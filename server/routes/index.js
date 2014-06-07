@@ -6,6 +6,8 @@ module.exports = function(app) {
     var index = require('../controllers/index');
 
     app.route('/')
-        .get(index.render);
+        .get(function(req, res){
+            res.sendfile(__dirname + '/public/index.html');
+        });
 
 };

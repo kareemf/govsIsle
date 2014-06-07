@@ -57,7 +57,7 @@ module.exports = function(app, passport, db) {
     app.set('view engine', 'html');
 
     // Set views path, template engine and default layout
-    app.set('views', config.root + '/server/views');
+    // app.set('views', config.root + '/server/views');
 
     // Enable jsonp
     app.enable('jsonp callback');
@@ -70,18 +70,18 @@ module.exports = function(app, passport, db) {
     app.use(bodyParser());
     app.use(methodOverride());
 
-    // Import the assets file
-    var assets = assetmanager.process({
-        assets: require('./assets.json'),
-        debug: (process.env.NODE_ENV !== 'production'),
-        webroot: 'public/public'
-    });
+    // // Import the assets file
+    // var assets = assetmanager.process({
+    //     assets: require('./assets.json'),
+    //     debug: (process.env.NODE_ENV !== 'production'),
+    //     webroot: 'public/public'
+    // });
 
     // Add assets to local variables
-    app.use(function(req, res, next) {
-        res.locals.assets = assets;
-        next();
-    });
+    // app.use(function(req, res, next) {
+    //     res.locals.assets = assets;
+    //     next();
+    // });
 
     // Express/Mongo session storage
     app.use(session({
@@ -106,7 +106,7 @@ module.exports = function(app, passport, db) {
     app.use(flash());
 
     // Setting the fav icon and static folder
-    app.use(favicon(appPath + '/public/system/assets/img/favicon.ico'));
+    // app.use(favicon(appPath + '/public/system/assets/img/favicon.ico'));
 
     app.get('/modules/aggregated.js', function(req, res) {
         res.setHeader('content-type', 'text/javascript');
@@ -149,7 +149,8 @@ module.exports = function(app, passport, db) {
         res.send(mean.aggregated.css);
     });
 
-    app.use('/public', express.static(config.root + '/public'));
+    app.use(express.static(config.root + '/public'));
+
 
     mean.events.on('modulesFound', function() {
 

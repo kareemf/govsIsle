@@ -15,7 +15,6 @@ module.exports = function(grunt) {
     // Project Configuration
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        assets: grunt.file.readJSON('server/config/assets.json'),
         clean: ['public/build'],
         watch: {
             js: {
@@ -114,7 +113,7 @@ module.exports = function(grunt) {
     if (process.env.NODE_ENV === 'production') {
         grunt.registerTask('default', ['clean','cssmin', 'uglify', 'concurrent']);
     } else {
-        grunt.registerTask('default', ['clean','jshint', 'csslint', 'concurrent']);
+        grunt.registerTask('default', ['jshint', 'csslint', 'concurrent']);
     }
 
     //Test task.
