@@ -163,6 +163,7 @@ module.exports = function(app, passport, db) {
             // used and shared by routes as further middlewares and is not a
             // route by itself
             util.walk(appPath + '/server/routes', 'middlewares', function(path) {
+                console.log('require router', path);
                 require(path)(app, passport);
             });
         }
