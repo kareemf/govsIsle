@@ -6,14 +6,13 @@ var mongoose = require('mongoose'),
     base = require('./baseModel');
 
 var properties = _.extend(base.properties, {
-    name: String,
-    type: String, // Food, Beverage
     description: String,
-    hours: String
-    specialities: [String] //Vegan, Kosher, etc
+    startDateTime: Date,
+    endDateTime: Date,
+    isReccuring: Boolean,
     location: String,
     geoLocation: {type: [Number], index: '2d'}
 });
-var AmenitiesSchema = new Schema(properties;
+var AlertSchema = new Schema(properties;
 
-mongoose.model('Amenities', AmenitiesSchema);
+mongoose.model('Alert', AlertSchema);
