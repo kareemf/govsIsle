@@ -1,0 +1,28 @@
+'use strict';
+
+// Events routes use events controller
+var events = require('../controllers/events'),
+    authorization = require('./middlewares/authorization');
+
+// Event authorization helpers
+var hasAuthorization = function(req, res, next) {
+    if (req.event.createdBy.id !== req.user.id) {
+        return res.send(401, 'User is not authorized');
+    }
+    next();
+};
+
+module.exports = function(app) {
+    var baseUrl = 'api/v1/event/';
+
+    app.route(baseUrl)
+        .get(events.all);
+        .post(authorization.requiresLogin, events.create);
+
+    app.route(baseUrl + ':eventId')
+        .get(events.show);
+        .put(authorization.requiresLogin, hasAuthorization, permissions.canUpdate, events.update);
+        .del(authorization.requiresLogin, hasAuthorization, permissions.canDelete, events.destroy);
+
+    app.param('eventId', events.get);
+};
