@@ -1,7 +1,7 @@
 'use strict';
 
 // Events routes use events controller
-var events = require('../controllers/events'),
+var events = require('../controllers/eventsController'),
     authorization = require('./middlewares/authorization');
 
 // Event authorization helpers
@@ -16,13 +16,13 @@ module.exports = function(app) {
     var baseUrl = 'api/v1/event/';
 
     app.route(baseUrl)
-        .get(events.all);
+        .get(events.all)
         .post(authorization.requiresLogin, events.create);
 
     app.route(baseUrl + ':eventId')
-        .get(events.show);
-        .put(authorization.requiresLogin, hasAuthorization, permissions.canUpdate, events.update);
-        .del(authorization.requiresLogin, hasAuthorization, permissions.canDelete, events.destroy);
+        .get(events.show)
+        .put(authorization.requiresLogin, hasAuthorization, events.update)
+        .delete(authorization.requiresLogin, hasAuthorization, events.destroy);
 
     app.param('eventId', events.get);
 };

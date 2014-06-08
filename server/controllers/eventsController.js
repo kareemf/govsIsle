@@ -5,7 +5,7 @@
  */
 var mongoose = require('mongoose'),
     Event = mongoose.model('Event'),
-    base = require('./base')(Event);
+    base = require('./baseController')(Event);
 
 /**
  * Find event by id

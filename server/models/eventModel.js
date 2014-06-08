@@ -19,6 +19,6 @@ var properties = _.extend(base.properties, {
     location: String,
     geoLocation: {type: [Number], index: '2d'}
 });
-var EventSchema = new Schema(properties;
+var EventSchema = new Schema(properties);
 
 mongoose.model('Event', EventSchema);
