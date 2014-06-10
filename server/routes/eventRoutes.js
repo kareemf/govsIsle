@@ -13,13 +13,13 @@ var hasAuthorization = function(req, res, next) {
 };
 
 module.exports = function(app) {
-    var baseUrl = 'api/v1/event/';
+    var baseUrl = '/api/v1/events';
 
     app.route(baseUrl)
         .get(events.all)
         .post(authorization.requiresLogin, events.create);
 
-    app.route(baseUrl + ':eventId')
+    app.route(baseUrl + '/:eventId')
         .get(events.show)
         .put(authorization.requiresLogin, hasAuthorization, events.update)
         .delete(authorization.requiresLogin, hasAuthorization, events.destroy);
