@@ -6,7 +6,8 @@ var events = require('../controllers/eventsController'),
 
 // Event authorization helpers
 var hasAuthorization = function(req, res, next) {
-    if (req.event.createdBy.id !== req.user.id) {
+    // console.log('hasAuthorization? user', req.user, 'event', req.event);
+    if (!req.event.createdBy.equals(req.user.id)) {
         return res.send(401, 'User is not authorized');
     }
     next();
