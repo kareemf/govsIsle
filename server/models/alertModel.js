@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     _ = require('lodash'),
-    base = require('./baseModel');
+    base = require('./baseContentModel');
 
 var properties = _.extend(base.properties, {
     description: String,
