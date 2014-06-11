@@ -9,5 +9,7 @@ exports.properties = {
     edited: { type: Date},
     editedBy: {type: ObjectId, ref: 'User'},
     beingEdited: {type: Boolean},
-    beingEditedBy: {type: ObjectId, ref: 'User'}
+    beingEditedBy: {type: ObjectId, ref: 'User'},
+    deleted: {type: Date},
+    deletedBy: {type: ObjectId, ref: 'User'},
 };
