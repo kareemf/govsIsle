@@ -14,7 +14,11 @@
         </script>
     </head>
     <body ng-controller="MapController">
-        <google-map center="mapOptions.center" zoom="mapOptions.zoom"></google-map>
+        <google-map
+            center="mapOptions.center"
+            zoom="mapOptions.zoom"
+            draggable='true'>
+        </google-map>
 
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
