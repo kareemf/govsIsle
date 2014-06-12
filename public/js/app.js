@@ -2,7 +2,22 @@
 
 var app = angular.module('app', ['ngResource', 'google-maps']);
 
-app.controller('MapController', ['$scope', function($scope){
+app.factory('Events', ['$resource', function($resource){
+    var eventUrl = 'api/v1/events/:eventId';
+    return $resource(eventUrl, {
+        eventId: '@_id'
+    }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+}]);
+
+app.controller('MapController', ['$scope', 'Events', function($scope, Events){
+    $scope.events = Events.query(function(events){
+        console.log('events', events);
+    });
+
     $scope.mapOptions = {
         center: {
             latitude: 40.6880492,
@@ -10,4 +25,4 @@ app.controller('MapController', ['$scope', function($scope){
         },
         zoom: 16
     };
-}])
+}]);
