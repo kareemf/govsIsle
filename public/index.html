@@ -1,37 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <style type="text/css">
             html { height: 100% }
             body { height: 100%; margin: 0; padding: 0 }
             #map-canvas { height: 100% }
+            .angular-google-map-container { height: 400px; }
         </style>
-    </head>
-    <body>
-        <div id="map-canvas"/>
-
         <script
         type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=KEY">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYSbhG6rdoOWBRgYT76ET-eJzQrWk0qmw">
         </script>
-        <script type="text/javascript">
-            function initialize() {
-                var mapOptions = {
-                    center: new google.maps.LatLng(40.6880492,-74.0188415),
-                    zoom: 16
-                };
-                var map = new google.maps.Map(document.getElementById("map-canvas"),
-                mapOptions);
-
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(40.6880492,-74.0188415),
-                    map: map,
-                    title:"Hello World!"
-                });
-            }
-            google.maps.event.addDomListener(window, 'load', initialize);
-        </script>
+    </head>
+    <body ng-controller="MapController">
+        <google-map center="mapOptions.center" zoom="mapOptions.zoom"></google-map>
 
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
