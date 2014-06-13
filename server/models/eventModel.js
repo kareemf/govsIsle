@@ -19,6 +19,20 @@ var properties = _.extend(base.properties, {
     location: String,
     geoLocation: {type: [Number], index: '2d'}
 });
-var EventSchema = new Schema(properties);
+var EventSchema = new Schema(properties, {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
+});
+
+EventSchema.virtual('coords').get(function(){
+    if(this.geoLocation && this.geoLocation.length == 2){
+        return {
+            latitude: this.geoLocation[0],
+            longitude: this.geoLocation[1]
+        };
+    }
+    return {};
+
+});
 
 mongoose.model('Event', EventSchema);

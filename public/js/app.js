@@ -18,7 +18,13 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
         console.log('events', events);
     });
 
-    $scope.mapOptions = {
+    $scope.mapParams = {
+        options: {
+            streetViewControl: true,
+            panControl: true,
+            maxZoom: 20,
+            minZoom: 3
+        },
         center: {
             latitude: 40.6880492,
             longitude: -74.0188415
