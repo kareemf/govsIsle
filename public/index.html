@@ -5,20 +5,32 @@
         <style type="text/css">
             html { height: 100% }
             body { height: 100%; margin: 0; padding: 0 }
-            #map-canvas { height: 100% }
             .angular-google-map-container { height: 400px; }
         </style>
-        <script
-        type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYSbhG6rdoOWBRgYT76ET-eJzQrWk0qmw">
-        </script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
     </head>
     <body ng-controller="MapController">
         <google-map
             center="mapOptions.center"
             zoom="mapOptions.zoom"
+            options="mapOptions.options"
+            mark-click="true"
             draggable='true'>
+<!--
+            <marker coords="{longitude: 40, latitude: -74}">
+                <marker-label content="'Hello'" anchor="22 0" class="marker-labels"/>
+                    <window ng-cloak  coords="'{longitude: 40, latitude: -74}'" isIconVisibleOnClick="false" options="event.options">
+                            <p>{ event.coords.latitude}, {{ event.coords.longitude}}!</p>
+                    </window>
+            </marker> -->
+
+            <!-- works -->
+            <marker ng-repeat="event in events" coords="event.coords" icon="event.icon"></marker>
+            <!-- also works -->
+            <!-- <markers models="events" coords="'coords'"></markers> -->
+
         </google-map>
+        <span ng-repeat="event in events">coords: {{event.coords}}</span>
 
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
