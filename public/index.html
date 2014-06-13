@@ -25,9 +25,17 @@
             </marker> -->
 
             <!-- works -->
-            <marker ng-repeat="event in events" coords="event.coords" icon="event.icon"></marker>
+            <!-- <marker ng-repeat="event in events" coords="event.coords" icon="event.icon"></marker> -->
             <!-- also works -->
             <!-- <markers models="events" coords="'coords'"></markers> -->
+
+            <marker ng-repeat="event in events" coords="event.coords" icon="event.icon">
+                <marker-label content="event.name" anchor="22 0" class="marker-labels"/>
+                <window ng-cloak  coords="event.coords" isIconVisibleOnClick="false" options="event.options">
+                            <p>{{event.description}}</p>
+                    </window>
+            </marker>
+
 
         </google-map>
         <span ng-repeat="event in events">coords: {{event.coords}}</span>
