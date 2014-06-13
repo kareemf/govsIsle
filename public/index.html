@@ -16,29 +16,17 @@
             options="mapOptions.options"
             mark-click="true"
             draggable='true'>
-<!--
-            <marker coords="{longitude: 40, latitude: -74}">
-                <marker-label content="'Hello'" anchor="22 0" class="marker-labels"/>
-                    <window ng-cloak  coords="'{longitude: 40, latitude: -74}'" isIconVisibleOnClick="false" options="event.options">
-                            <p>{ event.coords.latitude}, {{ event.coords.longitude}}!</p>
-                    </window>
-            </marker> -->
 
-            <!-- works -->
-            <!-- <marker ng-repeat="event in events" coords="event.coords" icon="event.icon"></marker> -->
             <!-- also works -->
             <!-- <markers models="events" coords="'coords'"></markers> -->
 
             <marker ng-repeat="event in events" coords="event.coords" icon="event.icon">
                 <marker-label content="event.name" anchor="22 0" class="marker-labels"/>
-                <window ng-cloak  coords="event.coords" isIconVisibleOnClick="false" options="event.options">
+                <window ng-cloak  coords="event.coords" isIconVisibleOnClick="true" options="event.options">
                             <p>{{event.description}}</p>
                     </window>
             </marker>
-
-
         </google-map>
-        <span ng-repeat="event in events">coords: {{event.coords}}</span>
 
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
