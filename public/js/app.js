@@ -2,6 +2,8 @@
 
 var app = angular.module('app', ['ngResource', 'google-maps']);
 
+var MARKER_ADDED_EVENT = 'MarkerAddedEvent';
+
 app.factory('Events', ['$resource', function($resource){
     var eventUrl = 'api/v1/events/:eventId';
     return $resource(eventUrl, {
@@ -50,7 +52,18 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
                     //there is only one infoWindow, which then gets moved around.
                     infoWindow.open(map, marker);
                 });
+
+                //inform other controllers of the markers creation
+                $scope.$broadcast(MARKER_ADDED_EVENT, {
+                    marker: marker
+                });
             }
         }
     };
+}]);
+
+app.controller('EventController', ['$scope', 'Events', function($scope, Events){
+    $scope.$on(MARKER_ADDED_EVENT, function(event, args){
+        console.log('new marker added', args);
+    });
 }]);
