@@ -29,8 +29,12 @@
                     </window>
             </marker>
 
-            <div ng-controller="EventController">
-
+            <div ng-controller="NewMarkerController">
+                <div ng-repeat="marker in markers" ng-controller="NewEventController">
+                   <!-- TODO: render a form ender event controller -->
+                    <form novalidate class="simple-form">
+                    </form>
+                </div>
             </div>
         </google-map>
 

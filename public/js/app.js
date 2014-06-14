@@ -43,7 +43,6 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
                 var marker = new google.maps.Marker({
                     map: map,
                     position: new google.maps.LatLng(clickLocation.k, clickLocation.A),
-                    title: "New"
                 });
 
                 infoWindow.setContent('sdss');
@@ -62,8 +61,18 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
     };
 }]);
 
-app.controller('EventController', ['$scope', 'Events', function($scope, Events){
+app.controller('NewMarkerController', ['$scope', function($scope){
+    $scope.markers = [1,2,3,4];
+
     $scope.$on(MARKER_ADDED_EVENT, function(event, args){
         console.log('new marker added', args);
+
+        var marker = args.marker;
+        $scope.markers.push(marker);
+        $scope.$apply();
     });
+}]);
+
+app.controller('NewEventController', ['$scope', 'Events', function($scope, Events){
+    console.log('inside NewEventController with marker', $scope.marker);
 }]);
