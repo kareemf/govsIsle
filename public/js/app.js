@@ -20,6 +20,7 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
 
     $scope.map = {} //will be populated.
 
+    var infoWindow = new google.maps.InfoWindow();
     $scope.mapParams = {
         options: {
             streetViewControl: true,
@@ -35,6 +36,20 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
         events: {
             rightclick: function(map, eventName, args){
                 console.log('rightclick', map, eventName, args);
+                var clickLocation = args[0].latLng;
+
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(clickLocation.k, clickLocation.A),
+                    title: "New"
+                });
+
+                infoWindow.setContent('sdss');
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    //there is only one infoWindow, which then gets moved around.
+                    infoWindow.open(map, marker);
+                });
             }
         }
     };
