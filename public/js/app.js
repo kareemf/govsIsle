@@ -79,6 +79,11 @@ app.controller('NewMarkerController', ['$scope', function($scope){
 app.controller('NewEventController', ['$scope', 'Events', function($scope, Events){
     console.log('insdie NewEventController', $scope.marker);
 
+    // TODO: hide form when event saved
+    // TODO: add cancel button, also hides form
+    // TODO: show form on marker right click
+    // TODO: add 'edit' functionality
+
     var marker = $scope.marker;
 
     var getMarkerGeoLocation = function(marker){

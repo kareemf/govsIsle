@@ -28,11 +28,13 @@
                             <p>{{event.description}}</p>
                     </window>
             </marker>
+
+            <!-- TODO: marker type filters -->
         </google-map>
 
         <div ng-controller="NewMarkerController">
             <div ng-repeat="marker in markers" ng-controller="NewEventController">
-               <!-- TODO: render a form ender event controller -->
+                <!-- TODO: proper input types -->
                 <form novalidate class="simple-form">
                     Name: <input type="text" ng-model="event.name" /><br />
                     Type: <input type="text" ng-model="event.type" /><br />
@@ -46,10 +48,14 @@
                     Head count: <input type="text" ng-model="event.anticipatedAttendance" /><br />
                     Location: <input type="text" ng-model="event.location" /><br />
                     Coords: <input type="text" ng-model="event.geoLocation" /><br />
+                    <button ng-click="save(event, marker)">Create</button>
 
                 </form>
             </div>
         </div>
+
+        <!-- TODO: display text list of markers -->
+        <!-- TODO: event/marker detail page(s) -->
 
 
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
