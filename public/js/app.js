@@ -38,11 +38,14 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
         events: {
             rightclick: function(map, eventName, args){
                 console.log('rightclick', map, eventName, args);
+
+                // TODO: check user's permissions first
                 var clickLocation = args[0].latLng;
 
                 var marker = new google.maps.Marker({
                     map: map,
                     position: new google.maps.LatLng(clickLocation.k, clickLocation.A),
+                    draggable: true
                 });
 
                 infoWindow.setContent('sdss');
@@ -76,6 +79,13 @@ app.controller('NewMarkerController', ['$scope', function($scope){
 app.controller('NewEventController', ['$scope', 'Events', function($scope, Events){
     console.log('insdie NewEventController', $scope.marker);
 
+    var marker = $scope.marker;
+
+    var getMarkerGeoLocation = function(marker){
+        var position = marker.position
+        return [position.k, position.A];
+    };
+
     $scope.event = {
         name: '',
         type: '', // Activity, Exhibit, Tour, Program/Festival
@@ -88,6 +98,20 @@ app.controller('NewEventController', ['$scope', 'Events', function($scope, Event
         isReccuring: false,
         anticipatedAttendance: null,
         location: '',
-        geoLocation: []
+        geoLocation: getMarkerGeoLocation(marker)
     };
+
+    $scope.save = function(event, marker){
+        console.log('saving Event');
+        // TODO: validate
+        var newEvent = new Events(event);
+        newEvent.$save();
+    };
+
+    //update event coords when marker is dragged
+    google.maps.event.addListener(marker, 'dragend', function() {
+        console.log('updating event position');
+        $scope.event.geoLocation = getMarkerGeoLocation(marker);
+        $scope.$apply();
+    });
 }]);
