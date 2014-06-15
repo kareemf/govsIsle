@@ -16,6 +16,28 @@ app.factory('Events', ['$resource', function($resource){
     });
 }]);
 
+app.factory('Geocoder', [function(){
+    var geocoder = new google.maps.Geocoder();
+    var southWest = new google.maps.LatLng(40.68391889999999, -74.02667689999998);
+    var northEast = new google.maps.LatLng(40.69379199999999, -74.01198210000001);
+    var bounds = new google.maps.LatLngBounds(southWest, northEast);
+
+    return {
+        reverseLookup: function(geoLocation){
+            var request = {
+                location: new google.maps.LatLng(geoLocation[0], geoLocation[1]),
+                bounds: bounds
+            };
+
+            geocoder.geocode(request, function(results, status) {
+                console.log('geocoder results', results, 'status', status);
+                // if (status == google.maps.GeocoderStatus.OK) {}
+                return results;
+            });
+        }
+    };
+}]);
+
 app.controller('MapController', ['$scope', 'Events', function($scope, Events){
     // TODO: only grab relevant content
     // TODO: only one info window for whole app
@@ -96,7 +118,7 @@ app.controller('NewMarkerController', ['$scope', function($scope){
 
 }]);
 
-app.controller('NewEventController', ['$scope', 'Events', function($scope, Events){
+app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($scope, Events, Geocoder){
     console.log('insdie NewEventController', $scope.marker);
 
     // TODO: hide form when event saved
@@ -104,6 +126,9 @@ app.controller('NewEventController', ['$scope', 'Events', function($scope, Event
     // TODO: show form on marker right click
     // TODO: add 'edit' functionality
     // TODO: reverse geocode geoLocation
+    // TODO: if geoLocation, prompt to update address
+    // TODO: if address, prompt to update geoLocation
+    // TODO: find more specific addresses
 
     var marker = $scope.marker;
 
@@ -154,7 +179,12 @@ app.controller('NewEventController', ['$scope', 'Events', function($scope, Event
     //update event coords when marker is dragged
     google.maps.event.addListener(marker, 'dragend', function() {
         console.log('updating event position');
-        $scope.event.geoLocation = getMarkerGeoLocation(marker);
+        var event = $scope.event;
+        var geoLocation = getMarkerGeoLocation(marker);
+
+        event.geoLocation = geoLocation
+        event.location = Geocoder.reverseLookup(geoLocation);
+
         $scope.$apply();
     });
 }]);
