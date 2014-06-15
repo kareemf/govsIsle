@@ -11,6 +11,7 @@
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
     </head>
     <body ng-controller="MapController">
+        <!-- TODO: add main nav -->
         <google-map
             center="mapParams.center"
             zoom="mapParams.zoom"
@@ -35,7 +36,7 @@
         <div ng-controller="NewMarkerController">
             <div ng-repeat="marker in markers" ng-controller="NewEventController">
                 <!-- TODO: proper input types -->
-                <form novalidate class="simple-form">
+                <form ng-show="showForm" novalidate class="simple-form">
                     Name: <input type="text" ng-model="event.name" /><br />
                     Type: <input type="text" ng-model="event.type" /><br />
                     Desc: <input type="text" ng-model="event.description" /><br />

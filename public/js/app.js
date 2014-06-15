@@ -16,6 +16,7 @@ app.factory('Events', ['$resource', function($resource){
 }]);
 
 app.controller('MapController', ['$scope', 'Events', function($scope, Events){
+    // TODO: only grab relevant content
     $scope.events = Events.query(function(events){
         console.log('events', events);
     });
@@ -105,6 +106,8 @@ app.controller('NewEventController', ['$scope', 'Events', function($scope, Event
         location: '',
         geoLocation: getMarkerGeoLocation(marker)
     };
+
+    $scope.showForm = true;
 
     $scope.save = function(event, marker){
         console.log('saving Event');
