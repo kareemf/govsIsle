@@ -49,6 +49,7 @@
                     Head count: <input type="text" ng-model="event.anticipatedAttendance" /><br />
                     Location: <input type="text" ng-model="event.location" /><br />
                     Coords: <input type="text" ng-model="event.geoLocation" /><br />
+                    <span class="error">Error: {{error}}</span>
                     <button ng-click="save(event, marker)">Create</button>
 
                 </form>

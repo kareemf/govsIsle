@@ -49,7 +49,7 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
                     draggable: true
                 });
 
-                infoWindow.setContent('sdss');
+                // infoWindow.setContent('sdss');
 
                 google.maps.event.addListener(marker, 'click', function() {
                     //there is only one infoWindow, which then gets moved around.
@@ -112,8 +112,18 @@ app.controller('NewEventController', ['$scope', 'Events', function($scope, Event
     $scope.save = function(event, marker){
         console.log('saving Event');
         // TODO: validate
-        var newEvent = new Events(event);
-        newEvent.$save();
+
+        var successCallback = function(newEvent, headers){
+            //save successful, close the form
+            $scope.showForm = false;
+        };
+
+        var failureCallback = function(response){
+            console.log('failed to save event', response);
+            $scope.error = response.data;
+        };
+
+        Events.save(event, successCallback, failureCallback);
     };
 
     //update event coords when marker is dragged
