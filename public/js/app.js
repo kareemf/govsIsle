@@ -3,6 +3,7 @@
 var app = angular.module('app', ['ngResource', 'google-maps']);
 
 var MARKER_ADDED_EVENT = 'MarkerAddedEvent';
+var MARKER_UPDATED_EVENT = 'MarkerUpdatedEvent'
 
 app.factory('Events', ['$resource', function($resource){
     var eventUrl = 'api/v1/events/:eventId';
@@ -17,6 +18,7 @@ app.factory('Events', ['$resource', function($resource){
 
 app.controller('MapController', ['$scope', 'Events', function($scope, Events){
     // TODO: only grab relevant content
+    // TODO: only one info window for whole app
     $scope.events = Events.query(function(events){
         console.log('events', events);
     });
@@ -58,7 +60,8 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
 
                 //inform other controllers of the markers creation
                 $scope.$broadcast(MARKER_ADDED_EVENT, {
-                    marker: marker
+                    marker: marker,
+                    infoWindow: infoWindow
                 });
             }
         }
@@ -67,14 +70,30 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
 
 app.controller('NewMarkerController', ['$scope', function($scope){
     $scope.markers = [];
+    $scope.infoWindow = null;
 
     $scope.$on(MARKER_ADDED_EVENT, function(event, args){
         console.log('new marker added', args);
 
         var marker = args.marker;
         $scope.markers.push(marker);
+
+        $scope.infoWindow = args.infoWindow;
+
         $scope.$apply();
     });
+
+    $scope.$on(MARKER_UPDATED_EVENT, function(event, args){
+        console.log('marker updated', args);
+        var marker = args.marker;
+        var event = args.event;
+        var infoWindow = $scope.infoWindow;
+
+        if(event.description){
+            infoWindow.setContent(event.name + '<br/><hr/>' + event.description);
+        }
+    });
+
 }]);
 
 app.controller('NewEventController', ['$scope', 'Events', function($scope, Events){
@@ -84,6 +103,7 @@ app.controller('NewEventController', ['$scope', 'Events', function($scope, Event
     // TODO: add cancel button, also hides form
     // TODO: show form on marker right click
     // TODO: add 'edit' functionality
+    // TODO: reverse geocode geoLocation
 
     var marker = $scope.marker;
 
@@ -124,6 +144,11 @@ app.controller('NewEventController', ['$scope', 'Events', function($scope, Event
         };
 
         Events.save(event, successCallback, failureCallback);
+
+        $scope.$emit(MARKER_UPDATED_EVENT, {
+            marker: marker,
+            event: event
+        });
     };
 
     //update event coords when marker is dragged
