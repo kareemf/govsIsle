@@ -62,7 +62,7 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
 }]);
 
 app.controller('NewMarkerController', ['$scope', function($scope){
-    $scope.markers = [1,2,3,4];
+    $scope.markers = [];
 
     $scope.$on(MARKER_ADDED_EVENT, function(event, args){
         console.log('new marker added', args);
@@ -74,5 +74,20 @@ app.controller('NewMarkerController', ['$scope', function($scope){
 }]);
 
 app.controller('NewEventController', ['$scope', 'Events', function($scope, Events){
-    console.log('inside NewEventController with marker', $scope.marker);
+    console.log('insdie NewEventController', $scope.marker);
+
+    $scope.event = {
+        name: '',
+        type: '', // Activity, Exhibit, Tour, Program/Festival
+        description: '',
+        visibility: '', //Private/Public
+        setupDateTime: null,
+        startDateTime: null,
+        endDateTime: null,
+        cleanupDateTime: null,
+        isReccuring: false,
+        anticipatedAttendance: null,
+        location: '',
+        geoLocation: []
+    };
 }]);

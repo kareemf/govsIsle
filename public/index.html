@@ -28,15 +28,29 @@
                             <p>{{event.description}}</p>
                     </window>
             </marker>
-
-            <div ng-controller="NewMarkerController">
-                <div ng-repeat="marker in markers" ng-controller="NewEventController">
-                   <!-- TODO: render a form ender event controller -->
-                    <form novalidate class="simple-form">
-                    </form>
-                </div>
-            </div>
         </google-map>
+
+        <div ng-controller="NewMarkerController">
+            <div ng-repeat="marker in markers" ng-controller="NewEventController">
+               <!-- TODO: render a form ender event controller -->
+                <form novalidate class="simple-form">
+                    Name: <input type="text" ng-model="event.name" /><br />
+                    Type: <input type="text" ng-model="event.type" /><br />
+                    Desc: <input type="text" ng-model="event.description" /><br />
+                    Vis: <input type="text" ng-model="event.visibility" /><br />
+                    Setup: <input type="text" ng-model="event.setupDateTime" /><br />
+                    Start: <input type="text" ng-model="event.startDateTime" /><br />
+                    End: <input type="text" ng-model="event.endDateTime" /><br />
+                    Cleanup: <input type="text" ng-model="event.cleanupDateTime" /><br />
+                    Recurring?: <input type="text" ng-model="event.isReccuring" /><br />
+                    Head count: <input type="text" ng-model="event.anticipatedAttendance" /><br />
+                    Location: <input type="text" ng-model="event.location" /><br />
+                    Coords: <input type="text" ng-model="event.geoLocation" /><br />
+
+                </form>
+            </div>
+        </div>
+
 
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
