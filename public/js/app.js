@@ -16,24 +16,44 @@ app.factory('Events', ['$resource', function($resource){
     });
 }]);
 
-app.factory('Geocoder', [function(){
+app.factory('Geocoder', ['$q', function($q){
     var geocoder = new google.maps.Geocoder();
     var southWest = new google.maps.LatLng(40.68391889999999, -74.02667689999998);
     var northEast = new google.maps.LatLng(40.69379199999999, -74.01198210000001);
     var bounds = new google.maps.LatLngBounds(southWest, northEast);
+    var request = {
+        bounds: bounds
+    }
+
+    var exec = function(request, deferred){
+        geocoder.geocode(request, function(results, status) {
+            console.log('geocoder results', results, 'status', status);
+            // if (status == google.maps.GeocoderStatus.OK) {}
+            deferred.resolve({
+                results: results,
+                status: status
+            });
+        });
+    };
 
     return {
-        reverseLookup: function(geoLocation){
-            var request = {
-                location: new google.maps.LatLng(geoLocation[0], geoLocation[1]),
-                bounds: bounds
-            };
+        lookup: function(location){
+            // attempt to geocode location
+            var deferred = $q.defer();
+            request.address = location;
 
-            geocoder.geocode(request, function(results, status) {
-                console.log('geocoder results', results, 'status', status);
-                // if (status == google.maps.GeocoderStatus.OK) {}
-                return results;
-            });
+            exec(request, deferred);
+
+            return deferred.promise;
+        },
+        reverseLookup: function(geoLocation){
+            // extract location from geocode
+            var deferred = $q.defer();
+            request.location = new google.maps.LatLng(geoLocation[0], geoLocation[1]);
+
+            exec(request, deferred);
+
+            return deferred.promise;
         }
     };
 }]);
@@ -72,8 +92,6 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
                     position: new google.maps.LatLng(clickLocation.k, clickLocation.A),
                     draggable: true
                 });
-
-                // infoWindow.setContent('sdss');
 
                 google.maps.event.addListener(marker, 'click', function() {
                     //there is only one infoWindow, which then gets moved around.
@@ -190,10 +208,24 @@ app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($
         var geoLocation = getMarkerGeoLocation(marker);
 
         if(lookupGeo){
+            Geocoder.lookup(event.location).then(function(response){
+                console.log('got reverseLookup response', response);
 
+                // TODO: if multiple results, allow user to pick
+                if(response.results){
+                    var geoLocation = response.results[0].geometry.location;
+                    event.geoLocation = [geoLocation.k, geoLocation.A];
+                }
+            });
         }
         if(lookupLocation){
-            event.location = Geocoder.reverseLookup(geoLocation);
+            Geocoder.reverseLookup(geoLocation).then(function(response){
+                console.log('got reverseLookup response', response);
+                // TODO: if multiple results, allow user to pick
+                if(response.results){
+                    event.location = response.results[0].formatted_address;
+                }
+            });
         }
     });
 
@@ -203,13 +235,11 @@ app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($
 
         var event = $scope.event;
         var geoLocation = getMarkerGeoLocation(marker);
-
         event.geoLocation = geoLocation
 
-        if(lookupLocation){
-            event.location = Geocoder.reverseLookup(geoLocation);
-        }
-
+        //if user wants to use geocoding again for the new location,
+        //must explicitly say so
+        $scope.lookupLocation = $scope. lookupGeo = false;
         $scope.$apply();
     });
 }]);
