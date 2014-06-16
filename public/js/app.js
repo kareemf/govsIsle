@@ -144,8 +144,6 @@ app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($
     // TODO: show form on marker right click
     // TODO: add 'edit' functionality
     // TODO: reverse geocode geoLocation
-    // TODO: if geoLocation, prompt to update address
-    // TODO: if address, prompt to update geoLocation
     // TODO: find more specific addresses
 
     var marker = $scope.marker;
@@ -170,10 +168,12 @@ app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($
         geoLocation: getMarkerGeoLocation(marker)
     };
 
-    $scope.showForm = true;
-    $scope.lookupGeo = false;
-    $scope.lookupLocation = false;
+    $scope.options = {
+        lookupGeo: false,
+        lookupLocation: false
+    };
 
+    $scope.showForm = true;
 
     $scope.save = function(event, marker){
         console.log('saving Event');
@@ -197,37 +197,29 @@ app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($
         });
     };
 
-    $scope.$watchCollection('[lookupGeo, lookupLocation]', function(newValues, oldValues){
-        console.log('lookupGeo or lookupLocation changed', newValues);
+    $scope.lookupGeo = function(event){
+        Geocoder.lookup(event.location).then(function(response){
+            console.log('got reverseLookup response', response);
 
-        var lookupGeo = newValues[0];
-        var lookupLocation = newValues[1];
+            // TODO: if multiple results, allow user to pick
+            if(response.results){
+                var geoLocation = response.results[0].geometry.location;
+                event.geoLocation = [geoLocation.k, geoLocation.A];
+            }
+        });
+    };
 
-        var event = $scope.event;
-        var marker = $scope.marker;
+    $scope.lookupLocation = function(event, marker){
         var geoLocation = getMarkerGeoLocation(marker);
 
-        if(lookupGeo){
-            Geocoder.lookup(event.location).then(function(response){
-                console.log('got reverseLookup response', response);
-
-                // TODO: if multiple results, allow user to pick
-                if(response.results){
-                    var geoLocation = response.results[0].geometry.location;
-                    event.geoLocation = [geoLocation.k, geoLocation.A];
-                }
-            });
-        }
-        if(lookupLocation){
-            Geocoder.reverseLookup(geoLocation).then(function(response){
-                console.log('got reverseLookup response', response);
-                // TODO: if multiple results, allow user to pick
-                if(response.results){
-                    event.location = response.results[0].formatted_address;
-                }
-            });
-        }
-    });
+        Geocoder.reverseLookup(geoLocation).then(function(response){
+            console.log('got reverseLookup response', response);
+            // TODO: if multiple results, allow user to pick
+            if(response.results){
+                event.location = response.results[0].formatted_address;
+            }
+        });
+    };
 
     //update event coords when marker is dragged
     google.maps.event.addListener(marker, 'dragend', function() {
@@ -237,9 +229,6 @@ app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($
         var geoLocation = getMarkerGeoLocation(marker);
         event.geoLocation = geoLocation
 
-        //if user wants to use geocoding again for the new location,
-        //must explicitly say so
-        $scope.lookupLocation = $scope. lookupGeo = false;
         $scope.$apply();
     });
 }]);

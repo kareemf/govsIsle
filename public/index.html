@@ -47,10 +47,12 @@
                     Cleanup: <input type="text" ng-model="event.cleanupDateTime" /><br />
                     Recurring?: <input type="checkbox" ng-model="event.isReccuring" /><br />
                     Head count: <input type="text" ng-model="event.anticipatedAttendance" /><br />
-                    Location: <input type="text" ng-model="event.location" /> Find coords? <input type="checkbox" ng-model="lookupGeo" ng-change="lookupLocation = false" /><br />
-                    Coords: <input type="text" ng-model="event.geoLocation" /> Find location? <input type="checkbox" ng-model="lookupLocation" ng-change="lookupGeo = false"/><br />
-                    <span class="error">Error: {{error}}</span>
+                    Location: <input type="text" ng-model="event.location" /><button ng-click="lookupGeo(event, marker)">Lookup Coords</button><br />
+                    Coords: <input type="text" ng-model="event.geoLocation" /><button ng-click="lookupLocation(event, marker)">Lookup Location</button><br />
+                    <span class="error" ng-show="error">Error: {{error}}</span><br>
                     <button ng-click="save(event, marker)">Create</button>
+                    <button ng-click="cancel(event, marker)">Cancel</button>
+
 
                 </form>
             </div>
