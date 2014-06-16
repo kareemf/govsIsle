@@ -153,6 +153,9 @@ app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($
     };
 
     $scope.showForm = true;
+    $scope.lookupGeo = false;
+    $scope.lookupLocation = false;
+
 
     $scope.save = function(event, marker){
         console.log('saving Event');
@@ -176,14 +179,36 @@ app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($
         });
     };
 
+    $scope.$watchCollection('[lookupGeo, lookupLocation]', function(newValues, oldValues){
+        console.log('lookupGeo or lookupLocation changed', newValues);
+
+        var lookupGeo = newValues[0];
+        var lookupLocation = newValues[1];
+
+        var event = $scope.event;
+        var marker = $scope.marker;
+        var geoLocation = getMarkerGeoLocation(marker);
+
+        if(lookupGeo){
+
+        }
+        if(lookupLocation){
+            event.location = Geocoder.reverseLookup(geoLocation);
+        }
+    });
+
     //update event coords when marker is dragged
     google.maps.event.addListener(marker, 'dragend', function() {
         console.log('updating event position');
+
         var event = $scope.event;
         var geoLocation = getMarkerGeoLocation(marker);
 
         event.geoLocation = geoLocation
-        event.location = Geocoder.reverseLookup(geoLocation);
+
+        if(lookupLocation){
+            event.location = Geocoder.reverseLookup(geoLocation);
+        }
 
         $scope.$apply();
     });
