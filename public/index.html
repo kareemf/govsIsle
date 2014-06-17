@@ -33,6 +33,10 @@
             <!-- TODO: marker type filters -->
         </google-map>
 
+        <div>
+            Edit mode: <input type="checkbox" ng-model="isEditMode" ng-change="toggleEditMode(isEditMode)">
+        </div>
+
         <div ng-controller="NewMarkerController">
             <div ng-repeat="marker in markers" ng-controller="NewEventController">
                 <!-- TODO: proper input types -->
@@ -52,8 +56,6 @@
                     <span class="error" ng-show="error">Error: {{error}}</span><br>
                     <button ng-click="save(event, marker)">Create</button>
                     <button ng-click="cancel(event, marker)">Cancel</button>
-
-
                 </form>
             </div>
         </div>

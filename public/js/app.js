@@ -66,7 +66,8 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
         console.log('events', events);
     });
 
-    $scope.map = {} //will be populated.
+    //will be automatically populated b/c of 'controls' property on map DOM element
+    $scope.map = {};
 
     var infoWindow = new google.maps.InfoWindow();
     $scope.mapParams = {
@@ -84,6 +85,11 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
         events: {
             rightclick: function(map, eventName, args){
                 console.log('rightclick', map, eventName, args);
+
+                if(!$scope.isEditMode){
+                    console.log('not isEditMode');
+                    return;
+                }
 
                 // TODO: check user's permissions first
                 var clickLocation = args[0].latLng;
@@ -107,6 +113,8 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
             }
         }
     };
+
+    $scope.isEditMode = false;
 }]);
 
 app.controller('NewMarkerController', ['$scope', function($scope){
