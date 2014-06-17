@@ -215,17 +215,6 @@ app.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', function(
         });
     };
 
-    $scope.cancel = function(event, marker){
-        console.log('canceling marker', marker, 'event', event);
-
-        marker.setMap(null);
-
-        $scope.$emit(MARKER_DELETED_EVENT, {
-            marker: marker,
-            event: event
-        });
-    };
-
     $scope.lookupGeo = function(event){
         Geocoder.lookup(event.location).then(function(response){
             console.log('got reverseLookup response', response);
@@ -288,6 +277,17 @@ app.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocod
 
     $scope.showForm = true;
 
+    $scope.cancel = function(event, marker){
+        console.log('canceling marker', marker, 'event', event);
+
+        marker.setMap(null);
+
+        $scope.$emit(MARKER_DELETED_EVENT, {
+            marker: marker,
+            event: event
+        });
+    };
+
     //update event coords when marker is dragged
     google.maps.event.addListener(marker, 'dragend', function() {
         console.log('updating event position');
@@ -304,7 +304,17 @@ app.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'G
     console.log('in ExistingEventController');
 
     $controller('BaseEventController', {$scope: $scope});
+
     $scope.showForm = false;
+
+    $scope.cancel = function(event, marker){
+        console.log('ExistingEventController canceling marker', marker, 'event', event);
+
+        //get the latest copy
+        $scope.event = Events.get({eventId: event.id});
+        $scope.showForm = false;
+
+    };
 
     $scope.$on(MARKER_CAN_BE_EDITED_EVENT+'!', function(event, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in BaseEventController');
@@ -324,6 +334,7 @@ app.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'G
         }
         // TODO: check user's permissions first
         $scope.showForm = true;
+        $scope.marker = args.marker;
     });
 
 }]);
