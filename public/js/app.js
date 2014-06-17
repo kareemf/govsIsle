@@ -238,6 +238,18 @@ app.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', function(
             }
         });
     };
+
+    $scope.addMarkerDragListener = function(scope, event, marker){
+        //update event coords when marker is dragged
+        google.maps.event.addListener(marker, 'dragend', function() {
+            console.log('updating event position');
+
+            var geoLocation = getMarkerGeoLocation(marker);
+            event.geoLocation = geoLocation;
+
+            scope.$apply();
+        });
+    };
 }]);
 
 app.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
@@ -287,16 +299,9 @@ app.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocod
         });
     };
 
-    //update event coords when marker is dragged
-    google.maps.event.addListener(marker, 'dragend', function() {
-        console.log('updating event position');
+    // register drag event handler
+    $scope.addMarkerDragListener($scope, $scope.event, marker);
 
-        var event = $scope.event;
-        var geoLocation = getMarkerGeoLocation(marker);
-        event.geoLocation = geoLocation
-
-        $scope.$apply();
-    });
 }]);
 
 app.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
@@ -312,8 +317,33 @@ app.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'G
         //get the latest copy
         $scope.event = Events.get({eventId: event.id});
         $scope.showForm = false;
-
     };
+
+    // if Event/Marker is not being edited, don't allow user to drag
+    $scope.$watch('showForm', function(newVal, oldVal){
+        console.log('ExistingEventController showForm changed', newVal, oldVal);
+
+        if(newVal === oldVal){ return;}
+
+        var marker = $scope.marker;
+        var showForm = newVal;
+
+        if(marker && !showForm){
+            marker.setDraggable(false);
+        }
+    });
+
+    // register drag event handler (marker may not be draggable yet)
+    $scope.$watch('marker', function(newVal, oldVal){
+        console.log('ExistingEventController marker changed', newVal, oldVal);
+
+        if(newVal === oldVal){ return;}
+
+        var marker = $scope.marker;
+        var event = $scope.event;
+
+        $scope.addMarkerDragListener($scope, event, marker);
+    });
 
     $scope.$on(MARKER_CAN_BE_EDITED_EVENT+'!', function(event, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in BaseEventController');
@@ -331,9 +361,11 @@ app.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'G
         if(args.event.id != $scope.event.id){
             return;
         }
+        var marker = args.marker;
+        marker.setDraggable(true);
         // TODO: check user's permissions first
         $scope.showForm = true;
-        $scope.marker = args.marker;
+        $scope.marker = marker;
         $scope.$apply();
     });
 
