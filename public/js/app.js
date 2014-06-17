@@ -3,7 +3,8 @@
 var app = angular.module('app', ['ngResource', 'google-maps']);
 
 var MARKER_ADDED_EVENT = 'MarkerAddedEvent';
-var MARKER_UPDATED_EVENT = 'MarkerUpdatedEvent'
+var MARKER_UPDATED_EVENT = 'MarkerUpdatedEvent';
+var MARKER_DELETED_EVENT = 'MarkerDeletedEvent';
 
 app.factory('Events', ['$resource', function($resource){
     var eventUrl = 'api/v1/events/:eventId';
@@ -134,16 +135,29 @@ app.controller('NewMarkerController', ['$scope', function($scope){
         }
     });
 
+    $scope.$on(MARKER_DELETED_EVENT, function(event, args){
+        console.log('marker deleted', args);
+
+        var event = args.event;
+        var marker = args.marker;
+        var markers = $scope.markers;
+
+        for (var i = markers.length - 1; i >= 0; i--) {
+            if(markers[i].__gm_id == marker.__gm_id){
+                markers.splice(i, 1);
+                break;
+            }
+        };
+
+    });
 }]);
 
 app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($scope, Events, Geocoder){
     console.log('insdie NewEventController', $scope.marker);
 
     // TODO: hide form when event saved
-    // TODO: add cancel button, also hides form
-    // TODO: show form on marker right click
+    // TODO: show edit form on marker right click
     // TODO: add 'edit' functionality
-    // TODO: reverse geocode geoLocation
     // TODO: find more specific addresses
 
     var marker = $scope.marker;
@@ -192,6 +206,17 @@ app.controller('NewEventController', ['$scope', 'Events', 'Geocoder', function($
         Events.save(event, successCallback, failureCallback);
 
         $scope.$emit(MARKER_UPDATED_EVENT, {
+            marker: marker,
+            event: event
+        });
+    };
+
+    $scope.cancel = function(event, marker){
+        console.log('canceling marker', marker, 'event', event);
+
+        marker.setMap(null);
+
+        $scope.$emit(MARKER_DELETED_EVENT, {
             marker: marker,
             event: event
         });
