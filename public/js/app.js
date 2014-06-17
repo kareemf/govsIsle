@@ -244,7 +244,6 @@ app.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocod
     console.log('insdie NewEventController', $scope.marker);
 
     // TODO: hide form when event saved
-    // TODO: show edit form on marker right click
     // TODO: add 'edit' functionality
     // TODO: find more specific addresses
 
@@ -329,12 +328,13 @@ app.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'G
          to prevent MapController from responding to the event which it is broadcasting
          */
 
-        if(args.event != $scope.event){
+        if(args.event.id != $scope.event.id){
             return;
         }
         // TODO: check user's permissions first
         $scope.showForm = true;
         $scope.marker = args.marker;
+        $scope.$apply();
     });
 
 }]);
