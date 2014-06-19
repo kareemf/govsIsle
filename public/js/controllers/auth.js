@@ -2,22 +2,27 @@
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location',
+controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '$location',
     function($scope, $rootScope, $http, $location) {
         // This object will be filled by the form
         $scope.user = {};
 
         // Register the login() function
         $scope.login = function(user) {
+            console.log('attempting login for user', user);
+
             $http.post('/login', {
                 email: user.email,
                 password: user.password
             })
             .success(function(response) {
                 // authentication OK
-                $scope.loginError = 0;
+                console.log('login success. response', response);
+
+                $scope.loginError = '';
                 $rootScope.user = response.user;
                 $rootScope.$emit('loggedin');
+
                 if (response.redirect) {
                     if (window.location.href === response.redirect) {
                         //This is so an admin user will get full admin page
@@ -30,13 +35,15 @@ controllers.controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location
                 }
             })
             .error(function() {
+                console.log('login failure');
+
                 $scope.loginError = 'Authentication failed.';
             });
         };
     }
 ]);
 
-controllers.controller('RegisterCtrl', ['$scope', '$rootScope', '$http', '$location',
+controllers.controller('RegisterController', ['$scope', '$rootScope', '$http', '$location',
     function($scope, $rootScope, $http, $location) {
         $scope.user = {};
 
