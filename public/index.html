@@ -10,63 +10,42 @@
         </style>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
     </head>
-    <body ng-controller="MapController">
+    <body >
         <!-- TODO: add main nav -->
-        <google-map
-            center="mapParams.center"
-            zoom="mapParams.zoom"
-            options="mapParams.options"
-            events="mapParams.events"
-            control="map"
-            draggable='true'>
+        <div ng-controller="MapController">
+            <google-map
+                center="mapParams.center"
+                zoom="mapParams.zoom"
+                options="mapParams.options"
+                events="mapParams.events"
+                control="map"
+                draggable='true'>
 
-            <!-- also works -->
-            <!-- <markers models="events" coords="'coords'"></markers> -->
+                <!-- also works -->
+                <!-- <markers models="events" coords="'coords'"></markers> -->
 
-            <marker
-                ng-repeat="event in events"
-                ng-controller="ExistingMarkerController"
-                events="markerParams.events"
-                coords="event.coords"
-                icon="event.icon">
-                <marker-label content="event.name" anchor="22 0" class="marker-labels"/>
-                <window ng-cloak  coords="event.coords" isIconVisibleOnClick="true" options="event.options">
-                            <p>{{event.description}}</p>
-                </window>
-            </marker>
+                <marker
+                    ng-repeat="event in events"
+                    ng-controller="ExistingMarkerController"
+                    events="markerParams.events"
+                    coords="event.coords"
+                    icon="event.icon">
+                    <marker-label content="event.name" anchor="22 0" class="marker-labels"/>
+                    <window ng-cloak  coords="event.coords" isIconVisibleOnClick="true" options="event.options">
+                                <p>{{event.description}}</p>
+                    </window>
+                </marker>
 
-            <!-- TODO: marker type filters -->
-        </google-map>
+                <!-- TODO: marker type filters -->
+            </google-map>
 
-        <div>
-            Edit mode: <input type="checkbox" ng-model="isEditMode" ng-change="toggleEditMode(isEditMode)">
-        </div>
+            <div>
+                Edit mode: <input type="checkbox" ng-model="isEditMode" ng-change="toggleEditMode(isEditMode)">
+            </div>
 
-        <div ng-repeat="event in events" ng-controller="ExistingEventController">
-            <!-- TODO: proper input types -->
-            <form ng-show="isEditMode && showForm" novalidate class="simple-form">
-                Name: <input type="text" ng-model="event.name" /><br />
-                Type: <input type="text" ng-model="event.type" /><br />
-                Desc: <input type="text" ng-model="event.description" /><br />
-                Vis: <input type="text" ng-model="event.visibility" /><br />
-                Setup: <input type="text" ng-model="event.setupDateTime" /><br />
-                Start: <input type="text" ng-model="event.startDateTime" /><br />
-                End: <input type="text" ng-model="event.endDateTime" /><br />
-                Cleanup: <input type="text" ng-model="event.cleanupDateTime" /><br />
-                Recurring?: <input type="checkbox" ng-model="event.isReccuring" /><br />
-                Head count: <input type="text" ng-model="event.anticipatedAttendance" /><br />
-                Location: <input type="text" ng-model="event.location" /><button ng-click="lookupGeo(event, marker)">Lookup Coords</button><br />
-                Coords: <input type="text" ng-model="event.geoLocation" /><button ng-click="lookupLocation(event, marker)">Lookup Location</button><br />
-                <span class="error" ng-show="error">Error: {{error}}</span><br>
-                <button ng-click="save(event, marker)">Create</button>
-                <button ng-click="cancel(event, marker)">Cancel</button>
-            </form>
-        </div>
-
-        <div ng-controller="NewMarkerController">
-            <div ng-repeat="marker in markers" ng-controller="NewEventController">
+            <div ng-repeat="event in events" ng-controller="ExistingEventController">
                 <!-- TODO: proper input types -->
-                <form ng-show="showForm" novalidate class="simple-form">
+                <form ng-show="isEditMode && showForm" novalidate class="simple-form">
                     Name: <input type="text" ng-model="event.name" /><br />
                     Type: <input type="text" ng-model="event.type" /><br />
                     Desc: <input type="text" ng-model="event.description" /><br />
@@ -84,11 +63,58 @@
                     <button ng-click="cancel(event, marker)">Cancel</button>
                 </form>
             </div>
+
+            <div ng-controller="NewMarkerController">
+                <div ng-repeat="marker in markers" ng-controller="NewEventController">
+                    <!-- TODO: proper input types -->
+                    <form ng-show="showForm" novalidate class="simple-form">
+                        Name: <input type="text" ng-model="event.name" /><br />
+                        Type: <input type="text" ng-model="event.type" /><br />
+                        Desc: <input type="text" ng-model="event.description" /><br />
+                        Vis: <input type="text" ng-model="event.visibility" /><br />
+                        Setup: <input type="text" ng-model="event.setupDateTime" /><br />
+                        Start: <input type="text" ng-model="event.startDateTime" /><br />
+                        End: <input type="text" ng-model="event.endDateTime" /><br />
+                        Cleanup: <input type="text" ng-model="event.cleanupDateTime" /><br />
+                        Recurring?: <input type="checkbox" ng-model="event.isReccuring" /><br />
+                        Head count: <input type="text" ng-model="event.anticipatedAttendance" /><br />
+                        Location: <input type="text" ng-model="event.location" /><button ng-click="lookupGeo(event, marker)">Lookup Coords</button><br />
+                        Coords: <input type="text" ng-model="event.geoLocation" /><button ng-click="lookupLocation(event, marker)">Lookup Location</button><br />
+                        <span class="error" ng-show="error">Error: {{error}}</span><br>
+                        <button ng-click="save(event, marker)">Create</button>
+                        <button ng-click="cancel(event, marker)">Cancel</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- TODO: display text list of markers -->
+            <!-- TODO: event/marker detail page(s) -->
         </div>
 
-        <!-- TODO: display text list of markers -->
-        <!-- TODO: event/marker detail page(s) -->
-
+        <div ng-controller="LoginCtrl">
+            <div class="alert alert-danger animated fadeIn" ng-show="loginError">{{loginError}}</div>
+            <h1>Sign in</h1>
+            <form  ng-submit="login(user)" class="signin form-horizontal">
+                <div class="form-group">
+                    <label for="email" class="col-md-4 control-label">Email</label>
+                    <div class="col-md-8">
+                        <input required id="email" type="email" name="email" placeholder="Email" class="form-control" ng-model="user.email"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-md-4 control-label">Password</label>
+                    <div class="col-md-8">
+                        <input required id="password" type="password" name="password" placeholder="Password" class="form-control" ng-model="user.password"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <button type="submit" class="btn btn-primary">Sign in</button>&nbsp;
+                        or&nbsp;<a ui-sref='auth.register' class="show-signup">Sign up</a>
+                    </div>
+                </div>
+            </form>
+        </div>
 
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
