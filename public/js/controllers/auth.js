@@ -20,6 +20,8 @@ controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '$lo
                 console.log('login success. response', response);
 
                 $scope.loginError = '';
+                $scope.isLoggedIn = true;
+
                 $rootScope.user = response.user;
                 $rootScope.$emit('loggedin');
 
@@ -40,6 +42,24 @@ controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '$lo
                 $scope.loginError = 'Authentication failed.';
             });
         };
+
+        $scope.checkLoggedIn = function(){
+            $http.get('/loggedin')
+            .success(function(response) {
+                console.log('loggedin check success. response', response);
+                if(angular.isObject(response) && response._id){
+                    console.log('logged in user', response);
+
+                    $scope.isLoggedIn = true;
+                }
+            })
+            .error(function() {
+                console.log('loggedin check failure');
+            });
+        };
+
+        $scope.checkLoggedIn();
+
     }
 ]);
 
