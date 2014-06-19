@@ -1,24 +1,17 @@
 'use strict';
 
-var app = angular.module('app', ['ngResource', 'google-maps']);
+var controllers = angular.module('app.controllers', []);
+var services = angular.module('app.services', []);
 
-var MARKER_ADDED_EVENT = 'MARKER_ADDED_EVENT';
-var MARKER_UPDATED_EVENT = 'MARKER_UPDATED_EVENT';
-var MARKER_DELETED_EVENT = 'MARKER_DELETED_EVENT';
-var MARKER_CAN_BE_EDITED_EVENT = 'MARKER_CAN_BE_EDITED_EVENT';
+var app = angular.module('app', [
+    'app.controllers',
+    'app.services',
+    'ngResource',
+    'google-maps']);
 
-app.factory('Events', ['$resource', function($resource){
-    var eventUrl = 'api/v1/events/:eventId';
-    return $resource(eventUrl, {
-        eventId: '@id'
-    }, {
-        update: {
-            method: 'PUT'
-        }
-    });
-}]);
 
-app.factory('Geocoder', ['$q', function($q){
+
+services.factory('Geocoder', ['$q', function($q){
     var geocoder = new google.maps.Geocoder();
     var southWest = new google.maps.LatLng(40.68391889999999, -74.02667689999998);
     var northEast = new google.maps.LatLng(40.69379199999999, -74.01198210000001);
@@ -60,7 +53,7 @@ app.factory('Geocoder', ['$q', function($q){
     };
 }]);
 
-app.controller('MapController', ['$scope', 'Events', function($scope, Events){
+controllers.controller('MapController', ['$scope', 'Events', function($scope, Events){
     // TODO: only grab relevant content
     // TODO: only one info window for whole app
     $scope.events = Events.query(function(events){
@@ -107,7 +100,7 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
                 });
 
                 //inform other controllers of the markers creation
-                $scope.$broadcast(MARKER_ADDED_EVENT, {
+                $scope.$broadcast('MARKER_ADDED_EVENT', {
                     marker: marker,
                     infoWindow: infoWindow
                 });
@@ -117,18 +110,18 @@ app.controller('MapController', ['$scope', 'Events', function($scope, Events){
 
     $scope.isEditMode = false;
 
-    $scope.$on(MARKER_CAN_BE_EDITED_EVENT, function(event, args){
+    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(event, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in MapController');
 
-        $scope.$broadcast(MARKER_CAN_BE_EDITED_EVENT+'!', args);
+        $scope.$broadcast('MARKER_CAN_BE_EDITED_EVENT'+'!', args);
     });
 }]);
 
-app.controller('NewMarkerController', ['$scope', function($scope){
+controllers.controller('NewMarkerController', ['$scope', function($scope){
     $scope.markers = [];
     $scope.infoWindow = null;
 
-    $scope.$on(MARKER_ADDED_EVENT, function(event, args){
+    $scope.$on('MARKER_ADDED_EVENT', function(event, args){
         console.log('new marker added', args);
 
         var marker = args.marker;
@@ -139,7 +132,7 @@ app.controller('NewMarkerController', ['$scope', function($scope){
         $scope.$apply();
     });
 
-    $scope.$on(MARKER_UPDATED_EVENT, function(event, args){
+    $scope.$on('MARKER_UPDATED_EVENT', function(event, args){
         console.log('marker updated', args);
         var marker = args.marker;
         var event = args.event;
@@ -150,7 +143,7 @@ app.controller('NewMarkerController', ['$scope', function($scope){
         }
     });
 
-    $scope.$on(MARKER_DELETED_EVENT, function(event, args){
+    $scope.$on('MARKER_DELETED_EVENT', function(event, args){
         console.log('marker deleted', args);
 
         var event = args.event;
@@ -167,7 +160,7 @@ app.controller('NewMarkerController', ['$scope', function($scope){
     });
 }]);
 
-app.controller('ExistingMarkerController', ['$scope', function($scope){
+controllers.controller('ExistingMarkerController', ['$scope', function($scope){
     console.log('in ExistingMarkerController');
 
     $scope.markerParams = {
@@ -178,7 +171,7 @@ app.controller('ExistingMarkerController', ['$scope', function($scope){
                 var event = $scope.event;
                 var marker = args.gMarker;
                 // inform other controllers that this marker may be edited
-                $scope.$emit(MARKER_CAN_BE_EDITED_EVENT, {
+                $scope.$emit('MARKER_CAN_BE_EDITED_EVENT', {
                     marker: marker,
                     event: event
                 });
@@ -187,7 +180,7 @@ app.controller('ExistingMarkerController', ['$scope', function($scope){
     };
 }]);
 
-app.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', function($scope, Events, Geocoder){
+controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', function($scope, Events, Geocoder){
     var getMarkerGeoLocation = $scope.getMarkerGeoLocation = function(marker){
         var position = marker.position
         return [position.k, position.A];
@@ -209,7 +202,7 @@ app.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', function(
 
         Events.save(event, successCallback, failureCallback);
 
-        $scope.$emit(MARKER_UPDATED_EVENT, {
+        $scope.$emit('MARKER_UPDATED_EVENT', {
             marker: marker,
             event: event
         });
@@ -252,7 +245,7 @@ app.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', function(
     };
 }]);
 
-app.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
+controllers.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
     console.log('insdie NewEventController', $scope.marker);
 
     // TODO: hide form when event saved
@@ -293,7 +286,7 @@ app.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocod
 
         marker.setMap(null);
 
-        $scope.$emit(MARKER_DELETED_EVENT, {
+        $scope.$emit('MARKER_DELETED_EVENT', {
             marker: marker,
             event: event
         });
@@ -304,7 +297,7 @@ app.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocod
 
 }]);
 
-app.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
+controllers.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
     console.log('in ExistingEventController');
 
     $controller('BaseEventController', {$scope: $scope});
@@ -345,12 +338,12 @@ app.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'G
         $scope.addMarkerDragListener($scope, event, marker);
     });
 
-    $scope.$on(MARKER_CAN_BE_EDITED_EVENT+'!', function(event, args){
+    $scope.$on('MARKER_CAN_BE_EDITED_EVENT'+'!', function(event, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in BaseEventController');
 
         /*
          user right-clicked an existing marker (handled by ExistingMarkerController)
-         -> a MARKER_CAN_BE_EDITED_EVENT event is dispatched.
+         -> a 'MARKER_CAN_BE_EDITED_EVENT' event is dispatched.
          we want ExistingEventController to handle this event, however, the
          scopes do not don't have a parent/child relationship. So the event is bubbled
          up to the MapController, which is a parent of both controllers,
