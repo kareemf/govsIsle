@@ -8,21 +8,43 @@ controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', f
         return [position.k, position.A];
     };
 
+    var saveSuccessCallback = function(newEvent, headers){
+        //save successful, close the form
+        $scope.showForm = false;
+    };
+
+    var saveFailureCallback = function(response){
+        console.log('failed to save event', response);
+        $scope.error = response.data;
+    };
+
     $scope.save = function(event, marker){
         console.log('saving Event');
         // TODO: validate
 
-        var successCallback = function(newEvent, headers){
-            //save successful, close the form
-            $scope.showForm = false;
-        };
+        Events.save(event, saveSuccessCallback, saveFailureCallback);
 
-        var failureCallback = function(response){
-            console.log('failed to save event', response);
-            $scope.error = response.data;
-        };
+        $scope.$emit('MARKER_UPDATED_EVENT', {
+            marker: marker,
+            event: event
+        });
+    };
 
-        Events.save(event, successCallback, failureCallback);
+    var updateSuccessCallback = function(newEvent, headers){
+        //update successful, close the form
+        $scope.showForm = false;
+    };
+
+    var updateFailureCallback = function(response){
+        console.log('failed to update event', response);
+        $scope.error = response.data;
+    };
+
+    $scope.update = function(event, marker){
+        console.log('saving Event');
+        // TODO: validate
+
+        Events.update(event, updateSuccessCallback, updateFailureCallback);
 
         $scope.$emit('MARKER_UPDATED_EVENT', {
             marker: marker,
@@ -71,8 +93,6 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
     console.log('insdie NewEventController', $scope.marker);
 
     // TODO: hide form when event saved
-    // TODO: add 'edit' functionality
-    // TODO: find more specific addresses
 
     // 'inherit' from Base
     $controller('BaseEventController', {$scope: $scope});
