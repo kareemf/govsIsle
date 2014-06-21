@@ -7,4 +7,13 @@ var app = angular.module('app', [
     'app.controllers',
     'app.services',
     'ngResource',
-    'google-maps']);
+    'google-maps',
+    'ui.router']);
+
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('home', {
+        url: '/',
+        templateUrl: 'templates/home.html'
+    })
+}])
