@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
     _ = require('lodash'),
     base = require('./baseContentModel');
 
-var properties = _.extend(base.properties, {
+var properties = _.extend({
     name: String,
     type: String, // Food, Beverage
     description: String,
@@ -13,7 +13,7 @@ var properties = _.extend(base.properties, {
     specialities: [String], //Vegan, Kosher, etc
     location: String,
     geoLocation: {type: [Number], index: '2d'}
-});
+}, base.properties);
 var AmenitySchema = new Schema(properties);
 
 mongoose.model('Amenity', AmenitySchema);

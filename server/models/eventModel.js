@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
     _ = require('lodash'),
     base = require('./baseContentModel');
 
-var properties = _.extend(base.properties, {
+var properties = _.extend({
     name: String,
     type: String, // Activity, Exhibit, Tour, Program/Festival
     description: String,
@@ -18,7 +18,8 @@ var properties = _.extend(base.properties, {
     anticipatedAttendance: Number,
     location: String,
     geoLocation: {type: [Number], index: '2d'}
-});
+}, base.properties);
+
 var EventSchema = new Schema(properties, {
     toObject: { virtuals: true },
     toJSON: { virtuals: true }
