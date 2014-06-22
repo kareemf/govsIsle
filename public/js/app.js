@@ -18,11 +18,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         })
         .state('login', {
             url: '/login',
-            templateUrl: 'templates/login.html'
+            templateUrl: 'templates/auth/login.html'
         })
         .state('register', {
             url: '/register',
-            templateUrl: 'templates/register.html'
+            templateUrl: 'templates/auth/register.html'
         });
 
     $urlRouterProvider.otherwise('/');
