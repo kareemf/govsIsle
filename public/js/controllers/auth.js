@@ -63,6 +63,21 @@ controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '$lo
     }
 ]);
 
+controllers.controller('LogoutController', ['$scope', '$rootScope', '$http', '$location',
+    function($scope, $rootScope, $http, $location) {
+        $http.get('logout')
+        .success(function(response){
+            console.log('logout success');
+            $rootScope.user = null;
+            $location.url('/');
+        })
+        .error(function(){
+            console.error('failed to logout');
+        })
+    }
+]);
+
+
 controllers.controller('RegisterController', ['$scope', '$rootScope', '$http', '$location',
     function($scope, $rootScope, $http, $location) {
         $scope.user = {};
