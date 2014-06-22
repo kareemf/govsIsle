@@ -20,4 +20,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         url: '/login',
         templateUrl: 'templates/login.html'
     })
+    .state('register', {
+        url: '/register',
+        templateUrl: 'templates/register.html'
+    })
 }])
