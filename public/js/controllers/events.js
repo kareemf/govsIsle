@@ -41,7 +41,7 @@ controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', f
     };
 
     $scope.update = function(event, marker){
-        console.log('saving Event');
+        console.log('updating Event');
         // TODO: validate
 
         Events.update(event, updateSuccessCallback, updateFailureCallback);
