@@ -11,16 +11,28 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
     console.log('Google maps controller.');
 
     /* $scope.myMap auto-populated with google map object */
+    $scope.isEditMode = false;
+
+    $scope.newMarkers = [];
+
+    $scope.existingMarkers = [];
 
     // TODO: only grab relevant content
     // TODO: only one info window for whole app
     $scope.events = Events.query(function(events){
         console.log('events', events);
+        events.forEach(function(event){
+            var position = new google.maps.LatLng(event.geoLocation[0], event.geoLocation[1]);
+            var marker = new google.maps.Marker({
+                map: $scope.myMap,
+                position: position,
+                draggable: true
+            });
+
+            // console.log('existing event', event, 'marker', marker);
+            $scope.existingMarkers.push(marker);
+        });
     });
-
-    $scope.isEditMode = false;
-
-    $scope.newMarkers = [];
 
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
