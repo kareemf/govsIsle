@@ -10,6 +10,8 @@ var controllers = angular.module('app.controllers');
 controllers.controller('MapController2', ['$scope', 'Events', function ($scope, Events) {
     console.log('Google maps controller.');
 
+    /* $scope.myMap auto-populated with google map object */
+
     // TODO: only grab relevant content
     // TODO: only one info window for whole app
     $scope.events = Events.query(function(events){
@@ -18,8 +20,7 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
 
     $scope.isEditMode = false;
 
-
-    $scope.myMarkers = [];
+    $scope.newMarkers = [];
 
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
@@ -32,48 +33,36 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
     };
 
     $scope.mapEvents = {
-        'map-rightclick': function(map, eventName, args){
-            console.log('rightclick', map, eventName, args);
-
-            if(!$scope.isEditMode){
-                console.log('not isEditMode');
-                return;
-            }
-
-            // TODO: check user's permissions first
-            var clickLocation = args[0].latLng;
-
-            var marker = new google.maps.Marker({
-                map: map,
-                position: new google.maps.LatLng(clickLocation.k, clickLocation.A),
-                draggable: true
-            });
-
-            google.maps.event.addListener(marker, 'click', function() {
-                //there is only one infoWindow, which then gets moved around.
-                infoWindow.open(map, marker);
-            });
-
-            //inform other controllers of the markers creation
-            $scope.$broadcast('MARKER_ADDED_EVENT', {
-                marker: marker,
-                infoWindow: infoWindow
-            });
-        },
-        'map-click': 'addMarker($event, $params)',
-        'map-zoom_changed': 'setZoomMessage(myMap.getZoom())'
+        'map-rightclick': 'addNewMarker($event, $params)',
     };
 
-    $scope.addMarker = function ($event, $params) {
-      $scope.myMarkers.push(new google.maps.Marker({
-        map: $scope.myMap,
-        position: $params[0].latLng
-      }));
-    };
+    $scope.addNewMarker = function ($event, $params) {
+        console.log('rightclick', $event, $params);
 
-    $scope.setZoomMessage = function (zoom) {
-      $scope.zoomMessage = 'You just zoomed to ' + zoom + '!';
-      console.log(zoom, 'zoomed');
+        if(!$scope.isEditMode){
+            console.log('not isEditMode');
+            return;
+        }
+
+        // TODO: check user's permissions first
+        var marker = new google.maps.Marker({
+            map: $scope.myMap,
+            position: $params[0].latLng,
+            draggable: true
+        });
+
+        $scope.newMarkers.push(marker);
+
+        // google.maps.event.addListener(marker, 'click', function() {
+        //     //there is only one infoWindow, which then gets moved around.
+        //     infoWindow.open(map, marker);
+        // });
+
+        // //inform other controllers of the markers creation
+        // $scope.$broadcast('MARKER_ADDED_EVENT', {
+        //     marker: marker,
+        //     infoWindow: infoWindow
+        // });
     };
 
     $scope.openMarkerInfo = function (marker) {
