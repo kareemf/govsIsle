@@ -7,8 +7,8 @@ var app = angular.module('app', [
     'app.controllers',
     'app.services',
     'ngResource',
-    'google-maps',
-    'ui.router']);
+    'ui.router',
+    'ui.map']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
