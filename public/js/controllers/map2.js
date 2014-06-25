@@ -7,13 +7,19 @@ function initCall() {
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('MapController2', ['$scope', function ($scope) {
-      console.log('Google maps controller.');
+controllers.controller('MapController2', ['$scope', 'Events', function ($scope, Events) {
+    console.log('Google maps controller.');
+
+    // TODO: only grab relevant content
+    // TODO: only one info window for whole app
+    $scope.events = Events.query(function(events){
+        console.log('events', events);
+    });
 
     $scope.myMarkers = [];
 
     $scope.mapOptions = {
-      center: new google.maps.LatLng(35.784, -78.670),
+      center: new google.maps.LatLng(40.6880492, -74.0188415),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
