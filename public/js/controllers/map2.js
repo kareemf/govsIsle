@@ -16,12 +16,52 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
         console.log('events', events);
     });
 
+    $scope.isEditMode = false;
+
+
     $scope.myMarkers = [];
 
     $scope.mapOptions = {
-      center: new google.maps.LatLng(40.6880492, -74.0188415),
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+        center: new google.maps.LatLng(40.6880492, -74.0188415),
+        streetViewControl: true,
+        panControl: true,
+        zoom: 15,
+        maxZoom: 20,
+        minZoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    $scope.mapEvents = {
+        'map-rightclick': function(map, eventName, args){
+            console.log('rightclick', map, eventName, args);
+
+            if(!$scope.isEditMode){
+                console.log('not isEditMode');
+                return;
+            }
+
+            // TODO: check user's permissions first
+            var clickLocation = args[0].latLng;
+
+            var marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(clickLocation.k, clickLocation.A),
+                draggable: true
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+                //there is only one infoWindow, which then gets moved around.
+                infoWindow.open(map, marker);
+            });
+
+            //inform other controllers of the markers creation
+            $scope.$broadcast('MARKER_ADDED_EVENT', {
+                marker: marker,
+                infoWindow: infoWindow
+            });
+        },
+        'map-click': 'addMarker($event, $params)',
+        'map-zoom_changed': 'setZoomMessage(myMap.getZoom())'
     };
 
     $scope.addMarker = function ($event, $params) {
