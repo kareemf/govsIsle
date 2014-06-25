@@ -48,6 +48,11 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
         'map-rightclick': 'addNewMarker($event, $params)',
     };
 
+    $scope.markerEvents = {
+        'map-click': 'openMarkerInfo(marker)',
+        'map-rightclick': 'editMarker(marker, events[$index])'
+    };
+
     $scope.addNewMarker = function ($event, $params) {
         console.log('rightclick', $event, $params);
 
@@ -65,11 +70,6 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
 
         $scope.newMarkers.push(marker);
 
-        // google.maps.event.addListener(marker, 'click', function() {
-        //     //there is only one infoWindow, which then gets moved around.
-        //     infoWindow.open(map, marker);
-        // });
-
         // //inform other controllers of the markers creation
         // $scope.$broadcast('MARKER_ADDED_EVENT', {
         //     marker: marker,
@@ -82,6 +82,10 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
       $scope.currentMarkerLat = marker.getPosition().lat();
       $scope.currentMarkerLng = marker.getPosition().lng();
       $scope.myInfoWindow.open($scope.myMap, marker);
+    };
+
+    $scope.editMarker = function(marker, event){
+        console.log('editting marker', marker, 'event', event);
     };
 
     $scope.setMarkerPosition = function (marker, lat, lng) {

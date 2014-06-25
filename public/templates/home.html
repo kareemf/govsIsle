@@ -1,9 +1,17 @@
 <section id="map" ng-controller="MapController2" >
+    <!-- render map -->
     <div ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="map-canvas"></div>
 
+    <!-- populate map with event markers -->
     <div ng-repeat="marker in existingMarkers"
         ui-map-marker="existingMarkers[$index]"
-        ui-event="{'map-click': 'openMarkerInfo(marker)'}">
+        ui-event="markerEvents">
+    </div>
+
+    <div ng-repeat="event in events" ng-controller="ExistingEventController">
+        <div ng-show="isEditMode && showForm"
+             ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+        </div>
     </div>
 
     <div ui-map-info-window="myInfoWindow">
