@@ -26,10 +26,11 @@
         </div>
     </div>
 
+    <!-- only one infoWindow, gets moved and populated dynamically -->
     <div ui-map-info-window="myInfoWindow">
-      <h1>Marker</h1>
-      Lat: <input ng-model="currentMarkerLat">, Lng: <input ng-model="currentMarkerLng">
-      <a ng-click="setMarkerPosition(currentMarker, currentMarkerLat, currentMarkerLng)">Set Position</a>
+      <h1>{{currentEvent.name}}</h1>
+      <p>{{currentEvent.description}}</p>
+      <p>{{currentEvent.location}}</p>
     </div>
 
     <div>

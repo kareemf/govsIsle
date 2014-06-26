@@ -49,12 +49,12 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
     };
 
     $scope.markerEvents = {
-        'map-click': 'openMarkerInfo(marker)',
+        'map-click': 'openMarkerInfo(marker, events[$index])',
         'map-rightclick': 'editMarker(marker, events[$index])'
     };
 
     $scope.newMarkerEvents = {
-        'map-click': 'openMarkerInfo(marker)',
+        'map-click': 'openMarkerInfo(marker, event)',
         'map-rightclick': 'editMarker(marker, event)'
     };
 
@@ -76,11 +76,13 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
         $scope.newMarkers.push(marker);
     };
 
-    $scope.openMarkerInfo = function (marker) {
-      $scope.currentMarker = marker;
-      $scope.currentMarkerLat = marker.getPosition().lat();
-      $scope.currentMarkerLng = marker.getPosition().lng();
-      $scope.myInfoWindow.open($scope.myMap, marker);
+    $scope.openMarkerInfo = function (marker, event) {
+        console.log('openMarkerInfo marker', marker, 'event', event );
+        $scope.currentMarker = marker;
+        $scope.currentEvent = event;
+        $scope.currentMarkerLat = marker.getPosition().lat();
+        $scope.currentMarkerLng = marker.getPosition().lng();
+        $scope.myInfoWindow.open($scope.myMap, marker);
     };
 
     $scope.editMarker = function(marker, event){
