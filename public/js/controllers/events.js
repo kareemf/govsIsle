@@ -76,16 +76,11 @@ controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', f
         });
     };
 
-    $scope.addMarkerDragListener = function(scope, event, marker){
-        //update event coords when marker is dragged
-        google.maps.event.addListener(marker, 'dragend', function() {
-            console.log('updating event position');
+    $scope.updateGeolocationAfterDrag = function(event, marker){
+        console.log('updating event position');
 
-            var geoLocation = getMarkerGeoLocation(marker);
-            event.geoLocation = geoLocation;
-
-            scope.$apply();
-        });
+        var geoLocation = getMarkerGeoLocation(marker);
+        event.geoLocation = geoLocation;
     };
 }]);
 
@@ -134,9 +129,6 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
         });
     };
 
-    // register drag event handler
-    $scope.addMarkerDragListener($scope, $scope.event, marker);
-
 }]);
 
 controllers.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
@@ -169,16 +161,16 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
     });
 
     // register drag event handler (marker may not be draggable yet)
-    $scope.$watch('marker', function(newVal, oldVal){
-        console.log('ExistingEventController marker changed', newVal, oldVal);
+    // $scope.$watch('marker', function(newVal, oldVal){
+    //     console.log('ExistingEventController marker changed', newVal, oldVal);
 
-        if(newVal === oldVal){ return;}
+    //     if(newVal === oldVal){ return;}
 
-        var marker = $scope.marker;
-        var event = $scope.event;
+    //     var marker = $scope.marker;
+    //     var event = $scope.event;
 
-        $scope.addMarkerDragListener($scope, event, marker);
-    });
+    //     $scope.addMarkerDragListener($scope, event, marker);
+    // });
 
     $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(event, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in BaseEventController');

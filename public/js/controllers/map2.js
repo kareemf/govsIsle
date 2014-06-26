@@ -55,7 +55,8 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
 
     $scope.newMarkerEvents = {
         'map-click': 'openMarkerInfo(marker, event)',
-        'map-rightclick': 'editMarker(marker, event)'
+        'map-rightclick': 'editMarker(marker, event)',
+        'map-dragend': 'updateGeolocationAfterDrag(event, marker)'
     };
 
     $scope.addNewMarker = function ($event, $params) {
@@ -78,10 +79,9 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
 
     $scope.openMarkerInfo = function (marker, event) {
         console.log('openMarkerInfo marker', marker, 'event', event );
+
         $scope.currentMarker = marker;
         $scope.currentEvent = event;
-        $scope.currentMarkerLat = marker.getPosition().lat();
-        $scope.currentMarkerLng = marker.getPosition().lng();
         $scope.myInfoWindow.open($scope.myMap, marker);
     };
 
@@ -92,10 +92,6 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
             marker: marker,
             event: event
         });
-    };
-
-    $scope.setMarkerPosition = function (marker, lat, lng) {
-      marker.setPosition(new google.maps.LatLng(lat, lng));
     };
 
   }]);
