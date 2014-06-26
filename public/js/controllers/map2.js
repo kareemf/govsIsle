@@ -86,10 +86,15 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
 
     $scope.editMarker = function(marker, event){
         console.log('editting marker', marker, 'event', event);
+
+        $scope.$broadcast('MARKER_CAN_BE_EDITED_EVENT', {
+            marker: marker,
+            event: event
+        });
     };
 
     $scope.setMarkerPosition = function (marker, lat, lng) {
       marker.setPosition(new google.maps.LatLng(lat, lng));
     };
-  }])
-;
+
+  }]);

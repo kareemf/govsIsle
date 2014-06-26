@@ -180,7 +180,7 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
         $scope.addMarkerDragListener($scope, event, marker);
     });
 
-    $scope.$on('MARKER_CAN_BE_EDITED_EVENT'+'!', function(event, args){
+    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(event, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in BaseEventController');
 
         /*
