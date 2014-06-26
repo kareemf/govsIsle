@@ -11,7 +11,7 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
     console.log('Google maps controller.');
 
     /* $scope.myMap auto-populated with google map object */
-    $scope.isEditMode = false;
+    $scope.isEditMode = true;
 
     $scope.newMarkers = [];
 
@@ -53,6 +53,11 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
         'map-rightclick': 'editMarker(marker, events[$index])'
     };
 
+    $scope.newMarkerEvents = {
+        'map-click': 'openMarkerInfo(marker)',
+        'map-rightclick': 'editMarker(marker, event)'
+    };
+
     $scope.addNewMarker = function ($event, $params) {
         console.log('rightclick', $event, $params);
 
@@ -69,12 +74,6 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
         });
 
         $scope.newMarkers.push(marker);
-
-        // //inform other controllers of the markers creation
-        // $scope.$broadcast('MARKER_ADDED_EVENT', {
-        //     marker: marker,
-        //     infoWindow: infoWindow
-        // });
     };
 
     $scope.openMarkerInfo = function (marker) {

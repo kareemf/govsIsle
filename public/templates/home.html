@@ -1,5 +1,5 @@
 <section id="map" ng-controller="MapController2" >
-    <!-- render map -->
+    <!-- render map. ui-map will be the name of scope property -->
     <div ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="map-canvas"></div>
 
     <!-- populate map with event markers -->
@@ -8,7 +8,19 @@
         ui-event="markerEvents">
     </div>
 
+    <!-- create a hidden edit form for each event -->
     <div ng-repeat="event in events" ng-controller="ExistingEventController">
+        <div ng-show="isEditMode && showForm"
+             ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+        </div>
+    </div>
+
+    <!-- populate map with new markers/events -->
+    <div ng-repeat="marker in newMarkers"
+        ng-controller="NewEventController"
+        ui-map-marker="newMarkers[$index]"
+        ui-event="newMarkerEvents">
+        <!-- create a hidden edit form for each new event/marker -->
         <div ng-show="isEditMode && showForm"
              ng-include="'/templates/events/eventForm.html'" scope="" onload="">
         </div>
