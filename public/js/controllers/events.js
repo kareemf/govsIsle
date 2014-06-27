@@ -187,3 +187,12 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
     });
 
 }]);
+
+
+controllers.controller('EventDetailController', ['$scope', 'Events', function($scope, Events){
+    console.log('in EventDetailController');
+}]);
+
+controllers.controller('EventListController', ['$scope', 'Events', function($scope, Events){
+    console.log('in EventListController');
+}]);
