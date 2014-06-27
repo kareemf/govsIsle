@@ -26,7 +26,7 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
             var marker = new google.maps.Marker({
                 map: $scope.myMap,
                 position: position,
-                draggable: true
+                draggable: false
             });
 
             // console.log('existing event', event, 'marker', marker);
