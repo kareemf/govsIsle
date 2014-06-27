@@ -15,5 +15,5 @@
     <span class="error" ng-show="error">Error: {{error}}</span><br>
     <button ng-show="event.id" ng-click="update(event, marker)">Edit</button>
     <button ng-show="!event.id" ng-click="save(event, marker)">Save</button>
-    <button ng-click="cancel(event, marker)">Cancel</button>
+    <button ng-click="cancel(event, marker, markers)">Cancel</button>
 </form>

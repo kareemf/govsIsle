@@ -7,7 +7,7 @@ function initCall() {
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('MapController2', ['$scope', 'Events', function ($scope, Events) {
+controllers.controller('MapController', ['$scope', 'Events', function ($scope, Events) {
     console.log('Google maps controller.');
 
     /* $scope.myMap auto-populated with google map object */

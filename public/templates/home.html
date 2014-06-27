@@ -1,4 +1,4 @@
-<section id="map" ng-controller="MapController2" >
+<section id="map" ng-controller="MapController" >
     <!-- render map. ui-map will be the name of scope property -->
     <div ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="map-canvas"></div>
 
@@ -9,10 +9,12 @@
 
         <!-- create a hidden edit form for each event -->
         <div ng-init="event = events[$index]" ng-controller="ExistingEventController">
-            <div ng-show="isEditMode && showForm"
+            <!-- TODO: is this an abuse of ng-init? -->
+            <div ng-show="isEditMode && showForm" ng-init="markers = existingMarkers"
                  ng-include="'/templates/events/eventForm.html'" scope="" onload="">
             </div>
         </div>
+
     </div>
 
     <!-- populate map with new markers/events -->
@@ -20,10 +22,12 @@
         ng-controller="NewEventController"
         ui-map-marker="newMarkers[$index]"
         ui-event="newMarkerEvents">
+
         <!-- create a hidden edit form for each new event/marker -->
-        <div ng-show="isEditMode && showForm"
+        <div ng-show="isEditMode && showForm" ng-init="markers = newMarkers"
              ng-include="'/templates/events/eventForm.html'" scope="" onload="">
         </div>
+
     </div>
 
     <!-- only one infoWindow, gets moved and populated dynamically -->
@@ -40,4 +44,5 @@
 
 <!-- TODO: display text list of markers -->
 <!-- TODO: event/marker detail page(s) -->
+<!-- TODO: filtering -->
 

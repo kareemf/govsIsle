@@ -111,15 +111,17 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
 
     $scope.showForm = true;
 
-    $scope.cancel = function(event, marker){
-        console.log('canceling marker', marker, 'event', event);
+    $scope.cancel = function(event, marker, markers){
+        console.log('NewEventController canceling marker', marker, 'event', event);
 
         marker.setMap(null);
 
-        $scope.$emit('MARKER_DELETED_EVENT', {
-            marker: marker,
-            event: event
-        });
+        for (var i = markers.length - 1; i >= 0; i--) {
+            if(markers[i].__gm_id == marker.__gm_id){
+                markers.splice(i, 1);
+                break;
+            }
+        };
     };
 
 }]);
