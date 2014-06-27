@@ -25,6 +25,11 @@ var EventSchema = new Schema(properties, {
     toJSON: { virtuals: true }
 });
 
+EventSchema.pre('save', function(next) {
+    base.preSave(this);
+    next();
+});
+
 EventSchema.virtual('coords').get(function(){
     if(this.geoLocation && this.geoLocation.length == 2){
         return {
