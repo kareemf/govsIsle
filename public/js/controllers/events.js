@@ -41,7 +41,7 @@ controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', f
     };
 
     $scope.update = function(event, marker){
-        console.log('saving Event');
+        console.log('updating Event');
         // TODO: validate
 
         Events.update(event, updateSuccessCallback, updateFailureCallback);
@@ -73,18 +73,6 @@ controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', f
             if(response.results){
                 event.location = response.results[0].formatted_address;
             }
-        });
-    };
-
-    $scope.addMarkerDragListener = function(scope, event, marker){
-        //update event coords when marker is dragged
-        google.maps.event.addListener(marker, 'dragend', function() {
-            console.log('updating event position');
-
-            var geoLocation = getMarkerGeoLocation(marker);
-            event.geoLocation = geoLocation;
-
-            scope.$apply();
         });
     };
 }]);
@@ -123,19 +111,18 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
 
     $scope.showForm = true;
 
-    $scope.cancel = function(event, marker){
-        console.log('canceling marker', marker, 'event', event);
+    $scope.cancel = function(event, marker, markers){
+        console.log('NewEventController canceling marker', marker, 'event', event);
 
         marker.setMap(null);
 
-        $scope.$emit('MARKER_DELETED_EVENT', {
-            marker: marker,
-            event: event
-        });
+        for (var i = markers.length - 1; i >= 0; i--) {
+            if(markers[i].__gm_id == marker.__gm_id){
+                markers.splice(i, 1);
+                break;
+            }
+        };
     };
-
-    // register drag event handler
-    $scope.addMarkerDragListener($scope, $scope.event, marker);
 
 }]);
 
@@ -169,18 +156,18 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
     });
 
     // register drag event handler (marker may not be draggable yet)
-    $scope.$watch('marker', function(newVal, oldVal){
-        console.log('ExistingEventController marker changed', newVal, oldVal);
+    // $scope.$watch('marker', function(newVal, oldVal){
+    //     console.log('ExistingEventController marker changed', newVal, oldVal);
 
-        if(newVal === oldVal){ return;}
+    //     if(newVal === oldVal){ return;}
 
-        var marker = $scope.marker;
-        var event = $scope.event;
+    //     var marker = $scope.marker;
+    //     var event = $scope.event;
 
-        $scope.addMarkerDragListener($scope, event, marker);
-    });
+    //     $scope.addMarkerDragListener($scope, event, marker);
+    // });
 
-    $scope.$on('MARKER_CAN_BE_EDITED_EVENT'+'!', function(event, args){
+    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(event, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in BaseEventController');
 
         /*
