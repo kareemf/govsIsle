@@ -16,4 +16,9 @@ var properties = _.extend({
 }, base.properties);
 var AmenitySchema = new Schema(properties);
 
+AmenitySchema.pre('save', function(next) {
+    base.preSave(this);
+    next();
+});
+
 mongoose.model('Amenity', AmenitySchema);
