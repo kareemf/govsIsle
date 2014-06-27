@@ -75,13 +75,6 @@ controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', f
             }
         });
     };
-
-    $scope.updateGeolocationAfterDrag = function(event, marker){
-        console.log('updating event position');
-
-        var geoLocation = getMarkerGeoLocation(marker);
-        event.geoLocation = geoLocation;
-    };
 }]);
 
 controllers.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){

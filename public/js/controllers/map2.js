@@ -50,7 +50,8 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
 
     $scope.markerEvents = {
         'map-click': 'openMarkerInfo(marker, events[$index])',
-        'map-rightclick': 'editMarker(marker, events[$index])'
+        'map-rightclick': 'editMarker(marker, events[$index])',
+        'map-dragend': 'updateGeolocationAfterDrag(events[$index], marker)'
     };
 
     $scope.newMarkerEvents = {
@@ -92,6 +93,19 @@ controllers.controller('MapController2', ['$scope', 'Events', function ($scope, 
             marker: marker,
             event: event
         });
+    };
+
+    //TODO: do not duplicate. see BaseEventController
+    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = function(marker){
+        var position = marker.position
+        return [position.k, position.A];
+    };
+
+    $scope.updateGeolocationAfterDrag = function(event, marker){
+        console.log('updating event position');
+
+        var geoLocation = getMarkerGeoLocation(marker);
+        event.geoLocation = geoLocation;
     };
 
   }]);
