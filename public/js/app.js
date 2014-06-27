@@ -11,6 +11,7 @@ var app = angular.module('app', [
     'ui.map']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    // System routes
     $stateProvider
         .state('home', {
             url: '/',
@@ -28,6 +29,27 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         .state('register', {
             url: '/register',
             templateUrl: 'templates/auth/register.html'
+        });
+    // Event routes
+    $stateProvider
+        .state('events', {
+            url: '/events',
+            templateUrl: 'templates/events/events.html'
+        })
+        .state('events.detail', {
+            url: '/events/:eventSlug',
+            templateUrl: 'templates/events/event.html'
+        });
+
+    // Amenities routes
+    $stateProvider
+        .state('amenities', {
+            url: '/amenities',
+            templateUrl: 'templates/amenities/amenities.html'
+        })
+        .state('amenities.detail', {
+            url: '/amenities/:amenitieslug',
+            templateUrl: 'templates/amenities/amenity.html'
         });
 
     $urlRouterProvider.otherwise('/');
