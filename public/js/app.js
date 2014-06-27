@@ -34,22 +34,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     $stateProvider
         .state('events', {
             url: '/events',
-            templateUrl: 'templates/events/events.html'
+            templateUrl: '/templates/events/events.html',
+
         })
         .state('events.detail', {
-            url: '/events/:eventSlug',
-            templateUrl: 'templates/events/event.html'
-        });
-
-    // Amenities routes
-    $stateProvider
-        .state('amenities', {
-            url: '/amenities',
-            templateUrl: 'templates/amenities/amenities.html'
-        })
-        .state('amenities.detail', {
-            url: '/amenities/:amenitieslug',
-            templateUrl: 'templates/amenities/amenity.html'
+            url: '/:slug',
+            templateUrl: '/templates/events/event.html',
         });
 
     $urlRouterProvider.otherwise('/');
