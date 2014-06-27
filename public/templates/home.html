@@ -6,12 +6,12 @@
     <div ng-repeat="marker in existingMarkers"
         ui-map-marker="existingMarkers[$index]"
         ui-event="markerEvents">
-    </div>
 
-    <!-- create a hidden edit form for each event -->
-    <div ng-repeat="event in events" ng-controller="ExistingEventController">
-        <div ng-show="isEditMode && showForm"
-             ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+        <!-- create a hidden edit form for each event -->
+        <div ng-init="event = events[$index]" ng-controller="ExistingEventController">
+            <div ng-show="isEditMode && showForm"
+                 ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+            </div>
         </div>
     </div>
 
