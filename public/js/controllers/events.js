@@ -173,11 +173,6 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
         /*
          user right-clicked an existing marker (handled by ExistingMarkerController)
          -> a 'MARKER_CAN_BE_EDITED_EVENT' event is dispatched.
-         we want ExistingEventController to handle this event, however, the
-         scopes do not don't have a parent/child relationship. So the event is bubbled
-         up to the MapController, which is a parent of both controllers,
-         then broadcasted back down to ExistingEventController. '!' is added
-         to prevent MapController from responding to the event which it is broadcasting
          */
 
         if(args.event.id != $scope.event.id){
