@@ -6,8 +6,8 @@ var mongoose = require('mongoose'),
 
 var PermissionSchema = new Schema({
     collectionName: String,
-    document: ObjectId,
-    can: [{
+    documentId: ObjectId,
+    canDo: [{
         type: String,
         unique: true,
         required: true
