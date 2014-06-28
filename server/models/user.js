@@ -5,8 +5,9 @@
  */
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    crypto = require('crypto');
- 
+    crypto = require('crypto'),
+    permissionSchema = require('./permissionModel');
+
 /**
   * Validations
   */
@@ -50,7 +51,8 @@ var UserSchema = new Schema({
     twitter: {},
     github: {},
     google: {},
-    linkedin: {}
+    linkedin: {},
+    permissions: [permissionSchema]
 });
 
 /**
