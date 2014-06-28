@@ -189,8 +189,25 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
 }]);
 
 
-controllers.controller('EventDetailController', ['$scope', 'Events', function($scope, Events){
+controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Events', function($scope, $stateParams, Events){
     console.log('in EventDetailController');
+
+    var slug = $stateParams.slug;
+    if(slug){
+        var successCallback = function(event, headers){
+            console.log('getBySlug event', event);
+
+            $scope.event = event;
+        };
+
+        var failureCallback = function(response){
+            console.log('getBySlug failed', response);
+
+            $scope.error = response.data;
+        };
+
+        Events.getBySlug({slug: slug}, successCallback, failureCallback);
+    }
 }]);
 
 controllers.controller('EventListController', ['$scope', 'Events', function($scope, Events){

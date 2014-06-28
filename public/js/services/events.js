@@ -5,6 +5,10 @@ services.factory('Events', ['$resource', function($resource){
     }, {
         update: {
             method: 'PUT'
+        },
+        getBySlug:{
+            url: eventUrl + '/slug/:slug',
+            method: 'GET'
         }
     });
 }]);
