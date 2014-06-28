@@ -41,6 +41,7 @@ module.exports = function(Model){
         */
         getByQuery: function(req, res, next, query){
             console.log('getByField query', query);
+
             Model.findOne(query).exec(function(err, doc){
                 if(err){ return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc by query' + query));}

@@ -15,6 +15,13 @@ exports.get = function(req, res, next, id) {
 };
 
 /**
+ * Find event by slug
+ */
+exports.getBySlug = function(req, res, next, id) {
+    base.getByQuery(req, res, next, {slug: id});
+};
+
+/**
  * Create a event
  */
 exports.create = function(req, res) {
