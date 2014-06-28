@@ -17,10 +17,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             url: '/home?view',
             templateUrl: 'templates/home/home.html'
         })
-        .state('home.mapView', {
+        .state('home.map', {
             templateUrl: 'templates/home/map.html'
         })
-        .state('home.listView', {
+        .state('home.list', {
             templateUrl: 'templates/home/list.html'
         });
 
