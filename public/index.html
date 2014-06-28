@@ -9,28 +9,25 @@
         </style>
     </head>
     <body>
-        <div id="map-canvas"/>
+        <div id= "map pull-center" align="center">
+            <h3>Testing Maps</h3>
+            <h4><a href="#" id="get_location">Get location</a></h4>
+            <iframe id= "google_map" width="1000" height= "500" frameborder="0" marginwidth="0" scrolling="yes" src="https://maps.google.com?q=40.6880492, -74.0188415&z=16&output=embed"></iframe>
+        </div>
 
-        <script
-        type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=KEY">
-        </script>
         <script type="text/javascript">
-            function initialize() {
-                var mapOptions = {
-                    center: new google.maps.LatLng(40.6880492,-74.0188415),
-                    zoom: 16
-                };
-                var map = new google.maps.Map(document.getElementById("map-canvas"),
-                mapOptions);
 
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(40.6880492,-74.0188415),
-                    map: map,
-                    title:"Hello World!"
-                });
+            var coordinates= function(position){
+                var lat= position.coords.latitude,
+                    lon= position.coords.longitude;
+                var coords = lat+ ', '+ lon;
+                document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
+
             }
-            google.maps.event.addDomListener(window, 'load', initialize);
+            document.getElementById('get_location').onclick=function(){
+                navigator.geolocation.getCurrentPosition(coordinates);
+                return false;
+            }
         </script>
     </body>
 </html>
