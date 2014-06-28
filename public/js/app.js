@@ -11,12 +11,15 @@ var app = angular.module('app', [
     'ui.map']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    // System routes
+    //Home route
     $stateProvider
         .state('home', {
             url: '/',
             templateUrl: 'templates/home.html'
-        })
+        });
+
+    // Auth routes
+    $stateProvider
         .state('login', {
             url: '/login',
             templateUrl: 'templates/auth/login.html'
@@ -30,6 +33,26 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             url: '/register',
             templateUrl: 'templates/auth/register.html'
         });
+
+    // Info routes
+    $stateProvider
+        .state('about', {
+            url: '/about',
+            templateUrl: 'templates/info/about.html'
+        })
+        .state('contact', {
+            url: '/contact',
+            templateUrl: 'templates/info/contact.html'
+        })
+        .state('history', {
+            url: '/history',
+            templateUrl: 'templates/info/history.html'
+        })
+        .state('faqs', {
+            url: '/faqs',
+            templateUrl: 'templates/info/faqs.html'
+        })
+
     // Event routes
     $stateProvider
         .state('events', {
