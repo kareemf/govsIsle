@@ -11,11 +11,17 @@ var app = angular.module('app', [
     'ui.map']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    //Home route
+    //Home routes
     $stateProvider
         .state('home', {
-            url: '/',
-            templateUrl: 'templates/home.html'
+            url: '/home?view',
+            templateUrl: 'templates/home/home.html'
+        })
+        .state('home.mapView', {
+            templateUrl: 'templates/home/map.html'
+        })
+        .state('home.listView', {
+            templateUrl: 'templates/home/list.html'
         });
 
     // Auth routes
@@ -69,6 +75,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             templateUrl: '/templates/events/event.html',
         });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/home');
 
 }])
