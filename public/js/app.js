@@ -52,6 +52,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             url: '/faqs',
             templateUrl: 'templates/info/faqs.html'
         })
+        .state('ferry', {
+            url: '/ferry',
+            templateUrl: 'templates/info/ferry.html'
+        })
 
     // Event routes
     $stateProvider
