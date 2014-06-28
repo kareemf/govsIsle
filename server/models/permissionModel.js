@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
     ObjectId = mongoose.Schema.ObjectId;
 
 var PermissionSchema = new Schema({
-    collection: String,
+    collectionName: String,
     document: ObjectId,
     can: [{
         type: String,

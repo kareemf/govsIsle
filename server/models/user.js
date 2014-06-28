@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto'),
-    permissionSchema = require('./permissionModel');
+    permissionSchema = require('./permissionModel').schema;
 
 /**
   * Validations
