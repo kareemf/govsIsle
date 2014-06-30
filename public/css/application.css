@@ -1,0 +1,20 @@
+*{margin: 0px;padding: 0px; }
+body{height: 100%; width: 100%; line-height: 1;background-image:url('../image/background.png');
+}
+body, h1,h2,h3,h4,h5,h6{
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1px;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+#main-content{
+	margin-top: 100px;
+}
+/*HEADER-STYLING AREA*/
+.angular-google-map-container { height: 400px; }
+/* i dont know what .gm does*/
+/*.gm-style-iw {top: 0 !important;}*/
+.map-canvas { height: 400px; }
