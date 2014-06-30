@@ -1,4 +1,4 @@
-<section id="map" ng-controller="MapController" >
+<section ng-controller="MapController" >
     <!-- render map. ui-map will be the name of scope property -->
     <div ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="map-canvas"></div>
 
@@ -42,6 +42,7 @@
         Edit mode: <input type="checkbox" ng-model="isEditMode" ng-change="toggleEditMode(isEditMode)">
     </div>
 </section>
+
 
 <!-- TODO: display text list of markers -->
 <!-- TODO: event/marker detail page(s) -->
