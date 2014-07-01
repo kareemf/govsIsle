@@ -92,7 +92,7 @@ module.exports = function(Model){
                     permissions = _.uniq(permissions.concat(determinePermissions(user, doc)));
                 }
 
-                if(!_.contains(doc.permissions, 'canRead')){
+                if(!_.contains(doc.permissions, 'read')){
                     return res.send(403, 'User does not have read access to this content');
                 }
 
@@ -184,6 +184,32 @@ module.exports = function(Model){
                     res.jsonp(docs);
                 }
             });
-        }
+        },
+
+        /**
+        * Publish a doc
+        */
+        publish: function(req, res){
+            console.log('attempting to publish', modelName, req[modelName]);
+
+            var user = req.user;
+            var doc = req[modelName];
+            var permissions = determinePermissions(user, doc);
+
+            if(!_.contains(permissions, 'publish')){
+                return res.send(403, 'User does not have permission to publish this content');
+            }
+
+            doc.published = new Date();
+            doc.save(function(err) {
+                if (err) {
+                    var data = {errors: err.errors};
+                    data[modelName] = doc;
+                    return new Error('Failed to update doc. Error: ' + err);
+                } else {
+                    res.jsonp(doc);
+                }
+            });
+        },
     };
 };
