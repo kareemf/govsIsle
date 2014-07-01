@@ -41,4 +41,12 @@ EventSchema.virtual('coords').get(function(){
 
 });
 
+EventSchema.virtual('permissions')
+    .set(function(permissions) {
+        this._permissions = permissions;
+    })
+    .get(function() {
+        return this._permissions;
+    });
+
 mongoose.model('Event', EventSchema);
