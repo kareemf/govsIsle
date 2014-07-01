@@ -77,13 +77,17 @@ module.exports = function(Model){
             Model.findOne(query).exec(function(err, doc){
                 if(err){ return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc by query' + query));}
-                req[modelName] = doc;
 
                 var user = req.user;
                 if(user){
                     doc.permissions = determinePermissions(user, doc);
                 }
 
+                if(!_.contains(doc.permissions, 'canRead')){
+                    return res.send(403, 'User does not have read access to this content');
+                }
+
+                req[modelName] = doc;
                 next();
             });
         },
