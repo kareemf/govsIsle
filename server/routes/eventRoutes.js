@@ -25,6 +25,9 @@ module.exports = function(app) {
         .put(authorization.requiresLogin, hasAuthorization, events.update)
         .delete(authorization.requiresLogin, hasAuthorization, events.destroy);
 
+    app.route(baseUrl + '/:eventId/publish')
+        .post(events.publish);
+
     app.route(baseUrl + '/slug/:eventSlug')
         .get(events.show);
 

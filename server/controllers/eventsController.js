@@ -55,3 +55,10 @@ exports.show = function(req, res) {
 exports.all = function(req, res) {
     base.all(req, res);
 };
+
+/**
+* Publish an Event
+*/
+exports.publish = function(req, res){
+    base.publish(req, res);
+}
