@@ -14,6 +14,8 @@ var mongoose = require('mongoose'),
 
 // Initializing system variables
 var config = require('./server/config/config');
+
+console.log('connecting to db:', config.db);
 var db = mongoose.connect(config.db);
 
 // Bootstrap Models, Dependencies, Routes and the app as an express app
