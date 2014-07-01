@@ -12,6 +12,27 @@ module.exports = function(Model){
         }).exec(callback);
     };
 
+    var determinePermissions = function(user, doc){
+        var canDo = [];
+        if(user.permissions){
+            user.permissions.forEach(function(permission){
+                if(permission.collectionName.toLowerCase() != modelName){
+                    return;
+                }
+
+                var documentId = permission.documentId;
+                if(documentId){
+                    if(!documentId.equals(doc.id)) {
+                        return;
+                    }
+                }
+
+                canDo.contact(permission.canDo);
+            });
+        }
+        return _.uniq(canDo);
+    };
+
     return {
         /**
          * Find doc by id
@@ -46,6 +67,12 @@ module.exports = function(Model){
                 if(err){ return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc by query' + query));}
                 req[modelName] = doc;
+
+                var user = req.user;
+                if(user){
+                    doc.permissions = determinePermissions(user, doc);
+                }
+
                 next();
             });
         },
