@@ -21,7 +21,7 @@ module.exports = function(Model){
                 // console.log('permission', permission);
 
                 if(!permission.documentType){
-                    console.log('malformed permission: did not specify documentType');
+                    // console.log('malformed permission: did not specify documentType');
                     return;
                 }
                 if(permission.documentType.toLowerCase() != modelName){
@@ -92,7 +92,8 @@ module.exports = function(Model){
                     permissions = _.uniq(permissions.concat(determinePermissions(user, doc)));
                 }
 
-                if(!_.contains(doc.permissions, 'read')){
+                // console.log('doc permissions', permissions);
+                if(!_.contains(permissions, 'read')){
                     return res.send(403, 'User does not have read access to this content');
                 }
 
