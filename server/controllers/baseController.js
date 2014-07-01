@@ -44,6 +44,14 @@ module.exports = function(Model){
         return _.uniq(canDo);
     };
 
+    var grantBasicPermissions = function(doc){
+        var canDo = [];
+        if(doc.published){
+            canDo.push('read');
+        }
+        return canDo;
+    };
+
     return {
         /**
          * Find doc by id
@@ -78,16 +86,19 @@ module.exports = function(Model){
                 if(err){ return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc by query' + query));}
 
+                var permissions = grantBasicPermissions(doc);
                 var user = req.user;
                 if(user){
-                    doc.permissions = determinePermissions(user, doc);
+                    permissions = _.uniq(permissions.concat(determinePermissions(user, doc)));
                 }
 
                 if(!_.contains(doc.permissions, 'canRead')){
                     return res.send(403, 'User does not have read access to this content');
                 }
 
+                doc.permissions = permissions;
                 req[modelName] = doc;
+
                 next();
             });
         },
