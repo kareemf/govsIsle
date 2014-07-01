@@ -1,8 +1,8 @@
 'use strict';
 
-var MONGOLAB_URL = process.env.MONGOLAB_URL;
+var MONGOLAB_URI = process.env.MONGOLAB_URI;
 module.exports = {
-    db: MONGOLAB_URL? MONGOLAB_URL : 'mongodb://localhost/gov-dev',
+    db: MONGOLAB_URI? MONGOLAB_URI : 'mongodb://localhost/gov-dev',
     app: {
         name: 'Govenor\'s Island'
     },
