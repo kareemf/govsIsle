@@ -1,9 +1,10 @@
 'use strict';
 
+var MONGOLAB_URL = process.env.MONGOLAB_URL;
 module.exports = {
-    db: 'mongodb://localhost/mean-prod',
+    db: MONGOLAB_URL? MONGOLAB_URL : 'mongodb://localhost/gov-prod',
     app: {
-        name: 'MEAN - A Modern Stack - Production'
+        name: 'Govenor\'s Island'
     },
     facebook: {
         clientID: 'APP_ID',
