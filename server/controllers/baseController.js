@@ -14,22 +14,33 @@ module.exports = function(Model){
 
     var determinePermissions = function(user, doc){
         var canDo = [];
+        // console.log('checking permissions');
         if(user.permissions){
+            // console.log('user has permissions');
             user.permissions.forEach(function(permission){
-                if(permission.collectionName.toLowerCase() != modelName){
+                // console.log('permission', permission);
+
+                if(!permission.documentType){
+                    console.log('malformed permission: did not specify documentType');
+                    return;
+                }
+                if(permission.documentType.toLowerCase() != modelName){
+                    // console.log('permission documentType !=', modelName);
                     return;
                 }
 
                 var documentId = permission.documentId;
                 if(documentId){
                     if(!documentId.equals(doc.id)) {
+                        // console.log('documentId !=', doc.id);
                         return;
                     }
                 }
-
-                canDo.contact(permission.canDo);
+                // console.log('adding permissions', permission.canDo);
+                canDo = canDo.concat(permission.canDo);
             });
         }
+        // console.log('returning permissions', _.uniq(canDo));
         return _.uniq(canDo);
     };
 
