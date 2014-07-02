@@ -49,4 +49,6 @@ EventSchema.virtual('permissions')
         return this._permissions;
     });
 
+EventSchema.statics = base.permissions;
+
 mongoose.model('Event', EventSchema);

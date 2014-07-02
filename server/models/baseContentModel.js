@@ -14,4 +14,23 @@ exports.preSave = function(model){
     console.log('base preSave for model', model);
 
     model.slug = slug(model.name).toLowerCase();
-}
+};
+
+exports.permissions = {
+    readPermission: function(){
+        return 'read';
+    },
+    createPermission: function(){
+        return 'create';
+    },
+    updatePermission: function(){
+        return 'update';
+    },
+    deletePermission: function(){
+        return 'delete';
+    },
+    publishPermission: function(){
+        return 'publish';
+    }
+};
+
