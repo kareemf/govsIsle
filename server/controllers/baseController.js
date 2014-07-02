@@ -70,6 +70,11 @@ module.exports = function(Model){
             var callback = function(err, doc) {
                 if (err) {return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc ' + id));}
+                var permissions = ascertainPermissions(req.user, doc);
+                if(!_.contains(permissions, Model.readPermission())){
+                    return res.send(403, 'User does not have read access to this content');
+                }
+
                 //ex req.post = post
                 req[modelName] = doc;
                 // console.log('req modelName', modelName);
@@ -118,6 +123,10 @@ module.exports = function(Model){
             if(!_.isUndefined(req.user)){
                 doc.createdBy = req.user._id;
             }
+            var permissions = ascertainPermissions(req.user, doc);
+            if(!_.contains(permissions, Model.createPermission())){
+                return res.send(403, 'User does not have read access to this content');
+            }
 
             doc.save(function(err) {
                 if (err) {
@@ -136,6 +145,10 @@ module.exports = function(Model){
         update: function(req, res) {
             var doc = req[modelName];
             var user = req.user;
+            var permissions = ascertainPermissions(req.user, doc);
+            if(!_.contains(permissions, Model.updatePermission())){
+                return res.send(403, 'User does not have read access to this content');
+            }
 
             doc.edit = new Date();
             doc.editedBy = user.id;
@@ -156,6 +169,10 @@ module.exports = function(Model){
          */
         destroy: function(req, res) {
             var doc = req[modelName];
+            var permissions = ascertainPermissions(req.user, doc);
+            if(!_.contains(permissions, Model.deletePermission())){
+                return res.send(403, 'User does not have read access to this content');
+            }
 
             doc.remove(function(err) {
                 if (err) {
@@ -187,6 +204,13 @@ module.exports = function(Model){
                         status: 500
                     });
                 } else {
+
+                    // TODO: determine permissions for list access
+                    // var permissions = ascertainPermissions(req.user, doc);
+                    // if(!_.contains(permissions, Model.readPermission())){
+                        // return res.send(403, 'User does not have read access to this content');
+                    // }
+
                     res.jsonp(docs);
                 }
             });
@@ -200,9 +224,8 @@ module.exports = function(Model){
 
             var user = req.user;
             var doc = req[modelName];
-            var permissions = determinePermissions(user, doc);
-
-            if(!_.contains(permissions, 'publish')){
+            var permissions = ascertainPermissions(user, doc);
+            if(!_.contains(permissions, Model.publishPermission())){
                 return res.send(403, 'User does not have permission to publish this content');
             }
 
