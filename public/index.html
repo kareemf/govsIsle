@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html ng-app="app">
     <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="govsIsland" content="">
+        <!--<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />-->
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/application.css">
+        <title>gov's Island</title>
     </head>
     <body>
-        <div id="main-header">
+      <div class="container">
+        <div id="main-header"><!--MAIN-HEADER-->
             <div ng-include="'templates/header.html'" data-role="navigation"></div>  <!-- Header End Here-->
         </div>
 
-        <div class="container main-content" id="main-content" >   <!--MAIN CONTENT-->
-            <div class="col-xs-12 col-sm-12 col-md-11 col-lg-12">
+        <div class="main-content" id="main-content" >   <!--MAIN CONTENT-->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div ui-view></div>
             </div>
+        </div>
+
+        <div class="main-footer"><!-- MAIN-FOOTER-->
+            <!--<div ng-include=" 'templates/footer.html' "></div> -->
+        </div>
+            
         </div>
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -35,5 +47,6 @@
         <script type="text/javascript" src="js/controllers/map.js"></script>
         <script type="text/javascript" src="js/controllers/events.js"></script>
         <script type="text/javascript" src="js/controllers/header.js"></script>
+      </div>
     </body>
 </html>
