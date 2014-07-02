@@ -16,14 +16,19 @@ footer, header, hgroup, menu, nav, section {
 .angular-google-map-container { height: 400px; }
 /* i dont know what .gm does*/
 /*.gm-style-iw {top: 0 !important;}*/
-.map-canvas { height: 400px; }
+.map-canvas { height: 100px; }
 
 /*---AROUSEL-STYLING AREA---*/
 /* Carousel base class */
-.carousel {
-  height: 500px;
-  margin-bottom: 60px;
+.carousel-wrapper{
+	background-color: #FFF;
 }
+.carousel {
+  background-color: #FFF;
+  height: auto;
+  margin-bottom: 50px;
+}
+
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   z-index: 10;
@@ -31,7 +36,7 @@ footer, header, hgroup, menu, nav, section {
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 500px;
+  height: 425px;
   background-color: #blue;
   min-height: 100%;
 }
@@ -48,6 +53,7 @@ footer, header, hgroup, menu, nav, section {
 .carousel-nav{
 	background-color: black;
 }
-.carousel-control{
-	background-color: #FFF;
+.carousel-img{
+	padding: 15px 15px 15px 15px;
+
 }
