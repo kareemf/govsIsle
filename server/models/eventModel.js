@@ -49,6 +49,23 @@ EventSchema.virtual('permissions')
         return this._permissions;
     });
 
+//Each model must define its set of assignable permissions.
+//All models inherit basic CRUD permissions
 EventSchema.statics = base.permissions;
+
+//Programatically create field permissions
+EventSchema.statics.fieldPermissions = _.memoize(function(){
+    var permissions = {};
+
+    for (var field in this.schema.paths) {
+        if (field == '_id' || field == '__v'){
+            continue;
+        }
+        console.log('creating permission', 'update-' + field);
+        permissions[field] = 'update-' + field;
+    };
+
+    return permissions;
+});
 
 mongoose.model('Event', EventSchema);
