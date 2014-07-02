@@ -12,7 +12,7 @@ module.exports = function(Model){
         }).exec(callback);
     };
 
-    var determinePermissions = function(user, doc){
+    var ascertainUserPermissions = function(user, doc){
         var canDo = [];
         // console.log('checking permissions');
         if(user.permissions){
@@ -44,12 +44,20 @@ module.exports = function(Model){
         return _.uniq(canDo);
     };
 
-    var grantBasicPermissions = function(doc){
+    var ascertainBasicPermissions = function(doc){
         var canDo = [];
         if(doc.published){
             canDo.push('read');
         }
         return canDo;
+    };
+
+    var ascertainPermissions = function(user, doc){
+        var permissions = ascertainBasicPermissions(doc);
+        if(user){
+            permissions = _.uniq(permissions.concat(ascertainUserPermissions(user, doc)));
+        }
+        return permissions;
     };
 
     return {
@@ -86,11 +94,8 @@ module.exports = function(Model){
                 if(err){ return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc by query' + query));}
 
-                var permissions = grantBasicPermissions(doc);
                 var user = req.user;
-                if(user){
-                    permissions = _.uniq(permissions.concat(determinePermissions(user, doc)));
-                }
+                var permissions = ascertainPermissions(user, doc);
 
                 // console.log('doc permissions', permissions);
                 if(!_.contains(permissions, 'read')){
