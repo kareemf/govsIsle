@@ -119,10 +119,12 @@ module.exports = function(Model){
          */
         create: function(req, res) {
             var doc = new Model(req.body);
+            var user = req.user;
 
             if(!_.isUndefined(req.user)){
-                doc.createdBy = req.user._id;
+                doc.createdBy = user._id;
             }
+
             var permissions = ascertainPermissions(req.user, doc);
             if(!_.contains(permissions, Model.createPermission())){
                 return res.send(403, 'User does not have read access to this content');
@@ -134,6 +136,22 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to create doc. Error: ' + err);
                 } else {
+                    if(user){
+                        user.permissions.push({
+                            documentType: modelName,
+                            documentId: doc.id,
+                            canDo: [
+                                Model.readPermission(),
+                                Model.updatePermission()
+                            ]
+                        });
+
+                        user.save(function (err) {
+                          if (err) return new Error('Failed to update user permissions. Error: ' + err);
+                          console.log('added permissions to user for doc', doc.id);
+                        });
+                    }
+
                     res.jsonp(doc);
                 }
             });
@@ -171,7 +189,7 @@ module.exports = function(Model){
             var doc = req[modelName];
             var permissions = ascertainPermissions(req.user, doc);
             if(!_.contains(permissions, Model.deletePermission())){
-                return res.send(403, 'User does not have read access to this content');
+                return res.send(403, 'User does not have delete access to this content');
             }
 
             doc.remove(function(err) {
