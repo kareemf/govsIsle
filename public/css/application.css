@@ -10,7 +10,7 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 #main-content{
-	margin-top: 100px;
+	margin-top: 75px;
 }
 /*HEADER-STYLING AREA*/
 .angular-google-map-container { height: 400px; }
@@ -25,7 +25,6 @@ footer, header, hgroup, menu, nav, section {
 }
 .carousel {
   background-color: #FFF;
-  height: auto;
   margin-bottom: 50px;
 }
 
@@ -56,4 +55,8 @@ footer, header, hgroup, menu, nav, section {
 .carousel-img{
 	padding: 15px 15px 15px 15px;
 
+}
+
+.carousel-info{
+  background-color: white;
 }
