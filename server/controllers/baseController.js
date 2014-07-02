@@ -98,7 +98,7 @@ module.exports = function(Model){
                 var permissions = ascertainPermissions(user, doc);
 
                 // console.log('doc permissions', permissions);
-                if(!_.contains(permissions, 'read')){
+                if(!_.contains(permissions, Model.readPermission())){
                     return res.send(403, 'User does not have read access to this content');
                 }
 
