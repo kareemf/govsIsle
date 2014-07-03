@@ -60,6 +60,27 @@ module.exports = function(Model){
         return permissions;
     };
 
+    var removeNonPermitedFields = function(permissions, doc){
+        var modelFieldPermissions =  Model.fieldPermissions();
+        var readPermission = Model.readPermission();
+
+        for (var field in Model.schema.paths) {
+            if (field == '_id' || field == '__v'){
+                continue;
+            }
+
+            var requiredPermission = modelFieldPermissions[field][readPermission];
+            if(!_.contains(permissions, requiredPermission)){
+                console.log('dont have', requiredPermission, 'for field', field);
+                delete doc[field];
+                // doc[field] = null;
+
+            }
+        };
+
+        return doc;
+    };
+
     return {
         /**
          * Find doc by id
@@ -234,7 +255,16 @@ module.exports = function(Model){
         show: function(req, res) {
             var doc = req[modelName];
             console.log('showing doc', doc);
-            res.jsonp(doc);
+
+            var permissions = ascertainPermissions(req.user, doc);
+
+            //returning a POJO instead of mongoose model instance
+            var _doc = doc.toObject();
+
+            //remove all field for which the user does not have read access
+             _doc = removeNonPermitedFields(permissions, _doc);
+
+            res.jsonp(_doc);
         },
 
         /**
