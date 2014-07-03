@@ -61,8 +61,15 @@ EventSchema.statics.fieldPermissions = _.memoize(function(){
         if (field == '_id' || field == '__v'){
             continue;
         }
-        console.log('creating permission', 'update-' + field);
-        permissions[field] = 'update-' + field;
+
+        // permissions[field] = 'update-' + field;
+        permissions[field] = {
+            'read': 'read-' + field,
+            'update': 'update-' + field,
+        }
+
+        console.log('creating field permissions', permissions[field]);
+
     };
 
     return permissions;
