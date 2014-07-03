@@ -9,10 +9,35 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+/*----default link-----*/
+a{
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+a:hover{
+  text-decoration: none;
+}
 #main-content{
 	margin-top: 75px;
 }
 /*HEADER-STYLING AREA*/
+#custom-nav{
+  height: 30px;
+  background-color: #FFF;
+  margin-top: 0px;
+  padding: 5px 10px 28px 10px;
+  text-align: center;
+} 
+.nav-login li, .social-icon li{
+  display: inline;
+  list-style-type: none;
+}
+
+.main-nav{
+  margin-top: 25px;
+
+}
 .angular-google-map-container { height: 400px; }
 /* i dont know what .gm does*/
 /*.gm-style-iw {top: 0 !important;}*/
@@ -59,4 +84,33 @@ footer, header, hgroup, menu, nav, section {
 
 .carousel-info{
   background-color: white;
+}
+.circle{
+  border-radius: 50%;
+}
+.fa-facebook{
+background: black;
+color: #FFFFFF;
+padding: .3em 0.3em;
+}
+.fa-twitter{
+background: black;
+color: #FFFFFF;
+padding: 0.3em 0.2em;
+}
+/*#4099FF #3B5998*/
+.fa-wordpress{
+  background-color: black;
+  color: #FFFFFF;
+padding: 0.3em 0.2em;
+}
+@media screen and (max-width: 691px){
+  body{
+    background-color: green;
+  }
+  .container{
+      margin-right: -15px;
+      margin-left: -15px;
+    
+  }
 }
