@@ -1,22 +1,29 @@
-<nav id="custom-nav" role="navigation">
-<!-- need to fix the login spacing. it does not look perfect-->
-  <div class="pull-left">
-    <ul class="social-icon"> 
-      <li><a href="https://www.facebook.com/govisland" target="_blank"><i class="fa fa-facebook circle fa-lg"></i></a></li>
-      <li><a href="https://twitter.com/gov_island" target="_blank"><i class="fa fa-twitter circle fa-lg"></i></a></li>
-      <li><a href="http://govislandblog.com/" target="_blank"><i class="fa fa-wordpress circle fa-lg"></i></a></li>
-    </ul>
-  </div>
-  <div class="pull-right">
-    <ul class="nav-login">
-      <li><a ui-sref='register'><b>SIGN UP</b></a></li> / <li><a ui-sref='login'><i class="fa fa-sign-in"></i><b> SIGN IN</b></a></li> 
-
-
-
+<div class="container-full"  data-ng-controller="HeaderController">
+  <nav id="custom-nav" role="navigation">
+  <!-- need to fix the login spacing. it does not look perfect-->
+    <div class="pull-left">
+      <ul class="social-icon"> 
+        <li><a href="https://www.facebook.com/govisland" target="_blank"><i class="fa fa-facebook circle fa-lg"></i></a></li>
+        <li><a href="https://twitter.com/gov_island" target="_blank"><i class="fa fa-twitter circle fa-lg"></i></a></li>
+        <li><a href="http://govislandblog.com/" target="_blank"><i class="fa fa-wordpress circle fa-lg"></i></a></li>
       </ul>
-  </div>
-</nav>
-<nav class="container">
+    </div>
+    <div class="pull-right">
+      <ul class="nav-login" data-ng-hide="global.authenticated">
+        <li><a ui-sref='register'><b>SIGN UP</b></a></li> / <li><a ui-sref='login'><i class="fa fa-sign-in"></i><b> SIGN IN</b></a></li> 
+      </ul>
+      <ul class="nav-login" data-ng-show="global.authenticated">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-lg"></i>&nbsp; {{global.user.name}} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li><a href="/logout">Signout</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<nav class="container-fluid">
   <div class="main-nav navbar navbar-default" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -26,7 +33,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" ui-sref="home.map" mean-token="'site-title'">GOVENOR'S ISLAND</a>
+        <a class="navbar-brand" ui-sref="/" mean-token="'site-title'">GOVENOR'S ISLAND</a>
       </div>
       <div class="text-edit">
         <div class="pull-right" data-ng-show="global.authenticated" mean-token-editable></div>
@@ -34,7 +41,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav pull-right">
-          <li class="active"><a href="#"><i class="fa fa-calendar fa-lg"></i></i>&nbsp; EVENTS</a></li>
+          <li class="active"><a ui-sref="home.map"><i class="fa fa-calendar fa-lg"></i>&nbsp; EVENTS</a></li>
           <li><a href="#"><i class="fa fa-users fa-lg">&nbsp; TOURS</i></a></li>
           <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp; FERRY SCHEDULE</i></a></li>
           <li class="dropdown">

@@ -11,6 +11,13 @@ var app = angular.module('app', [
     'ui.map']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    //Lading page routes
+    $stateProvider
+        .state('/', {
+            url: '/',
+            templateUrl: 'templates/landing.html'
+        })
+
     //Home routes
     $stateProvider
         .state('home', {
@@ -75,6 +82,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             templateUrl: '/templates/events/event.html',
         });
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
 
 }])
