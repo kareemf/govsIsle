@@ -1,4 +1,4 @@
-*{margin: 0px;padding: 0px; }
+*{margin: 0px;padding: 0px;}
 body{height: 100%; width: 100%; line-height: 1; background-color: #444;}
 body, h1,h2,h3,h4,h5,h6{
   font-family: Helvetica, Arial, sans-serif;
@@ -75,7 +75,7 @@ a:hover{
 }
 
 .carousel-nav{
-	background-color: black;
+	background-color: white;
 }
 .carousel-img{
 	padding: 15px 15px 15px 15px;
@@ -83,7 +83,7 @@ a:hover{
 }
 
 .carousel-info{
-  background-color: white;
+  background-color: blue;
 }
 .circle{
   border-radius: 50%;
@@ -98,16 +98,13 @@ background: black;
 color: #FFFFFF;
 padding: 0.3em 0.2em;
 }
-/*#4099FF #3B5998*/
+/*#4099FF #3B5998 #019AD5(gov)*/
 .fa-wordpress{
   background-color: black;
   color: #FFFFFF;
 padding: 0.3em 0.2em;
 }
-@media screen and (max-width: 691px){
-  body{
-    background-color: green;
-  }
+@media screen and (max-width: 656px){
   .container{
       margin-right: -15px;
       margin-left: -15px;
