@@ -20,6 +20,9 @@ exports.permissions = {
     readPermission: function(){
         return 'read';
     },
+    readListPermission: function(){
+        return 'readList';
+    },
     createPermission: function(){
         return 'create';
     },
