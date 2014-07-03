@@ -31,7 +31,7 @@ module.exports = function(Model){
 
                 var documentId = permission.documentId;
                 if(documentId){
-                    if(!documentId.equals(doc.id)) {
+                    if(!doc.id || !documentId.equals(doc.id)) {
                         // console.log('documentId !=', doc.id);
                         return;
                     }
@@ -91,6 +91,7 @@ module.exports = function(Model){
             var callback = function(err, doc) {
                 if (err) {return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc ' + id));}
+
                 var permissions = ascertainPermissions(req.user, doc);
                 if(!_.contains(permissions, Model.readPermission())){
                     return res.send(403, 'User does not have read access to this content');
@@ -147,8 +148,9 @@ module.exports = function(Model){
             }
 
             var permissions = ascertainPermissions(req.user, doc);
+
             if(!_.contains(permissions, Model.createPermission())){
-                return res.send(403, 'User does not have read access to this content');
+                return res.send(403, 'User does not have create access to this content type');
             }
 
             doc.save(function(err) {
@@ -187,7 +189,7 @@ module.exports = function(Model){
             var permissions = ascertainPermissions(req.user, doc);
 
             if(!_.contains(permissions, Model.updatePermission())){
-                return res.send(403, 'User does not have read access to this content');
+                return res.send(403, 'User does not have update access to this content');
             }
 
             //prevent user from updating fields to which they dont have access
@@ -234,6 +236,7 @@ module.exports = function(Model){
         destroy: function(req, res) {
             var doc = req[modelName];
             var permissions = ascertainPermissions(req.user, doc);
+
             if(!_.contains(permissions, Model.deletePermission())){
                 return res.send(403, 'User does not have delete access to this content');
             }
@@ -298,6 +301,7 @@ module.exports = function(Model){
             var user = req.user;
             var doc = req[modelName];
             var permissions = ascertainPermissions(user, doc);
+
             if(!_.contains(permissions, Model.publishPermission())){
                 return res.send(403, 'User does not have permission to publish this content');
             }
