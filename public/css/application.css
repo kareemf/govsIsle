@@ -106,8 +106,8 @@ padding: 0.3em 0.2em;
 }
 @media screen and (max-width: 656px){
   .container{
-      margin-right: -15px;
-      margin-left: -15px;
+      margin-right: auto;
+      margin-left: auto;
     
   }
 }
