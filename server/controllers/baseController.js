@@ -81,6 +81,28 @@ module.exports = function(Model){
         return doc;
     };
 
+    var buildPermittedFieldsSelectStatement = function(permissions){
+        var modelFieldPermissions =  Model.fieldPermissions();
+        var readPermission = Model.readPermission();
+        var readableFields = [];
+
+        for (var field in Model.schema.paths) {
+            if (field == '_id' || field == '__v'){
+                readableFields.push(field);
+                continue;
+            }
+
+            var requiredPermission = modelFieldPermissions[field][readPermission];
+            if(_.contains(permissions, requiredPermission)){
+                // console.log('you have', requiredPermission, 'for field', field);
+
+                readableFields.push(field);
+            }
+        };
+
+        return readableFields.join(' ');
+    }
+
     return {
         /**
          * Find doc by id
@@ -160,6 +182,7 @@ module.exports = function(Model){
                     return new Error('Failed to create doc. Error: ' + err);
                 } else {
                     if(user){
+                        //TODO: work with model to get basic permissions. move to separate method
                         user.permissions.push({
                             documentType: modelName,
                             documentId: doc.id,
@@ -194,6 +217,7 @@ module.exports = function(Model){
 
             //prevent user from updating fields to which they dont have access
             //ex prevent user from updating his/her own permissions
+            //TODO: move to separate method
             for(var field in req.body) {
                 if (field == '_id' || field == '__v'){
                     //can't manually update id or version
@@ -274,19 +298,23 @@ module.exports = function(Model){
          * List of docs
          */
         all: function(req, res) {
-            Model.find().sort('-created').populate('user', 'name username').exec(function(err, docs) {
+            //only collection-levle permissions are relevant at this point
+            var permissions = ascertainUserPermissions(req.user, null);
+
+            if(!_.contains(permissions, Model.readListPermission())){
+                return res.send(403, 'User does not have read access to '+ modelName +' list');
+            }
+
+            //only going to select fields that user has permission to view
+            var select = buildPermittedFieldsSelectStatement(permissions);
+            // console.log('all select:', select);
+
+            Model.find().sort('-created').select(select).populate('user', 'name username').exec(function(err, docs) {
                 if (err) {
                     res.render('error', {
                         status: 500
                     });
                 } else {
-
-                    // TODO: determine permissions for list access
-                    // var permissions = ascertainPermissions(req.user, doc);
-                    // if(!_.contains(permissions, Model.readPermission())){
-                        // return res.send(403, 'User does not have read access to this content');
-                    // }
-
                     res.jsonp(docs);
                 }
             });
