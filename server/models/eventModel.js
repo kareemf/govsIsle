@@ -75,4 +75,28 @@ EventSchema.statics.fieldPermissions = _.memoize(function(){
     return permissions;
 });
 
+EventSchema.statics.permissionsGrantedOnCreation = function(){
+    var grant = [this.readPermission(), this.updatePermission()];
+    var fieldPermissions = this.fieldPermissions();
+    var cantTouch = ['created', 'createdBy', 'deleted', 'deletedBy', 'published'];
+
+    for (var field in this.schema.paths) {
+        if (field == '_id' || field == '__v'){
+            continue;
+        }
+        if(_.contains(cantTouch, field)){
+            console.log('cant edit', field, 'without explicit permission');
+            continue;
+        }
+        for(var permission in fieldPermissions[field]){
+            grant.push(fieldPermissions[field][permission]);
+
+            // console.log('you can', permission, field);
+        }
+    };
+
+    return grant;
+
+};
+
 mongoose.model('Event', EventSchema);

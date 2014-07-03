@@ -133,6 +133,22 @@ module.exports = function(Model){
         return readableFields.join(' ');
     }
 
+    var grandCreatorPermissions =  function(user, doc){
+        if(user){
+            //TODO: don't do this for admin (they should already have access)
+            user.permissions.push({
+                documentType: modelName,
+                documentId: doc.id,
+                canDo: Model.permissionsGrantedOnCreation()
+            });
+
+            user.save(function (err) {
+              if (err) return new Error('Failed to update user permissions. Error: ' + err);
+              console.log('added permissions to user for doc', doc.id);
+            });
+        }
+    };
+
     return {
         /**
          * Find doc by id
@@ -211,23 +227,7 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to create doc. Error: ' + err);
                 } else {
-                    if(user){
-                        //TODO: work with model to get basic permissions. move to separate method
-                        user.permissions.push({
-                            documentType: modelName,
-                            documentId: doc.id,
-                            canDo: [
-                                Model.readPermission(),
-                                Model.updatePermission()
-                            ]
-                        });
-
-                        user.save(function (err) {
-                          if (err) return new Error('Failed to update user permissions. Error: ' + err);
-                          console.log('added permissions to user for doc', doc.id);
-                        });
-                    }
-
+                    grandCreatorPermissions(req.user, doc);
                     res.jsonp(doc);
                 }
             });
