@@ -81,6 +81,36 @@ module.exports = function(Model){
         return doc;
     };
 
+    var removeNonPermitedUpdateFields = function(permissions, doc, body, params){
+        var modelFieldPermissions =  Model.fieldPermissions();
+        var readPermission = Model.readPermission();
+
+
+        for(var field in body) {
+            if (field == '_id' || field == '__v'){
+                //can't manually update id or version
+                delete body[field];
+                continue;
+            }
+            if(params[field] != doc[field]){
+                console.log('DIRTY FIELD', field);
+
+                var requiredPermission = modelFieldPermissions[field][readPermission];
+
+                if(!_.contains(permissions, requiredPermission)){
+                    console.log('DONT HAVE permission', requiredPermission, 'to update', field);
+                    delete body[field];
+                }
+                else{
+                    console.log('updating field', field);
+                    // doc[field] = req.params[field];
+                }
+            }
+        }
+
+        return body;
+    };
+
     var buildPermittedFieldsSelectStatement = function(permissions){
         var modelFieldPermissions =  Model.fieldPermissions();
         var readPermission = Model.readPermission();
@@ -210,6 +240,7 @@ module.exports = function(Model){
             var doc = req[modelName];
             var user = req.user;
             var permissions = ascertainPermissions(req.user, doc);
+            var body = req.body;
 
             if(!_.contains(permissions, Model.updatePermission())){
                 return res.send(403, 'User does not have update access to this content');
@@ -217,32 +248,11 @@ module.exports = function(Model){
 
             //prevent user from updating fields to which they dont have access
             //ex prevent user from updating his/her own permissions
-            //TODO: move to separate method
-            for(var field in req.body) {
-                if (field == '_id' || field == '__v'){
-                    //can't manually update id or version
-                    delete req.body[field];
-                    continue;
-                }
-                if(req.params[field] != doc[field]){
-                    console.log('DIRTY FIELD', field);
-
-                    var requiredPermission = Model.fieldPermissions()[field];
-
-                    if(!_.contains(permissions, requiredPermission)){
-                        console.log('DONT HAVE permission', requiredPermission, 'to update', field);
-                        delete req.body[field];
-                    }
-                    else{
-                        console.log('updating field', field);
-                        // doc[field] = req.params[field];
-                    }
-                }
-            }
+            body = removeNonPermitedUpdateFields(permissions, doc, body, req.params);
 
             doc.edit = new Date();
             doc.editedBy = user.id;
-            doc = _.extend(doc, req.body);
+            doc = _.extend(doc, body);
             doc.save(function(err) {
                 if (err) {
                     var data = {errors: err.errors};
