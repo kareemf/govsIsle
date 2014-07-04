@@ -315,11 +315,25 @@ module.exports = function(Model){
                 return res.send(403, 'User does not have read access to '+ modelName +' list');
             }
 
+            var query = Model.find();
+
+            //handle sort, limit, and offset query parameters
+            var sort = req.query.sort ? req.query.sort : '-created';
+            query.sort(sort);
+
+            if(req.query.limit) {
+                query.limit(req.query.limit);
+            }
+
+            if(req.query.offset) {
+                query.skip(req.query.offset);
+            }
+
             //only going to select fields that user has permission to view
             var select = buildPermittedFieldsSelectStatement(permissions);
             // console.log('all select:', select);
 
-            Model.find().sort('-created').select(select).populate('user', 'name username').exec(function(err, docs) {
+            query.select(select).populate('user', 'name username').exec(function(err, docs) {
                 if (err) {
                     res.render('error', {
                         status: 500
