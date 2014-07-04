@@ -69,12 +69,12 @@ EventSchema.statics.fieldPermissions = _.memoize(function(){
         }
 
         console.log('creating field permissions', permissions[field]);
-
     };
 
     return permissions;
 });
 
+//Specifies which permissions are granted to a user over the documents they create
 EventSchema.statics.permissionsGrantedOnCreation = function(){
     var grant = [this.readPermission(), this.updatePermission()];
     var fieldPermissions = this.fieldPermissions();
@@ -96,7 +96,12 @@ EventSchema.statics.permissionsGrantedOnCreation = function(){
     };
 
     return grant;
+};
 
+//Specifies which permissions are granted to a user on cretion
+EventSchema.statics.permissionsGrantedOnUserCreation = function(){
+    var grant = [this.readPermission(), this.readListPermission()];
+    return grant;
 };
 
 mongoose.model('Event', EventSchema);

@@ -60,6 +60,27 @@ exports.create = function(req, res, next) {
 
     // Hard coded for now. Will address this with the user permissions system in v0.3.5
     user.roles = ['authenticated'];
+
+    var permissions = [];
+    for(var model in mongoose.models){
+        var Model = mongoose.model(model);
+
+        //If a Model specifies permissions to grant to all users, assign them now
+        if(Model.permissionsGrantedOnUserCreation){
+            var _permissions = Model.permissionsGrantedOnUserCreation();
+
+            permissions.push({
+                documentType: Model.modelName.toLowerCase(),
+                canDo: _permissions
+            });
+
+            // console.log(Model.collection.name, 'permissionsGrantedOnUserCreation:', _permissions);
+            // console.log('permissions', permissions);
+        }
+    };
+    // console.log('permissionsGrantedOnUserCreation:', permissions);
+
+    user.permissions = permissions;
     user.save(function(err) {
         if (err) {
             switch (err.code) {
