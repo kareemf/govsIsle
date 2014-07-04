@@ -317,6 +317,11 @@ module.exports = function(Model){
 
             var query = Model.find();
 
+            //prevent user from viewing unpublished content unless they have permission to do so
+            if(!_.contains(permissions, Model.readUnpublishedPermission())){
+                query.exists('published');
+            }
+
             //handle sort, limit, and offset query parameters
             var sort = req.query.sort ? req.query.sort : '-created';
             query.sort(sort);

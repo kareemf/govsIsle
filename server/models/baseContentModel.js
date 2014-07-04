@@ -23,6 +23,9 @@ exports.permissions = {
     readListPermission: function(){
         return 'readList';
     },
+    readUnpublishedPermission: function(){
+        return 'readUnpublished';
+    },
     createPermission: function(){
         return 'create';
     },
