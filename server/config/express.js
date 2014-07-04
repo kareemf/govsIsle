@@ -106,7 +106,9 @@ module.exports = function(app, passport, db) {
     app.use(flash());
 
     // Setting the fav icon and static folder
-    // app.use(favicon(appPath + '/public/system/assets/img/favicon.ico'));
+    app.use(favicon(appPath + '/public/images/favicon.ico'));
+    //app.use(express.favicon(path.join(__dirname, 'public','images','favicon.ico'))); 
+
 
     app.get('/modules/aggregated.js', function(req, res) {
         res.setHeader('content-type', 'text/javascript');

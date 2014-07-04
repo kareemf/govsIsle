@@ -26,10 +26,58 @@ a:hover{
 	margin-top: 75px;
 }
 /*HEADER-STYLING AREA*/
-.container-full {
+.top-nav-header, .second-nav-header{
   margin: 0;
   width: 100%;
   min-width: 200px;
+}
+.navbar{
+  background-color: #FFFFFF;
+}
+.img-logo{
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+.header-brand{
+  display: inline-block;
+}
+/*CONTROL WHEN BAR GOING TO COLLAPSE*/
+@media (max-width: 808px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+  }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+    margin-top: 7.5px;
+  }
+  .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+      display:block !important;
+  }
 }
 #custom-nav{
   height: 30px;
@@ -38,8 +86,11 @@ a:hover{
   padding: 5px 10px 28px 10px;
   text-align: center;
 } 
-@media screen and (max-width: 237px){
+@media screen and (max-width: 253px){
   #custom-nav{height: 55px;}
+}
+/*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
+@media screen and (max-width: 237px){
 }
 .nav-login li, .social-icon li{
   display: inline;

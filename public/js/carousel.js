@@ -1,7 +1,7 @@
 $(document).ready( function() {
 
   $('#home-carousel').carousel({
-    interval: 2000
+    interval: 3000
   });
 
   var clickEvent = false;
@@ -16,7 +16,7 @@ $(document).ready( function() {
       var count = $('#home-carousel .nav').children().length -1;
       var current = $('#home-carousel .nav li.carousel-info');
       current.removeClass('carousel-info').next().addClass('carousel-info');
-      var id = parseInt(current.data('slide-to'));
+      var id = parseFloat(current.data('slide-to'));
       if(count == id) {
         $('#home-carousel .nav li').first().addClass('carousel-info');
       }
