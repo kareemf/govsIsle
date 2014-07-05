@@ -165,6 +165,14 @@ module.exports = function(Model){
                     return res.send(403, 'User does not have read access to this content');
                 }
 
+                //prevent user from viewing unpublished content unless they have
+                //permission to do so. this happens after the query is already
+                //executed because the user may have doc-level readUnpublished
+                //permission without having collection level access
+                if(!_.contains(permissions, Model.readUnpublishedPermission())){
+                    return res.send(403, 'Content not yet available');
+                }
+
                 //ex req.post = post
                 req[modelName] = doc;
                 // console.log('req modelName', modelName);
@@ -192,10 +200,7 @@ module.exports = function(Model){
                 var user = req.user;
                 var permissions = ascertainPermissions(user, doc);
 
-                //prevent user from viewing unpublished content unless they have
-                //permission to do so. this happens after the query is already
-                //executed because the user may have doc-level readUnpublished
-                //permission without having collection level access
+                //prevent user from viewing unpublished content unless they have permission to do so.
                 if(!_.contains(permissions, Model.readUnpublishedPermission())){
                     return res.send(403, 'Content not yet available');
                 }
