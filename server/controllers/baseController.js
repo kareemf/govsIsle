@@ -184,7 +184,7 @@ module.exports = function(Model){
         /**
          * List of docs
          */
-        all: function(req, res) {
+        all: function(req, res, queryParams) {
             //only collection-levle permissions are relevant at this point
             var permissions = permissionsManager.ascertainUserPermissions(req.user, null);
 
@@ -193,6 +193,11 @@ module.exports = function(Model){
             }
 
             var query = Model.find();
+
+            //allow the execution of user-provided queries
+            if(queryParams){
+                query.where(queryParams);
+            }
 
             //prevent user from viewing unpublished content unless they have permission to do so
             if(!_.contains(permissions, Model.readUnpublishedPermission())){

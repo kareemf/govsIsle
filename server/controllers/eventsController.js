@@ -3,7 +3,8 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+var _ = require('lodash'),
+    mongoose = require('mongoose'),
     Event = mongoose.model('Event'),
     base = require('./baseController')(Event);
 
@@ -53,7 +54,23 @@ exports.show = function(req, res) {
  * List of Events
  */
 exports.all = function(req, res) {
-    base.all(req, res);
+    var query = null;
+    var filter = req.query.filter;
+
+    if(filter){
+        if(_.isArray(filter)){
+            query = {
+                type: {$in: filter}
+            };
+        }
+        else{
+            query = {
+                type: filter
+            };
+        }
+    }
+
+    base.all(req, res, query);
 };
 
 /**
