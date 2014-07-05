@@ -2,6 +2,13 @@
 
 var _ = require('lodash');
 
+var PaginationResponse = function(items, total, limit, offset){
+    this.items = items;
+    this.total = total;
+    this.offset = offset ? offset : 0;
+    this.limit = limit ? limit : 20;
+};
+
 module.exports = function(Model){
     //TODO: may be a better way to get property name
     var modelName = Model.modelName.toLowerCase(),
@@ -193,15 +200,18 @@ module.exports = function(Model){
             }
 
             var query = Model.find();
+            var countQuery = Model.find();
 
             //allow the execution of user-provided queries
             if(queryParams){
                 query.where(queryParams);
+                countQuery.where(queryParams);
             }
 
             //prevent user from viewing unpublished content unless they have permission to do so
             if(!_.contains(permissions, Model.readUnpublishedPermission())){
                 query.exists('published');
+                countQuery.exists('published');
             }
 
             //handle sort, limit, and offset query parameters
@@ -222,12 +232,29 @@ module.exports = function(Model){
 
             query.select(select).populate('user', 'name username').exec(function(err, docs) {
                 if (err) {
-                    res.render('error', {
+                    return res.render('error', {
                         status: 500
                     });
-                } else {
-                    res.jsonp(docs);
                 }
+
+                if(req.query.paginate){
+                    return countQuery.count(function(err, total){
+                        if (err) {
+                            return res.render('error', {
+                                status: 500
+                            });
+                        }
+                        return res.jsonp(new PaginationResponse(
+                            docs,
+                            total,
+                            Number(req.query.limit),
+                            Number(req.query.offset)
+                        ));
+                    });
+                }
+
+                return res.jsonp(docs);
+
             });
         },
 
