@@ -1,9 +1,12 @@
 'use strict';
 
-var _ = require('lodash');
+var _ = require('lodash'),
+    mongoose = require('mongoose');
 
 module.exports = function(Model){
-    var modelName = Model.modelName.toLowerCase();
+    if(Model){
+        var modelName = Model.modelName.toLowerCase();
+    }
 
     return {
         ascertainUserPermissions: function(user, doc){
@@ -142,5 +145,58 @@ module.exports = function(Model){
                 });
             }
         },
+        grantBasicPermissions: function(){
+            var permissions = [];
+            for(var model in mongoose.models){
+                var Model = mongoose.model(model);
+
+                //If a Model specifies permissions to grant to all users, assign them now
+                if(Model.permissionsGrantedOnUserCreation){
+                    var _permissions = Model.permissionsGrantedOnUserCreation();
+
+                    permissions.push({
+                        documentType: Model.modelName.toLowerCase(),
+                        canDo: _permissions
+                    });
+
+                    // console.log(Model.collection.name, 'permissionsGrantedOnUserCreation:', _permissions);
+                    // console.log('permissions', permissions);
+                }
+            };
+            return permissions;
+            // console.log('permissionsGrantedOnUserCreation:', permissions);
+        },
+        grantAllFieldPermissions: function(){
+            var permissions = [];
+
+            for(var model in mongoose.models){
+                var Model = mongoose.model(model);
+                var canDo = [];
+
+                if(Model.fieldPermissions){
+                    var fieldPermissions = Model.fieldPermissions();
+
+                    for (var field in Model.schema.paths) {
+                        if (field == '_id' || field == '__v'){
+                            continue;
+                        }
+
+                        for(var permission in fieldPermissions[field]){
+                            canDo.push(fieldPermissions[field][permission]);
+                        }
+                    };
+
+                    permissions.push({
+                        documentType: Model.modelName.toLowerCase(),
+                        canDo: canDo
+                    });
+
+                    // console.log(Model.collection.name, 'fieldPermissions:', _permissions);
+                    // console.log('permissions', permissions);
+                }
+            };
+            console.log('grantAllFieldPermissions:', permissions);
+            return permissions;
+        }
     };
 };

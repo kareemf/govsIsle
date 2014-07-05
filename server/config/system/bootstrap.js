@@ -21,33 +21,34 @@ module.exports = function(passport, db) {
     function bootstrapRoles(){
         var mongoose = require('mongoose');
         var Role = mongoose.model('Role');
+        var permissionsManager = require('../../controllers/permissionsManager')(null);
 
-        //create roles iff they doesn't exist
-        Role.findOne({name: 'admin'}).exec(function(err, adminRole){
-            if(adminRole){
-                console.log('admin Role exists');
-                return;
-            }
-            adminRole = new Role({
-                name: 'admin',
-                permissions: [] //TODO
+        ['admin', 'authenticated'].forEach(function(roleName){
+            //create roles iff they doesn't exist
+            Role.findOne({name: roleName}).exec(function(err, role){
+                if(role){
+                    console.log('Role exists:', roleName);
+                    return;
+                }
+
+                role = new Role({name: roleName});
+
+                var permissions = permissionsManager.grantBasicPermissions();
+
+                if(roleName == 'admin'){
+                    var allFieldPermissions = permissionsManager.grantAllFieldPermissions();
+                    permissions = permissions.concat(allFieldPermissions);
+                }
+
+                console.log('granting', roleName, 'permissions', permissions);
+                role.permissions = permissions;
+
+                console.log('bootstraping role', roleName);
+
+                role.save(function(err){
+                    console.log('role bootstraped:', roleName);
+                });
             });
-
-            console.log('bootstrapRoles admin')
-        });
-
-        Role.findOne({name: 'authenticated'}).exec(function(err, authenticatedRole){
-            if(authenticatedRole){
-                console.log('authenticated Role exists');
-                return;
-            }
-            authenticatedRole = new Role({
-                name: 'authenticated',
-                permissions: [] //TODO
-            });
-
-            console.log('bootstrapRoles authenticated')
-
         });
     };
 

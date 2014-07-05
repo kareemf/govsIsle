@@ -6,29 +6,6 @@
 var mongoose = require('mongoose'),
     User = mongoose.model('User'),
     Role = mongoose.model('Role');
-
-var grantBasicPermissions = function(){
-    var permissions = [];
-    for(var model in mongoose.models){
-        var Model = mongoose.model(model);
-
-        //If a Model specifies permissions to grant to all users, assign them now
-        if(Model.permissionsGrantedOnUserCreation){
-            var _permissions = Model.permissionsGrantedOnUserCreation();
-
-            permissions.push({
-                documentType: Model.modelName.toLowerCase(),
-                canDo: _permissions
-            });
-
-            // console.log(Model.collection.name, 'permissionsGrantedOnUserCreation:', _permissions);
-            // console.log('permissions', permissions);
-        }
-    };
-    return permissions;
-    // console.log('permissionsGrantedOnUserCreation:', permissions);
-};
-
 /**
  * Auth callback
  */
@@ -84,8 +61,8 @@ exports.create = function(req, res, next) {
     User.count(function(err, count){
         var roleQueryParams = {name: 'authenticated'};
 
+        //If this is the frist user, give admin role
         if(!count){
-            //If this is the frist user, give admin role
             roleQueryParams = {name: 'admin'};
         }
         console.log('searching for role:', roleQueryParams);
@@ -96,8 +73,6 @@ exports.create = function(req, res, next) {
             if(role){
                 user.roles = [role];
             }
-
-            user.permissions = grantBasicPermissions();
 
             user.save(function(err) {
                 console.log('user saved');
