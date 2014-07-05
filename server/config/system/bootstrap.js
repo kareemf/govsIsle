@@ -18,6 +18,41 @@ module.exports = function(passport, db) {
 
     bootstrapModels();
 
+    function bootstrapRoles(){
+        var mongoose = require('mongoose');
+        var Role = mongoose.model('Role');
+
+        //create roles iff they doesn't exist
+        Role.findOne({name: 'admin'}).exec(function(err, adminRole){
+            if(adminRole){
+                console.log('admin Role exists');
+                return;
+            }
+            adminRole = new Role({
+                name: 'admin',
+                permissions: [] //TODO
+            });
+
+            console.log('bootstrapRoles admin')
+        });
+
+        Role.findOne({name: 'authenticated'}).exec(function(err, authenticatedRole){
+            if(authenticatedRole){
+                console.log('authenticated Role exists');
+                return;
+            }
+            authenticatedRole = new Role({
+                name: 'authenticated',
+                permissions: [] //TODO
+            });
+
+            console.log('bootstrapRoles authenticated')
+
+        });
+    };
+
+    bootstrapRoles();
+
     // Bootstrap passport config
     require(appPath + '/server/config/passport')(passport);
 
