@@ -95,6 +95,9 @@ EventSchema.statics.permissionsGrantedOnCreation = function(){
         }
     };
 
+    //Users can view unpublished versions of docs they create
+    grant.push(this.readUnpublishedPermission());
+
     return grant;
 };
 
