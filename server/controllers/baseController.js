@@ -4,149 +4,13 @@ var _ = require('lodash');
 
 module.exports = function(Model){
     //TODO: may be a better way to get property name
-    var modelName = Model.modelName.toLowerCase();
+    var modelName = Model.modelName.toLowerCase(),
+        permissionsManager = require('./permissionsManager')(Model);
 
     var load = function(id, callback){
         Model.findOne({
             _id: id
         }).exec(callback);
-    };
-
-    var ascertainUserPermissions = function(user, doc){
-        var canDo = [];
-        // console.log('checking permissions');
-        if(user.permissions){
-            // console.log('user has permissions');
-            user.permissions.forEach(function(permission){
-                // console.log('permission', permission);
-
-                if(!permission.documentType){
-                    // console.log('malformed permission: did not specify documentType');
-                    return;
-                }
-                if(permission.documentType.toLowerCase() != modelName){
-                    // console.log('permission documentType !=', modelName);
-                    return;
-                }
-
-                var documentId = permission.documentId;
-                if(documentId){
-                    if(!doc.id || !documentId.equals(doc.id)) {
-                        // console.log('documentId !=', doc.id);
-                        return;
-                    }
-                }
-                // console.log('adding permissions', permission.canDo);
-                canDo = canDo.concat(permission.canDo);
-            });
-        }
-        // console.log('returning permissions', _.uniq(canDo));
-        return _.uniq(canDo);
-    };
-
-    var ascertainBasicPermissions = function(doc){
-        var canDo = [];
-        if(doc.published){
-            canDo.push('read');
-        }
-        return canDo;
-    };
-
-    var ascertainPermissions = function(user, doc){
-        var permissions = ascertainBasicPermissions(doc);
-        if(user){
-            permissions = _.uniq(permissions.concat(ascertainUserPermissions(user, doc)));
-        }
-        return permissions;
-    };
-
-    var removeNonPermitedFields = function(permissions, doc){
-        var modelFieldPermissions =  Model.fieldPermissions();
-        var readPermission = Model.readPermission();
-
-        for (var field in Model.schema.paths) {
-            if (field == '_id' || field == '__v'){
-                continue;
-            }
-
-            var requiredPermission = modelFieldPermissions[field][readPermission];
-            if(!_.contains(permissions, requiredPermission)){
-                console.log('dont have', requiredPermission, 'for field', field);
-                delete doc[field];
-                // doc[field] = null;
-
-            }
-        };
-
-        return doc;
-    };
-
-    var removeNonPermitedUpdateFields = function(permissions, doc, body, params){
-        var modelFieldPermissions =  Model.fieldPermissions();
-        var readPermission = Model.readPermission();
-
-
-        for(var field in body) {
-            if (field == '_id' || field == '__v'){
-                //can't manually update id or version
-                delete body[field];
-                continue;
-            }
-            if(params[field] != doc[field]){
-                console.log('DIRTY FIELD', field);
-
-                var requiredPermission = modelFieldPermissions[field][readPermission];
-
-                if(!_.contains(permissions, requiredPermission)){
-                    console.log('DONT HAVE permission', requiredPermission, 'to update', field);
-                    delete body[field];
-                }
-                else{
-                    console.log('updating field', field);
-                    // doc[field] = req.params[field];
-                }
-            }
-        }
-
-        return body;
-    };
-
-    var buildPermittedFieldsSelectStatement = function(permissions){
-        var modelFieldPermissions =  Model.fieldPermissions();
-        var readPermission = Model.readPermission();
-        var readableFields = [];
-
-        for (var field in Model.schema.paths) {
-            if (field == '_id' || field == '__v'){
-                readableFields.push(field);
-                continue;
-            }
-
-            var requiredPermission = modelFieldPermissions[field][readPermission];
-            if(_.contains(permissions, requiredPermission)){
-                // console.log('you have', requiredPermission, 'for field', field);
-
-                readableFields.push(field);
-            }
-        };
-
-        return readableFields.join(' ');
-    }
-
-    var grandCreatorPermissions =  function(user, doc){
-        if(user){
-            //TODO: don't do this for admin (they should already have access)
-            user.permissions.push({
-                documentType: modelName,
-                documentId: doc.id,
-                canDo: Model.permissionsGrantedOnCreation()
-            });
-
-            user.save(function (err) {
-              if (err) return new Error('Failed to update user permissions. Error: ' + err);
-              console.log('added permissions to user for doc', doc.id);
-            });
-        }
     };
 
     return {
@@ -160,7 +24,7 @@ module.exports = function(Model){
                 if (err) {return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc ' + id));}
 
-                var permissions = ascertainPermissions(req.user, doc);
+                var permissions = permissionsManager.ascertainPermissions(req.user, doc);
                 if(!_.contains(permissions, Model.readPermission())){
                     return res.send(403, 'User does not have read access to this content');
                 }
@@ -198,7 +62,7 @@ module.exports = function(Model){
                 if (!doc) {return next(new Error('Failed to load doc by query' + query));}
 
                 var user = req.user;
-                var permissions = ascertainPermissions(user, doc);
+                var permissions = permissionsManager.ascertainPermissions(user, doc);
 
                 //prevent user from viewing unpublished content unless they have permission to do so.
                 if(!_.contains(permissions, Model.readUnpublishedPermission())){
@@ -228,7 +92,7 @@ module.exports = function(Model){
                 doc.createdBy = user._id;
             }
 
-            var permissions = ascertainPermissions(req.user, doc);
+            var permissions = permissionsManager.ascertainPermissions(req.user, doc);
 
             if(!_.contains(permissions, Model.createPermission())){
                 return res.send(403, 'User does not have create access to this content type');
@@ -240,7 +104,7 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to create doc. Error: ' + err);
                 } else {
-                    grandCreatorPermissions(req.user, doc);
+                    permissionsManager.grantCreatorPermissions(req.user, doc);
                     res.jsonp(doc);
                 }
             });
@@ -252,7 +116,7 @@ module.exports = function(Model){
         update: function(req, res) {
             var doc = req[modelName];
             var user = req.user;
-            var permissions = ascertainPermissions(req.user, doc);
+            var permissions = permissionsManager.ascertainPermissions(req.user, doc);
             var body = req.body;
 
             if(!_.contains(permissions, Model.updatePermission())){
@@ -261,7 +125,7 @@ module.exports = function(Model){
 
             //prevent user from updating fields to which they dont have access
             //ex prevent user from updating his/her own permissions
-            body = removeNonPermitedUpdateFields(permissions, doc, body, req.params);
+            body = permissionsManager.removeNonPermitedUpdateFields(permissions, doc, body, req.params);
 
             doc.edit = new Date();
             doc.editedBy = user.id;
@@ -282,7 +146,7 @@ module.exports = function(Model){
          */
         destroy: function(req, res) {
             var doc = req[modelName];
-            var permissions = ascertainPermissions(req.user, doc);
+            var permissions = permissionsManager.ascertainPermissions(req.user, doc);
 
             if(!_.contains(permissions, Model.deletePermission())){
                 return res.send(403, 'User does not have delete access to this content');
@@ -306,13 +170,13 @@ module.exports = function(Model){
             var doc = req[modelName];
             console.log('showing doc', doc);
 
-            var permissions = ascertainPermissions(req.user, doc);
+            var permissions = permissionsManager.ascertainPermissions(req.user, doc);
 
             //returning a POJO instead of mongoose model instance
             var _doc = doc.toObject();
 
             //remove all field for which the user does not have read access
-             _doc = removeNonPermitedFields(permissions, _doc);
+             _doc = permissionsManager.removeNonPermitedFields(permissions, _doc);
 
             res.jsonp(_doc);
         },
@@ -322,7 +186,7 @@ module.exports = function(Model){
          */
         all: function(req, res) {
             //only collection-levle permissions are relevant at this point
-            var permissions = ascertainUserPermissions(req.user, null);
+            var permissions = permissionsManager.ascertainUserPermissions(req.user, null);
 
             if(!_.contains(permissions, Model.readListPermission())){
                 return res.send(403, 'User does not have read access to '+ modelName +' list');
@@ -348,7 +212,7 @@ module.exports = function(Model){
             }
 
             //only going to select fields that user has permission to view
-            var select = buildPermittedFieldsSelectStatement(permissions);
+            var select = permissionsManager.buildPermittedFieldsSelectStatement(permissions);
             // console.log('all select:', select);
 
             query.select(select).populate('user', 'name username').exec(function(err, docs) {
@@ -370,7 +234,7 @@ module.exports = function(Model){
 
             var user = req.user;
             var doc = req[modelName];
-            var permissions = ascertainPermissions(user, doc);
+            var permissions = permissionsManager.ascertainPermissions(user, doc);
 
             if(!_.contains(permissions, Model.publishPermission())){
                 return res.send(403, 'User does not have permission to publish this content');
