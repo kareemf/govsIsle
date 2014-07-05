@@ -192,6 +192,14 @@ module.exports = function(Model){
                 var user = req.user;
                 var permissions = ascertainPermissions(user, doc);
 
+                //prevent user from viewing unpublished content unless they have
+                //permission to do so. this happens after the query is already
+                //executed because the user may have doc-level readUnpublished
+                //permission without having collection level access
+                if(!_.contains(permissions, Model.readUnpublishedPermission())){
+                    return res.send(403, 'Content not yet available');
+                }
+
                 // console.log('doc permissions', permissions);
                 if(!_.contains(permissions, Model.readPermission())){
                     return res.send(403, 'User does not have read access to this content');
