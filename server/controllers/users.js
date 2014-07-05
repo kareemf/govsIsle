@@ -4,7 +4,30 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    Role = mongoose.model('Role');
+
+var grantBasicPermissions = function(){
+    var permissions = [];
+    for(var model in mongoose.models){
+        var Model = mongoose.model(model);
+
+        //If a Model specifies permissions to grant to all users, assign them now
+        if(Model.permissionsGrantedOnUserCreation){
+            var _permissions = Model.permissionsGrantedOnUserCreation();
+
+            permissions.push({
+                documentType: Model.modelName.toLowerCase(),
+                canDo: _permissions
+            });
+
+            // console.log(Model.collection.name, 'permissionsGrantedOnUserCreation:', _permissions);
+            // console.log('permissions', permissions);
+        }
+    };
+    return permissions;
+    // console.log('permissionsGrantedOnUserCreation:', permissions);
+};
 
 /**
  * Auth callback
@@ -58,47 +81,46 @@ exports.create = function(req, res, next) {
         return res.status(400).send(errors);
     }
 
-    // Hard coded for now. Will address this with the user permissions system in v0.3.5
-    user.roles = ['authenticated'];
+    User.count(function(err, count){
+        var roleQueryParams = {name: 'authenticated'};
 
-    var permissions = [];
-    for(var model in mongoose.models){
-        var Model = mongoose.model(model);
-
-        //If a Model specifies permissions to grant to all users, assign them now
-        if(Model.permissionsGrantedOnUserCreation){
-            var _permissions = Model.permissionsGrantedOnUserCreation();
-
-            permissions.push({
-                documentType: Model.modelName.toLowerCase(),
-                canDo: _permissions
-            });
-
-            // console.log(Model.collection.name, 'permissionsGrantedOnUserCreation:', _permissions);
-            // console.log('permissions', permissions);
+        if(!count){
+            //If this is the frist user, give admin role
+            roleQueryParams = {name: 'admin'};
         }
-    };
-    // console.log('permissionsGrantedOnUserCreation:', permissions);
+        console.log('searching for role:', roleQueryParams);
 
-    user.permissions = permissions;
-    user.save(function(err) {
-        if (err) {
-            switch (err.code) {
-                case 11000:
-                case 11001:
-                    res.status(400).send('Username already taken');
-                    break;
-                default:
-                    res.status(400).send('Please fill all the required fields');
+        Role.findOne(roleQueryParams).exec(function(err, role){
+            console.log('giving user role:', role);
+
+            if(role){
+                user.roles = [role];
             }
 
-            return res.status(400);
-        }
-        req.logIn(user, function(err) {
-            if (err) return next(err);
-            return res.redirect('/');
+            user.permissions = grantBasicPermissions();
+
+            user.save(function(err) {
+                console.log('user saved');
+                if (err) {
+                    switch (err.code) {
+                        case 11000:
+                        case 11001:
+                            res.status(400).send('Username already taken');
+                            break;
+                        default:
+                            res.status(400).send('Please fill all the required fields');
+                    }
+
+                    return res.status(400);
+                }
+                req.logIn(user, function(err) {
+                    if (err) return next(err);
+                    return res.redirect('/');
+                });
+                res.status(200);
+            });
+
         });
-        res.status(200);
     });
 };
 /**
