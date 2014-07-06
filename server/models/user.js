@@ -6,7 +6,10 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     crypto = require('crypto'),
-    permissionSchema = require('./permissionModel').schema;
+    permissionSchema = require('./permissionModel').schema,
+    roleSchema = require('./roleModel').schema,
+    ObjectId = mongoose.Schema.ObjectId;
+
 
 /**
   * Validations
@@ -34,10 +37,6 @@ var UserSchema = new Schema({
         unique: true,
         required: true
     },
-    roles: {
-        type: Array,
-        default: ['authenticated']
-    },
     hashed_password: {
         type: String,
         validate: [validatePresenceOf, 'Password cannot be blank']
@@ -52,6 +51,7 @@ var UserSchema = new Schema({
     github: {},
     google: {},
     linkedin: {},
+    roles: [{type: ObjectId, ref: 'Role'}],
     permissions: [permissionSchema]
 });
 
