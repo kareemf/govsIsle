@@ -35,7 +35,8 @@ module.exports = function(passport) {
         function(email, password, done) {
             User.findOne({
                 email: email
-            }, function(err, user) {
+            }).populate('roles', 'name permissions')
+            .exec(function(err, user) {
                 if (err) {
                     return done(err);
                 }
