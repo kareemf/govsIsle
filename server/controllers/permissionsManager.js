@@ -8,33 +8,55 @@ module.exports = function(Model){
         var modelName = Model.modelName.toLowerCase();
     }
 
+    //Given a list of user/role permissions, return the subset that pertains to
+    //the specified doc/Model
+    var _relevantPermissions = function(permissions, doc){
+        if(!permissions){
+            // console.log('no permissions')
+            return [];
+        }
+
+        var canDo = [];
+        permissions.forEach(function(permission){
+            // console.log('permission', permission);
+
+            if(!permission.documentType){
+                // console.error('malformed permission: did not specify documentType:', permission);
+                return;
+            }
+            if(permission.documentType.toLowerCase() != modelName){
+                // console.log('permission documentType !=', modelName);
+                return;
+            }
+
+            var documentId = permission.documentId;
+            if(documentId){
+                if(!doc || !documentId.equals(doc.id)) {
+                    //this permission is meant to be applied to a specific doc
+                    //either no doc was specified or doc does not match permission
+
+                    // console.log('documentId !=', doc.id);
+                    return;
+                }
+            }
+            // console.log('adding permissions', permission.canDo);
+            canDo = canDo.concat(permission.canDo);
+        });
+        return canDo;
+    };
+
     return {
         ascertainUserPermissions: function(user, doc){
             var canDo = [];
             // console.log('checking permissions');
             if(user.permissions){
                 // console.log('user has permissions');
-                user.permissions.forEach(function(permission){
-                    // console.log('permission', permission);
-
-                    if(!permission.documentType){
-                        console.error('malformed permission: did not specify documentType:', permission);
-                        return;
-                    }
-                    if(permission.documentType.toLowerCase() != modelName){
-                        // console.log('permission documentType !=', modelName);
-                        return;
-                    }
-
-                    var documentId = permission.documentId;
-                    if(documentId){
-                        if(!doc || !documentId.equals(doc.id)) {
-                            // console.log('documentId !=', doc.id);
-                            return;
-                        }
-                    }
-                    // console.log('adding permissions', permission.canDo);
-                    canDo = canDo.concat(permission.canDo);
+                canDo = canDo.concat(_relevantPermissions(user.permissions, doc));
+            }
+            if(user.roles){
+                // console.log('user has roles', user.roles);
+                user.roles.forEach(function(role){
+                    canDo = canDo.concat(_relevantPermissions(role.permissions, doc))
                 });
             }
             // console.log('returning permissions', _.uniq(canDo));
