@@ -46,6 +46,7 @@ module.exports = function(Model){
     };
 
     return {
+        /*Determine what the specified user can do to this doc*/
         ascertainUserPermissions: function(user, doc){
             var canDo = [];
             // console.log('checking permissions');
@@ -63,6 +64,7 @@ module.exports = function(Model){
             return _.uniq(canDo);
         },
 
+        /*Determine what any user - authenticated or not - can do to this doc*/
         ascertainBasicPermissions: function(doc){
             var canDo = [];
             if(doc.published){
@@ -71,6 +73,7 @@ module.exports = function(Model){
             return canDo;
         },
 
+        /*Determine what permissions a user has over a specic doc*/
         ascertainPermissions: function(user, doc){
             var permissions = this.ascertainBasicPermissions(doc);
             if(user){
@@ -79,6 +82,7 @@ module.exports = function(Model){
             return permissions;
         },
 
+        /*Before sending a doc to a user, redact fields that they dont have read access to*/
         removeNonPermitedFields: function(permissions, doc){
             var modelFieldPermissions =  Model.fieldPermissions();
             var readPermission = Model.readPermission();
@@ -100,6 +104,7 @@ module.exports = function(Model){
             return doc;
         },
 
+        /*Before commiting a user's update, remove fields that they dont have write access to*/
         removeNonPermitedUpdateFields: function(permissions, doc, body, params){
             var modelFieldPermissions =  Model.fieldPermissions();
             var readPermission = Model.readPermission();
@@ -130,6 +135,7 @@ module.exports = function(Model){
             return body;
         },
 
+        /*Return a string containing the field names that a user has permission to view*/
         buildPermittedFieldsSelectStatement: function(permissions){
             var modelFieldPermissions =  Model.fieldPermissions();
             var readPermission = Model.readPermission();
@@ -152,6 +158,7 @@ module.exports = function(Model){
             return readableFields.join(' ');
         },
 
+        /*Grant elevated permissions to a document's creator*/
         grantCreatorPermissions: function(user, doc){
             if(user){
                 //TODO: don't do this for admin (they should already have access)
@@ -167,6 +174,8 @@ module.exports = function(Model){
                 });
             }
         },
+
+        /*Grant basic read-only access to a newly registered user*/
         grantBasicPermissions: function(){
             var permissions = [];
             for(var model in mongoose.models){
@@ -188,6 +197,8 @@ module.exports = function(Model){
             return permissions;
             // console.log('permissionsGrantedOnUserCreation:', permissions);
         },
+
+        /*Grant all field read and write permissions to a content administrator*/
         grantAllFieldPermissions: function(){
             var permissions = [];
 
