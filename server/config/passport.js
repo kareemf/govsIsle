@@ -22,7 +22,9 @@ module.exports = function(passport) {
     passport.deserializeUser(function(id, done) {
         User.findOne({
             _id: id
-        }, '-salt -hashed_password', function(err, user) {
+        }, '-salt -hashed_password')
+        .populate('roles', 'name permissions')
+        .exec(function(err, user) {
             done(err, user);
         });
     });
