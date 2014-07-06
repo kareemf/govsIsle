@@ -36,6 +36,8 @@ module.exports = function(passport, db) {
                 var permissions = permissionsManager.grantBasicPermissions();
 
                 if(roleName == 'admin'){
+                    permissions = permissionsManager.grantAllBasePermissions();
+
                     var allFieldPermissions = permissionsManager.grantAllFieldPermissions();
                     permissions = permissions.concat(allFieldPermissions);
                 }

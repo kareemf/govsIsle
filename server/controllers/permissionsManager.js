@@ -1,7 +1,9 @@
 'use strict';
 
 var _ = require('lodash'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    baseContentModel = require('../models/baseContentModel');
+
 
 module.exports = function(Model){
     if(Model){
@@ -230,6 +232,49 @@ module.exports = function(Model){
             };
             console.log('grantAllFieldPermissions:', permissions);
             return permissions;
-        }
+        },
+
+        /*Grant all CRUD permissions*/
+        grantAllBasePermissions: function(){
+            var permissions = [];
+            var types = ['', 'List', 'Unpublished'];
+
+            for(var model in mongoose.models){
+                var Model = mongoose.model(model);
+
+                var canDo = []
+                types.forEach(function(type){
+                    var funcName = 'read' + type + 'Permission';
+                    if(Model[funcName]){
+                        var permissionName = Model[funcName]();
+                        canDo.push(permissionName);
+                    }
+                });
+
+                if(Model.createPermission){
+                    canDo.push(Model.createPermission());
+                }
+
+                if(Model.updatePermission){
+                    canDo.push(Model.updatePermission());
+                }
+
+                if(Model.deletePermission){
+                    canDo.push(Model.deletePermission());
+                }
+
+                if(Model.publishPermission){
+                    canDo.push(Model.publishPermission());
+                }
+                if(canDo.length > 0){
+                    permissions.push({
+                        documentType: Model.modelName.toLowerCase(),
+                        canDo: canDo
+                    });
+                }
+
+            };
+            return permissions;
+        },
     };
 };
