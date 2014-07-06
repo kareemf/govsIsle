@@ -10,13 +10,13 @@
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/application.css">
         <link rel="stylesheet" type="text/css" href="bower_components/fontawesome/css/font-awesome.css">
-        <title>gov's Island</title>
+        <title>Culture Island</title>
     </head>
     <body>
         <div id="main-header"><!--MAIN-HEADER-->
             <div ng-include="'templates/header.html'" data-role="navigation"></div>  <!-- Header End Here-->
         </div>
-        <div class="container">
+        <!--<div class="container"> -->
             <div class="main-content" id="main-content" >   <!--MAIN CONTENT-->
               <!--  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"></div> -->
                     <div ui-view></div>
@@ -26,9 +26,9 @@
                 <!--<div ng-include=" 'templates/footer.html' "></div> -->
             </div>
                 
-            </div>
+        <!--</div>-->
             <!-- Bower installs-->
-            <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+            <script type="text/javascript" src="bower_components/jquery/jquery.min.js"></script>
             <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
             <script type="text/javascript" src="bower_components/angular/angular.js"></script>

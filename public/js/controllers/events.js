@@ -212,4 +212,38 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
 
 controllers.controller('EventListController', ['$scope', 'Events', function($scope, Events){
     console.log('in EventListController');
+    //me playing around
+    $scope.existingMarkers = [];
+
+    // TODO: only grab relevant content
+    // TODO: only one info window for whole app
+    $scope.events = Events.query(function(events){
+        console.log('events', events);
+        events.forEach(function(event){
+            var position = new google.maps.LatLng(event.geoLocation[0], event.geoLocation[1]);
+            var marker = new google.maps.Marker({
+                map: $scope.myMap,
+                position: position,
+                draggable: false
+            });
+
+            // console.log('existing event', event, 'marker', marker);
+            $scope.existingMarkers.push(marker);
+        });
+    });
+
+    $scope.mapOptions = {
+        center: new google.maps.LatLng(40.6880492, -74.0188415),
+        streetViewControl: true,
+        panControl: true,
+        zoom: 15,
+        maxZoom: 20,
+        minZoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
 }]);
+
+
+
+

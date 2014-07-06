@@ -9,7 +9,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
-/*----default link-----*/
 a{
   margin: 0;
   padding: 0;
@@ -18,19 +17,23 @@ a{
 a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
 }
-a:hover{
+a:hover, .nav a:hover{
   color: blue;
 }
 
-#main-content{
-	margin-top: 75px;
-}
 /*HEADER-STYLING AREA*/
 .top-nav-header{
   margin: 0;
   width: 100%;
   min-width: 200px;
 }
+#custom-nav{
+  height: 30px;
+  background-color: #FFF;
+  margin-top: 0px;
+  padding: 5px 10px 28px 10px;
+  text-align: center;
+} 
 
 .navbar{background-color: #FFFFFF;}
 .navheader-logo{display: inline-block;}
@@ -40,6 +43,9 @@ a:hover{
   /*top:-10px;*/  
 }
 
+.test{
+  display: inline;
+}
 
 /*CONTROL WHEN BAR GOING TO COLLAPSE*/
 @media (max-width: 991px) {
@@ -78,13 +84,7 @@ a:hover{
       display:block !important;
   }
 }
-#custom-nav{
-  height: 30px;
-  background-color: #FFF;
-  margin-top: 0px;
-  padding: 5px 10px 28px 10px;
-  text-align: center;
-} 
+
 @media screen and (max-width: 253px){
   #custom-nav{height: 55px;}
 }
@@ -98,21 +98,30 @@ a:hover{
 
 .main-nav{
   margin-top: 25px;
-
 }
+
+/*The start of the middle section
+in between the header and footer */
+#main-content{
+  margin-top: 25px;
+}
+/*------END OF THE MAIN CONTENT-----*/
 
 /*--------------MAPS---------------*/
 .angular-google-map-container { height: 400px; }
 /* i dont know what .gm does*/
 /*.gm-style-iw {top: 0 !important;}*/
-.map-canvas { height: 100px; }
-.event-map{padding-bottom: 60px;}
+.map-canvas { height: 500px; }
+.event-map{ height: 100%;  margin: 0;padding-bottom: 60px;}
+#map{
+    height: 300px;
+    width: 100%;
+}
+/*-------END---OF----MAPS---------------*/
 
-
-/*---AROUSEL-STYLING AREA---*/
-/* Carousel base class */
+/*---CAROUSEL-STYLING AREA---*/
 .carousel-wrapper{
-	background-color: #FFF;
+  background-color: #FFF;
 }
 .carousel {
   background-color: #FFF;
@@ -126,7 +135,7 @@ a:hover{
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 425px;
+  height: 100px;
   background-color: #blue;
   min-height: 100%;
 }
@@ -141,16 +150,18 @@ a:hover{
 }
 
 .carousel-nav{
-	background-color: white;
+  background-color: white;
 }
 .carousel-img{
-	padding: 15px 15px 15px 15px;
+  padding: 15px 15px 15px 15px;
 
 }
 
 .carousel-info{
   background-color: blue;
 }
+
+/*---END---OF---CAROUSEL-STYLING AREA---*/
 .circle{
   border-radius: 50%;
 }
@@ -168,15 +179,27 @@ padding: 0.3em 0.2em;
 .fa-wordpress{
   background-color: black;
   color: #FFFFFF;
-padding: 0.3em 0.2em;
+  padding: 0.3em 0.2em;
 }
 .fa-facebook:hover, .fa-twitter:hover, .fa-wordpress:hover{
   background-color: blue;
 }
-@media screen and (max-width: 656px){
-  .container{
-      margin-right: auto;
-      margin-left: auto;
-    
-  }
+
+/*----------=EVENTS PAGES=----------*/
+.mybar{
+  background-color: #FFFFFF;
+  border-bottom: 3px solid red;
+
+ 
 }
+
+.map-container{
+  width: 100%;
+  min-width: 200px;
+  background-color: white;
+  margin-top: 3px;
+}
+
+input{display: inline;}
+
+form{display: inline;}
