@@ -73,15 +73,22 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     // Event routes
     $stateProvider
         .state('events', {
-            url: '/events',
-            templateUrl: '/templates/events/events.html',
-
+            url: '/events?view',
+            templateUrl: 'templates/events/events.html',
+        })
+        .state('events.map',{
+            templateUrl: 'templates/events/eventmap.html'
+        })
+        .state('events.list',{
+            templateUrl: 'templates/events/eventlist.html'
+        })
+        .state('events.calendar',{
+            templateUrl: 'templates/events/eventcalendar.html'
         })
         .state('events.detail', {
             url: '/:slug',
-            templateUrl: '/templates/events/event.html',
+            templateUrl: 'templates/events/event.html',
         });
-
     $urlRouterProvider.otherwise('/home');
 
 }])

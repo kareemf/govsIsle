@@ -1,31 +1,27 @@
 <div ng-controller="EventListController">
- <!--<div ui-view></div>-->
-	<div class="container"><div class="row">
+	<div class="container"><div class="row">	<!--header for events-->
 		<div class="mybar">
-    		<form class= role="search" method="get" name="search-form">
+			<form class= role="search" method="get" name="search-form">
 		        <div class="input-group">
-        	        <div class="input-group-btn">
-        	        	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Filter <span class="caret"></span></button>
+	    	        <div class="input-group-btn">
+	    	        	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Filter <span class="caret"></span></button>
 	    	        	<ul class="dropdown-menu" role="menu">
-						    <li><a href="">Restroom</a></li>
-						    <li><a href="">Water Fountain</a></li>
-						    <li><a href="">Food</a></li>
-						    <li><a href="">Beverage</a></li>
-  						</ul>
-        	        </div>
-        
+						    <li><a >Restroom</a></li>
+						    <li><a >Water Fountain</a></li>
+						    <li><a >Food</a></li>
+						    <li><a >Beverage</a></li>
+						</ul>
+	    	        </div>        
 		            <input type="text" class="form-control" placeholder="Search" id="query" name="query" value="">
 		            <div class="input-group-btn">
-	           			 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-	           			 <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-map-marker"> MAP</span></button>
-	           			 <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"> GRID</span></button>
+	           			 <a class="btn btn-default"><span class="glyphicon glyphicon-search"></span></a>
+	           			 <a ui-sref="events.calendar" class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span></a>
+	           			 <a ui-sref="events.map" class="btn btn-default"><span class="glyphicon glyphicon-map-marker"> MAP</span></a>
+	           			 <a ui-sref="events.list" type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"> GRID</span></a>
 	           		</div>
 		        </div>
 	        </form>
 		</div>
 	</div></div><!--end of row and container-->
-
-	<div class="map-container">
-		<div ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" id="map"></div>
-	</div>
+	<div ui-view></div>
 </div>

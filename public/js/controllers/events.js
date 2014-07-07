@@ -210,8 +210,14 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
     }
 }]);
 
-controllers.controller('EventListController', ['$scope', 'Events', function($scope, Events){
+controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){
     console.log('in EventListController');
+
+    var view = $stateParams.view;
+    view = view ? view : 'map';
+
+    console.log('changeing to home state:', view);
+    $state.go('events.' + view);
     //me playing around
     $scope.existingMarkers = [];
 
@@ -243,7 +249,5 @@ controllers.controller('EventListController', ['$scope', 'Events', function($sco
     }
 
 }]);
-
-
 
 

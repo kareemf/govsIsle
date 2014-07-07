@@ -43,10 +43,8 @@ a:hover, .nav a:hover{
   /*top:-10px;*/  
 }
 
-.test{
-  display: inline;
-}
 
+/*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 /*CONTROL WHEN BAR GOING TO COLLAPSE*/
 @media (max-width: 991px) {
     .navbar-header {
@@ -88,12 +86,33 @@ a:hover, .nav a:hover{
 @media screen and (max-width: 253px){
   #custom-nav{height: 55px;}
 }
-/*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
-@media screen and (max-width: 237px){
-}
+
+/*-----=TOP NAV BAR SCOIAL ICONS=---------*/
 .nav-login li, .social-icon li{
   display: inline;
   list-style-type: none;
+}
+.circle{
+  border-radius: 50%;
+}
+.fa-facebook{
+background: black;
+color: #FFFFFF;
+padding: .3em 0.3em;
+}
+.fa-twitter{
+background: black;
+color: #FFFFFF;
+padding: 0.3em 0.2em;
+}
+/*#4099FF #3B5998 #019AD5(gov)*/
+.fa-wordpress{
+  background-color: black;
+  color: #FFFFFF;
+  padding: 0.3em 0.2em;
+}
+.fa-facebook:hover, .fa-twitter:hover, .fa-wordpress:hover{
+  background-color: blue;
 }
 
 .main-nav{
@@ -161,35 +180,14 @@ in between the header and footer */
   background-color: blue;
 }
 
-/*---END---OF---CAROUSEL-STYLING AREA---*/
-.circle{
-  border-radius: 50%;
-}
-.fa-facebook{
-background: black;
-color: #FFFFFF;
-padding: .3em 0.3em;
-}
-.fa-twitter{
-background: black;
-color: #FFFFFF;
-padding: 0.3em 0.2em;
-}
-/*#4099FF #3B5998 #019AD5(gov)*/
-.fa-wordpress{
-  background-color: black;
-  color: #FFFFFF;
-  padding: 0.3em 0.2em;
-}
-.fa-facebook:hover, .fa-twitter:hover, .fa-wordpress:hover{
-  background-color: blue;
-}
-
 /*----------=EVENTS PAGES=----------*/
 .mybar{
   background-color: #FFFFFF;
   display: inline;
+<<<<<<< HEAD
  
+=======
+>>>>>>> 12962b857ac0cd25d6bbf76ec465ec6d417bec6d
 }
 
 .map-container{
@@ -199,6 +197,4 @@ padding: 0.3em 0.2em;
   margin-top: 3px;
 }
 
-input{display: inline;}
 
-form{display: inline;}

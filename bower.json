@@ -12,6 +12,7 @@
     "angular-ui-router": "0.2.8-bowratic-tedium",
     "angular-google-maps": "~1.1.0",
     "angular-ui-map": "~0.5.0",
-    "fontawesome": "~4.1.0"
+    "fontawesome": "~4.1.0",
+    "jquery": "~2.1.1"
   }
 }
