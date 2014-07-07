@@ -188,8 +188,7 @@ padding: 0.3em 0.2em;
 /*----------=EVENTS PAGES=----------*/
 .mybar{
   background-color: #FFFFFF;
-  border-bottom: 3px solid red;
-
+  display: inline;
  
 }
 
