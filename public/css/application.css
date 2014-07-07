@@ -193,4 +193,8 @@ in between the header and footer */
   margin-top: 3px;
 }
 
+/*----------=Calendar PAGES=----------*/
+#calendar{
+  background-color: grey;
+}
 
