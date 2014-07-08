@@ -215,12 +215,14 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
 
     var view = $stateParams.view;
     view = view ? view : 'map';
-
-    console.log('changeing to home state:', view);
     $state.go('events.' + view);
+    
+    $scope.mybutton=true;
+    $scope.uiup=true;
+    $scope.headerview=true;
+
     //me playing around
     $scope.existingMarkers = [];
-
     // TODO: only grab relevant content
     // TODO: only one info window for whole app
     $scope.events = Events.query(function(events){

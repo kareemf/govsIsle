@@ -21,10 +21,14 @@ a:hover, .nav a:hover{
   color: blue;
 }
 
-/*HEADER-STYLING AREA*/
+/*------============HEADER-STYLING AREA=========---------*/
+.main-header{
+  margin-bottom: 5px;
+}
 .top-nav-header{
   margin: 0;
   width: 100%;
+  height: 100%;
   min-width: 200px;
 }
 #custom-nav{
@@ -47,6 +51,9 @@ a:hover, .nav a:hover{
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 /*CONTROL WHEN BAR GOING TO COLLAPSE*/
 @media (max-width: 991px) {
+    .container{
+      width: 100%;
+    }
     .navbar-header {
         float: none;
     }
@@ -80,6 +87,13 @@ a:hover, .nav a:hover{
     }
     .collapse.in{
       display:block !important;
+  }
+  .form-control {
+       padding: 0px 0px 0px 0px;
+       margin: 0px 0px 0px 0px;
+  }
+  .btn{
+        height: 34px;
   }
 }
 
@@ -118,11 +132,11 @@ padding: 0.3em 0.2em;
 .main-nav{
   margin-top: 25px;
 }
-
+/*-------====END OF HEADER STUFFF====------*/
 /*The start of the middle section
 in between the header and footer */
 #main-content{
-  margin-top: 25px;
+  margin-top: 0px;
 }
 /*------END OF THE MAIN CONTENT-----*/
 
@@ -182,17 +196,44 @@ in between the header and footer */
 
 /*----------=EVENTS PAGES=----------*/
 .mybar{
-  background-color: #FFFFFF;
-  display: inline;
+  background-color: black;
+
 }
 
 .map-container{
   width: 100%;
   min-width: 200px;
-  background-color: white;
-  margin-top: 3px;
+  margin-top: 0px;
+  padding: 0;
 }
-
+.map-ui{
+  position: relative;
+  width: inherit;
+  height: 40px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  z-index: 20;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+        filter: alpha(opacity=50);
+   opacity: 0.3;
+   top: -300px;
+   bottom: -300px;
+   padding-top: 3px;
+   font-size: 30px;
+   text-align: center;
+}
+.map-ui a{
+  color: white;
+}
+.map-ui a:hover{
+  color: red;
+}
+#map{
+    height: 300px;
+    width: 100%;
+}
 /*----------=Calendar PAGES=----------*/
 #calendar{
   background-color: grey;

@@ -1,4 +1,4 @@
-$(document).ready( function() {
+$(function () {
 
   $('#home-carousel').carousel({
     interval: 3000
@@ -24,3 +24,11 @@ $(document).ready( function() {
     clickEvent = false;
   });
 });
+/*
+$(function () {
+
+  $('.full-screen-up').on('click', 'a', function() {
+    $('a').removeClass('carousel-info');
+    $(this).parent().addClass('carousel-info');
+});
+*/
