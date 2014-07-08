@@ -24,6 +24,7 @@ var express = require('express'),
     assetmanager = require('assetmanager'),
     fs = require('fs'),
     Grid = require('gridfs-stream');
+    var multer = require('multer');
 
 module.exports = function(app, passport, db) {
 
@@ -67,6 +68,7 @@ module.exports = function(app, passport, db) {
 
     // Request body parsing middleware should be above methodOverride
     app.use(expressValidator());
+    app.use(multer({ dest: './uploads/'}))
     app.use(bodyParser());
     app.use(methodOverride());
 
