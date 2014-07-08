@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs'),
+    async = require('async'),
     mongoose = require('mongoose'),
     Media = mongoose.model('Media');
 
@@ -43,9 +44,14 @@ exports.create = function(req, res) {
     console.log('media create req.files:', req.files);
     // return res.jsonp({files: req.files, body: req.body});
     var responseJson = {};
+    var fields = []
 
     for(var fieldName in req.files){
         var field = req.files[fieldName];
+        fields.push(field);
+    }
+
+    var createMediaFromField = function(field, callback){
         var name = field.originalname;
         var media = new Media(field);
 
@@ -64,12 +70,17 @@ exports.create = function(req, res) {
             }
             else{
                 responseJson[name] = {
-                        status: 200,
-                        mediaId: media.id
+                    status: 200,
+                    meida: media.toObject()
                 };
             }
+            callback();
         });
-    }
+    };
 
-    res.jsonp(responseJson);
+    var sendResponse = function(err){
+        res.jsonp(responseJson);
+    };
+
+    async.each(fields, createMediaFromField, sendResponse);
 };
