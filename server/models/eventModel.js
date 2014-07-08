@@ -54,57 +54,18 @@ EventSchema.virtual('permissions')
 EventSchema.statics = base.permissions;
 
 //Programatically create field permissions
-EventSchema.statics.fieldPermissions = _.memoize(function(){
-    var permissions = {};
-
-    for (var field in this.schema.paths) {
-        if (field == '_id' || field == '__v'){
-            continue;
-        }
-
-        // permissions[field] = 'update-' + field;
-        permissions[field] = {
-            'read': 'read-' + field,
-            'update': 'update-' + field,
-        }
-
-        console.log('creating field permissions', permissions[field]);
-    };
-
-    return permissions;
-});
+EventSchema.statics.fieldPermissions = function(){
+    return base.fieldPermissions(this);
+}
 
 //Specifies which permissions are granted to a user over the documents they create
 EventSchema.statics.permissionsGrantedOnCreation = function(){
-    var grant = [this.readPermission(), this.updatePermission()];
-    var fieldPermissions = this.fieldPermissions();
-    var cantTouch = ['created', 'createdBy', 'deleted', 'deletedBy', 'published'];
-
-    for (var field in this.schema.paths) {
-        if (field == '_id' || field == '__v'){
-            continue;
-        }
-        if(_.contains(cantTouch, field)){
-            console.log('cant edit', field, 'without explicit permission');
-            continue;
-        }
-        for(var permission in fieldPermissions[field]){
-            grant.push(fieldPermissions[field][permission]);
-
-            // console.log('you can', permission, field);
-        }
-    };
-
-    //Users can view unpublished versions of docs they create
-    grant.push(this.readUnpublishedPermission());
-
-    return grant;
+    return base.permissionsGrantedOnCreation(this);
 };
 
 //Specifies which permissions are granted to a user on cretion
 EventSchema.statics.permissionsGrantedOnUserCreation = function(){
-    var grant = [this.readPermission(), this.readListPermission()];
-    return grant;
+    return base.permissionsGrantedOnUserCreation(this);
 };
 
 mongoose.model('Event', EventSchema);
