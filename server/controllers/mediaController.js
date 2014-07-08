@@ -41,7 +41,7 @@ exports.getModelInstance = function(req, res, next, id) {
 };
 
 exports.create = function(req, res) {
-    console.log('media create req.files:', req.files);
+    // console.log('media create req.files:', req.files);
     // return res.jsonp({files: req.files, body: req.body});
     var responseJson = {};
     var fields = []
@@ -54,10 +54,17 @@ exports.create = function(req, res) {
     var createMediaFromField = function(field, callback){
         var name = field.originalname;
         var media = new Media(field);
-
+        //TODO: may not want to do this if there are more than one files
+        var attribution = req.body.attribution;
+        var caption = req.body.caption;
         media.name = name;
-        //media.attribution = '';
-        //media.caption = '';
+
+        if(attribution){
+            media.attribution = attribution;
+        }
+        if(caption){
+            media.caption = caption;
+        }
 
         media.file = fs.readFileSync(field.path);
 
@@ -71,16 +78,48 @@ exports.create = function(req, res) {
             else{
                 responseJson[name] = {
                     status: 200,
-                    meida: media.toObject()
+                    media: media.toObject()
                 };
             }
             callback();
         });
     };
 
-    var sendResponse = function(err){
-        res.jsonp(responseJson);
+    var addMediaToDoc = function(err){
+        var doc = req.doc;
+        var mediaResponses = [];
+
+        if(!doc){
+            responseJson.error = 'Failed to find doc for media upload';
+            return res.jsonp(responseJson);
+        }
+        for(var name in responseJson){
+            var mediaResponse = responseJson[name];
+            mediaResponses.push(mediaResponse);
+        }
+
+        var updatedAssociatedDoc = function(mediaResponse, callback){
+            if (mediaResponse.status != 200){
+                return callback();
+            }
+
+            doc.media.push(mediaResponse.media.id);
+            doc.save(function(err, doc){
+                responseJson.doc = {id: doc.id};
+                if(err){
+                    mediaResponse.status = 500;
+                    mediaResponse.error = err;
+                }
+                callback();
+            });
+        };
+
+        var sendResponse = function(err){
+            return res.jsonp(responseJson);
+        };
+
+        async.each(mediaResponses, updatedAssociatedDoc, sendResponse);
     };
 
-    async.each(fields, createMediaFromField, sendResponse);
+    async.each(fields, createMediaFromField, addMediaToDoc);
 };
