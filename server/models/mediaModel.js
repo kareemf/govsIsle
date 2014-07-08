@@ -19,4 +19,37 @@ var properties = _.extend({
 
 var MediaSchema = new Schema(properties);
 
+var MediaSchema = new Schema(properties, {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
+});
+
+// MediaSchema.pre('save', function(next) {
+//     base.preSave(this);
+//     next();
+// });
+
+MediaSchema.virtual('permissions')
+    .set(function(permissions) {
+        this._permissions = permissions;
+    })
+    .get(function() {
+        return this._permissions;
+    });
+
+MediaSchema.statics = base.permissions;
+
+MediaSchema.statics.fieldPermissions = function(){
+    return base.fieldPermissions(this);
+};
+
+MediaSchema.statics.permissionsGrantedOnCreation = function(){
+    return base.permissionsGrantedOnCreation(this);
+};
+
+MediaSchema.statics.permissionsGrantedOnUserCreation = function(){
+    return base.permissionsGrantedOnUserCreation(this);
+};
+
+
 mongoose.model('Media', MediaSchema);
