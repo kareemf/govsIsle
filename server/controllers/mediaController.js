@@ -3,7 +3,8 @@
 var fs = require('fs'),
     async = require('async'),
     mongoose = require('mongoose'),
-    Media = mongoose.model('Media');
+    Media = mongoose.model('Media'),
+    permissionsManager = require('./permissionsManager')(Media);
 
 exports.getModelType = function(req, res, next, modelType) {
     // console.log('getModelType');
@@ -80,6 +81,9 @@ exports.create = function(req, res) {
             else{
                 var mediaJson = media.toObject();
                 delete mediaJson.file
+
+                permissionsManager.grantCreatorPermissions(req.user, media);
+
                 responseJson[name] = {
                     status: 200,
                     media: mediaJson
