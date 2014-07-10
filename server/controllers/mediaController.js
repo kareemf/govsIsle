@@ -44,13 +44,15 @@ exports.create = function(req, res) {
     // console.log('media create req.files:', req.files);
     // return res.jsonp({files: req.files, body: req.body});
     var responseJson = {};
-    var fields = []
+    var fields = [];
 
     for(var fieldName in req.files){
         var field = req.files[fieldName];
         fields.push(field);
     }
-
+    if(!fields.length){
+        return res.jsonp(500, 'Nothing to upload');
+    }
     var createMediaFromField = function(field, callback){
         var name = field.originalname;
         var media = new Media(field);
@@ -76,9 +78,11 @@ exports.create = function(req, res) {
                 };
             }
             else{
+                var mediaJson = media.toObject();
+                delete mediaJson.file
                 responseJson[name] = {
                     status: 200,
-                    media: media.toObject()
+                    media: mediaJson
                 };
             }
             callback();
