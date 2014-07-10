@@ -218,8 +218,8 @@ in between the header and footer */
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
         filter: alpha(opacity=50);
    opacity: 0.3;
-   top: -300px;
-   bottom: -300px;
+   top: -500px;
+   bottom: -500px;
    padding-top: 3px;
    font-size: 30px;
    text-align: center;
@@ -231,7 +231,7 @@ in between the header and footer */
   color: red;
 }
 #map{
-    height: 300px;
+    height: 500px;
     width: 100%;
 }
 /*----------=Calendar PAGES=----------*/
