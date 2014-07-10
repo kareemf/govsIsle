@@ -24,10 +24,10 @@ var MediaSchema = new Schema(properties, {
     toJSON: { virtuals: true }
 });
 
-// MediaSchema.pre('save', function(next) {
-//     base.preSave(this);
-//     next();
-// });
+MediaSchema.pre('save', function(next) {
+    base.preSave(this);
+    next();
+});
 
 MediaSchema.virtual('permissions')
     .set(function(permissions) {
