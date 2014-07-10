@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
+    ObjectId = mongoose.Schema.ObjectId,
     _ = require('lodash'),
     base = require('./baseContentModel');
 
@@ -17,7 +18,8 @@ var properties = _.extend({
     isReccuring: Boolean,
     anticipatedAttendance: Number,
     location: String,
-    geoLocation: {type: [Number], index: '2d'}
+    geoLocation: {type: [Number], index: '2d'},
+    media: [{type: ObjectId, ref: 'Media'}]
 }, base.properties);
 
 var EventSchema = new Schema(properties, {
