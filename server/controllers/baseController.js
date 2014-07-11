@@ -40,7 +40,7 @@ module.exports = function(Model){
                 //permission to do so. this happens after the query is already
                 //executed because the user may have doc-level readUnpublished
                 //permission without having collection level access
-                if(!_.contains(permissions, Model.readUnpublishedPermission())){
+                if(!doc.published && !_.contains(permissions, Model.readUnpublishedPermission())){
                     return res.send(403, 'Content not yet available');
                 }
 
@@ -72,7 +72,7 @@ module.exports = function(Model){
                 var permissions = permissionsManager.ascertainPermissions(user, doc);
 
                 //prevent user from viewing unpublished content unless they have permission to do so.
-                if(!_.contains(permissions, Model.readUnpublishedPermission())){
+                if(!doc.published && !_.contains(permissions, Model.readUnpublishedPermission())){
                     return res.send(403, 'Content not yet available');
                 }
 
