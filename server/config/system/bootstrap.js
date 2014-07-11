@@ -25,6 +25,7 @@ module.exports = function(passport, db) {
 
         ['admin', 'authenticated'].forEach(function(roleName){
             //create roles iff they doesn't exist
+            // TODO: if new model/permission type is added, grant to admin user
             Role.findOne({name: roleName}).exec(function(err, role){
                 if(role){
                     console.log('Role exists:', roleName);

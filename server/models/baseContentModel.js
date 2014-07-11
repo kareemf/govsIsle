@@ -92,7 +92,7 @@ exports.permissionsGrantedOnCreation = function(Schema, _cantTouch){
 };
 
 exports.permissionsGrantedOnUserCreation = function(Schema, _grant){
-    var grant = [Schema.readPermission(), Model.readListPermission()];
+    var grant = [Schema.readPermission(), Schema.readListPermission()];
 
     if(_grant){
         grant = grant.concat(_grant);
