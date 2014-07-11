@@ -220,6 +220,7 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
     $scope.mybutton=true;
     $scope.uiup=true;
     $scope.headerview=true;
+    $scope.listormap=true;
 
     /*playing with maps*/
 
