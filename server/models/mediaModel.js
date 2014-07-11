@@ -51,5 +51,18 @@ MediaSchema.statics.permissionsGrantedOnUserCreation = function(){
     return base.permissionsGrantedOnUserCreation(this);
 };
 
+MediaSchema.statics.permissionsGrantedToAnon = function(){
+    var fieldPermissions = this.fieldPermissions();
+    var readPermission = this.readPermission();
+
+    return [
+        readPermission,
+        fieldPermissions['name'][readPermission],
+        fieldPermissions['attribution'][readPermission],
+        fieldPermissions['caption'][readPermission],
+
+    ];
+};
+
 
 mongoose.model('Media', MediaSchema);
