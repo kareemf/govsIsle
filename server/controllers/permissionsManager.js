@@ -70,7 +70,11 @@ module.exports = function(Model){
         ascertainBasicPermissions: function(doc){
             var canDo = [];
             if(doc.published){
-                canDo.push('read');
+                canDo.push(Model.readPermission());
+            }
+
+            if(Model.permissionsGrantedToAnon){
+                canDo = canDo.concat(Model.permissionsGrantedToAnon());
             }
             return canDo;
         },
