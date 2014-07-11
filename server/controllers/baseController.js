@@ -199,7 +199,7 @@ module.exports = function(Model){
          */
         all: function(req, res, queryParams) {
             //only collection-levle permissions are relevant at this point
-            var permissions = permissionsManager.ascertainUserPermissions(req.user, null);
+            var permissions = permissionsManager.ascertainPermissions(req.user, null);
 
             if(!_.contains(permissions, Model.readListPermission())){
                 return res.send(403, 'User does not have read access to '+ modelName +' list');
