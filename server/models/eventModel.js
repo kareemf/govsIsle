@@ -70,4 +70,25 @@ EventSchema.statics.permissionsGrantedOnUserCreation = function(){
     return base.permissionsGrantedOnUserCreation(this);
 };
 
+EventSchema.statics.permissionsGrantedToAnon = function(){
+    var fieldPermissions = this.fieldPermissions();
+    var readPermission = this.readPermission();
+    var readListPermission = this.readListPermission();
+
+    return [
+        readPermission,
+        readListPermission,
+        fieldPermissions['name'][readPermission],
+        fieldPermissions['type'][readPermission],
+        fieldPermissions['description'][readPermission],
+        fieldPermissions['visibility'][readPermission],
+        fieldPermissions['startDateTime'][readPermission],
+        fieldPermissions['endDateTime'][readPermission],
+        fieldPermissions['isReccuring'][readPermission],
+        fieldPermissions['location'][readPermission],
+        fieldPermissions['geoLocation'][readPermission],
+        fieldPermissions['media'][readPermission],
+    ];
+};
+
 mongoose.model('Event', EventSchema);
