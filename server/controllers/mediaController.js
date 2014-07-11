@@ -166,3 +166,7 @@ exports.render = function(req, res) {
     res.contentType(media.mimetype);
     res.send(media.file);
 };
+
+exports.publish = function(req, res){
+    base.publish(req, res);
+}
