@@ -72,6 +72,10 @@ exports.create = function(req, res) {
 
         media.file = fs.readFileSync(field.path);
 
+        //Media instances are published by default
+        media.published = new Date();
+        media.publishedBy = req.user.id;
+
         media.save(function(err, media){
             if(err){
                 responseJson[name] = {

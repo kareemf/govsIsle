@@ -60,7 +60,6 @@ MediaSchema.statics.permissionsGrantedToAnon = function(){
         fieldPermissions['name'][readPermission],
         fieldPermissions['attribution'][readPermission],
         fieldPermissions['caption'][readPermission],
-
     ];
 };
 
