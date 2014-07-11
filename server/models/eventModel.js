@@ -65,7 +65,7 @@ EventSchema.statics.permissionsGrantedOnCreation = function(){
     return base.permissionsGrantedOnCreation(this);
 };
 
-//Specifies which permissions are granted to a user on cretion
+//Specifies which permissions are granted to a user on creation
 EventSchema.statics.permissionsGrantedOnUserCreation = function(){
     return base.permissionsGrantedOnUserCreation(this);
 };
