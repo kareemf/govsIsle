@@ -3,10 +3,12 @@
 var _ = require('lodash'),
     slug = require('slug'),
     mongoose = require('mongoose'),
+    ObjectId = mongoose.Schema.ObjectId,
     base = require('./baseModel');
 
 exports.properties = _.extend(base.properties, {
     published: {type: Date},
+    publishedBy: {type: ObjectId, ref: 'User'},
     slug: String,
 });
 

@@ -279,6 +279,7 @@ module.exports = function(Model){
             }
 
             doc.published = new Date();
+            doc.publishedBy = req.user.id;
             doc.save(function(err) {
                 if (err) {
                     var data = {errors: err.errors};
