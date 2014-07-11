@@ -10,11 +10,14 @@ module.exports = function(app) {
         .get(authorization.requiresLogin, media.all)
 
     app.route(baseUrl + '/:mediaId')
-        .get(media.show)
+        .get(media.render)
         .put(authorization.requiresLogin, media.update)
         .delete(authorization.requiresLogin, media.destroy);
 
     app.route(baseUrl + '/slug/:mediaSlug')
+        .get(media.render);
+
+    app.route(baseUrl + '/info/:mediaId')
         .get(media.show);
 
     app.route(baseUrl + '/:modelType/:modelId')

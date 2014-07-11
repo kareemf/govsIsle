@@ -173,7 +173,7 @@ module.exports = function(Model){
         /**
          * Show a doc
          */
-        show: function(req, res) {
+        show: function(req, res, options) {
             var doc = req[modelName];
             console.log('showing doc', doc);
 
@@ -181,6 +181,12 @@ module.exports = function(Model){
 
             //returning a POJO instead of mongoose model instance
             var _doc = doc.toObject();
+
+            if(options && options.omit){
+                options.omit.forEach(function(ommitedField){
+                    delete _doc[ommitedField];
+                });
+            }
 
             //remove all field for which the user does not have read access
              _doc = permissionsManager.removeNonPermitedFields(permissions, _doc);

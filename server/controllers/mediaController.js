@@ -154,6 +154,14 @@ exports.destroy = function(req, res) {
 };
 
 exports.show = function(req, res) {
+    var options = {
+        omit: ['file']
+    };
+
+    base.show(req, res, options);
+};
+
+exports.render = function(req, res) {
     var media = req.media;
     res.contentType(media.mimetype);
     res.send(media.file);
