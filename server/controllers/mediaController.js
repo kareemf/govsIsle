@@ -4,6 +4,7 @@ var fs = require('fs'),
     async = require('async'),
     mongoose = require('mongoose'),
     Media = mongoose.model('Media'),
+    base = require('./baseController')(Media),
     permissionsManager = require('./permissionsManager')(Media);
 
 exports.getModelType = function(req, res, next, modelType) {
@@ -130,4 +131,30 @@ exports.create = function(req, res) {
     };
 
     async.each(fields, createMediaFromField, addMediaToDoc);
+};
+
+exports.get = function(req, res, next, id) {
+    base.get(req, res, next, id);
+};
+
+exports.getBySlug = function(req, res, next, id) {
+    base.getByQuery(req, res, next, {slug: id});
+};
+
+exports.all = function(req, res) {
+    base.all(req, res);
+};
+
+exports.update = function(req, res) {
+    base.update(req, res);
+};
+
+exports.destroy = function(req, res) {
+    base.destroy(req, res);
+};
+
+exports.show = function(req, res) {
+    var media = req.media;
+    res.contentType(media.mimetype);
+    res.send(media.file);
 };
