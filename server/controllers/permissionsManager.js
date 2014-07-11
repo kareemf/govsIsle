@@ -72,7 +72,7 @@ module.exports = function(Model){
         /*Determine what any user - authenticated or not - can do to this doc*/
         ascertainBasicPermissions: function(doc){
             var canDo = [];
-            if(doc.published){
+            if(doc && doc.published){
                 canDo.push(Model.readPermission());
             }
 
