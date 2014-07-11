@@ -51,6 +51,9 @@ module.exports = function(Model){
         /*Determine what the specified user can do to this doc*/
         ascertainUserPermissions: function(user, doc){
             var canDo = [];
+            if(!user){
+                return canDo;
+            }
             // console.log('checking permissions');
             if(user.permissions){
                 // console.log('user has permissions');
