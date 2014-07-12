@@ -2,7 +2,7 @@
 	<a ui-sref="/"><img ng-src="images/logo.png" alt="culture island" class="navimg-logo"></a><a class="navbar-brand" ui-sref="/" mean-token="'site-title'"></a>
 </nav>
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="carousel-wrapper col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<div id="home-carousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
@@ -11,7 +11,6 @@
 			<li data-target="#home-carousel" data-slide-to="2"></li>
 			<li data-target="#home-carousel" data-slide-to="3"></li>
 		</ol>
-
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner">
 		    <div class="item active">
@@ -39,6 +38,26 @@
 		      	<div class="carousel-caption custom-caption"><h3>PERMITS</h3></div>
 		    </div>
 		</div><!--ENDING OF CAROUSEL-INNER nav-pills-->
-
+		<!-- Controls -->
+		<a data-target="#home-carousel" class="left carousel-control" role="button" data-slide="prev">
+		    <span class="glyphicon glyphicon-chevron-left"></span>
+		</a>
+		<a data-target="#home-carousel" class="right carousel-control" role="button" data-slide="next">
+		    <span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
 	</div>
 </div>
+<div class="clear"></div>
+	<!--
+	<div class="navmain-container">
+	    <div class="map-ui-landing">
+	        <ul class="nav-login">
+	            <li><a ui-sref="about"><span class="glyphicon glyphicon-info-sign"></span></a></li>
+	            <li><a ui-sref="ferry"><span class="glyphicon glyphicon-plane"></span></a></li>
+	            <li><a ui-sref="events.map" ng-show="listormap" ng-click="listormap=false"><span class="glyphicon glyphicon-map-marker"></span></a></li>
+	            <li><a ui-sref="events.list" ng-hide="listormap" ng-click="listormap=true"><span class="glyphicon glyphicon-list"></span></a></li>
+	            <li><a><span class="glyphicon glyphicon-headphones"></span></a></li>
+	            <li><a ui-sref="events.calendar"><span class="glyphicon glyphicon-calendar"></span></a></li>
+	        </ul>
+	    </div>
+	</div>-->

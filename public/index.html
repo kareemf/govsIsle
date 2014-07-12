@@ -16,16 +16,14 @@
         <!--<div id="main-header">--><!--MAIN-HEADER-->
            <!-- <div ng-include="'templates/header.html'" data-role="navigation"></div> --> <!-- Header End Here-->
         <!--</div>-->
-
         <div id="main-content">   <!--MAIN CONTENT-->
           <!--  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"></div> -->
                <div ui-view></div>
         </div>
-
-        <!--<div class="main-footer">--><!-- MAIN-FOOTER-->
-            <!--<div ng-include=" 'templates/footer.html' "></div> -->
-        <!--</div>-->
-                
+        <div class="nav-footer"><!-- MAIN-FOOTER-->
+            <div ng-include=" 'templates/nav.html' "></div>
+        </div>
+        
         <!-- Bower installs-->
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -49,5 +47,6 @@
         <script type="text/javascript" src="js/controllers/map.js"></script>
         <script type="text/javascript" src="js/controllers/events.js"></script>
         <script type="text/javascript" src="js/controllers/header.js"></script>
+        <script type="text/javascript" src="js/controllers/nav.js"></script>
     </body>
 </html>
