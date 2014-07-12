@@ -45,6 +45,7 @@ module.exports = function(Model){
                 }
 
                 //ex req.post = post
+                doc.permissions = permissions;
                 req[modelName] = doc;
                 // console.log('req modelName', modelName);
                 next();
