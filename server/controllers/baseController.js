@@ -113,6 +113,7 @@ module.exports = function(Model){
                     return new Error('Failed to create doc. Error: ' + err);
                 } else {
                     permissionsManager.grantCreatorPermissions(req.user, doc);
+                    doc.permissions = permissions;
                     res.jsonp(doc);
                 }
             });
@@ -144,6 +145,7 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
+                    doc.permissions = permissions;
                     res.jsonp(doc);
                 }
             });
@@ -166,6 +168,7 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to destroy doc. Error: ' + err);
                 } else {
+                    doc.permissions = permissions;
                     res.jsonp(doc);
                 }
             });
@@ -190,8 +193,9 @@ module.exports = function(Model){
             }
 
             //remove all field for which the user does not have read access
-             _doc = permissionsManager.removeNonPermitedFields(permissions, _doc);
+            _doc = permissionsManager.removeNonPermitedFields(permissions, _doc);
 
+            doc.permissions = permissions;
             res.jsonp(_doc);
         },
 
@@ -287,6 +291,7 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
+                    doc.permissions = permissions;
                     res.jsonp(doc);
                 }
             });
