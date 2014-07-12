@@ -1,6 +1,7 @@
 'use strict';
 
-var _ = require('lodash');
+var _ = require('lodash'),
+    Lazy = require('lazy.js');
 
 var PaginationResponse = function(items, total, limit, offset){
     this.items = items;
@@ -247,6 +248,11 @@ module.exports = function(Model){
                         status: 500
                     });
                 }
+
+                //populate permissions for each doc
+                Lazy(docs).each(function(doc){
+                    doc.permissions = permissionsManager.ascertainPermissions(req.user, doc);
+                });
 
                 if(req.query.paginate){
                     return countQuery.count(function(err, total){
