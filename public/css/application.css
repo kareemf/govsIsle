@@ -187,6 +187,10 @@ in between the header and footer */
 }
 
 /*----------=LIST VIEW=-------------*/
+.largeTitle {
+  font-size: 10pt;
+}
+
 .list-container{
   width: 80%;
   margin: 30px auto;
