@@ -146,7 +146,6 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
-                    doc.permissions = permissions;
                     res.jsonp(doc);
                 }
             });
@@ -169,7 +168,6 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to destroy doc. Error: ' + err);
                 } else {
-                    doc.permissions = permissions;
                     res.jsonp(doc);
                 }
             });
@@ -297,7 +295,6 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
-                    doc.permissions = permissions;
                     res.jsonp(doc);
                 }
             });
