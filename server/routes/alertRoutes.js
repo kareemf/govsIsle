@@ -10,14 +10,14 @@ module.exports = function(app) {
         .get(alerts.all)
         .post(authorization.requiresLogin, alerts.create);
 
-    app.route(baseUrl + '/:id')
+    app.route(baseUrl + '/:alertId')
         .get(alerts.show)
         .put(authorization.requiresLogin, alerts.update)
         .delete(authorization.requiresLogin, alerts.destroy);
 
-    app.route(baseUrl + '/:id/publish')
+    app.route(baseUrl + '/:alertId/publish')
         .post(alerts.publish);
 
-    app.param('id', alerts.get);
+    app.param('alertId', alerts.get);
 
 };
