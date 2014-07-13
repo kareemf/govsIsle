@@ -30,9 +30,11 @@ exports.getModelInstance = function(req, res, next, id) {
             // console.log('getModelInstance err:', err, 'doc:', doc);
 
             if(err){
+                console.log('getModelInstance err:', err);
                 return res.send(500, err);
             }
             if(!doc){
+                console.log('getModelInstance failed to find doc by id');
                 return res.send(500, 'Unable to find', Model.modelName, 'with id', id);
             }
 
