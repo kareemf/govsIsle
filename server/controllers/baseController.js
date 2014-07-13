@@ -66,7 +66,7 @@ module.exports = function(Model){
         getByQuery: function(req, res, next, query){
             console.log('getByField query', query);
 
-            Model.findOne(query).exec(function(err, doc){
+            Model.findOne(query).populate('media', 'slug id').exec(function(err, doc){
                 if(err){ return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc by query' + query));}
 
@@ -240,7 +240,10 @@ module.exports = function(Model){
             var select = permissionsManager.buildPermittedFieldsSelectStatement(permissions);
             // console.log('all select:', select);
 
-            query.select(select).populate('user', 'name username').exec(function(err, docs) {
+            query.select(select)
+            .populate('media', 'slug id')
+            .populate('user', 'name username')
+            .exec(function(err, docs) {
                 if (err) {
                     return res.render('error', {
                         status: 500

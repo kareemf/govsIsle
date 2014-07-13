@@ -55,6 +55,7 @@ MediaSchema.statics.permissionsGrantedToAnon = function(){
     var fieldPermissions = this.fieldPermissions();
     var readPermission = this.readPermission();
 
+    //TODO: base permissionsGrantedToAnon which returns slug
     return [
         readPermission,
         fieldPermissions['name'][readPermission],
