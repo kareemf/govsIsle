@@ -1,36 +1,24 @@
 'use strict';
 
-var _ = require('lodash');
+var _ = require('lodash'),
+    Lazy = require('lazy.js');
+
+var PaginationResponse = function(items, total, limit, offset){
+    this.items = items;
+    this.total = total;
+    this.offset = offset ? offset : 0;
+    this.limit = limit ? limit : 20;
+};
 
 module.exports = function(Model){
     //TODO: may be a better way to get property name
-    var modelName = Model.modelName.toLowerCase();
+    var modelName = Model.modelName.toLowerCase(),
+        permissionsManager = require('./permissionsManager')(Model);
 
     var load = function(id, callback){
         Model.findOne({
             _id: id
         }).exec(callback);
-    };
-
-    var determinePermissions = function(user, doc){
-        var canDo = [];
-        if(user.permissions){
-            user.permissions.forEach(function(permission){
-                if(permission.collectionName.toLowerCase() != modelName){
-                    return;
-                }
-
-                var documentId = permission.documentId;
-                if(documentId){
-                    if(!documentId.equals(doc.id)) {
-                        return;
-                    }
-                }
-
-                canDo.contact(permission.canDo);
-            });
-        }
-        return _.uniq(canDo);
     };
 
     return {
@@ -43,7 +31,22 @@ module.exports = function(Model){
             var callback = function(err, doc) {
                 if (err) {return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc ' + id));}
+
+                var permissions = permissionsManager.ascertainPermissions(req.user, doc);
+                if(!_.contains(permissions, Model.readPermission())){
+                    return res.send(403, 'User does not have read access to this content');
+                }
+
+                //prevent user from viewing unpublished content unless they have
+                //permission to do so. this happens after the query is already
+                //executed because the user may have doc-level readUnpublished
+                //permission without having collection level access
+                if(!doc.published && !_.contains(permissions, Model.readUnpublishedPermission())){
+                    return res.send(403, 'Content not yet available');
+                }
+
                 //ex req.post = post
+                doc.permissions = permissions;
                 req[modelName] = doc;
                 // console.log('req modelName', modelName);
                 next();
@@ -63,15 +66,25 @@ module.exports = function(Model){
         getByQuery: function(req, res, next, query){
             console.log('getByField query', query);
 
-            Model.findOne(query).exec(function(err, doc){
+            Model.findOne(query).populate('media', 'slug id').exec(function(err, doc){
                 if(err){ return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc by query' + query));}
-                req[modelName] = doc;
 
                 var user = req.user;
-                if(user){
-                    doc.permissions = determinePermissions(user, doc);
+                var permissions = permissionsManager.ascertainPermissions(user, doc);
+
+                //prevent user from viewing unpublished content unless they have permission to do so.
+                if(!doc.published && !_.contains(permissions, Model.readUnpublishedPermission())){
+                    return res.send(403, 'Content not yet available');
                 }
+
+                // console.log('doc permissions', permissions);
+                if(!_.contains(permissions, Model.readPermission())){
+                    return res.send(403, 'User does not have read access to this content');
+                }
+
+                doc.permissions = permissions;
+                req[modelName] = doc;
 
                 next();
             });
@@ -82,9 +95,16 @@ module.exports = function(Model){
          */
         create: function(req, res) {
             var doc = new Model(req.body);
+            var user = req.user;
 
             if(!_.isUndefined(req.user)){
-                doc.createdBy = req.user._id;
+                doc.createdBy = user._id;
+            }
+
+            var permissions = permissionsManager.ascertainPermissions(req.user, doc);
+
+            if(!_.contains(permissions, Model.createPermission())){
+                return res.send(403, 'User does not have create access to this content type');
             }
 
             doc.save(function(err) {
@@ -93,6 +113,8 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to create doc. Error: ' + err);
                 } else {
+                    permissionsManager.grantCreatorPermissions(req.user, doc);
+                    doc.permissions = permissions;
                     res.jsonp(doc);
                 }
             });
@@ -104,10 +126,20 @@ module.exports = function(Model){
         update: function(req, res) {
             var doc = req[modelName];
             var user = req.user;
+            var permissions = permissionsManager.ascertainPermissions(req.user, doc);
+            var body = req.body;
+
+            if(!_.contains(permissions, Model.updatePermission())){
+                return res.send(403, 'User does not have update access to this content');
+            }
+
+            //prevent user from updating fields to which they dont have access
+            //ex prevent user from updating his/her own permissions
+            body = permissionsManager.removeNonPermitedUpdateFields(permissions, doc, body, req.params);
 
             doc.edit = new Date();
             doc.editedBy = user.id;
-            doc = _.extend(doc, req.body);
+            doc = _.extend(doc, body);
             doc.save(function(err) {
                 if (err) {
                     var data = {errors: err.errors};
@@ -124,6 +156,11 @@ module.exports = function(Model){
          */
         destroy: function(req, res) {
             var doc = req[modelName];
+            var permissions = permissionsManager.ascertainPermissions(req.user, doc);
+
+            if(!_.contains(permissions, Model.deletePermission())){
+                return res.send(403, 'User does not have delete access to this content');
+            }
 
             doc.remove(function(err) {
                 if (err) {
@@ -139,25 +176,131 @@ module.exports = function(Model){
         /**
          * Show a doc
          */
-        show: function(req, res) {
+        show: function(req, res, options) {
             var doc = req[modelName];
             console.log('showing doc', doc);
-            res.jsonp(doc);
+
+            var permissions = permissionsManager.ascertainPermissions(req.user, doc);
+
+            //returning a POJO instead of mongoose model instance
+            var _doc = doc.toObject();
+
+            if(options && options.omit){
+                options.omit.forEach(function(ommitedField){
+                    delete _doc[ommitedField];
+                });
+            }
+
+            //remove all field for which the user does not have read access
+            _doc = permissionsManager.removeNonPermitedFields(permissions, _doc);
+
+            doc.permissions = permissions;
+            res.jsonp(_doc);
         },
 
         /**
          * List of docs
          */
-        all: function(req, res) {
-            Model.find().sort('-created').populate('user', 'name username').exec(function(err, docs) {
+        all: function(req, res, queryParams) {
+            //only collection-levle permissions are relevant at this point
+            var permissions = permissionsManager.ascertainPermissions(req.user, null);
+
+            if(!_.contains(permissions, Model.readListPermission())){
+                return res.send(403, 'User does not have read access to '+ modelName +' list');
+            }
+
+            var query = Model.find();
+            var countQuery = Model.find();
+
+            //allow the execution of user-provided queries
+            if(queryParams){
+                query.where(queryParams);
+                countQuery.where(queryParams);
+            }
+
+            //prevent user from viewing unpublished content unless they have permission to do so
+            if(!_.contains(permissions, Model.readUnpublishedPermission())){
+                query.exists('published');
+                countQuery.exists('published');
+            }
+
+            //handle sort, limit, and offset query parameters
+            var sort = req.query.sort ? req.query.sort : '-created';
+            query.sort(sort);
+
+            if(req.query.limit) {
+                query.limit(req.query.limit);
+            }
+
+            if(req.query.offset) {
+                query.skip(req.query.offset);
+            }
+
+            //only going to select fields that user has permission to view
+            var select = permissionsManager.buildPermittedFieldsSelectStatement(permissions);
+            // console.log('all select:', select);
+
+            query.select(select)
+            .populate('media', 'slug id')
+            .populate('user', 'name username')
+            .exec(function(err, docs) {
                 if (err) {
-                    res.render('error', {
+                    return res.render('error', {
                         status: 500
                     });
+                }
+
+                //populate permissions for each doc
+                Lazy(docs).each(function(doc){
+                    doc.permissions = permissionsManager.ascertainPermissions(req.user, doc);
+                });
+
+                if(req.query.paginate){
+                    return countQuery.count(function(err, total){
+                        if (err) {
+                            return res.render('error', {
+                                status: 500
+                            });
+                        }
+                        return res.jsonp(new PaginationResponse(
+                            docs,
+                            total,
+                            Number(req.query.limit),
+                            Number(req.query.offset)
+                        ));
+                    });
+                }
+
+                return res.jsonp(docs);
+
+            });
+        },
+
+        /**
+        * Publish a doc
+        */
+        publish: function(req, res){
+            console.log('attempting to publish', modelName, req[modelName]);
+
+            var user = req.user;
+            var doc = req[modelName];
+            var permissions = permissionsManager.ascertainPermissions(user, doc);
+
+            if(!_.contains(permissions, Model.publishPermission())){
+                return res.send(403, 'User does not have permission to publish this content');
+            }
+
+            doc.published = new Date();
+            doc.publishedBy = req.user.id;
+            doc.save(function(err) {
+                if (err) {
+                    var data = {errors: err.errors};
+                    data[modelName] = doc;
+                    return new Error('Failed to update doc. Error: ' + err);
                 } else {
-                    res.jsonp(docs);
+                    res.jsonp(doc);
                 }
             });
-        }
+        },
     };
 };

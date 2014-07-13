@@ -3,7 +3,6 @@
 var amenities = require('../controllers/amenitiesController'),
     authorization = require('./middlewares/authorization');
 
-// Amenity authorization helpers
 var hasAuthorization = function(req, res, next) {
     if (!req.amenity.createdBy.equals(req.user.id)) {
         return res.send(401, 'User is not authorized');
@@ -18,10 +17,18 @@ module.exports = function(app) {
         .get(amenities.all)
         .post(authorization.requiresLogin, amenities.create);
 
-    app.route(baseUrl + '/:amenityId')
+    app.route(baseUrl + '/:id')
         .get(amenities.show)
-        .put(authorization.requiresLogin, hasAuthorization, amenities.update)
-        .delete(authorization.requiresLogin, hasAuthorization, amenities.destroy);
+        .put(authorization.requiresLogin, amenities.update)
+        .delete(authorization.requiresLogin, amenities.destroy);
 
-    app.param('amenityId', amenities.get);
+    app.route(baseUrl + '/:id/publish')
+        .post(amenities.publish);
+
+    app.route(baseUrl + '/slug/:slug')
+        .get(amenities.show);
+
+    app.param('id', amenities.get);
+    app.param('slug', amenities.getBySlug);
+
 };
