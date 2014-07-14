@@ -261,9 +261,73 @@ padding: 0.3em 0.2em;
     width: 100%;
 
 }
+
 /*----------=Calendar PAGES=----------*/
 #calendar{
   background-color: grey;
+
+
+/*----------=LIST VIEW=-------------*/
+.largeTitle {
+  font-size: 10pt;
+}
+
+.list-container{
+  width: 80%;
+  margin: 30px auto;
+  overflow: hidden;
+}
+
+.gridItem h3 {
+    text-transform: uppercase;
+}
+ 
+.gridItem img {
+    max-width: 100%;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.gridItem {
+    color: #797478;
+    font: 10px/1.5 Verdana, Helvetica, sans-serif;
+    float: left;    
+    width: 16%;
+    margin:  2% 2% 50px 2%; 
+}
+
+@media only screen and (max-width : 940px),
+only screen and (max-device-width : 940px){
+    .gridItem {width: 21%;}
+}
+ 
+@media only screen and (max-width : 720px),
+only screen and (max-device-width : 720px){
+    .gridItem {width: 29.33333%;}
+}
+ 
+@media only screen and (max-width : 530px),
+only screen and (max-device-width : 530px){
+    .gridItem {width: 46%;}
+}
+ 
+@media only screen and (max-width : 320px),
+only screen and (max-device-width : 320px){
+    .gridItem {width: 96%;}
+    .gridItem img {width: 96%;}
+    .gridItem h3 {font-size: 18px;}
+    .gridItem p, {font-size: 18px;}
+}
+
+
+/*----------=END LIST VIEW=-------------*/
+
+.map-container{
+  width: 100%;
+  min-width: 200px;
+  background-color: white;
+  margin-top: 3px;
 }
 #calendar-wrapper{
   margin-top: 25px;
