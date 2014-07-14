@@ -77,12 +77,15 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             templateUrl: 'templates/events/events.html',
         })
         .state('events.map',{
+            url: '/map',
             templateUrl: 'templates/events/eventmap.html'
         })
         .state('events.list',{
+            url: '/list',
             templateUrl: 'templates/events/eventlist.html'
         })
         .state('events.calendar',{
+            url: '/calendar',
             templateUrl: 'templates/events/eventcalendar.html'
         })
         .state('events.detail', {

@@ -215,12 +215,10 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
     var view = $stateParams.view;
     view = view ? view : 'map';
     //$state.go("events."+ view);
-    
     $scope.mybutton=true;
     $scope.uiup=true;
     $scope.headerview=true;
     $scope.listormap=true;
-
     /*playing with maps*/
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),

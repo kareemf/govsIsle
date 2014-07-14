@@ -10,4 +10,21 @@
             <li><a ui-sref="events.calendar"><span class="glyphicon glyphicon-calendar"></span></a></li>
         </ul>
     </div>
+    <div class="map-ui-toggle">
+        <ul class="nav-login">
+            <li><a class="toggle-up" ng-hide="headerview" ng-click="headerview=true"><span class="glyphicon glyphicon-chevron-up"></span></a></li>
+            <li><a class="toggle-down" ng-show="headerview" ng-click="headerview=false"><span class="glyphicon glyphicon-chevron-down"></span></a></li>
+        </ul>
+    </div>
 </div> 
+<script type="text/javascript">
+$(function() {
+    $('.toggle-down').on('click', function () {
+        $('.map-ui-toggle').css("bottom","0px");
+    });
+
+    $('.toggle-up').on('click', function () {
+        $('.map-ui-toggle').css("bottom",'60px');
+    });
+});
+</script>
