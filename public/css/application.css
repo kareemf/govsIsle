@@ -1,13 +1,13 @@
 *{margin: 0px;padding: 0px;}
 html{
-    position: relative;
+  position: relative;
   min-height: 100%;
 }
 body{
   height: 100%; width: 100%; 
   line-height: 1; 
   background-color: #333; 
-  color: #FFF;
+  color: blue;
   min-width: 250px;
 }
 body, h1,h2,h3,h4,h5,h6{
@@ -30,12 +30,11 @@ a, a:link, a:hover, a:visited, a:active{
 a:hover, .nav a:hover{
   color: blue;
 }
-
 .clear{
   clear: both;
 }
 .chevron-left, .chevron-right{
-  font-size: 1.5em;
+  font-size: 2em;
 }
 .landing-page{
   margin-top: 30px;
@@ -276,6 +275,7 @@ padding: 0.3em 0.2em;
 /*----------=Calendar PAGES=----------*/
 #calendar{
   background-color: grey;
+  margin-bottom: 120px;
 }
 
 /*----------=LIST VIEW=-------------*/
