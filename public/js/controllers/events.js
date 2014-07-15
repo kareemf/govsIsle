@@ -229,13 +229,6 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
         minZoom: 14,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-
-    $scope.toggleFilters = function(filters){
-        console.log('toggleFilter', filters);
-        var filters = filters.split(',');
-
-
-    }
 }]);
 
 
