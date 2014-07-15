@@ -230,8 +230,11 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    $scope.toggleFilter = function(filter){
-        console.log('toggleFilter', filter);
+    $scope.toggleFilters = function(filters){
+        console.log('toggleFilter', filters);
+        var filters = filters.split(',');
+
+
     }
 }]);
 
