@@ -175,10 +175,10 @@ in between the header and footer */
     background-image: none
 }
 /*----------=EVENTS PAGES=----------*/
-.mybar{
-  background-color: black;
+#calendar {
+  width: auto;
+  margin: 0px 0px 0px 0px;
 }
-
 .map-container{
   position: relative;
   width: 100%;
