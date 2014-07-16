@@ -10,10 +10,6 @@ body{
   color: blue;
   min-width: 250px;
 }
-body, h1,h2,h3,h4,h5,h6{
-  font-family: Helvetica, Arial, sans-serif;
-  line-height: 1px;
-}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
