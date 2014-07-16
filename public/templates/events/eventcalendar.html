@@ -1,25 +1,25 @@
+<link rel='stylesheet' href='bower_components/fullcalendar/lib/cupertino/jquery-ui.min.css' />
+
 <script src='bower_components/fullcalendar/lib/moment.min.js'></script>
 <script src='bower_components/fullcalendar/lib/jquery-ui.custom.min.js'></script>
 <script src='bower_components/fullcalendar/fullcalendar.min.js'></script>
 <script>
 
 	$(document).ready(function() {
-		
+
 		$('#calendar').fullCalendar({
+			theme: false,
+ 			eventBackgroundColor: "#DC143C",
 			header: {
-				left: 'title',
-				center: '',
-				right: 'today,prev,next'
+				left: 'prev,next  today  month,agendaWeek,agendaDay',
+				center: 'title',
+				right: ''
 			},
 			defaultDate: '2014-06-12',
 			editable: true,
 			events: [
 				{
 					title: 'All Day Event',
-					start: '2014-06-01'
-				},
-				{
-					title: 'more than one event',
 					start: '2014-06-01'
 				},
 				{
@@ -61,5 +61,6 @@
 	});
 
 </script>
-<div id='calendar'></div>
-
+<div class="container">
+	<div id='calendar'></div>
+</div>

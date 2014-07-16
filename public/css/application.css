@@ -3,10 +3,11 @@ html{
   position: relative;
   min-height: 100%;
 }
+
 body{
   height: 100%; width: 100%; 
   line-height: 1; 
-  background-color: #333; 
+  background-color: #E7E7E7; 
   color: blue;
   min-width: 250px;
 }
@@ -35,6 +36,7 @@ a:hover, .nav a:hover{
 .landing-page{
   margin-top: 30px;
 }
+
 /*------============HEADER-STYLING AREA=========---------*/
 #custom-nav{
   height: 160px;
@@ -42,7 +44,16 @@ a:hover, .nav a:hover{
   margin-top: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
 }
-
+#nav-beta{
+  height: 160px;
+  padding: 0px 0px 0px 0px;
+  background-color: #FFF;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-collapse: separate;
+  z-index: 999;
+}
 .navbar{background-color: #FFFFFF;}
 .navheader-logo{display: inline-block;}
 .navimg-logo{ 
@@ -58,14 +69,12 @@ a:hover, .nav a:hover{
   color: white;
   font-weight: bold;
   font-style: italic;
-  z-index: 20;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-        filter: alpha(opacity=50);
-   opacity: 0.3;
-   bottom: 0px;
-   padding-top: 3px;
-   font-size: 45px;
-   text-align: center;
+  z-index: 900;
+  opacity: 0.3;
+  bottom: 0px;
+  padding-top: 3px;
+  font-size: 45px;
+  text-align: center;
 }
 .map-ui-toggle{
   position: absolute;
@@ -77,12 +86,10 @@ a:hover, .nav a:hover{
   color: white;
   font-weight: bold;
   font-style: italic;
-  z-index: 20;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-        filter: alpha(opacity=50);
-   opacity: 0.3;
-   font-size: 45px;
-   text-align: center;
+  z-index: 900;
+  opacity: 0.3;
+  font-size: 45px;
+  text-align: center;
 }
 .map-filter{
   position: absolute;
@@ -92,13 +99,10 @@ a:hover, .nav a:hover{
   left: 75px;
   font-weight: bold;
   font-style: italic;
-  z-index: 20;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-        filter: alpha(opacity=70);
-   opacity: 0.7;
-   
-   font-size: 25px;
-   padding-top: 15px;
+  z-index: 900;
+  opacity: 0.7; 
+  font-size: 25px;
+  padding-top: 15px;
 }
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
@@ -136,14 +140,49 @@ a:hover, .nav a:hover{
 /*The start of the middle section
 in between the header and footer */
 #main-content{
-  height:100%;
-  width:100%;
+  height:100%;width:100%;
  /* padding-bottom: 120px;*/
 }
 /*------==END OF THE MAIN CONTENT==-----*/
 
-/*------===LANDING PAGE===-----*/
-/*---CAROUSEL-STYLING AREA---*/
+/*----------= CALENDAR EVENTS PAGES=----------*/
+#calendar {
+  width: auto;
+  margin: 0px 0px 0px 0px;
+  margin-bottom: 120px;
+}
+.map-container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 200px;
+  margin-top: 0px;
+  padding: 0;
+}
+.fc table {
+  background-color: #FFFFFF;
+}
+.fc-widget-header {  /* <td>, usually */
+  /*background-color: green;*/
+}
+
+@media screen and (max-width: 600px){
+  .fc-header{
+    height: 75px;
+  }
+  .fc-header-center {
+    position: absolute;
+    top: 30px;
+    left: 100px;
+    display: block;
+    text-align: center;
+  }
+}
+
+
+
+
+/*---CAROUSEL-LANDING PAGE--STYLING AREA---*/
 #home-carousel{
   margin-top: 0px;
 }
@@ -163,8 +202,9 @@ in between the header and footer */
   background-color: black;
   color: white;
   font-weight: bold;font-style: italic;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  /*-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
         filter: alpha(opacity=50);
+  */
   opacity: 0.5;
 }
 .carousel-control{
@@ -174,19 +214,7 @@ in between the header and footer */
 .carousel-control.left, .carousel-control.right {
     background-image: none
 }
-/*----------=EVENTS PAGES=----------*/
-#calendar {
-  width: auto;
-  margin: 0px 0px 0px 0px;
-}
-.map-container{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-width: 200px;
-  margin-top: 0px;
-  padding: 0;
-}
+
 /*---======SHAPES=====----*/
 .circle{
   border-radius: 50%;
@@ -254,7 +282,6 @@ padding: 0.3em 0.2em;
     height: 100px;
     width: 100%;
 }
-/*-------END---OF----MAPS---------------*/
 
 .map-ui a, .map-ui-toggle a{
   color: white;
@@ -265,14 +292,8 @@ padding: 0.3em 0.2em;
 #eventmap{
     height: 100vh;
     width: 100%;
-
 }
-
-/*----------=Calendar PAGES=----------*/
-#calendar{
-  background-color: grey;
-  margin-bottom: 120px;
-}
+/*-------END---OF----MAPS---------------*/
 
 /*----------=LIST VIEW=-------------*/
 .largeTitle {
@@ -326,11 +347,4 @@ only screen and (max-device-width : 320px){
     .gridItem h3 {font-size: 18px;}
     .gridItem p, {font-size: 18px;}
 }
-
-
 /*----------=END LIST VIEW=-------------*/
-#calendar-wrapper{
-  margin-top: 10px;
-}
-
-
