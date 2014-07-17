@@ -3,7 +3,10 @@ html{
   position: relative;
   min-height: 100%;
 }
-
+@font-face {
+    font-family: myFirstFont;
+    src: url(../font/DINEngschriftStd.otf);
+}
 body{
   height: 100%; width: 100%; 
   line-height: 1; 
@@ -33,9 +36,6 @@ a:hover, .nav a:hover{
 .chevron-left, .chevron-right{
   font-size: 2em;
 }
-.landing-page{
-  margin-top: 30px;
-}
 .shadow-effect{
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
@@ -43,7 +43,12 @@ a:hover, .nav a:hover{
   border-collapse: separate;
   z-index: 999;
 }
-
+.information{background-color: #ff9900;}
+.food-drink{background-color: #ff66cc;}
+.activities{background-color: #33cc66;}
+.venues{background-color: #000066}
+.facilities{background-color: #0099ff;}
+.history{background-color: #ccff33;}
 /*------============HEADER-STYLING AREA=========---------*/
 #custom-nav{
   height: 160px;
@@ -52,14 +57,23 @@ a:hover, .nav a:hover{
   padding: 0px 0px 0px 0px;
 }
 #nav-beta{
-  height: 160px;
+  height: 100px;
   padding: 0px 0px 0px 0px;
-  background-color: #FFF;
+  background-color: #5FA77A;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   border-collapse: separate;
   z-index: 999;
+  border-bottom: 1px solid #000;
+}
+#nav-beta p{
+  color: white;
+  font-size: 36px;
+  vertical-align: middle;
+  text-align: center;
+  padding-top: 38px;
+  font-family: myFirstFont;
 }
 .navbar{background-color: #FFFFFF;}
 .navheader-logo{display: inline-block;}
@@ -118,7 +132,8 @@ a:hover, .nav a:hover{
   padding:0;margin: 0;}
   .container{
     width: 100%;
-    margin: 0px 0px 0px 0px;
+    margin-left: 0px;
+    margin-right: 0px;
     padding: 0px 0px 0px 0px;
   }
 }
@@ -141,8 +156,6 @@ a:hover, .nav a:hover{
   margin-top: 60px;
   padding-top: 4px;
 }
-/*-------====END OF HEADER STUFFF====------*/
-
 
 /*The start of the middle section
 in between the header and footer */
@@ -152,7 +165,7 @@ in between the header and footer */
 }
 
 /*----------= CALENDAR EVENTS PAGES=----------*/
-#calendar {
+#calendar{
   width: auto;
   margin: 0px 0px 0px 0px;
   margin-bottom: 120px;
@@ -192,10 +205,10 @@ in between the header and footer */
   }
 }
 
-
-
-
-/*---CAROUSEL-LANDING PAGE--STYLING AREA---*/
+/*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
+.carousel-wrapper{
+  margin-top: 1px;
+}
 #home-carousel{
   margin-top: 0px;
 }
@@ -207,11 +220,18 @@ in between the header and footer */
     display: block;
     margin: 0 auto;
     width: 90%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    /*padding-top: 20px;
+    padding-bottom: 20px;*/
+}
+.img-custom-lg{
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    /*padding-top: 20px;
+    padding-bottom: 20px;*/
 }
 .custom-caption{
-  right: 5%;left: 5%;
+  right: 2%;left: 2%;
   background-color: black;
   color: white;
   font-weight: bold;font-style: italic;
@@ -225,7 +245,46 @@ in between the header and footer */
 }
 
 .carousel-control.left, .carousel-control.right {
-    background-image: none
+    /*background-image: none;*/
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
+}
+.btn-custom{
+  background-color: #5FA77A;
+}
+#sub-carousel{
+  margin: 10px 2px 10px 2px;
+    height: 200px;width:200px;
+}
+.img-collection{
+  margin-top: 25px;
+}
+.img-container-sm{
+  position: relative;
+  width: 150px;height: 150px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.img-cover{
+  position: absolute;
+  top: 0;
+  height: 77px;
+  width: 150px;
+  opacity: .5;
+}
+
+.img-collection section{
+  display: inline-block;
+}
+.img-cover p{
+  color: #FFF;
+  font-size: 36px;
+  vertical-align: middle;
+  text-align: center;
+  font-family: myFirstFont;
+  padding-top: 25px;
 }
 
 /*---======SHAPES=====----*/
@@ -306,7 +365,7 @@ padding: 0.3em 0.2em;
     height: 100vh;
     width: 100%;
 }
-/*-------END---OF----MAPS---------------*/
+
 
 /*----------=LIST VIEW=-------------*/
 .largeTitle {
@@ -360,4 +419,5 @@ only screen and (max-device-width : 320px){
     .gridItem h3 {font-size: 18px;}
     .gridItem p, {font-size: 18px;}
 }
-/*----------=END LIST VIEW=-------------*/
+
+
