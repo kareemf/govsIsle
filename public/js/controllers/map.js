@@ -94,8 +94,9 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     console.log('in MarkerListController');
 
     $scope.newMarkers = [];
-
     $scope.existingMarkers = [];
+    $scope.filters = [];
+
 
     var createMarker = function(content, map){
         var position = new google.maps.LatLng(content.geoLocation[0], content.geoLocation[1]);
@@ -105,40 +106,81 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             draggable: false
         });
 
-        console.log('existing contetn', content, 'marker', marker);
+        console.log('existing content', content, 'marker', marker);
         $scope.existingMarkers.push(marker);
     };
 
-    $scope.toggleFilters = function(filters){
-        console.log('toggleFilter', filters);
-        var filters = filters.split(',');
+    // TODO: filters are case sensitive
+    var getContentByFilters = function(filters){
+        console.log('getContentByFilters', filters);
         var events,
-            activities;
+            amenities;
 
-        if(filters.indexOf('events') >= 0){
-            // TODO: only grab relevant content
-            // TODO: only one info window for whole app
+        if(filters.indexOf('event') >= 0){
             events = Events.query(function(events){
                 console.log('events', events);
                 events.forEach(function(event){
                     createMarker(event, $scope.myMap);
                 });
             });
-        }
-        if(filters.indexOf('activities') >= 0){
-            activities = Amenities.query(function(activities){
-                console.log('activities', activities);
-                activities.forEach(function(activity){
-                    createMarker(activity, $scope.myMap);
-                });
+
+            //remove events from the set of filters to prevent including
+            //amenities query
+            filters = filters.filter(function(f){
+                return f != 'events'
             });
         }
 
-        $scope.markers = [].concat(events, activities);
+        if(filters.indexOf('tour') >= 0){
+            //TODO: amenities with audio content
+            filters = filters.filter(function(f){
+                return f != 'tours'
+            });
+        }
 
-    }
+        amenities = Amenities.query({filter: filters}, function(amenities){
+            console.log('amenities', amenities);
+            amenities.forEach(function(activity){
+                createMarker(activity, $scope.myMap);
+            });
+        });
 
-    $scope.toggleFilters('events,activities');
+        $scope.markers = [].concat(events, amenities);
+    };
+
+    $scope.toggleFilter = function(oneOrMoreFilters){
+        var scopeFilters = $scope.filters;
+        var filters = [];
+
+        if(angular.isArray(oneOrMoreFilters)){
+            filters = oneOrMoreFilters
+        }
+        else{
+            filters = [oneOrMoreFilters];
+        }
+
+        for (var i = filters.length - 1; i >= 0; i--) {
+            var filter = filters[i];
+            if(scopeFilters.indexOf(filter) >= 0){
+                scopeFilters = scopeFilters.filter(function(f){
+                    return f != filter
+                });
+            }
+            else{
+                scopeFilters.push(filter);
+            }
+        };
+
+        $scope.filters = scopeFilters;
+        console.log('scopeFilters', scopeFilters);
+    };
+
+    $scope.$watch('filters', function(newVal, oldVal){
+        console.log('$scope.$watch filters triggered', newVal, oldVal);
+        getContentByFilters($scope.filters);
+    });
+
+    $scope.toggleFilter(['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event']);
 
 
 
