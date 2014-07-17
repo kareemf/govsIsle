@@ -97,6 +97,18 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
     $scope.existingMarkers = [];
 
+    var createMarker = function(content, map){
+        var position = new google.maps.LatLng(content.geoLocation[0], content.geoLocation[1]);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: position,
+            draggable: false
+        });
+
+        console.log('existing contetn', content, 'marker', marker);
+        $scope.existingMarkers.push(marker);
+    };
+
     $scope.toggleFilters = function(filters){
         console.log('toggleFilter', filters);
         var filters = filters.split(',');
@@ -109,31 +121,15 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             events = Events.query(function(events){
                 console.log('events', events);
                 events.forEach(function(event){
-                    var position = new google.maps.LatLng(event.geoLocation[0], event.geoLocation[1]);
-                    var marker = new google.maps.Marker({
-                        map: $scope.myMap,
-                        position: position,
-                        draggable: false
-                    });
-
-                    console.log('existing event', event, 'marker', marker);
-                    $scope.existingMarkers.push(marker);
+                    createMarker(event, $scope.myMap);
                 });
             });
         }
         if(filters.indexOf('activities') >= 0){
             activities = Amenities.query(function(activities){
                 console.log('activities', activities);
-                activities.forEach(function(event){
-                    var position = new google.maps.LatLng(event.geoLocation[0], event.geoLocation[1]);
-                    var marker = new google.maps.Marker({
-                        map: $scope.myMap,
-                        position: position,
-                        draggable: false
-                    });
-
-                    console.log('existing activity', event, 'marker', marker);
-                    $scope.existingMarkers.push(marker);
+                activities.forEach(function(activity){
+                    createMarker(activity, $scope.myMap);
                 });
             });
         }
