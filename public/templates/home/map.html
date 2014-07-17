@@ -1,23 +1,26 @@
 <section class="event-map" ng-controller="MapController" >
     <!-- render map. ui-map will be the name of scope property -->
     <div class="container">
-    	
-    	<div ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="map-canvas"></div>	
+
+    	<div ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="map-canvas"></div>
 	</div>
-    <!-- populate map with event markers -->
-    <div ng-repeat="marker in existingMarkers"
-        ui-map-marker="existingMarkers[$index]"
-        ui-event="markerEvents">
+    <div ng-controller="MarkerListController">
+        <!-- populate map with event markers -->
+        <div ng-repeat="marker in existingMarkers"
+            ui-map-marker="existingMarkers[$index]"
+            ui-event="markerEvents">
 
-        <!-- create a hidden edit form for each event -->
-        <div ng-init="event = events[$index]" ng-controller="ExistingEventController">
-            <!-- TODO: is this an abuse of ng-init? -->
-            <div ng-show="isEditMode && showForm" ng-init="markers = existingMarkers"
-                 ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+            <!-- create a hidden edit form for each event -->
+            <div ng-init="event = events[$index]" ng-controller="ExistingEventController">
+                <!-- TODO: is this an abuse of ng-init? -->
+                <div ng-show="isEditMode && showForm" ng-init="markers = existingMarkers"
+                     ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
+
 
     <!-- populate map with new markers/events -->
     <div ng-repeat="marker in newMarkers"

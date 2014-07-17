@@ -90,7 +90,7 @@ controllers.controller('MapController', ['$scope', 'Events', function ($scope, E
 
   }]);
 
-controllers.controller('MarkerListController', ['$scope', '$state','$stateParams','Events', 'Amenities','Shared', function($scope, $state, $stateParams, Events, Shared){
+controllers.controller('MarkerListController', ['$scope', '$state','$stateParams','Events', 'Amenities','Shared', function($scope, $state, $stateParams, Events, Amenities, Shared){
     console.log('in MarkerListController');
 
     $scope.newMarkers = [];
@@ -100,11 +100,13 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     $scope.toggleFilters = function(filters){
         console.log('toggleFilter', filters);
         var filters = filters.split(',');
+        var events,
+            activities;
 
         if(filters.indexOf('events') >= 0){
             // TODO: only grab relevant content
             // TODO: only one info window for whole app
-            $scope.events = Events.query(function(events){
+            events = Events.query(function(events){
                 console.log('events', events);
                 events.forEach(function(event){
                     var position = new google.maps.LatLng(event.geoLocation[0], event.geoLocation[1]);
@@ -114,13 +116,13 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                         draggable: false
                     });
 
-                    // console.log('existing event', event, 'marker', marker);
+                    console.log('existing event', event, 'marker', marker);
                     $scope.existingMarkers.push(marker);
                 });
             });
         }
         if(filters.indexOf('activities') >= 0){
-            $scope.activities = Amenities.query(function(activities){
+            activities = Amenities.query(function(activities){
                 console.log('activities', activities);
                 activities.forEach(function(event){
                     var position = new google.maps.LatLng(event.geoLocation[0], event.geoLocation[1]);
@@ -130,15 +132,17 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                         draggable: false
                     });
 
-                    // console.log('existing event', event, 'marker', marker);
+                    console.log('existing activity', event, 'marker', marker);
                     $scope.existingMarkers.push(marker);
                 });
             });
         }
 
+        $scope.markers = [].concat(events, activities);
+
     }
 
-    $scope.toggleFilters('events, activities');
+    $scope.toggleFilters('events,activities');
 
 
 
