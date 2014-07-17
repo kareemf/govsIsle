@@ -107,45 +107,42 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         });
 
         console.log('existing content', content, 'marker', marker);
-        $scope.existingMarkers.push(marker);
+        return marker;
     };
 
     // TODO: filters are case sensitive
     var getContentByFilters = function(filters){
         console.log('getContentByFilters', filters);
-        var events,
-            amenities;
+        $scope.existingMarkers = [];
 
         if(filters.indexOf('event') >= 0){
-            events = Events.query(function(events){
+            Events.query(function(events){
                 console.log('events', events);
                 events.forEach(function(event){
-                    createMarker(event, $scope.myMap);
+                    $scope.existingMarkers.push(createMarker(event, $scope.myMap));
                 });
             });
 
             //remove events from the set of filters to prevent including
             //amenities query
             filters = filters.filter(function(f){
-                return f != 'events'
+                return f != 'event'
             });
         }
 
         if(filters.indexOf('tour') >= 0){
             //TODO: amenities with audio content
             filters = filters.filter(function(f){
-                return f != 'tours'
+                return f != 'tour'
             });
         }
 
-        amenities = Amenities.query({filter: filters}, function(amenities){
+        Amenities.query({filter: filters}, function(amenities){
             console.log('amenities', amenities);
             amenities.forEach(function(activity){
-                createMarker(activity, $scope.myMap);
+                $scope.existingMarkers.push(createMarker(activity, $scope.myMap));
             });
         });
-
-        $scope.markers = [].concat(events, amenities);
     };
 
     $scope.toggleFilter = function(oneOrMoreFilters){
