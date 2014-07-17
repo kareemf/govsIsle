@@ -2,7 +2,6 @@
 
     <!-- render map. ui-map will be the name of scope property -->
     <div class="container">
-
     	<div ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="map-canvas"></div>
 	</div>
     <div ng-controller="MarkerListController">
@@ -23,9 +22,9 @@
         </div>
 
         <!-- populate map with event markers -->
-        <div ng-repeat="marker in existingMarkers"
-            ui-map-marker="existingMarkers[$index]"
-            ui-event="markerEvents">
+        <div ng-repeat="marker in existingMarkers">
+            <span ui-map-marker="existingMarkers[$index]"
+            ui-event="markerEvents"></span>
 
             <!-- create a hidden edit form for each event -->
             <div ng-init="event = events[$index]" ng-controller="ExistingEventController">
@@ -38,7 +37,6 @@
         </div>
     </div>
 
-
     <!-- populate map with new markers/events -->
     <div ng-repeat="marker in newMarkers"
         ng-controller="NewEventController"
@@ -49,7 +47,6 @@
         <div ng-show="isEditMode && showForm" ng-init="markers = newMarkers"
              ng-include="'/templates/events/eventForm.html'" scope="" onload="">
         </div>
-
     </div>
 
     <!-- only one infoWindow, gets moved and populated dynamically -->

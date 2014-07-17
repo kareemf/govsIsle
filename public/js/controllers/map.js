@@ -136,13 +136,16 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                 return f != 'tour'
             });
         }
-
-        Amenities.query({filter: filters}, function(amenities){
-            console.log('amenities', amenities);
-            amenities.forEach(function(activity){
-                $scope.existingMarkers.push(createMarker(activity, $scope.myMap));
+        if(filters){
+            Amenities.query({filter: filters}, function(amenities){
+                console.log('amenities', amenities);
+                amenities.forEach(function(activity){
+                    $scope.existingMarkers.push(createMarker(activity, $scope.myMap));
+                });
             });
-        });
+        }
+
+
     };
 
     $scope.toggleFilter = function(oneOrMoreFilters){
@@ -174,10 +177,13 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
     $scope.$watch('filters', function(newVal, oldVal){
         console.log('$scope.$watch filters triggered', newVal, oldVal);
+        if(newVal == oldVal){
+            return;
+        }
         getContentByFilters($scope.filters);
-    });
+    }, true);
 
-    $scope.toggleFilter(['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event']);
+    // $scope.toggleFilter(['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event']);
 
 
 
