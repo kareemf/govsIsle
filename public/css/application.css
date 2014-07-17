@@ -30,12 +30,7 @@ a, a:link, a:hover, a:visited, a:active{
 a:hover, .nav a:hover{
   color: blue;
 }
-.clear{
-  clear: both;
-}
-.chevron-left, .chevron-right{
-  font-size: 2em;
-}
+.clear{clear: both;}
 .shadow-effect{
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
@@ -43,6 +38,7 @@ a:hover, .nav a:hover{
   border-collapse: separate;
   z-index: 999;
 }
+/*The site main colors*/
 .information{background-color: #ff9900;}
 .food-drink{background-color: #ff66cc;}
 .activities{background-color: #33cc66;}
@@ -244,7 +240,7 @@ in between the header and footer */
   height: inherit;
 }
 
-.carousel-control.left, .carousel-control.right {
+.carousel-control.left, .carousel-control.right{
     /*background-image: none;*/
     font-size: 2em;
     padding: 0;
@@ -253,19 +249,27 @@ in between the header and footer */
 .btn-custom{
   background-color: #5FA77A;
 }
-#sub-carousel{
-  margin: 10px 2px 10px 2px;
-    height: 200px;width:200px;
+/*----------====SECOND CAROUSEL====-------*/
+#carousel{
+  text-align: center;
 }
 .img-collection{
   margin-top: 25px;
+  box-shadow: 0 0 0px #aaa;
 }
 .img-container-sm{
   position: relative;
   width: 150px;height: 150px;
   display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 0 auto;
+
+  border: none;
+  display: block;
+  float: center;
+  padding: 0px 0px 0px 0px;
+}
+.img-custom-sm{
+  vertical-align: middle;
 }
 .img-cover{
   position: absolute;
@@ -286,7 +290,6 @@ in between the header and footer */
   font-family: myFirstFont;
   padding-top: 25px;
 }
-
 /*---======SHAPES=====----*/
 .circle{
   border-radius: 50%;
@@ -419,5 +422,4 @@ only screen and (max-device-width : 320px){
     .gridItem h3 {font-size: 18px;}
     .gridItem p, {font-size: 18px;}
 }
-
-
+/*-----------end of List View--------------*/

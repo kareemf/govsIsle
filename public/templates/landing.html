@@ -40,22 +40,52 @@
 				</a>
 			</div>
 	</div>
+</div>
+<div class="container">
 	<div class="img-collection">
-		<section>
-			<div class="img-container-sm">
-				<a><img src="images/rsz_slide_1.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
-				<div class="img-cover information"><p>Discover</p></div>
-			</div>
-			
-		</section>
-		<section>
-			<div class="img-container-sm">
-					<a><img src="images/rsz_slide_2.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
-					<div class="img-cover food-drink"><p>Enjoy</p></div>
-			</div>
-		</section>
+		<div id="carousel">
+			<section>
+				<div class="img-container-sm">
+					<a><img src="images/rsz_slide_1.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
+					<div class="img-cover information"><p>Discover</p></div>
+				</div>
+			</section>
+			<section>
+				<div class="img-container-sm">
+						<a><img src="images/rsz_slide_2.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
+						<div class="img-cover food-drink"><p>Enjoy</p></div>
+				</div>
+			</section>
+			<section>
+				<div class="img-container-sm">
+						<a><img src="images/rsz_slide_3.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
+						<div class="img-cover activities"><p>Eat</p></div>
+				</div>
+			</section>
+			<section>
+				<div class="img-container-sm">
+						<a><img src="images/rsz_slide_0.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
+						<div class="img-cover venues"><p>Learn</p></div>
+				</div>
+			</section>
+		</div>
 	</div>
 </div>
-
-
+<script type="text/javascript" src="js/jquery.carouFredSel-6.0.4-packed.js" ></script>
+<script type="text/javascript">
+	$(function() {
+		$('#carousel').carouFredSel({
+			responsive: true,
+			scroll: 1,
+			items: {
+				width: 300,
+				height: '100%',
+				visible: {
+					min: 2,
+					max: 5
+				}
+			}
+		});
+	});
+</script> 
 
