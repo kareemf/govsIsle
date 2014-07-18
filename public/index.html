@@ -16,13 +16,12 @@
     </head>
     <body>
         
-        <!--<div id="main-header">--><!--MAIN-HEADER-->
-           <!-- <div ng-include="'templates/header.html'" data-role="navigation"></div> --> <!-- Header End Here-->
-        <!--</div>-->
-        <div id="main-content">   <!--MAIN CONTENT-->
-          <!--  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"></div> -->
-               <div ui-view></div>
+        <div class="main-header"><!--MAIN-HEADER-->
+           <div ng-include="'templates/header.html'" data-role="navigation"></div>
         </div>
+        <div class="test"></div>
+        <div ui-view></div>
+
         <div class="nav-footer"><!-- MAIN-FOOTER-->
             <div ng-include=" 'templates/nav.html' "></div>
         </div>

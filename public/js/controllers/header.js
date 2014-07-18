@@ -4,6 +4,7 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
     function($scope, $rootScope, Global, Menus) {
         $scope.global = Global;
         $scope.menus = {};
+        $scope.headerview=true;
 
         // Default hard coded menu items for main menu
         var defaultMainMenu = [];

@@ -1,4 +1,4 @@
-<div class="navbar-fixed-bottom" ng-controller="NavController">
+<div class="navbar-fixed-bottom navmain" ng-controller="NavController">
     <div class="map-ui" ng-show="headerview">
         <ul class="nav-login">
             <li><a ng-hide="isHome" ng-click="isHome=true" ui-sref="/"><span class="glyphicon glyphicon-home"></span></a></li>
@@ -6,7 +6,7 @@
             <li><a ui-sref="ferry"><span class="glyphicon glyphicon-plane"></span></a></li>
             <li><a ui-sref="events.map" ng-show="listormap" ng-click="listormap=false"><span class="glyphicon glyphicon-map-marker"></span></a></li>
             <li><a ui-sref="events.list" ng-hide="listormap" ng-click="listormap=true"><span class="glyphicon glyphicon-list"></span></a></li>
-            <li><a ui-sref=""><span class="glyphicon glyphicon-headphones"></span></a></li>
+            <li><a><span class="glyphicon glyphicon-headphones"></span></a></li>
             <li><a ui-sref="events.calendar"><span class="glyphicon glyphicon-calendar"></span></a></li>
         </ul>
     </div>

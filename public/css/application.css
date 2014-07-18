@@ -46,14 +46,7 @@ a:hover, .nav a:hover{
 .facilities{background-color: #0099ff;}
 .history{background-color: #ccff33;}
 /*------============HEADER-STYLING AREA=========---------*/
-#custom-nav{
-  height: 160px;
-  background-color: #FFF;
-  margin-top: 0px 0px 0px 0px;
-  padding: 0px 0px 0px 0px;
-}
 #nav-beta{
-  height: 100px;
   padding: 0px 0px 0px 0px;
   background-color: #5FA77A;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
@@ -61,36 +54,66 @@ a:hover, .nav a:hover{
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   border-collapse: separate;
   z-index: 999;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #E7E7E7;
+  margin-bottom: 100px;
 }
-#nav-beta p{
+.nav-ui{
+  width: 100%;height: 60px;
+  background-color: #5FA77A;
   color: white;
-  font-size: 36px;
+  z-index: 900;
+  font-size: 30px;
+  text-align: center;
+}
+.nav-gov-brand{
+  color: white;
+  font-size: 32px;
   vertical-align: middle;
   text-align: center;
-  padding-top: 38px;
   font-family: myFirstFont;
 }
-.navbar{background-color: #FFFFFF;}
-.navheader-logo{display: inline-block;}
-.navimg-logo{ 
-   display: block;
-    margin: 0 auto;
+.nav-header-link{
+  padding-top: 15px;
 }
-
+.nav-ui a{
+  color: white;
+}
+.nav-ui a:hover{
+  color: red;
+}
+.nav-inlineblock li{
+  display: inline-block;
+  list-style-type: none;
+}
+.navright-btn{
+  padding-right: 10px; 
+}  
+.navleft-btn{
+  padding-left: 10px;
+}
+.center-brand{
+  text-align: center;
+  vertical-align: top;
+  display: inline-block;
+}
+/* if we bring log back
+.navheader-logo{display: inline-block;}
+.navimg-logo{
+   display: block;
+   margin: 0 auto;
+}
+*/
+/*MAIN-FOOTER NAVIGATION*/
 .map-ui{
   position: relative;
-  width: inherit;
-  height: 60px;
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  font-style: italic;
-  z-index: 900;
-  opacity: 0.3;
+  width: inherit;height: 60px;
   bottom: 0px;
+  background-color: #797F8F;
+  color: white;
+  z-index: 900;
   padding-top: 3px;
   font-size: 45px;
+  /*opacity: 0.3;*/
   text-align: center;
 }
 .map-ui-toggle{
@@ -99,13 +122,11 @@ a:hover, .nav a:hover{
   height: 50px;
   bottom: 60px;
   right: 10px;
-  background-color: black;
+  background-color: #797F8F;
   color: white;
-  font-weight: bold;
-  font-style: italic;
   z-index: 900;
-  opacity: 0.3;
   font-size: 45px;
+  /*opacity: 0.3;*/
   text-align: center;
 }
 .map-filter{
@@ -120,6 +141,12 @@ a:hover, .nav a:hover{
   opacity: 0.7; 
   font-size: 25px;
   padding-top: 15px;
+}
+.map-ui a, .map-ui-toggle a, .map-filter a{
+  color: white;
+}
+.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
+  color: #5FA77A;
 }
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
@@ -142,22 +169,10 @@ a:hover, .nav a:hover{
   list-style-type: none;
 }
 
-.map-ui-landing{
-  height: 60px;
-  background-color: #FFF;
-  color: white;
-  font-weight: bold;
-  font-size: 45px;
-  text-align: center;
-  margin-top: 60px;
-  padding-top: 4px;
-}
-
 /*The start of the middle section
 in between the header and footer */
-#main-content{
-  height:100%;width:100%;
- /* padding-bottom: 120px;*/
+.main-content{
+  padding-top: 60px;
 }
 
 /*----------= CALENDAR EVENTS PAGES=----------*/
@@ -170,6 +185,7 @@ in between the header and footer */
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   border-collapse: separate;
   z-index: 999;
+  padding-top: 60px;
 }
 .map-container{
   position: relative;
@@ -203,7 +219,7 @@ in between the header and footer */
 
 /*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
 .carousel-wrapper{
-  margin-top: 1px;
+  padding-top: 60px;
 }
 #home-carousel{
   margin-top: 0px;
@@ -358,12 +374,6 @@ padding: 0.3em 0.2em;
     width: 100%;
 }
 
-.map-ui a, .map-ui-toggle a{
-  color: white;
-}
-.map-ui a:hover, .map-ui-toggle a:hover{
-  color: red;
-}
 #eventmap{
     height: 100vh;
     width: 100%;
@@ -376,6 +386,7 @@ padding: 0.3em 0.2em;
 }
 
 .list-container{
+  padding-top: 60px;
   width: 80%;
   margin: 30px auto;
   overflow: hidden;
