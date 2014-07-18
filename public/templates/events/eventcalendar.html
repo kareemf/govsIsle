@@ -1,17 +1,59 @@
-<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-calendar/css/calendar.css">
-<div id="calendar-wrapper">
-	<div class="container">
-	    <div id="calendar"></div>
-	</div>
-</div>
-<div class="clear"></div>
-<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
-<script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
-<script type="text/javascript" src="bower_components/bootstrap-calendar/js/calendar.js"></script>
-<script type="text/javascript">
-    var calendar = $("#calendar").calendar(
-        {
-            tmpl_path: "bower_components/bootstrap-calendar/tmpls/",
-            events_source: function () { return []; }
-        });         
+<script>
+	$(document).ready(function() {
+
+		$('#calendar').fullCalendar({
+			theme: false,
+ 			eventBackgroundColor: "#DC143C",
+			header: {
+				left: 'prev,next  today  month,agendaWeek,agendaDay',
+				center: 'title',
+				right: ''
+			},
+			defaultDate: '2014-06-12',
+			editable: true,
+			events: [
+				{
+					title: 'All Day Event',
+					start: '2014-06-01'
+				},
+				{
+					title: 'Long Event',
+					start: '2014-06-07',
+					end: '2014-06-10'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2014-06-09T16:00:00'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2014-06-16T16:00:00'
+				},
+				{
+					title: 'Meeting',
+					start: '2014-06-12T10:30:00',
+					end: '2014-06-12T12:30:00'
+				},
+				{
+					title: 'Lunch',
+					start: '2014-06-12T12:00:00'
+				},
+				{
+					title: 'Birthday Party',
+					start: '2014-06-13T07:00:00'
+				},
+				{
+					title: 'Click for Google',
+					url: 'http://google.com/',
+					start: '2014-06-28'
+				}
+			]
+		});
+		
+	});
 </script>
+<div class="container">
+	<div id='calendar'></div>
+</div>

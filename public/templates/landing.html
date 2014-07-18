@@ -1,50 +1,91 @@
-<nav id="custom-nav" role="navigation">
-	<a ui-sref="/"><img ng-src="images/logo.png" alt="culture island" class="navimg-logo"></a><a class="navbar-brand" ui-sref="/" mean-token="'site-title'"></a>
+<nav id="nav-beta" role="navigation">
+	<!--<a ui-sref="/"><img ng-src="images/logo.png" alt="culture island" class="navimg-logo"></a><a class="navbar-brand" ui-sref="/" mean-token="'site-title'"></a>-->
+	<p>GOVERNORS ISLAND</p>
 </nav>
-
-<div class="carousel-wrapper col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	<div id="home-carousel" class="carousel slide" data-ride="carousel">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="#home-carousel" data-slide-to="0" class="active"></li>
-			<li data-target="#home-carousel" data-slide-to="1"></li>
-			<li data-target="#home-carousel" data-slide-to="2"></li>
-			<li data-target="#home-carousel" data-slide-to="3"></li>
-		</ol>
-		<!-- Wrapper for slides -->
-		<div class="carousel-inner">
-		    <div class="item active">
-		        <div class="img-container">
-		        	<img src="images/rsz_slide_0.jpg" alt="gov's island" class="img-custom img-reponsive">
-		        	 <div class="carousel-caption custom-caption"><h3>VISIT THE ISLAND</h3></div>
-		        </div>
-		    </div>
-		    <div class="item">
-		    	<div class="img-container">
-		      		<img src="images/rsz_slide_1.jpg" alt="gov's island" class="img-custom img-responsive">
-		      	</div>
-		    	<div class="carousel-caption custom-caption"><h3>PROGRAMS THIS WEEK</h3></div>
-		    </div>
-		    <div class="item">
-		    	<div class="img-container">
-		     		<img src="images/rsz_slide_2.jpg" alt="gov's island" class="img-custom img-responsive">
-		     	</div>
-		      	<div class="carousel-caption custom-caption"><h3>FERRY SCHEDULE</h3></div>
-		    </div>
-		    <div class="item">
-		    	<div class="img-container">
-		      		<img src="images/rsz_slide_3.jpg" alt="gov's island" class="img-custom img-responsive">
-		      	</div>
-		      	<div class="carousel-caption custom-caption"><h3>PERMITS</h3></div>
-		    </div>
-		</div><!--ENDING OF CAROUSEL-INNER nav-pills-->
-		<!-- Controls -->
-		<a data-target="#home-carousel" class="left carousel-control" role="button" data-slide="prev">
-		    <span class="glyphicon glyphicon-chevron-left"></span>
-		</a>
-		<a data-target="#home-carousel" class="right carousel-control" role="button" data-slide="next">
-		    <span class="glyphicon glyphicon-chevron-right"></span>
-		</a>
+<div class="container carousel-wrapper">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div id="main-carousel" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target=" #main-carousel" data-slide-to="0" class="active"></li>
+					<li data-target=" #main-carousel" data-slide-to="1"></li>
+					<li data-target=" #main-carousel" data-slide-to="2"></li>
+					<li data-target=" #main-carousel" data-slide-to="3"></li>
+				</ol>
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner">
+				    <div class="item active">
+			        	<img src="images/rsz_slide_0.jpg" alt="gov's island" class="img-custom-lg img-reponsive">
+			        	 <div class="carousel-caption  "><h3>VISIT THE ISLAND</h3><h4><a type="button" class="btn btn-custom">More ... </a></h4></div>
+				    </div>
+				    <div class="item">
+				      		<img src="images/rsz_slide_1.jpg" alt="gov's island" class="img-custom-lg img-responsive">
+				    	<div class="carousel-caption  "><h3>PROGRAMS THIS WEEK</h3><h4><a type="button" class="btn btn-custom">More ... </a></h4></div>
+				    </div>
+				    <div class="item">
+				     		<img src="images/rsz_slide_2.jpg" alt="gov's island" class="img-custom-lg img-responsive">
+				      	<div class="carousel-caption  "><h3>FERRY SCHEDULE</h3><h4><a type="button" class="btn btn-custom">More ... </a></h4></div>
+				    </div>
+				    <div class="item">
+				      		<img src="images/rsz_slide_3.jpg" alt="gov's island" class="img-custom-lg img-responsive">
+				      	<div class="carousel-caption  "><h3>PERMITS</h3><h4><a type="button" class="btn btn-custom">More ... </a></h4></div>
+				    </div>
+				</div><!--ENDING OF CAROUSEL-INNER nav-pills-->
+				<!-- Controls -->
+				<a data-target=" #main-carousel" class="left carousel-control" role="button" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				<a data-target=" #main-carousel" class="right carousel-control" role="button" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+			</div>
 	</div>
 </div>
-<div class="clear"></div>
+<div class="container">
+	<div class="img-collection">
+		<div id="carousel">
+			<section>
+				<div class="img-container-sm">
+					<a><img src="images/rsz_slide_1.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
+					<div class="img-cover information"><p>Discover</p></div>
+				</div>
+			</section>
+			<section>
+				<div class="img-container-sm">
+						<a><img src="images/rsz_slide_2.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
+						<div class="img-cover food-drink"><p>Enjoy</p></div>
+				</div>
+			</section>
+			<section>
+				<div class="img-container-sm">
+						<a><img src="images/rsz_slide_3.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
+						<div class="img-cover activities"><p>Eat</p></div>
+				</div>
+			</section>
+			<section>
+				<div class="img-container-sm">
+						<a><img src="images/rsz_slide_0.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
+						<div class="img-cover venues"><p>Learn</p></div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="js/jquery.carouFredSel-6.0.4-packed.js" ></script>
+<script type="text/javascript">
+	$(function() {
+		$('#carousel').carouFredSel({
+			responsive: true,
+			scroll: 1,
+			items: {
+				width: 300,
+				height: '100%',
+				visible: {
+					min: 2,
+					max: 5
+				}
+			}
+		});
+	});
+</script> 
+

@@ -1,18 +1,18 @@
 *{margin: 0px;padding: 0px;}
 html{
-    position: relative;
+  position: relative;
   min-height: 100%;
+}
+@font-face {
+    font-family: myFirstFont;
+    src: url(../font/DINEngschriftStd.otf);
 }
 body{
   height: 100%; width: 100%; 
   line-height: 1; 
-  background-color: #333; 
-  color: #FFF;
+  background-color: #E7E7E7; 
+  color: black;
   min-width: 250px;
-}
-body, h1,h2,h3,h4,h5,h6{
-  font-family: Helvetica, Arial, sans-serif;
-  line-height: 1px;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -30,22 +30,47 @@ a, a:link, a:hover, a:visited, a:active{
 a:hover, .nav a:hover{
   color: blue;
 }
-.col-xs-12{
-  width: 100%;
-  padding:0;
-  margin: 0;
+.clear{clear: both;}
+.shadow-effect{
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-collapse: separate;
+  z-index: 999;
 }
-.clear{
-  clear: both;
-}
+/*The site main colors*/
+.information{background-color: #ff9900;}
+.food-drink{background-color: #ff66cc;}
+.activities{background-color: #33cc66;}
+.venues{background-color: #000066}
+.facilities{background-color: #0099ff;}
+.history{background-color: #ccff33;}
 /*------============HEADER-STYLING AREA=========---------*/
 #custom-nav{
   height: 160px;
   background-color: #FFF;
   margin-top: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
-} 
-
+}
+#nav-beta{
+  height: 100px;
+  padding: 0px 0px 0px 0px;
+  background-color: #5FA77A;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-collapse: separate;
+  z-index: 999;
+  border-bottom: 1px solid #000;
+}
+#nav-beta p{
+  color: white;
+  font-size: 36px;
+  vertical-align: middle;
+  text-align: center;
+  padding-top: 38px;
+  font-family: myFirstFont;
+}
 .navbar{background-color: #FFFFFF;}
 .navheader-logo{display: inline-block;}
 .navimg-logo{ 
@@ -53,7 +78,61 @@ a:hover, .nav a:hover{
     margin: 0 auto;
 }
 
+.map-ui{
+  position: relative;
+  width: inherit;
+  height: 60px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  z-index: 900;
+  opacity: 0.3;
+  bottom: 0px;
+  padding-top: 3px;
+  font-size: 45px;
+  text-align: center;
+}
+.map-ui-toggle{
+  position: absolute;
+  width: 70px;
+  height: 50px;
+  bottom: 60px;
+  right: 10px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  z-index: 900;
+  opacity: 0.3;
+  font-size: 45px;
+  text-align: center;
+}
+.map-filter{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 10px;
+  left: 75px;
+  font-weight: bold;
+  font-style: italic;
+  z-index: 900;
+  opacity: 0.7; 
+  font-size: 25px;
+  padding-top: 15px;
+}
+
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
+@media screen and (max-width: 991px){
+  .col-xs-12{width: 100%;
+  padding:0;margin: 0;}
+  .container{
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px 0px 0px 0px;
+  }
+}
 @media screen and (max-width: 253px){
   #custom-nav{height: 55px;}
 }
@@ -61,17 +140,6 @@ a:hover, .nav a:hover{
 .nav-login li, .social-icon li{
   display: inline;
   list-style-type: none;
-}
-
-.nav-main{
-  margin-top: 25px;
-}
-.navmain-container{
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-
 }
 
 .map-ui-landing{
@@ -85,20 +153,58 @@ a:hover, .nav a:hover{
   padding-top: 4px;
 }
 
-/*-------====END OF HEADER STUFFF====------*/
-
-
 /*The start of the middle section
 in between the header and footer */
 #main-content{
-  height:100%;
-  width:100%;
+  height:100%;width:100%;
  /* padding-bottom: 120px;*/
 }
-/*------==END OF THE MAIN CONTENT==-----*/
 
-/*------===LANDING PAGE===-----*/
-/*---CAROUSEL-STYLING AREA---*/
+/*----------= CALENDAR EVENTS PAGES=----------*/
+#calendar{
+  width: auto;
+  margin: 0px 0px 0px 0px;
+  margin-bottom: 120px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-collapse: separate;
+  z-index: 999;
+}
+.map-container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 200px;
+  margin-top: 0px;
+  padding: 0;
+}
+.fc table {
+  background-color: #FFFFFF;
+}
+.fc-widget-header {  /* <td>, usually */
+  /*background-color: green;*/
+}
+.fc-header-left{
+  width: 100%;
+}
+@media screen and (max-width: 600px){
+  .fc-header{
+    height: 75px;
+  }
+  .fc-header-center {
+    position: absolute;
+    top: 30px;
+    left: 100px;
+    display: block;
+    text-align: center;
+  }
+}
+
+/*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
+.carousel-wrapper{
+  margin-top: 1px;
+}
 #home-carousel{
   margin-top: 0px;
 }
@@ -110,87 +216,79 @@ in between the header and footer */
     display: block;
     margin: 0 auto;
     width: 90%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    /*padding-top: 20px;
+    padding-bottom: 20px;*/
+}
+.img-custom-lg{
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    /*padding-top: 20px;
+    padding-bottom: 20px;*/
 }
 .custom-caption{
-  right: 5%;left: 5%;
+  right: 2%;left: 2%;
   background-color: black;
   color: white;
   font-weight: bold;font-style: italic;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  /*-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
         filter: alpha(opacity=50);
+  */
   opacity: 0.5;
 }
 .carousel-control{
   height: inherit;
 }
 
-.carousel-control.left, .carousel-control.right {
-    background-image: none
+.carousel-control.left, .carousel-control.right{
+    /*background-image: none;*/
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
 }
-/*----------=EVENTS PAGES=----------*/
-.mybar{
-  background-color: black;
+.btn-custom{
+  background-color: #5FA77A;
+}
+/*----------====SECOND CAROUSEL====-------*/
+#carousel{
+  text-align: center;
+}
+.img-collection{
+  margin-top: 25px;
+  box-shadow: 0 0 0px #aaa;
+}
+.img-container-sm{
+  position: relative;
+  width: 150px;height: 150px;
+  display: inline-block;
+  margin: 0 auto 0 auto;
+
+  border: none;
+  display: block;
+  float: center;
+  padding: 0px 0px 0px 0px;
+}
+.img-custom-sm{
+  vertical-align: middle;
+}
+.img-cover{
+  position: absolute;
+  top: 0;
+  height: 77px;
+  width: 150px;
+  opacity: .5;
 }
 
-.map-container{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  min-width: 200px;
-  margin-top: 0px;
-  padding: 0;
+.img-collection section{
+  display: inline-block;
 }
-.map-ui{
-  position: absolute;
-  width: inherit;
-  height: 60px;
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  font-style: italic;
-  z-index: 20;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-        filter: alpha(opacity=50);
-   opacity: 0.3;
-   bottom: 0px;
-   padding-top: 3px;
-   font-size: 45px;
-   text-align: center;
-}
-.map-ui-toggle{
-  position: absolute;
-  width: 70px;
-  height: 50px;
-  bottom: 60px;
-  right: 10px;
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  font-style: italic;
-  z-index: 20;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-        filter: alpha(opacity=50);
-   opacity: 0.3;
-   font-size: 45px;
-   text-align: center;
-}
-.map-filter{
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 10px;
-  left: 75px;
-  font-weight: bold;
-  font-style: italic;
-  z-index: 20;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-        filter: alpha(opacity=70);
-   opacity: 0.7;
-   
-   font-size: 25px;
-   padding-top: 15px;
+.img-cover p{
+  color: #FFF;
+  font-size: 36px;
+  vertical-align: middle;
+  text-align: center;
+  font-family: myFirstFont;
+  padding-top: 25px;
 }
 /*---======SHAPES=====----*/
 .circle{
@@ -259,7 +357,6 @@ padding: 0.3em 0.2em;
     height: 100px;
     width: 100%;
 }
-/*-------END---OF----MAPS---------------*/
 
 .map-ui a, .map-ui-toggle a{
   color: white;
@@ -270,13 +367,8 @@ padding: 0.3em 0.2em;
 #eventmap{
     height: 100vh;
     width: 100%;
-
 }
 
-/*----------=Calendar PAGES=----------*/
-#calendar{
-  background-color: grey;
-}
 
 /*----------=LIST VIEW=-------------*/
 .largeTitle {
@@ -411,3 +503,6 @@ only screen and (max-device-width : 320px){
 	
 	width:100%;
 }
+=======
+/*-----------end of List View--------------*/
+

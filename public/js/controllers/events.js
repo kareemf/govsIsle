@@ -212,9 +212,10 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
 
 controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','Shared', function($scope, $state, $stateParams, Events, Shared){
     console.log('in EventListController');
-    var view = $stateParams.view;
-    view = view ? view : 'map';
+    //var view = $stateParams.view;
+    //view = view ? view : 'map';
     //$state.go("events."+ view);
+    
     $scope.mybutton=true;
     $scope.uiup=true;
     $scope.headerview=true;
