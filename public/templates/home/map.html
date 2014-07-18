@@ -1,8 +1,8 @@
 <section class="event-map" ng-controller="MapController" >
 
     <!-- render map. ui-map will be the name of scope property -->
-    <div class="container">
-    	<div ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="map-canvas"></div>
+    <div class="map-container">
+    	<div id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="map-canvas"></div>
 	</div>
     <div ng-controller="MarkerListController">
         <div class="map-filter ">
