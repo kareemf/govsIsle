@@ -1,0 +1,12 @@
+{
+  "name": "map tailer 2",
+  "version": "1.0.0",
+  "description": "",
+  "type": "overlay",
+  "format": "png",
+  "minzoom": "14",
+  "maxzoom": "19",
+  "bounds": "-74.02701930,40.68218334,-74.00876434,40.69568850",
+  "scale": "1",
+  "profile": "mercator"
+}

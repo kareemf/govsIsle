@@ -210,6 +210,25 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
     }
 }]);
 
-controllers.controller('EventListController', ['$scope', 'Events', function($scope, Events){
+controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','Shared', function($scope, $state, $stateParams, Events, Shared){
     console.log('in EventListController');
+    var view = $stateParams.view;
+    view = view ? view : 'map';
+    //$state.go("events."+ view);
+    $scope.mybutton=true;
+    $scope.uiup=true;
+    $scope.headerview=true;
+    $scope.listormap=true;
+    /*playing with maps*/
+    $scope.mapOptions = {
+        center: new google.maps.LatLng(40.6880492, -74.0188415),
+        streetViewControl: true,
+        panControl: true,
+        zoom: 15,
+        maxZoom: 20,
+        minZoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
 }]);
+
+

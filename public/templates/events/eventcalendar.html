@@ -1,0 +1,17 @@
+<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-calendar/css/calendar.css">
+<div id="calendar-wrapper">
+	<div class="container">
+	    <div id="calendar"></div>
+	</div>
+</div>
+<div class="clear"></div>
+<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+<script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap-calendar/js/calendar.js"></script>
+<script type="text/javascript">
+    var calendar = $("#calendar").calendar(
+        {
+            tmpl_path: "bower_components/bootstrap-calendar/tmpls/",
+            events_source: function () { return []; }
+        });         
+</script>

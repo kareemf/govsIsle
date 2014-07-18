@@ -43,7 +43,7 @@ exports.permissions = {
     }
 };
 
-exports.fieldPermissions = _.memoize(function(Schema){
+exports.fieldPermissions = function(Schema){
     var permissions = {};
 
     for (var field in Schema.schema.paths) {
@@ -55,13 +55,13 @@ exports.fieldPermissions = _.memoize(function(Schema){
         permissions[field] = {
             'read': 'read-' + field,
             'update': 'update-' + field,
-        }
+        };
 
-        console.log('creating field permissions', permissions[field]);
+        //console.log('creating', Schema.modelName ,'field permissions', permissions[field]);
     };
 
     return permissions;
-});
+};
 
 exports.permissionsGrantedOnCreation = function(Schema, _cantTouch){
     var grant = [Schema.readPermission(), Schema.updatePermission()];

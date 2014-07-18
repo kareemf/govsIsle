@@ -11,6 +11,13 @@ var app = angular.module('app', [
     'ui.map']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    //Lading page routes
+    $stateProvider
+        .state('/', {
+            url: '/',
+            templateUrl: 'templates/landing.html'
+        })
+
     //Home routes
     $stateProvider
         .state('home', {
@@ -66,15 +73,25 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     // Event routes
     $stateProvider
         .state('events', {
-            url: '/events',
-            templateUrl: '/templates/events/events.html',
-
+            url: '/events?view',
+            templateUrl: 'templates/events/events.html',
+        })
+        .state('events.map',{
+            url: '/map',
+            templateUrl: 'templates/map/maplist.html'
+        })
+        .state('events.list',{
+            url: '/list',
+            templateUrl: 'templates/events/eventlist.html'
+        })
+        .state('events.calendar',{
+            url: '/calendar',
+            templateUrl: 'templates/events/eventcalendar.html'
         })
         .state('events.detail', {
             url: '/:slug',
-            templateUrl: '/templates/events/event.html',
+            templateUrl: 'templates/events/event.html',
         });
-
     $urlRouterProvider.otherwise('/home');
 
 }])
