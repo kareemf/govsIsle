@@ -110,9 +110,16 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         return marker;
     };
 
+    var clearMarkers = function(markers){
+        markers.forEach(function(marker){
+            marker.setMap(null);
+        });
+    }
+
     // TODO: filters are case sensitive
     var getContentByFilters = function(filters){
         console.log('getContentByFilters', filters);
+        clearMarkers($scope.existingMarkers);
         $scope.existingMarkers = [];
 
         if(filters.indexOf('event') >= 0){
@@ -170,17 +177,18 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             }
         }
         else{
-        for (var i = filters.length - 1; i >= 0; i--) {
-            var filter = filters[i];
-            if(scopeFilters.indexOf(filter) >= 0){
-                scopeFilters = scopeFilters.filter(function(f){
-                    return f != filter
-                });
-            }
-            else{
-                scopeFilters.push(filter);
-            }
-        };
+            for (var i = filters.length - 1; i >= 0; i--) {
+                var filter = filters[i];
+                if(scopeFilters.indexOf(filter) >= 0){
+                    scopeFilters = scopeFilters.filter(function(f){
+                        return f != filter
+                    });
+                }
+                else{
+                    scopeFilters.push(filter);
+                }
+            };
+        }
 
         $scope.filters = scopeFilters;
         console.log('scopeFilters', scopeFilters);
