@@ -1,0 +1,16 @@
+
+
+<div id="allTours" ng-controller="ToursController">
+	<div id="tourImage">
+	</div>
+	<ul id="tourlist"> 
+		<li data-ng-repeat="tour in allTours">
+			<a ui-sref="tourlist({ id: tour.id })">
+				<img src="{{getImageSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
+				<div class="caption">
+					<h5>{{tour.tourName}}</h5>
+				</div>
+			</a>
+		</li>
+	</ul>
+</div>

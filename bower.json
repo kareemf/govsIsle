@@ -14,5 +14,19 @@
     "angular-ui-map": "~0.5.0",
     "fontawesome": "~4.1.0",
     "jquery": "~2.1.1"
-  }
+  },
+  "homepage": "https://github.com/kareemf/govsIsle",
+  "authors": [
+    "mcgawb <brian@occurrentarts.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ]
 }

@@ -9,8 +9,10 @@ var app = angular.module('app', [
     'ngResource',
     'ui.router',
     'ui.map']);
+	
 
-app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+
+app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', function($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
     //Lading page routes
     $stateProvider
         .state('/', {
@@ -92,6 +94,30 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             url: '/:slug',
             templateUrl: 'templates/events/event.html',
         });
+		
+	$stateProvider
+	        .state('tours', {
+	            url: '/tours',
+	            templateUrl: 'templates/tours/tours.html',
+	        });
+	
+	$stateProvider
+			.state('tourlist',{
+			    url: '/tourlist/{id}',
+			    templateUrl: 'templates/tours/tour.html'
+			});	
+					
+	$stateProvider
+			.state('tourpoint', {
+				url: '/tourpoint/{id}',
+				templateUrl: 'templates/tours/tourpoint.html',
+			});	
+	
+	
     $urlRouterProvider.otherwise('/home');
+		
+	$sceDelegateProvider.resourceUrlWhitelist([
+				   'self',
+				   'http://www.entangledspace.com/**']);
 
 }])
