@@ -96,7 +96,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     $scope.newMarkers = [];
     $scope.existingMarkers = [];
     $scope.filters = [];
-
+    var allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event'];
 
     var createMarker = function(content, map){
         var position = new google.maps.LatLng(content.geoLocation[0], content.geoLocation[1]);
@@ -159,6 +159,17 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             filters = [oneOrMoreFilters];
         }
 
+        if(filters.indexOf('all') >= 0){
+            if(scopeFilters.length){
+                //turn all filters off
+                scopeFilters = [];
+            }
+            else{
+                //turn all filters on
+                scopeFilters = allFilters;
+            }
+        }
+        else{
         for (var i = filters.length - 1; i >= 0; i--) {
             var filter = filters[i];
             if(scopeFilters.indexOf(filter) >= 0){
@@ -178,12 +189,12 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     $scope.$watch('filters', function(newVal, oldVal){
         console.log('$scope.$watch filters triggered', newVal, oldVal);
         if(newVal == oldVal){
-            return;
+            // return;
         }
         getContentByFilters($scope.filters);
     }, true);
 
-    // $scope.toggleFilter(['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event']);
+    $scope.toggleFilter('all');
 
 
 
