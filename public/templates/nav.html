@@ -1,13 +1,14 @@
 <div class="navbar-fixed-bottom navmain" ng-controller="NavController">
     <div class="map-ui" ng-show="headerview">
         <ul class="nav-login">
-            <li><a ng-hide="isHome" ng-click="isHome=true" ui-sref="/"><span class="glyphicon glyphicon-home"></span></a></li>
-            <li><a ng-show="isHome" ng-click="isHome=false" ui-sref="about"><span class="glyphicon glyphicon-info-sign"></span></a></li>
-            <li><a ui-sref="ferry"><span class="glyphicon glyphicon-plane"></span></a></li>
-            <li><a ui-sref="events.map" ng-show="listormap" ng-click="listormap=false"><span class="glyphicon glyphicon-map-marker"></span></a></li>
-            <li><a ui-sref="events.list" ng-hide="listormap" ng-click="listormap=true"><span class="glyphicon glyphicon-list"></span></a></li>
-            <li><a><span class="glyphicon glyphicon-headphones"></span></a></li>
-            <li><a ui-sref="events.calendar"><span class="glyphicon glyphicon-calendar"></span></a></li>
+            <!--<li><a ng-click="showNav()" ui-sref="/"><span class="glyphicon glyphicon-home"></span></a></li>-->
+            <!--<li><a ng-click="showNav()" ui-sref="ferry"><span class="glyphicon glyphicon-plane"></span></a></li>-->
+            <li><a ng-click="showNav()" ui-sref="ferry"><img class="navimg-icon" ng-src="images/ferry_off.png"/></a></li>
+
+            <li><a ng-click="showNav();listormap=false" ui-sref="events.map" ng-show="listormap"><span class="glyphicon glyphicon-map-marker"></span></a></li>
+            <li><a ng-click="showNav();listormap=true" ui-sref="events.list" ng-hide="listormap"><span class="glyphicon glyphicon-list"></span></a></li>
+            <li><a ng-click="showNav()"><span class="glyphicon glyphicon-headphones"></span></a></li>
+            <li><a ng-click="showNav()" ui-sref="events.calendar"><span class="glyphicon glyphicon-calendar"></span></a></li>
         </ul>
     </div>
     <div class="map-ui-toggle">

@@ -13,6 +13,8 @@ body{
   background-color: #E7E7E7; 
   color: black;
   min-width: 250px;
+  font-family: myFirstFont;
+  font-size: 16px;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -24,20 +26,24 @@ a{
   padding: 0;
   color: black;
 }
+/* old gov colors #4099FF #3B5998 #019AD5*/
 a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
 }
 a:hover, .nav a:hover{
-  color: blue;
+  color: #4099FF;
 }
-.clear{clear: both;}
-.shadow-effect{
+.cleartop{clear: top;}
+.clearboth{clear: both;}
+.header-shadow{
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  border-collapse: separate;
-  z-index: 999;
 }
+.navSpacingFix{
+  margin-top: 85px;
+}
+.gov-size{font-size: 32px;}
 /*The site main colors*/
 .information{background-color: #ff9900;}
 .food-drink{background-color: #ff66cc;}
@@ -49,9 +55,6 @@ a:hover, .nav a:hover{
 #nav-beta{
   padding: 0px 0px 0px 0px;
   background-color: #5FA77A;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   border-collapse: separate;
   z-index: 999;
   border-bottom: 1px solid #E7E7E7;
@@ -79,7 +82,7 @@ a:hover, .nav a:hover{
   color: white;
 }
 .nav-ui a:hover{
-  color: red;
+  color: #4099FF;
 }
 .nav-inlineblock li{
   display: inline-block;
@@ -146,7 +149,7 @@ a:hover, .nav a:hover{
   color: white;
 }
 .map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
-  color: #5FA77A;
+  color: #4099FF;
 }
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
@@ -172,9 +175,11 @@ a:hover, .nav a:hover{
 /*The start of the middle section
 in between the header and footer */
 .main-content{
-  padding-top: 60px;
+  margin-top: 61px;
 }
-
+.main-footer{
+  margin-bottom: 60px; /*lower navigation bar*/
+}
 /*----------= CALENDAR EVENTS PAGES=----------*/
 #calendar{
   width: auto;
@@ -185,7 +190,6 @@ in between the header and footer */
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   border-collapse: separate;
   z-index: 999;
-  padding-top: 60px;
 }
 .map-container{
   position: relative;
@@ -219,7 +223,6 @@ in between the header and footer */
 
 /*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
 .carousel-wrapper{
-  padding-top: 60px;
 }
 #home-carousel{
   margin-top: 0px;
@@ -354,7 +357,7 @@ background: black;
 color: #FFFFFF;
 padding: 0.3em 0.2em;
 }
-/*#4099FF #3B5998 #019AD5(gov)*/
+
 .fa-wordpress{
   background-color: black;
   color: #FFFFFF;
@@ -386,7 +389,6 @@ padding: 0.3em 0.2em;
 }
 
 .list-container{
-  padding-top: 60px;
   width: 80%;
   margin: 30px auto;
   overflow: hidden;
@@ -434,3 +436,67 @@ only screen and (max-device-width : 320px){
     .gridItem p, {font-size: 18px;}
 }
 /*-----------end of List View--------------*/
+
+/* -------====FERRY SCHEDULE==--------- */
+.info-banner{
+  padding: 0px 0px 0px 0px;
+  height: 50px;
+  width: 100%;
+  background-color: #FFF;
+  text-align: center;
+}
+.info-banner h3, .info-banner h4{
+  padding-top: 15px;
+}
+.btn-brooklyn, .btn-manhattan{
+  display: inline-block;
+  text-align: center;
+  vertical-align: center;
+  height: 50px;
+  padding-top: 13px;
+  background-color: #454953;
+
+}
+.btn-brooklyn{
+  width: 50%;
+  float: right;
+}
+.btn-manhattan{
+  width: 50%;
+  float: left;
+}
+.btn-brooklyn a, .btn-manhattan a{
+  color: #FFF;
+}
+.btn-bk-mh{
+  margin: 0px;
+  display: block;
+  margin-top: 35px;
+}
+p.lead a{
+  color: blue;
+}
+/*ICONS*/
+.navimg-icon{
+  height: 55px;
+  width: 55px;
+  padding-bottom: 15px;
+}
+/*SITE STAPLES/GLOBAL SYLING*/ 
+.activebtn{background-color: #5FA77A; color: #FFF;}
+.dangere{background-color: #FF0101;}
+.coole{background-color: #4099FF;}
+.lead{padding-right: 5px; padding-left: 5px;}
+.text-indent{text-indent: 5%;}
+/*SPRITES*/
+.ferry-off, .ferry-on, .headphones-off, .headphones-on, .calendar-off, 
+.calendar-on, .map-pin-off, .map-pin-on
+{ display: inline-block; background: url('../images/navicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+.ferry-off { background-position: -0px -0px; width: 131px; height: 91px; }
+.ferry-on { background-position: -0px -91px; width: 131px; height: 90px;}
+.headphones-off { background-position: -0px -182px; width: 115px; height: 96px; }
+.headphones-on { background-position: -0px -278px; width: 115px; height: 96px; }
+.calendar-off { background-position: -0px -374px; width: 105px; height: 96px; }
+.calendar-on { background-position: -0px -470px; width: 105px; height: 96px; }
+.map-pin-off { background-position: -0px -566px; width: 60px; height: 96px; }
+.map-pin-on { background-position: -60px -566px; width: 60px; height: 96px; }
