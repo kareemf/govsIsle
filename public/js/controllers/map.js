@@ -136,7 +136,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                 return f != 'tour'
             });
         }
-        if(filters){
+        if(filters && filters.length){
             Amenities.query({filter: filters}, function(amenities){
                 console.log('amenities', amenities);
                 amenities.forEach(function(activity){
