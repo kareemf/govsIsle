@@ -13,12 +13,12 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner">
 					    <div class="item active">
-				        	<img src="{{getImageSrc(allTours[0].imageLoc)}}" alt="gov's island" class="img-custom-lg img-reponsive">
-				        	 <div class="carousel-caption  "><h3>HEAR HOW IT BEGAN</h3></div>
+				        	<img src="{{getImageSrc(myTours[1].imageLoc)}}" alt="gov's island" class="img-custom-lg img-reponsive">
+				        	 <div class="carousel-caption  "><h3>EVENTS ON THE ISLAND</h3></div>
 					    </div>
 					    <div class="item">
-					      		<img src="images/rsz_slide_1.jpg" alt="gov's island" class="img-custom-lg img-responsive">
-					    	<div class="carousel-caption  "><h3>WHATS HAPPENING NOW?</h3></div>
+					      		<img src="{{getImageSrc(myTours[0].imageLoc)}}" alt="gov's island" class="img-custom-lg img-responsive">
+					    	<div class="carousel-caption  "><h3>PAST, PRESENT, FUTURE</h3></div>
 					    </div>
 					</div><!--ENDING OF CAROUSEL-INNER nav-pills-->
 
@@ -37,8 +37,8 @@
 		
 	</div>
 	<h3 id="curatedLabel">CURATED TOURS</h3>
-	<ul id="tourlist"> 
-		<li data-ng-repeat="tour in allTours">
+	<ul id="curatedlist" class="tourlist"> 
+		<li data-ng-repeat="tour in myTours">
 			<a ui-sref="tourlist({ id: tour.id })">
 				<img src="{{getImageSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
 				<div class="caption">
@@ -48,7 +48,7 @@
 		</li>
 	</ul>
 	<h3 id="artistLabel">ARTIST CONTRIBUTORS</h3>
-	<ul id="tourlist"> 
+	<ul id="artistlist" class="tourlist"> 
 		<li data-ng-repeat="tour in allTours">
 			<a ui-sref="tourlist({ id: tour.id })">
 				<img src="{{getImageSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
