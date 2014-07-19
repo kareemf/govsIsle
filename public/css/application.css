@@ -4,8 +4,12 @@ html{
   min-height: 100%;
 }
 @font-face {
-  font-family: myFirstFont;
+  font-family: myFirstFont sans-serif;
 	src: url(../font/dinregularwebfont.ttf);
+}
+@font-face {
+    font-family: govsle;
+    src: url(../font/DINEngschriftStd.otf);
 }
 body{
   height: 100%; width: 100%; 
@@ -41,7 +45,7 @@ a:hover, .nav a:hover{color: #4099FF;}
 .navSpacingFix{
   margin-top: 85px;
 }
-.gov-size{font-size: 24px;}
+.gov-size{font-size: 32px;font-family: govsle;}
 /*The site main colors*/
 .information{background-color: #ff9900;}
 .food-drink{background-color: #ff66cc;}
@@ -69,10 +73,10 @@ a:hover, .nav a:hover{color: #4099FF;}
 }
 .nav-gov-brand{
   color: white;
-  font-size: 24px;
+  font-size: 32px;
   vertical-align: middle;
   text-align: center;
-  font-family: myFirstFont;
+  font-family: govsle;
   line-height: 32px;
   padding-top: 3px;
 }
@@ -696,7 +700,7 @@ only screen and (max-device-width : 320px){
   text-align: center;
 }
 .info-banner h3, .info-banner h4{
-  padding-top: 15px;
+  padding-top: 12px;
 }
 .info-banner-space{
   margin-bottom: 10px;
