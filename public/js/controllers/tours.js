@@ -2,7 +2,6 @@
 
 var controllers = angular.module('app.controllers');
 
-
 controllers.controller('ToursController', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http){
     	console.log('in TourController');
 		
@@ -31,7 +30,7 @@ controllers.controller('TourpointDetailController', ['$scope', '$stateParams', '
 	};
 	
    $scope.playing = false;
-   $scope.audio = document.createElement('audio');
+   $scope.audio = document.getElementById('audioPlayer');
 	
    $scope.play = function() {
 	    $scope.audio.play();
@@ -67,7 +66,7 @@ controllers.controller('TourListController', ['$scope', '$stateParams', '$http',
     console.log('in TourListController');
 	
     $scope.playing = false;
-    $scope.audio = document.createElement('audio');
+    $scope.audio = document.getElementById('audioPlayer');
 	
     $scope.play = function() {
  	    $scope.audio.play();

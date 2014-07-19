@@ -5,11 +5,10 @@ html{
 }
 @font-face {
     font-family: myFirstFont;
-    src: url(../font/DINEngschriftStd.otf);
+	src: url(../font/dinregularwebfont.ttf);
 }
 body{
   height: 100%; width: 100%; 
-  line-height: 1; 
   background-color: #E7E7E7; 
   color: black;
   min-width: 250px;
@@ -432,7 +431,7 @@ only screen and (max-device-width : 320px){
 
 
 
-/*----------=TOUR VIEW=-------------*/
+/*----------=ALL TOURS VIEW=-------------*/
 
 #allTours {
 	background: #ffffff;
@@ -474,9 +473,9 @@ only screen and (max-device-width : 320px){
 	
 	float:right;
 	width:37px;
-	right:15px;
+	right:10px;
 	margin-left:auto;
-	bottom: 7px;
+	bottom: 4px;
 }
 
 #allTours #main-carousel .carousel-caption {
@@ -488,14 +487,14 @@ only screen and (max-device-width : 320px){
 	margin-right:200;
 	display:inline;
 	left:0;right:0;
-	width:268px;
+	width:290px;
 	height:50px;
 	
 }
 
 #allTours #main-carousel .carousel-caption h3 {
 	
-	font-size:24px !important;
+	font-size:21px !important;
 	
 }
 
@@ -508,7 +507,6 @@ only screen and (max-device-width : 320px){
 	top:-50px;
 	
 }
-
 
 
 #tourlist {
@@ -549,23 +547,59 @@ only screen and (max-device-width : 320px){
 	
 }
 
-#pointlist {
+/*----------=SINGLE TOUR VIEW=-------------*/
+
+#tourPoints #tourInfo h3 {
+	
+	padding-left:10px;
+	margin-top:10px;
+	font-size:24px;
+	
+}
+
+#tourPoints #tourInfo p {
+	
+	padding-left:10px;
+	margin-top:10px;
+	font-size:18px;
+	
+}
+
+#tourPoints #pointlist {
 	
 	height: 100%;
 
 }
 
-#pointlist li{
+#tourPoints #pointlist li{
 	
 	padding: 5px;
 	padding-left: 15px;
 	border-top:solid 2px gray;
+	height: 50px;
 	
 }
 
-#pointlist .audioPlayer {
+#tourPoints #pointlist .caption{
+	
+	position:relative;
+	top:-10px;
+	
+}
+
+#tourPoints #pointlist li h5{
+	
+	font-size: 20px;
+	display:inline;
+	width:100%;
+}
+
+#tourPoints #pointlist img {
 	
 	float:right;
+	display:inline;
+	position:relative;
+	top:-10px;
 }
 
 #point {
@@ -577,7 +611,7 @@ only screen and (max-device-width : 320px){
 	
 }
 
-#pointInfo {
+#point #pointInfo {
 	
 	text-align:left;
 	padding-left: 25px;
@@ -588,24 +622,41 @@ only screen and (max-device-width : 320px){
 	
 }
 
-#pointInfo h3{
+#point #pointInfo h3{
 	
 	padding-bottom: 10px;
 	border-bottom: solid 2px gray;
 	
 }
 
-#pointImg {
+#point #pointImg {
 	
 	height: 200px;
 	overflow:hidden;
-	
+	margin:0;
 }
 
-#pointImg img{
+#point #pointImg img{
 	
 	width:100%;
 }
+
+#point .audioPlayer button{
+	
+	background: transparent;
+	border: none;
+	position:relative;
+	top:-170px
+	
+}
+
+#point .audioPlayer {
+	
+	height:0;
+	
+}
+
+  
 
 #tourpoints {
 	

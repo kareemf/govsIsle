@@ -4,8 +4,8 @@
 		<img src="{{getImageSrc(tourpoint.imageLoc)}}">
 	</div>
 	<div class="audioPlayer">
-		<button ng-click="play()" class="button" ng-show="!playing">Play</button>
-		<button ng-click="stop()" class="button alert" ng-show="playing">Stop</button>
+		<button ng-click="play()" class="button" ng-show="!playing"><img src="../images/detail_play.png"></button>
+		<button ng-click="stop()" class="button" ng-show="playing"><img src="../images/detail_pause.png"></button>
 	</div>
 	<div id="pointInfo">
 		<h3>{{tourpoint.postName}}</h3>

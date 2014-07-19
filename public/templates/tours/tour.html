@@ -4,16 +4,16 @@
 	</div>
 	<div id="tourInfo">
 		<h3>{{tour.tourName}}</h3>
+		<p>{{tour.description}}</p>
 	</div>
 	<ul id="pointlist">
 		<li data-ng-repeat="point in tourpoints">
+				<a ui-sref="tourpoint({ id: point.id })">
 				<div class="caption">
-					<a ui-sref="tourpoint({ id: point.id })"><h5>{{$index + 1}} : {{point.postName}}</h5></a>
-					<div class="audioPlayer">
-						<button ng-click="play(point.id)" class="button" ng-show="!playing">Play</button>
-						<button ng-click="stop(point.id)" class="button alert" ng-show="playing">Stop</button>
-					</div>
+					<h5>{{$index + 1}} : {{point.postName}}</h5>
+					<img src="../images/play.png" width="40px" height="40px">
 				</div>
+				</a>
 			</a>
 		</li>
 	</ul>

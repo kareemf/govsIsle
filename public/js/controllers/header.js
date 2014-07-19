@@ -33,6 +33,6 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
                 user: $rootScope.user
             };
         });
-
+		
     }
 ]);
