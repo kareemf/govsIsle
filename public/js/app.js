@@ -78,7 +78,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         })
         .state('events.map',{
             url: '/map',
-            templateUrl: 'templates/events/eventmap.html'
+            templateUrl: 'templates/map/maplist.html'
         })
         .state('events.list',{
             url: '/list',

@@ -253,7 +253,7 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
         maxZoom: 20,
         minZoom: 14,
         mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
+    };
 }]);
 
 

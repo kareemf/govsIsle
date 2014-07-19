@@ -30,7 +30,8 @@ module.exports = function(Model){
 
             var callback = function(err, doc) {
                 if (err) {return next(err);}
-                if (!doc) {return next(new Error('Failed to load doc ' + id));}
+                if (!doc) {
+                    return next(new Error('Failed to load doc ' + id + 'for model ' + modelName));}
 
                 var permissions = permissionsManager.ascertainPermissions(req.user, doc);
                 if(!_.contains(permissions, Model.readPermission())){
