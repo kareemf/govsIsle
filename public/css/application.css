@@ -15,6 +15,7 @@ body{
   min-width: 250px;
   font-family: myFirstFont;
   font-size: 16px;
+  line-height: 1px;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -30,9 +31,7 @@ a{
 a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
 }
-a:hover, .nav a:hover{
-  color: #4099FF;
-}
+a:hover, .nav a:hover{color: #4099FF;}
 .cleartop{clear: top;}
 .clearboth{clear: both;}
 .header-shadow{
@@ -51,6 +50,7 @@ a:hover, .nav a:hover{
 .venues{background-color: #000066}
 .facilities{background-color: #0099ff;}
 .history{background-color: #ccff33;}
+
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
   padding: 0px 0px 0px 0px;
@@ -74,6 +74,8 @@ a:hover, .nav a:hover{
   vertical-align: middle;
   text-align: center;
   font-family: myFirstFont;
+  line-height: 32px;
+  padding-top: 3px;
 }
 .nav-header-link{
   padding-top: 15px;
@@ -81,8 +83,8 @@ a:hover, .nav a:hover{
 .nav-ui a{
   color: white;
 }
-.nav-ui a:hover{
-  color: #4099FF;
+.nav-ui a:hover, .nav-ui a:active{
+  color: black;
 }
 .nav-inlineblock li{
   display: inline-block;
@@ -98,6 +100,10 @@ a:hover, .nav a:hover{
   text-align: center;
   vertical-align: top;
   display: inline-block;
+}
+.nav-icon{
+  padding-right: 15px;
+  padding-left: 15px;
 }
 /* if we bring log back
 .navheader-logo{display: inline-block;}
@@ -149,7 +155,7 @@ a:hover, .nav a:hover{
   color: white;
 }
 .map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
-  color: #4099FF;
+  color: #5FA77A;
 }
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
@@ -167,8 +173,8 @@ a:hover, .nav a:hover{
   #custom-nav{height: 55px;}
 }
 
-.nav-login li, .social-icon li{
-  display: inline;
+.nav-login li{
+  display: inline-block;
   list-style-type: none;
 }
 
@@ -222,8 +228,7 @@ in between the header and footer */
 }
 
 /*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
-.carousel-wrapper{
-}
+.carousel-wrapper{}
 #home-carousel{
   margin-top: 0px;
 }
@@ -281,7 +286,6 @@ in between the header and footer */
   width: 150px;height: 150px;
   display: inline-block;
   margin: 0 auto 0 auto;
-
   border: none;
   display: block;
   float: center;
@@ -296,6 +300,7 @@ in between the header and footer */
   height: 77px;
   width: 150px;
   opacity: .5;
+  padding-top: 15px;
 }
 
 .img-collection section{
@@ -438,6 +443,7 @@ only screen and (max-device-width : 320px){
 /*-----------end of List View--------------*/
 
 /* -------====FERRY SCHEDULE==--------- */
+/*-----======And Detain view-----------*/
 .info-banner{
   padding: 0px 0px 0px 0px;
   height: 50px;
@@ -448,14 +454,17 @@ only screen and (max-device-width : 320px){
 .info-banner h3, .info-banner h4{
   padding-top: 15px;
 }
+.info-banner-space{
+  margin-bottom: 10px;
+}
 .btn-brooklyn, .btn-manhattan{
   display: inline-block;
   text-align: center;
   vertical-align: center;
   height: 50px;
-  padding-top: 13px;
+  line-height: 50px;
   background-color: #454953;
-
+  padding-top: 3px;
 }
 .btn-brooklyn{
   width: 50%;
@@ -468,13 +477,15 @@ only screen and (max-device-width : 320px){
 .btn-brooklyn a, .btn-manhattan a{
   color: #FFF;
 }
-.btn-bk-mh{
-  margin: 0px;
-  display: block;
-  margin-top: 35px;
-}
+.btn-bk-mh{ margin-top: 50px;}
 p.lead a{
   color: blue;
+}
+
+/*detail view image*/
+.info-img{
+  height: 250%;
+  width: 100%;
 }
 /*ICONS*/
 .navimg-icon{
@@ -482,6 +493,7 @@ p.lead a{
   width: 55px;
   padding-bottom: 15px;
 }
+/* -------====FERRY SCHEDULE END==--------- */
 /*SITE STAPLES/GLOBAL SYLING*/ 
 .activebtn{background-color: #5FA77A; color: #FFF;}
 .dangere{background-color: #FF0101;}

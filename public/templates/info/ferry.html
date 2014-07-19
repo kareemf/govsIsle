@@ -6,8 +6,7 @@
 		<a ng-click='tab=1'><div ng-class="{activebtn:tab===1}" class="btn-manhattan gov-size">MANHATTAN</div></a>
 		<a ng-click='tab=2'><div ng-class="{activebtn:tab===2}" class="btn-brooklyn gov-size">BROOKLYN</div></a>
 	</section><br/>
-	<div class="btn-bk-mh"></div>
-
+	<div class="btn-bk-mh"></div><!--clearing-->
 	<section ng-show="tab===1"><!--manhattan-->
 		<div class="info-banner header-shadow">
 			<h3>MONDDAY - FRIDAY</h3>
@@ -16,7 +15,7 @@
 			<thead>
 				<tr>
 					<th class=" coole text-center">Departs Manhattan</th>
-					<th class="coole text-center">Departs<br>Governors Island</th>
+					<th class="coole text-center">Departs<br/>Governors Island</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,7 +33,7 @@
 				</tr>
 				<tr>
 					<td class="dangere">4:00 PM Last Boat*</td>
-					<td>5:00 pm</td>
+					<td>5:00 PM*</td>
 				</tr>
 				<tr>
 					<td></td>
@@ -55,7 +54,7 @@
 			<thead>
 				<tr>
 					<th class=" coole text-center">Departs Manhattan</th>
-					<th class="coole text-center">Departs<br>Governors Island</th>
+					<th class="coole text-center">Departs<br/>Governors Island</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -77,7 +76,7 @@
 				</tr>
 				<tr>
 					<td>6:30 PM</td>
-					<td>6:30 pm</td>
+					<td>6:30 PM</td>
 				</tr>
 				<tr>
 					<td class="dangere">7:00 PM*</td>
@@ -98,7 +97,7 @@
 			<thead>
 				<tr>
 					<th class=" coole text-center">Departs Brooklyn</th>
-					<th class="coole text-center">Departs<br>Governors Island</th>
+					<th class="coole text-center">Departs<br/>Governors Island</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -123,7 +122,7 @@
 					<td>Every 30 Minutes</td>
 				</tr>
 				<tr>
-					<td class="dangere">5:30 PM</td>
+					<td class="dangere">5:30 PM*</td>
 					<td>6:30 pm</td>
 				</tr>
 				<tr>
@@ -137,9 +136,9 @@
 		</table>
 	</section>
 	<section ng-show="tab===1"><!--Mahattan-->
-		<div class="info-banner header-shadow">
+		<div class="info-banner info-banner-space header-shadow">
 			<h3>Directions to Manhattan Ferry</h3>
-		</div><br>
+		</div>
 		<p class="lead text-indent">The Governors Island ferry departs from the Battery Maritime Building located at 10 South Street, adjacent to the Staten Island Ferry in Lower Manhattan. The ferry terminal is accessible as follows:</p>
 		<ul class="lead">
 			<li><b>By Subway</b></li>
@@ -153,9 +152,9 @@
 		</ul>	
 	</section>
 	<section ng-show="tab===2"><!--Brooklyn-->
-		<div class="info-banner header-shadow">
+		<div class="info-banner info-banner-space header-shadow">
 			<h3>Directions to Brooklyn Ferry</h3>
-		</div><br>
+		</div>
 		<p class="lead text-indent">The Governors Island Brooklyn ferry departs from Pier 6 in Brooklyn Bridge Park, at the foot of Atlantic Avenue. <em>Directions to the Governors Island Brooklyn Ferry (Weekends ONLY)</em></p>
 		<ul class="lead">
 			<li><b>By Subway</b></li>
@@ -167,9 +166,9 @@
 		</ul>	
 	</section>
 	<section><!--both -->
-		<div class="info-banner header-shadow">
+		<div class="info-banner info-banner-space header-shadow">
 			<h3>Ferry Fare</h3>
-		</div><br>
+		</div>
 		<ul class="lead">
 			<li><b>Ferry Fare (Round-Trip)</b></li>
 			<li>Adults and Children over 12 : $2</li>
