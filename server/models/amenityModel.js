@@ -14,7 +14,8 @@ var properties = _.extend({
     specialities: [String], //Vegan, Kosher, etc
     location: String,
     geoLocation: {type: [Number], index: '2d'},
-    media: [{type: ObjectId, ref: 'Media'}]
+    media: [{type: ObjectId, ref: 'Media'}],
+    coverPhoto: {type: ObjectId, ref: 'Media'}
 }, base.properties);
 var AmenitySchema = new Schema(properties);
 
