@@ -4,12 +4,11 @@ html{
   min-height: 100%;
 }
 @font-face {
-    font-family: myFirstFont;
-    src: url(../font/DINEngschriftStd.otf);
+  font-family: myFirstFont;
+	src: url(../font/dinregularwebfont.ttf);
 }
 body{
   height: 100%; width: 100%; 
-  line-height: 1; 
   background-color: #E7E7E7; 
   color: black;
   min-width: 250px;
@@ -42,7 +41,7 @@ a:hover, .nav a:hover{color: #4099FF;}
 .navSpacingFix{
   margin-top: 85px;
 }
-.gov-size{font-size: 32px;}
+.gov-size{font-size: 24px;}
 /*The site main colors*/
 .information{background-color: #ff9900;}
 .food-drink{background-color: #ff66cc;}
@@ -70,7 +69,7 @@ a:hover, .nav a:hover{color: #4099FF;}
 }
 .nav-gov-brand{
   color: white;
-  font-size: 32px;
+  font-size: 24px;
   vertical-align: middle;
   text-align: center;
   font-family: myFirstFont;
@@ -229,7 +228,7 @@ in between the header and footer */
 
 /*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
 .carousel-wrapper{}
-#home-carousel{
+#first-carousel{
   margin-top: 0px;
 }
 .img-container{
@@ -440,7 +439,252 @@ only screen and (max-device-width : 320px){
     .gridItem h3 {font-size: 18px;}
     .gridItem p, {font-size: 18px;}
 }
-/*-----------end of List View--------------*/
+/*----------=END LIST VIEW=-------------*/
+
+/*----------=ALL TOURS VIEW=-------------*/
+#allTours {
+	background: #ffffff;
+}
+
+#allTours #featuredLabel, #curatedLabel, #artistLabel{
+	
+	padding: 10px;
+	margin:0px;
+	padding-bottom: 0px;
+
+}
+
+#allTours #main-carousel{
+	
+	height: 250px;
+	overflow:hidden;
+	
+}
+
+#allTours #main-carousel .carousel-wrapper {
+	
+	
+}
+
+#allTours #main-carousel .carousel{
+	
+	padding:10px;
+	
+}
+
+#allTours #main-carousel .carousel-inner, #allTours .item, .carousel-wrapper, #caroContainer{
+	
+	height: 250px;
+	
+}
+
+#allTours #main-carousel .carousel-indicators {
+	
+	float:right;
+	width:37px;
+	right:10px;
+	margin-left:auto;
+	bottom: 4px;
+}
+
+#allTours #main-carousel .carousel-caption {
+	
+	text-align:left;
+	float:left;
+	padding-left:15px;
+	margin-bottom:5px;
+	margin-right:200;
+	display:inline;
+	left:0;right:0;
+	width:290px;
+	height:50px;
+	
+}
+
+#allTours #main-carousel .carousel-caption h3 {
+	
+	font-size:21px !important;
+	
+}
+
+#allTours #bottomBar {
+	
+	padding: 10px;
+	background-color:black; filter:alpha(opacity=80); opacity:.8;
+	height: 50px;
+	position:relative;
+	top:-50px;
+	
+}
+
+
+#tourlist {
+	
+	height: 200px;
+	
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space:nowrap;
+	border-bottom: solid 2px gray;
+	
+}
+
+#tourlist li{
+	
+	box-shadow: 1px 1px 10px #999;
+	background: #ffffff;
+	padding: 10px;
+	
+	display:inline-block;
+	*display:inline;/* For IE7*/
+	*zoom:1;/* For IE7*/
+	
+}
+
+#tourlist .caption h5{
+	
+	font-size:20px;
+	padding-top:0px;
+	margin-top:10px;
+	
+}
+
+#tourImage {
+	
+	width:100%;
+	height:50%;
+	
+}
+
+/*----------=SINGLE TOUR VIEW=-------------*/
+
+#tourPoints #tourInfo h3 {
+	
+	padding-left:10px;
+	margin-top:10px;
+	font-size:24px;
+	
+}
+
+#tourPoints #tourInfo p {
+	
+	padding-left:10px;
+	margin-top:10px;
+	font-size:18px;
+	
+}
+
+#tourPoints #pointlist {
+	
+	height: 100%;
+
+}
+
+#tourPoints #pointlist li{
+	
+	padding: 5px;
+	padding-left: 15px;
+	border-top:solid 2px gray;
+	height: 50px;
+	
+}
+
+#tourPoints #pointlist .caption{
+	
+	position:relative;
+	top:-10px;
+	
+}
+
+#tourPoints #pointlist li h5{
+	
+	font-size: 20px;
+	display:inline;
+	width:100%;
+}
+
+#tourPoints #pointlist img {
+	
+	float:right;
+	display:inline;
+	position:relative;
+	top:-10px;
+}
+
+#point {
+	
+	text-align:center;
+	width: 100%;
+	height: 100px;
+	margin-top:25px;
+	
+}
+
+#point #pointInfo {
+	
+	text-align:left;
+	padding-left: 25px;
+	padding-right: 25px;
+	overflow-y:auto;
+	height:80vh;
+	line-height:130%
+	
+}
+
+#point #pointInfo h3{
+	
+	padding-bottom: 10px;
+	border-bottom: solid 2px gray;
+	
+}
+
+#point #pointImg {
+	
+	height: 200px;
+	overflow:hidden;
+	margin:0;
+}
+
+#point #pointImg img{
+	
+	width:100%;
+}
+
+#point .audioPlayer button{
+	
+	background: transparent;
+	border: none;
+	position:relative;
+	top:-170px
+	
+}
+
+#point .audioPlayer {
+	
+	height:0;
+	
+}
+
+  
+
+#tourpoints {
+	
+	
+}
+
+#tourImage {
+	
+	height: 225px;
+	overflow:hidden;
+	
+}
+
+#tourImage img{
+	
+	width: 100%;
+	
+}
+/*-----------END OF TOUR--------------*/
 
 /* -------====FERRY SCHEDULE==--------- */
 /*-----======And Detain view-----------*/

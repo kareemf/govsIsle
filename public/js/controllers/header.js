@@ -44,8 +44,7 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
             $scope.isCollapsed = false;
 
             $rootScope.$on('loggedin', function() {
-
-                queryMenu('main', defaultMainMenu);
+                //queryMenu('main', defaultMainMenu);
 
                 $scope.global = {
                     authenticated: !! $rootScope.user,
