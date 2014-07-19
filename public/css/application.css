@@ -4,15 +4,21 @@ html{
   min-height: 100%;
 }
 @font-face {
-    font-family: myFirstFont;
+  font-family: myFirstFont sans-serif;
+	src: url(../font/dinregularwebfont.ttf);
+}
+@font-face {
+    font-family: govsle;
     src: url(../font/DINEngschriftStd.otf);
 }
 body{
   height: 100%; width: 100%; 
-  line-height: 1; 
   background-color: #E7E7E7; 
   color: black;
   min-width: 250px;
+  font-family: myFirstFont;
+  font-size: 16px;
+  line-height: 1px;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -24,20 +30,22 @@ a{
   padding: 0;
   color: black;
 }
+/* old gov colors #4099FF #3B5998 #019AD5*/
 a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
 }
-a:hover, .nav a:hover{
-  color: blue;
-}
-.clear{clear: both;}
-.shadow-effect{
+a:hover, .nav a:hover{color: #4099FF;}
+.cleartop{clear: top;}
+.clearboth{clear: both;}
+.header-shadow{
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  border-collapse: separate;
-  z-index: 999;
 }
+.navSpacingFix{
+  margin-top: 85px;
+}
+.gov-size{font-size: 32px;font-family: govsle;}
 /*The site main colors*/
 .information{background-color: #ff9900;}
 .food-drink{background-color: #ff66cc;}
@@ -45,13 +53,11 @@ a:hover, .nav a:hover{
 .venues{background-color: #000066}
 .facilities{background-color: #0099ff;}
 .history{background-color: #ccff33;}
+
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
   padding: 0px 0px 0px 0px;
   background-color: #5FA77A;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   border-collapse: separate;
   z-index: 999;
   border-bottom: 1px solid #E7E7E7;
@@ -70,7 +76,9 @@ a:hover, .nav a:hover{
   font-size: 32px;
   vertical-align: middle;
   text-align: center;
-  font-family: myFirstFont;
+  font-family: govsle;
+  line-height: 32px;
+  padding-top: 3px;
 }
 .nav-header-link{
   padding-top: 15px;
@@ -78,8 +86,8 @@ a:hover, .nav a:hover{
 .nav-ui a{
   color: white;
 }
-.nav-ui a:hover{
-  color: red;
+.nav-ui a:hover, .nav-ui a:active{
+  color: black;
 }
 .nav-inlineblock li{
   display: inline-block;
@@ -95,6 +103,10 @@ a:hover, .nav a:hover{
   text-align: center;
   vertical-align: top;
   display: inline-block;
+}
+.nav-icon{
+  padding-right: 15px;
+  padding-left: 15px;
 }
 /* if we bring log back
 .navheader-logo{display: inline-block;}
@@ -164,17 +176,19 @@ a:hover, .nav a:hover{
   #custom-nav{height: 55px;}
 }
 
-.nav-login li, .social-icon li{
-  display: inline;
+.nav-login li{
+  display: inline-block;
   list-style-type: none;
 }
 
 /*The start of the middle section
 in between the header and footer */
 .main-content{
-  padding-top: 60px;
+  margin-top: 61px;
 }
-
+.main-footer{
+  margin-bottom: 60px; /*lower navigation bar*/
+}
 /*----------= CALENDAR EVENTS PAGES=----------*/
 #calendar{
   width: auto;
@@ -185,7 +199,6 @@ in between the header and footer */
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   border-collapse: separate;
   z-index: 999;
-  padding-top: 60px;
 }
 .map-container{
   position: relative;
@@ -218,10 +231,8 @@ in between the header and footer */
 }
 
 /*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
-.carousel-wrapper{
-  padding-top: 60px;
-}
-#home-carousel{
+.carousel-wrapper{}
+#first-carousel{
   margin-top: 0px;
 }
 .img-container{
@@ -278,7 +289,6 @@ in between the header and footer */
   width: 150px;height: 150px;
   display: inline-block;
   margin: 0 auto 0 auto;
-
   border: none;
   display: block;
   float: center;
@@ -293,6 +303,7 @@ in between the header and footer */
   height: 77px;
   width: 150px;
   opacity: .5;
+  padding-top: 15px;
 }
 
 .img-collection section{
@@ -354,7 +365,7 @@ background: black;
 color: #FFFFFF;
 padding: 0.3em 0.2em;
 }
-/*#4099FF #3B5998 #019AD5(gov)*/
+
 .fa-wordpress{
   background-color: black;
   color: #FFFFFF;
@@ -386,7 +397,6 @@ padding: 0.3em 0.2em;
 }
 
 .list-container{
-  padding-top: 60px;
   width: 80%;
   margin: 30px auto;
   overflow: hidden;
@@ -433,4 +443,328 @@ only screen and (max-device-width : 320px){
     .gridItem h3 {font-size: 18px;}
     .gridItem p, {font-size: 18px;}
 }
-/*-----------end of List View--------------*/
+/*----------=END LIST VIEW=-------------*/
+
+/*----------=ALL TOURS VIEW=-------------*/
+#allTours {
+	background: #ffffff;
+}
+
+#allTours #featuredLabel, #curatedLabel, #artistLabel{
+	
+	padding: 10px;
+	margin:0px;
+	padding-bottom: 0px;
+
+}
+
+#allTours #main-carousel{
+	
+	height: 250px;
+	overflow:hidden;
+	
+}
+
+#allTours #main-carousel .carousel-wrapper {
+	
+	
+}
+
+#allTours #main-carousel .carousel{
+	
+	padding:10px;
+	
+}
+
+#allTours #main-carousel .carousel-inner, #allTours .item, .carousel-wrapper, #caroContainer{
+	
+	height: 250px;
+	
+}
+
+#allTours #main-carousel .carousel-indicators {
+	
+	float:right;
+	width:37px;
+	right:10px;
+	margin-left:auto;
+	bottom: 4px;
+}
+
+#allTours #main-carousel .carousel-caption {
+	
+	text-align:left;
+	float:left;
+	padding-left:15px;
+	margin-bottom:5px;
+	margin-right:200;
+	display:inline;
+	left:0;right:0;
+	width:290px;
+	height:50px;
+	
+}
+
+#allTours #main-carousel .carousel-caption h3 {
+	
+	font-size:21px !important;
+	
+}
+
+#allTours #bottomBar {
+	
+	padding: 10px;
+	background-color:black; filter:alpha(opacity=80); opacity:.8;
+	height: 50px;
+	position:relative;
+	top:-50px;
+	
+}
+
+
+.tourlist {
+	
+	height: 220px;
+	
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space:nowrap;
+	border-bottom: solid 2px gray;
+	
+}
+
+.tourlist li{
+	
+	max-width:180px;
+	box-shadow: 1px 1px 10px #999;
+	background: #ffffff;
+	padding: 10px;
+	
+	display:inline-block;
+	*display:inline;/* For IE7*/
+	*zoom:1;/* For IE7*/
+	vertical-align:top;
+}
+
+.tourlist .caption {
+	
+	width: 150px;
+	height: 40px;
+	white-space:normal;
+}
+
+.tourlist .caption h5 {
+	
+	font-size:18px;
+	padding-top:0px;
+	margin-top:10px;
+
+}
+
+#tourImage {
+	
+	width:100%;
+	height:50%;
+	
+}
+
+/*----------=SINGLE TOUR VIEW=-------------*/
+
+#tourPoints #tourInfo h3 {
+	
+	padding-left:10px;
+	margin-top:10px;
+	font-size:24px;
+	
+}
+
+#tourPoints #tourInfo p {
+	
+	padding-left:10px;
+	margin-top:10px;
+	font-size:18px;
+	
+}
+
+#tourPoints #pointlist {
+	
+	height: 100%;
+
+}
+
+#tourPoints #pointlist li{
+	
+	padding: 5px;
+	padding-left: 15px;
+	border-top:solid 2px gray;
+	height: 50px;
+	
+}
+
+#tourPoints #pointlist .caption{
+	
+	position:relative;
+	top:-10px;
+	
+}
+
+#tourPoints #pointlist li h5{
+	
+	font-size: 20px;
+	display:inline;
+	width:100%;
+}
+
+#tourPoints #pointlist img {
+	
+	float:right;
+	display:inline;
+	position:relative;
+	top:-10px;
+}
+
+#point {
+	
+	text-align:center;
+	width: 100%;
+	height: 100px;
+	margin-top:25px;
+	
+}
+
+#point #pointInfo {
+	
+	text-align:left;
+	padding-left: 25px;
+	padding-right: 25px;
+	overflow-y:auto;
+	height:80vh;
+	line-height:130%
+	
+}
+
+#point #pointInfo h3{
+	
+	padding-bottom: 10px;
+	border-bottom: solid 2px gray;
+	
+}
+
+#point #pointImg {
+	
+	height: 200px;
+	overflow:hidden;
+	margin:0;
+}
+
+#point #pointImg img{
+	
+	width:100%;
+}
+
+#point .audioPlayer button{
+	
+	background: transparent;
+	border: none;
+	position:relative;
+	top:-170px
+	
+}
+
+#point .audioPlayer {
+	
+	height:0;
+	
+}
+
+  
+
+#tourpoints {
+	
+	
+}
+
+#tourImage {
+	
+	height: 225px;
+	overflow:hidden;
+	
+}
+
+#tourImage img{
+	
+	width: 100%;
+	
+}
+/*-----------END OF TOUR--------------*/
+
+/* -------====FERRY SCHEDULE==--------- */
+/*-----======And Detain view-----------*/
+.info-banner{
+  padding: 0px 0px 0px 0px;
+  height: 50px;
+  width: 100%;
+  background-color: #FFF;
+  text-align: center;
+}
+.info-banner h3, .info-banner h4{
+  padding-top: 12px;
+}
+.info-banner-space{
+  margin-bottom: 10px;
+}
+.btn-brooklyn, .btn-manhattan{
+  display: inline-block;
+  text-align: center;
+  vertical-align: center;
+  height: 50px;
+  line-height: 50px;
+  background-color: #454953;
+  padding-top: 3px;
+}
+.btn-brooklyn{
+  width: 50%;
+  float: right;
+}
+.btn-manhattan{
+  width: 50%;
+  float: left;
+}
+.btn-brooklyn a, .btn-manhattan a{
+  color: #FFF;
+}
+.btn-bk-mh{ margin-top: 50px;}
+p.lead a{
+  color: blue;
+}
+
+/*detail view image*/
+.info-img{
+  height: 250%;
+  width: 100%;
+}
+/*ICONS*/
+.navimg-icon{
+  height: 55px;
+  width: 55px;
+  padding-bottom: 15px;
+}
+/* -------====FERRY SCHEDULE END==--------- */
+/*SITE STAPLES/GLOBAL SYLING*/ 
+.activebtn{background-color: #5FA77A; color: #FFF;}
+.dangere{background-color: #FF0101;}
+.coole{background-color: #4099FF;}
+.lead{padding-right: 5px; padding-left: 5px;}
+.text-indent{text-indent: 5%;}
+/*SPRITES*/
+.ferry-off, .ferry-on, .headphones-off, .headphones-on, .calendar-off, 
+.calendar-on, .map-pin-off, .map-pin-on
+{ display: inline-block; background: url('../images/navicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+.ferry-off { background-position: -0px -0px; width: 131px; height: 91px; }
+.ferry-on { background-position: -0px -91px; width: 131px; height: 90px;}
+.headphones-off { background-position: -0px -182px; width: 115px; height: 96px; }
+.headphones-on { background-position: -0px -278px; width: 115px; height: 96px; }
+.calendar-off { background-position: -0px -374px; width: 105px; height: 96px; }
+.calendar-on { background-position: -0px -470px; width: 105px; height: 96px; }
+.map-pin-off { background-position: -0px -566px; width: 60px; height: 96px; }
+.map-pin-on { background-position: -60px -566px; width: 60px; height: 96px; }

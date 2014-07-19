@@ -7,10 +7,8 @@
         <meta name="govsIsland" content="">
         <!--<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />-->
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="bower_components/fontawesome/css/font-awesome.css">
-        <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet' />
-        <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print' />
         <link rel="stylesheet" type="text/css" href="css/application.css">
+        <link rel="stylesheet" type="text/css" href="bower_components/fontawesome/css/font-awesome.css">
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
         <title>Culture Island</title>
     </head>
@@ -19,10 +17,11 @@
         <div class="main-header"><!--MAIN-HEADER-->
            <div ng-include="'templates/header.html'" data-role="navigation"></div>
         </div>
-        <div class="test"></div>
-        <div ui-view></div>
-
-        <div class="nav-footer"><!-- MAIN-FOOTER-->
+        <div class="main-content"><!--MAIN-CONTENT-->
+             <!--<div ui-view autoscroll="false"></div> -->
+            <ui-view autoscroll='false'/>
+        </div>
+        <div class="main-footer"><!-- MAIN-FOOTER-->
             <div ng-include=" 'templates/nav.html' "></div>
         </div>
         
@@ -37,12 +36,7 @@
         <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="bower_components/angular-ui-utils/ui-utils.js"></script>
         <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.js"></script>
-        
-        <!-- Special functionality-calendar-->
-        <script src='bower_components/moment/min/moment.min.js'></script>
-        <script src='js/jquery-ui.custom.min.js'></script>
-        <script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
-        
+            
         <!-- Special functionality-footer--> <!--my verison will come soon-->
         <script type="text/javascript" src="js/smartmenus-min.js"></script>
         <script type="text/javascript" src="js/smartmenus-bootstrap.js"></script>
@@ -63,5 +57,8 @@
         <script type="text/javascript" src="js/controllers/events.js"></script>
         <script type="text/javascript" src="js/controllers/header.js"></script>
         <script type="text/javascript" src="js/controllers/nav.js"></script>
+		<script type="text/javascript" src="js/controllers/tours.js"></script>
+		
+		<audio id="audioPlayer"></audio>
     </body>
 </html>

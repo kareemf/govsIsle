@@ -1,3 +1,182 @@
-<div>
-    <h3>Ferry Schedule</h3>
+<div class="ferry-wrapper" ng-init="tab=1">
+	<div class="info-banner header-shadow"><!--both-->
+		<h4>FERRY, SCHEDULE &amp; DIRECTIONS</h4>
+	</div>
+	<section>
+		<a ng-click='tab=1'><div ng-class="{activebtn:tab===1}" class="btn-manhattan gov-size">MANHATTAN</div></a>
+		<a ng-click='tab=2'><div ng-class="{activebtn:tab===2}" class="btn-brooklyn gov-size">BROOKLYN</div></a>
+	</section><br/>
+	<div class="btn-bk-mh"></div><!--clearing-->
+	<section ng-show="tab===1"><!--manhattan-->
+		<div class="info-banner header-shadow">
+			<h3>MONDAY - FRIDAY</h3>
+		</div>
+		<table class="table table-bordered text-center">
+			<thead>
+				<tr>
+					<th class=" coole text-center">Departs<br/>Manhattan</th>
+					<th class="coole text-center">Departs<br/>Governors Island</th>
+				</tr>g
+			</thead>
+			<tbody>
+				<tr>
+					<td>10:00 AM</td>
+					<td>10:30 AM</td>
+				</tr>
+				<tr>
+					<td>11:00 AM</td>
+					<td>11:30 AM</td>
+				</tr>
+				<tr>
+					<td>Every Hour</td>
+					<td>Every Hour</td>
+				</tr>
+				<tr>
+					<td class="dangere">4:00 PM Last Boat*</td>
+					<td>5:00 PM*</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="dangere">6:00 PM Last Boat*</td>
+				</tr>
+				<tr>
+					<td colspan="2"><em>*<b>indicates last ferry boat</b></em></td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+
+	<section ng-show="tab===1"><!--manhattan-->
+		<div class="info-banner header-shadow">
+			<h3>SATURDAY &amp; SUNDAY</h3>
+		</div>
+		<table class="table table-bordered text-center">
+			<thead>
+				<tr>
+					<th class=" coole text-center">Departs<br/>Manhattan</th>
+					<th class="coole text-center">Departs<br/>Governors Island</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>10:00 AM</td>
+					<td>10:30 AM</td>
+				</tr>
+				<tr>
+					<td>11:00 AM</td>
+					<td>11:30 AM</td>
+				</tr>
+				<tr>
+					<td>11:30 AM</td>
+					<td>12:00 PM</td>
+				</tr>
+				<tr>
+					<td>Every 30 Minutes</td>
+					<td>Every 30 Minutes</td>
+				</tr>
+				<tr>
+					<td>6:30 PM</td>
+					<td>6:30 PM</td>
+				</tr>
+				<tr>
+					<td class="dangere">7:00 PM*</td>
+					<td class="dangere">7:00 PM*</td>
+				</tr>
+				<tr>
+					<td colspan="2"><em>*<b>Indicates last ferry boat</b></em></td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+
+	<section ng-show="tab===2"><!--Brooklyn-->
+		<div class="info-banner header-shadow">
+			<h4>SATURDAY, SUNDAY, MEMORIAL DAY &amp; LABOR DAY</h4>
+		</div>
+		<table class="table table-bordered text-center">
+			<thead>
+				<tr>
+					<th class=" coole text-center">Departs<br/>Brooklyn</th>
+					<th class="coole text-center">Departs<br/>Governors Island</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>11:00 AM</td>
+					<td>10:30 AM</td>
+				</tr>
+				<tr>
+					<td>11:30 AM</td>
+					<td>11:30 AM</td>
+				</tr>
+				<tr>
+					<td>12:00 AM</td>
+					<td>Every Hour</td>
+				</tr>
+				<tr>
+					<td>12:30 PM</td>
+					<td>4:30 PM</td>
+				</tr>
+				<tr>
+					<td>Every 30 Minutes</td>
+					<td>Every 30 Minutes</td>
+				</tr>
+				<tr>
+					<td class="dangere">5:30 PM*</td>
+					<td>6:30 pm</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="dangere">7:00 PM*</td>
+				</tr>
+				<tr>
+					<td colspan="2"><em>*<b>Indicates last ferry boat</b></em></td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	<section ng-show="tab===1"><!--Mahattan-->
+		<div class="info-banner info-banner-space header-shadow">
+			<h3>Directions to Manhattan Ferry</h3>
+		</div>
+		<p class="lead text-indent">The Governors Island ferry departs from the Battery Maritime Building located at 10 South Street, adjacent to the Staten Island Ferry in Lower Manhattan. The ferry terminal is accessible as follows:</p>
+		<ul class="lead">
+			<li><b>By Subway</b></li>
+			<li>1 to South Ferry station</li>
+			<li>4, 5 to Bowling Green station</li>
+			<li>R to Whitehall St. station</li>
+		</ul>
+		<ul class="lead">
+			<li><b>By Bus</b></li>
+			<li>M6, M9, and M15</li>
+		</ul>	
+	</section>
+	<section ng-show="tab===2"><!--Brooklyn-->
+		<div class="info-banner info-banner-space header-shadow">
+			<h3>Directions to Brooklyn Ferry</h3>
+		</div>
+		<p class="lead text-indent">The Governors Island Brooklyn ferry departs from Pier 6 in Brooklyn Bridge Park, at the foot of Atlantic Avenue. <em>Directions to the Governors Island Brooklyn Ferry (Weekends ONLY)</em></p>
+		<ul class="lead">
+			<li><b>By Subway</b></li>
+			<li>4,5,2,3 to Borough Hall</li>
+		</ul>
+		<ul class="lead">
+			<li><b>By Bus</b></li>
+			<li>B63</li>
+		</ul>	
+	</section>
+	<section><!--both -->
+		<div class="info-banner info-banner-space header-shadow">
+			<h3>Ferry Fare</h3>
+		</div>
+		<ul class="lead">
+			<li><b>Ferry Fare (Round-Trip)</b></li>
+			<li>Adults and Children over 12 : $2</li>
+			<li>Senior Citizens : $1</li>
+			<li>Children 12 and Under : Free</li>
+			<li>Season Pass (Unlimited Rides) : $20</li>
+		</ul>
+		<p class="lead text-indent">Children under 12 ride for free at all times and senior citizens' fares are half price.</p>
+		<p class="lead text-indent">Tickets and season passes can be purchased online at the <a href="https://nywaterway.bytemark.co/portal/login" target="_blank"> New York Waterway website</a>, through the <a href="http://www.nywaterway.com/MobileAppDownloads.aspx" target="_blank">NY Waterway App</a>, and in person at the ticket offices at the Battery Maritime Building in Manhattan or at Pier 6 in Brooklyn when ferries are running.</p>
+	</section>
 </div>
