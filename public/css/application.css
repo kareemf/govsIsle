@@ -4,7 +4,7 @@ html{
   min-height: 100%;
 }
 @font-face {
-    font-family: myFirstFont;
+  font-family: myFirstFont;
 	src: url(../font/dinregularwebfont.ttf);
 }
 body{
@@ -13,6 +13,8 @@ body{
   color: black;
   min-width: 250px;
   font-family: myFirstFont;
+  font-size: 16px;
+  line-height: 1px;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -24,20 +26,22 @@ a{
   padding: 0;
   color: black;
 }
+/* old gov colors #4099FF #3B5998 #019AD5*/
 a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
 }
-a:hover, .nav a:hover{
-  color: blue;
-}
-.clear{clear: both;}
-.shadow-effect{
+a:hover, .nav a:hover{color: #4099FF;}
+.cleartop{clear: top;}
+.clearboth{clear: both;}
+.header-shadow{
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  border-collapse: separate;
-  z-index: 999;
 }
+.navSpacingFix{
+  margin-top: 85px;
+}
+.gov-size{font-size: 24px;}
 /*The site main colors*/
 .information{background-color: #ff9900;}
 .food-drink{background-color: #ff66cc;}
@@ -45,52 +49,79 @@ a:hover, .nav a:hover{
 .venues{background-color: #000066}
 .facilities{background-color: #0099ff;}
 .history{background-color: #ccff33;}
+
 /*------============HEADER-STYLING AREA=========---------*/
-#custom-nav{
-  height: 160px;
-  background-color: #FFF;
-  margin-top: 0px 0px 0px 0px;
-  padding: 0px 0px 0px 0px;
-}
 #nav-beta{
-  height: 100px;
   padding: 0px 0px 0px 0px;
   background-color: #5FA77A;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   border-collapse: separate;
   z-index: 999;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #E7E7E7;
+  margin-bottom: 100px;
 }
-#nav-beta p{
+.nav-ui{
+  width: 100%;height: 60px;
+  background-color: #5FA77A;
   color: white;
-  font-size: 36px;
+  z-index: 900;
+  font-size: 30px;
+  text-align: center;
+}
+.nav-gov-brand{
+  color: white;
+  font-size: 24px;
   vertical-align: middle;
   text-align: center;
-  padding-top: 38px;
   font-family: myFirstFont;
+  line-height: 32px;
+  padding-top: 3px;
 }
-.navbar{background-color: #FFFFFF;}
+.nav-header-link{
+  padding-top: 15px;
+}
+.nav-ui a{
+  color: white;
+}
+.nav-ui a:hover, .nav-ui a:active{
+  color: black;
+}
+.nav-inlineblock li{
+  display: inline-block;
+  list-style-type: none;
+}
+.navright-btn{
+  padding-right: 10px; 
+}  
+.navleft-btn{
+  padding-left: 10px;
+}
+.center-brand{
+  text-align: center;
+  vertical-align: top;
+  display: inline-block;
+}
+.nav-icon{
+  padding-right: 15px;
+  padding-left: 15px;
+}
+/* if we bring log back
 .navheader-logo{display: inline-block;}
-.navimg-logo{ 
+.navimg-logo{
    display: block;
-    margin: 0 auto;
+   margin: 0 auto;
 }
-
+*/
+/*MAIN-FOOTER NAVIGATION*/
 .map-ui{
   position: relative;
-  width: inherit;
-  height: 60px;
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  font-style: italic;
-  z-index: 900;
-  opacity: 0.3;
+  width: inherit;height: 60px;
   bottom: 0px;
+  background-color: #797F8F;
+  color: white;
+  z-index: 900;
   padding-top: 3px;
   font-size: 45px;
+  /*opacity: 0.3;*/
   text-align: center;
 }
 .map-ui-toggle{
@@ -99,13 +130,11 @@ a:hover, .nav a:hover{
   height: 50px;
   bottom: 60px;
   right: 10px;
-  background-color: black;
+  background-color: #797F8F;
   color: white;
-  font-weight: bold;
-  font-style: italic;
   z-index: 900;
-  opacity: 0.3;
   font-size: 45px;
+  /*opacity: 0.3;*/
   text-align: center;
 }
 .map-filter{
@@ -120,6 +149,12 @@ a:hover, .nav a:hover{
   opacity: 0.7; 
   font-size: 25px;
   padding-top: 15px;
+}
+.map-ui a, .map-ui-toggle a, .map-filter a{
+  color: white;
+}
+.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
+  color: #5FA77A;
 }
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
@@ -137,29 +172,19 @@ a:hover, .nav a:hover{
   #custom-nav{height: 55px;}
 }
 
-.nav-login li, .social-icon li{
-  display: inline;
+.nav-login li{
+  display: inline-block;
   list-style-type: none;
-}
-
-.map-ui-landing{
-  height: 60px;
-  background-color: #FFF;
-  color: white;
-  font-weight: bold;
-  font-size: 45px;
-  text-align: center;
-  margin-top: 60px;
-  padding-top: 4px;
 }
 
 /*The start of the middle section
 in between the header and footer */
-#main-content{
-  height:100%;width:100%;
- /* padding-bottom: 120px;*/
+.main-content{
+  margin-top: 61px;
 }
-
+.main-footer{
+  margin-bottom: 60px; /*lower navigation bar*/
+}
 /*----------= CALENDAR EVENTS PAGES=----------*/
 #calendar{
   width: auto;
@@ -202,10 +227,8 @@ in between the header and footer */
 }
 
 /*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
-.carousel-wrapper{
-  margin-top: 1px;
-}
-#home-carousel{
+.carousel-wrapper{}
+#first-carousel{
   margin-top: 0px;
 }
 .img-container{
@@ -262,7 +285,6 @@ in between the header and footer */
   width: 150px;height: 150px;
   display: inline-block;
   margin: 0 auto 0 auto;
-
   border: none;
   display: block;
   float: center;
@@ -277,6 +299,7 @@ in between the header and footer */
   height: 77px;
   width: 150px;
   opacity: .5;
+  padding-top: 15px;
 }
 
 .img-collection section{
@@ -338,7 +361,7 @@ background: black;
 color: #FFFFFF;
 padding: 0.3em 0.2em;
 }
-/*#4099FF #3B5998 #019AD5(gov)*/
+
 .fa-wordpress{
   background-color: black;
   color: #FFFFFF;
@@ -358,12 +381,6 @@ padding: 0.3em 0.2em;
     width: 100%;
 }
 
-.map-ui a, .map-ui-toggle a{
-  color: white;
-}
-.map-ui a:hover, .map-ui-toggle a:hover{
-  color: red;
-}
 #eventmap{
     height: 100vh;
     width: 100%;
@@ -422,17 +439,9 @@ only screen and (max-device-width : 320px){
     .gridItem h3 {font-size: 18px;}
     .gridItem p, {font-size: 18px;}
 }
-
-
 /*----------=END LIST VIEW=-------------*/
-#calendar-wrapper{
-  margin-top: 10px;
-}
-
-
 
 /*----------=ALL TOURS VIEW=-------------*/
-
 #allTours {
 	background: #ffffff;
 }
@@ -463,7 +472,7 @@ only screen and (max-device-width : 320px){
 	
 }
 
-#allTours #main-carousel .carousel-inner, .item, .carousel-wrapper, #caroContainer{
+#allTours #main-carousel .carousel-inner, #allTours .item, .carousel-wrapper, #caroContainer{
 	
 	height: 250px;
 	
@@ -683,6 +692,75 @@ only screen and (max-device-width : 320px){
 	width: 100%;
 	
 }
+/*-----------END OF TOUR--------------*/
 
-/*-----------end of List View--------------*/
+/* -------====FERRY SCHEDULE==--------- */
+/*-----======And Detain view-----------*/
+.info-banner{
+  padding: 0px 0px 0px 0px;
+  height: 50px;
+  width: 100%;
+  background-color: #FFF;
+  text-align: center;
+}
+.info-banner h3, .info-banner h4{
+  padding-top: 15px;
+}
+.info-banner-space{
+  margin-bottom: 10px;
+}
+.btn-brooklyn, .btn-manhattan{
+  display: inline-block;
+  text-align: center;
+  vertical-align: center;
+  height: 50px;
+  line-height: 50px;
+  background-color: #454953;
+  padding-top: 3px;
+}
+.btn-brooklyn{
+  width: 50%;
+  float: right;
+}
+.btn-manhattan{
+  width: 50%;
+  float: left;
+}
+.btn-brooklyn a, .btn-manhattan a{
+  color: #FFF;
+}
+.btn-bk-mh{ margin-top: 50px;}
+p.lead a{
+  color: blue;
+}
 
+/*detail view image*/
+.info-img{
+  height: 250%;
+  width: 100%;
+}
+/*ICONS*/
+.navimg-icon{
+  height: 55px;
+  width: 55px;
+  padding-bottom: 15px;
+}
+/* -------====FERRY SCHEDULE END==--------- */
+/*SITE STAPLES/GLOBAL SYLING*/ 
+.activebtn{background-color: #5FA77A; color: #FFF;}
+.dangere{background-color: #FF0101;}
+.coole{background-color: #4099FF;}
+.lead{padding-right: 5px; padding-left: 5px;}
+.text-indent{text-indent: 5%;}
+/*SPRITES*/
+.ferry-off, .ferry-on, .headphones-off, .headphones-on, .calendar-off, 
+.calendar-on, .map-pin-off, .map-pin-on
+{ display: inline-block; background: url('../images/navicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+.ferry-off { background-position: -0px -0px; width: 131px; height: 91px; }
+.ferry-on { background-position: -0px -91px; width: 131px; height: 90px;}
+.headphones-off { background-position: -0px -182px; width: 115px; height: 96px; }
+.headphones-on { background-position: -0px -278px; width: 115px; height: 96px; }
+.calendar-off { background-position: -0px -374px; width: 105px; height: 96px; }
+.calendar-on { background-position: -0px -470px; width: 105px; height: 96px; }
+.map-pin-off { background-position: -0px -566px; width: 60px; height: 96px; }
+.map-pin-on { background-position: -60px -566px; width: 60px; height: 96px; }

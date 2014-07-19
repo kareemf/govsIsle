@@ -210,15 +210,18 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
     }
 }]);
 
-controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','Shared', function($scope, $state, $stateParams, Events, Shared){
+controllers.controller('EventListController', ['$scope', '$state','$stateParams','$location','Events', function($scope, $state, $stateParams, $location, Events){
     console.log('in EventListController');
-    //var view = $stateParams.view;
-    //view = view ? view : 'map';
-    //$state.go("events."+ view);
-    
+    var view = $stateParams.view;
+    var path = $location.path();
+    view = view ? view : 'map';
+
+    if(path==='/events/map'){
+       //  $scope.headerview=false;
+             console.log('pass');
+    }
+
     $scope.mybutton=true;
-    $scope.uiup=true;
-    $scope.headerview=true;
     $scope.listormap=true;
     /*playing with maps*/
     $scope.mapOptions = {
