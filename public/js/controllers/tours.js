@@ -95,6 +95,11 @@ controllers.controller('TourListController', ['$scope', '$stateParams', '$http',
 	
     var id = $stateParams.id;
     if(id){
+		
+	    $http.get('http://entangledspace.com/staging/getTour.php?username=cultureisland&tourID='+id).
+	           success(function(data) {
+	               $scope.tour = data;
+	    });
 
 	    $http.get('http://entangledspace.com/staging/getTourpoints.php?username=cultureisland&tourID='+id).
 	           success(function(data) {

@@ -433,13 +433,91 @@ only screen and (max-device-width : 320px){
 
 /*----------=TOUR VIEW=-------------*/
 
+#allTours {
+	background: #ffffff;
+}
+
+#allTours #featuredLabel, #curatedLabel, #artistLabel{
+	
+	padding: 10px;
+	margin:0px;
+
+}
+
+#allTours #main-carousel{
+	
+	height: 250px;
+	overflow:hidden;
+	
+}
+
+#allTours #main-carousel .carousel-wrapper {
+	
+	
+}
+
+#allTours #main-carousel .carousel{
+	
+	padding:10px;
+	
+}
+
+#allTours #main-carousel .carousel-inner, .item, .carousel-wrapper, #caroContainer{
+	
+	height: 250px;
+	
+}
+
+#allTours #main-carousel .carousel-indicators {
+	
+	float:right;
+	width:37px;
+	right:15px;
+	margin-left:auto;
+	bottom: 7px;
+}
+
+#allTours #main-carousel .carousel-caption {
+	
+	text-align:left;
+	float:left;
+	padding-left:15px;
+	margin-bottom:5px;
+	margin-right:200;
+	display:inline;
+	left:0;right:0;
+	width:268px;
+	height:50px;
+	font-size:22px !important;
+	
+}
+
+#allTours #main-carousel .carousel-caption h3 {
+	
+	font-size:19px !important;
+	
+}
+
+#allTours #bottomBar {
+	
+	padding: 10px;
+	background-color:black; filter:alpha(opacity=80); opacity:.8;
+	height: 50px;
+	position:relative;
+	top:-50px;
+	
+}
+
+
+
 #tourlist {
 	
 	height: 200px;
 	
-	overflow-x: scroll;
+	overflow-x: auto;
 	overflow-y: hidden;
 	white-space:nowrap;
+	border-bottom: solid 2px gray;
 	
 }
 
@@ -447,11 +525,20 @@ only screen and (max-device-width : 320px){
 	
 	box-shadow: 1px 1px 10px #999;
 	background: #ffffff;
-	padding: 5px;
+	padding: 10px;
 	
 	display:inline-block;
 	*display:inline;/* For IE7*/
 	*zoom:1;/* For IE7*/
+	
+}
+
+#tourlist .caption h5{
+	
+	font-weight:bold;
+	font-size:16px;
+	padding-top:0px;
+	margin-top:5px;
 	
 }
 
@@ -464,23 +551,22 @@ only screen and (max-device-width : 320px){
 
 #pointlist {
 	
-	height: 200px;
-	
-	overflow-x: scroll;
-	overflow-y: hidden;
-	white-space:nowrap;
+	height: 100%;
+
 }
 
 #pointlist li{
 	
-	box-shadow: 1px 1px 10px #999;
-	background: #ffffff;
 	padding: 5px;
+	padding-left: 15px;
 	
-	display:inline-block;
-	*display:inline;/* For IE7*/
-	*zoom:1;/* For IE7*/
+	border-top:solid 2px gray;
 	
+}
+
+#pointlist .audioPlayer {
+	
+	float:right;
 }
 
 #point {
@@ -489,6 +575,24 @@ only screen and (max-device-width : 320px){
 	width: 100%;
 	height: 100px;
 	margin-top:25px;
+	
+}
+
+#pointInfo {
+	
+	text-align:left;
+	padding-left: 25px;
+	padding-right: 25px;
+	overflow-y:auto;
+	height:80vh;
+	line-height:130%
+	
+}
+
+#pointInfo h3{
+	
+	padding-bottom: 10px;
+	border-bottom: solid 2px gray;
 	
 }
 
@@ -503,6 +607,24 @@ only screen and (max-device-width : 320px){
 	
 	width:100%;
 }
-=======
+
+#tourpoints {
+	
+	
+}
+
+#tourImage {
+	
+	height: 225px;
+	overflow:hidden;
+	
+}
+
+#tourImage img{
+	
+	width: 100%;
+	
+}
+
 /*-----------end of List View--------------*/
 

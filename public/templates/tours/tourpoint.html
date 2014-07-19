@@ -3,14 +3,14 @@
 	<div id="pointImg">
 		<img src="{{getImageSrc(tourpoint.imageLoc)}}">
 	</div>
-	<h2>{{tourpoint.postName}}</h2>
-	<br>
-	
-	<button ng-click="play()" class="button" ng-show="!playing">Play</button>
-	<button ng-click="stop()" class="button alert" ng-show="playing">Stop</button>
-	
-	<div id="info">
-		{{tourpoint.postText}}
+	<div class="audioPlayer">
+		<button ng-click="play()" class="button" ng-show="!playing">Play</button>
+		<button ng-click="stop()" class="button alert" ng-show="playing">Stop</button>
 	</div>
-
+	<div id="pointInfo">
+		<h3>{{tourpoint.postName}}</h3>
+		<p id="info">
+			{{tourpoint.postText}}
+		</p>
+	</div>
 </div>

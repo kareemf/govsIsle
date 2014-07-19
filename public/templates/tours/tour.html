@@ -1,13 +1,18 @@
 <div id="tourPoints" ng-controller="TourListController"> 
-	<div id="pointImage">
-		
+	<div id="tourImage">
+		<img src="{{getImageSrc(tour.imageLoc)}}">
+	</div>
+	<div id="tourInfo">
+		<h3>{{tour.tourName}}</h3>
 	</div>
 	<ul id="pointlist">
 		<li data-ng-repeat="point in tourpoints">
-			<a ui-sref="tourpoint({ id: point.id })">	
-				<img src="{{getImageSrc(point.imageLoc)}}" alt="" width="150px" height="150px">
 				<div class="caption">
-					<h5>{{$index + 1}} : {{point.postName}}</h5>
+					<a ui-sref="tourpoint({ id: point.id })"><h5>{{$index + 1}} : {{point.postName}}</h5></a>
+					<div class="audioPlayer">
+						<button ng-click="play(point.id)" class="button" ng-show="!playing">Play</button>
+						<button ng-click="stop(point.id)" class="button alert" ng-show="playing">Stop</button>
+					</div>
 				</div>
 			</a>
 		</li>
