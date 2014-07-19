@@ -210,39 +210,18 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
     }
 }]);
 
-controllers.controller('EventListController', ['$scope', '$state','$stateParams','$location','Events','NavService', function($scope, $state, $stateParams, $location,Events, NavService){
+controllers.controller('EventListController', ['$scope', '$state','$stateParams','$location','Events', function($scope, $state, $stateParams, $location, Events){
     console.log('in EventListController');
     var view = $stateParams.view;
     var path = $location.path();
     view = view ? view : 'map';
 
-    $scope.navHeader = true;
-    $scope.incrementDataInService= function() {
-        NavService.increase();            
-    }
-    $scope.decreaseDataInService= function() {
-        NavService.decrease();
-    }   
-    $scope.$on('XChanged', function(event, x) {
-        $scope.navHeader = x;
-    });    
-    //console.log("EventListController, "+NavService.navHeader);
-    //NavService.navHeader= false;
-    /*$scope.headerview=NavService.navHeader;
-    $scope.$watch(
-        function(){return "hello"}, function(newVal, oldVal){
-        console.log('NavService.navHeader newval oldval', newVal, oldVal);
-        $scope.headerview = NavService.navHeader;
-    });    
-*/
     if(path==='/events/map'){
-         $scope.headerview=false;
+       //  $scope.headerview=false;
              console.log('pass');
-
     }
 
     $scope.mybutton=true;
-    $scope.uiup=true;
     $scope.listormap=true;
     /*playing with maps*/
     $scope.mapOptions = {
