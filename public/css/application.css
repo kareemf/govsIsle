@@ -522,9 +522,9 @@ only screen and (max-device-width : 320px){
 }
 
 
-#tourlist {
+.tourlist {
 	
-	height: 200px;
+	height: 220px;
 	
 	overflow-x: auto;
 	overflow-y: hidden;
@@ -533,8 +533,9 @@ only screen and (max-device-width : 320px){
 	
 }
 
-#tourlist li{
+.tourlist li{
 	
+	max-width:180px;
 	box-shadow: 1px 1px 10px #999;
 	background: #ffffff;
 	padding: 10px;
@@ -542,15 +543,22 @@ only screen and (max-device-width : 320px){
 	display:inline-block;
 	*display:inline;/* For IE7*/
 	*zoom:1;/* For IE7*/
-	
+	vertical-align:top;
 }
 
-#tourlist .caption h5{
+.tourlist .caption {
 	
-	font-size:20px;
+	width: 150px;
+	height: 40px;
+	white-space:normal;
+}
+
+.tourlist .caption h5 {
+	
+	font-size:18px;
 	padding-top:0px;
 	margin-top:10px;
-	
+
 }
 
 #tourImage {

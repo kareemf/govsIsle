@@ -34,6 +34,31 @@ controllers.controller('ToursController', ['$scope', '$stateParams', '$http', fu
 				   
 	    });
 		
+	    $http.get('http://entangledspace.com/staging/getTours.php?username=cultureisland').
+	           success(function(data) {
+	               $scope.myTours = data;
+				   
+				$scope.myTourpoints = [];   
+	   			var log = [];
+	   			angular.forEach($scope.myTours, function(value) {
+					
+	   	   	    	$http.get('http://entangledspace.com/staging/getTourpoints.php?username=cultureisland&tourID='+value.id+'').
+	   	   	           success(function(data_2) {	
+	
+	   	   	               var log2 = [];
+						   angular.forEach(data_2, function(point) {
+							   $scope.myTourpoints.push(point);
+							   //alert(point);
+						   }, log2);
+					   
+	   	   	    	   });
+
+	   			}, log);
+				//alert($scope.allTourpoints);
+				
+				   
+	    });
+		
 }]);
 
 
