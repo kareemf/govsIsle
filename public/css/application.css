@@ -284,8 +284,10 @@ in between the header and footer */
   top: 0;
   height: 77px;
   width: 150px;
-  opacity: .5;
-  padding-top: 15px;
+  opacity: .7;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  line-height: 25px;
 }
 
 .img-collection section{

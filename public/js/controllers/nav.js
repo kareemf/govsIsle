@@ -8,14 +8,18 @@ controllers.controller('NavController', ['$scope','$location', 'NavService',func
     $scope.headerview=true;
     
     var paths=["/","/about","/events/list","/events/map","events/tour","/ferry"];
+
     $scope.currentLink=paths.indexOf(path);
     console.log($scope.currentLink+"link");
-    //$scope.navHeader = true;
+    
     $scope.activelink = function(numbtn) {
         NavService.updateBtn(numbtn);            
     };
     $scope.isActive=function(checkTab){
         return NavService.getBtn()===checkTab;
+    };
+    $scope.buttonswap= function(){  
+        return NavService.getHiddenBtn();
     };
     $scope.$on('XChanged', function(event, x) {
        $scope.currentLink = x;

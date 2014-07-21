@@ -9,8 +9,6 @@ var app = angular.module('app', [
     'ngResource',
     'ui.router',
     'ui.map']);
-	
-
 
 app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', function($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
     //Lading page routes
@@ -86,9 +84,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
             url: '/list',
             templateUrl: 'templates/events/eventlist.html'
         })
-        .state('events.calendar',{
-            url: '/calendar',
-            templateUrl: 'templates/events/eventcalendar.html'
+        .state('events.events',{
+            url: '/events',
+            templateUrl: 'templates/events/events.html'
         })
         .state('events.detail', {
             url: '/:slug',

@@ -1,10 +1,26 @@
-<nav class="navbar-fixed-top" id="nav-beta" data-ng-controller="NavController">
+<nav class="navbar-fixed-top" id="nav-beta" data-ng-controller="NavController" ng-init="activelink(currentLink)">
     <div class="nav-ui" ng-show="headerview">
     	<div class="container">
 	        <ul class="nav-header-link nav-inlineblock">
 	        	<li class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activehome:isActive(0)}" class="glyphicon glyphicon-home"></span></a></li>
 	            <li class="nav-gov-brand"><a ui-sref="/">GOVERNORS ISLAND</a></li>
-	            <li class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicon glyphicon-info-sign"></span></a></li>
+	            <li ng-hide="buttonswap()" class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicon glyphicon-info-sign"></span></a></li>
+
+	            <li ng-show="isActive(3)" class="pull-right navright-btn">
+					<a type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li ng-click="toggleFilters('all')"><a><i class="fa fa-plus fa-all circle"></i>All</a></li>
+						<li ng-click="toggleFilters('info')"><a><i class="fa fa-info fa-all circle"></i> info</a></li>
+					    <li ng-click="toggleFilters('food, drink')"><a><i class="fa fa-building fa-all circle"></i> Food and Drink</a></li>
+					    <li ng-click="toggleFilters('activites')"><a><i class="fa fa-university fa-all circle"></i> Activities</a></li>
+					    <li ng-click="toggleFilters('venus')"><a><i class="fa fa-glass fa-all circle"></i> Venus</a></li>
+					    <li ng-click="toggleFilters('facilities')"><a><i class="fa fa-cutlery fa-all circle"></i> Facilities</a></li>
+					    <li ng-click="toggleFilters('tours')"><a><i class="fa fa-headphones fa-all circle"></i> History</a></li>
+					    <li ng-click="toggleFilters('events')"><a><i class="fa fa-headphones fa-all circle"></i> Events</a></li>
+					</ul>
+				</li>
+				<li ng-show="isActive(2)" class="pull-right navright-btn"><a ui-sref="events.events" ng-click="activelink(6)"><span class="glyphicon glyphicon-th-list"></span></a></li>
+				<li ng-show="isActive(6)" class="pull-right navright-btn"><a ui-sref="events.list" ng-click="activelink(2)"><span class="glyphicon glyphicon-th-large"></span></a></li>
 	        </ul>
         </div>
     </div>

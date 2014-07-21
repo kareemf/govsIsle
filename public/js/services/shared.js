@@ -8,7 +8,7 @@ services.factory('Shared', [function(){
 }]);
 
 services.factory('NavService',function($rootScope){
-    var activelink=null;
+    var activelink=null, hideInfo=null;
     return {
         updateBtn : function(newval) {
             activelink=newval;
@@ -16,6 +16,12 @@ services.factory('NavService',function($rootScope){
         },
         getBtn :function(){
             return activelink;
+        },
+        getHiddenBtn : function(){
+            if(activelink===2 || activelink===3 || activelink===4 || activelink===6){
+                return true;
+            }
+            else{return false;}
         }
    };
 })
