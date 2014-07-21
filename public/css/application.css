@@ -34,6 +34,14 @@ a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
 }
 a:hover, .nav a:hover{color: #4099FF;}
+/* ALL LINKS*/
+.map-ui a, .map-ui-toggle a, .map-filter a{
+  color: white;
+}
+.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
+  color: #5FA77A;
+}
+
 .cleartop{clear: top;}
 .clearboth{clear: both;}
 .header-shadow{
@@ -44,7 +52,7 @@ a:hover, .nav a:hover{color: #4099FF;}
 .navSpacingFix{
   margin-top: 85px;
 }
-.gov-size{font-size: 32px;font-family: govsle;}
+.gov-size{font-size: 26px;font-family: govsle;}
 /*The site main colors*/
 .information{background-color: #ff9900;}
 .food-drink{background-color: #ff66cc;}
@@ -52,15 +60,14 @@ a:hover, .nav a:hover{color: #4099FF;}
 .venues{background-color: #000066}
 .facilities{background-color: #0099ff;}
 .history{background-color: #ccff33;}
-
+.title{font-size: bold;}
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
-  padding: 0px 0px 0px 0px;
+  height: 60px;
   background-color: #5FA77A;
   border-collapse: separate;
   z-index: 999;
   border-bottom: 1px solid #E7E7E7;
-  margin-bottom: 100px;
 }
 .nav-ui{
   width: 100%;height: 60px;
@@ -73,11 +80,9 @@ a:hover, .nav a:hover{color: #4099FF;}
 .nav-gov-brand{
   color: white;
   font-size: 32px;
-  vertical-align: middle;
+  line-height: 32px;
   text-align: center;
   font-family: govsle;
-  line-height: 32px;
-  padding-top: 3px;
 }
 .nav-header-link{
   padding-top: 15px;
@@ -92,6 +97,10 @@ a:hover, .nav a:hover{color: #4099FF;}
   display: inline-block;
   list-style-type: none;
 }
+.nav-login li{
+  display: inline-block;
+  list-style-type: none;
+}
 .navright-btn{
   padding-right: 10px; 
 }  
@@ -103,42 +112,25 @@ a:hover, .nav a:hover{color: #4099FF;}
   vertical-align: top;
   display: inline-block;
 }
-.nav-icon{
-  padding-right: 15px;
-  padding-left: 15px;
-}
-/* if we bring log back
-.navheader-logo{display: inline-block;}
-.navimg-logo{
-   display: block;
-   margin: 0 auto;
-}
-*/
 /*MAIN-FOOTER NAVIGATION*/
 .map-ui{
-  position: relative;
-  width: inherit;height: 60px;
-  bottom: 0px;
-  background-color: #797F8F;
+  height: 60px; width: 100%;
+  background-color: #4F535E;
   color: white;
   z-index: 900;
-  padding-top: 3px;
-  font-size: 45px;
-  /*opacity: 0.3;*/
+  padding-top: 6px;
+  font-size:45px;
   text-align: center;
 }
 .map-ui-toggle{
   position: absolute;
-  width: 70px;
-  height: 50px;
-  bottom: 60px;
-  right: 10px;
-  background-color: #797F8F;
+  width: 45px;height: 50px;
+  bottom: 60px;right: 0px;
+  background-color: #4F535E;
   color: white;
   z-index: 900;
-  font-size: 45px;
-  /*opacity: 0.3;*/
-  text-align: center;
+  font-size: 35px;
+  padding: 0;
 }
 .map-filter{
   position: absolute;
@@ -153,12 +145,8 @@ a:hover, .nav a:hover{color: #4099FF;}
   font-size: 25px;
   padding-top: 15px;
 }
-.map-ui a, .map-ui-toggle a, .map-filter a{
-  color: white;
-}
-.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
-  color: #5FA77A;
-}
+.nav-map{ padding-left: 6%; padding-right: 5%;}
+.nav-end{padding-left: 6%;}
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
@@ -173,11 +161,6 @@ a:hover, .nav a:hover{color: #4099FF;}
 }
 @media screen and (max-width: 253px){
   #custom-nav{height: 55px;}
-}
-
-.nav-login li{
-  display: inline-block;
-  list-style-type: none;
 }
 
 /*The start of the middle section
@@ -702,10 +685,12 @@ only screen and (max-device-width : 320px){
 /*-----======And Detain view-----------*/
 .info-banner{
   padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   height: 50px;
   width: 100%;
   background-color: #FFF;
   text-align: center;
+  font-style: bold;
 }
 .info-banner h3, .info-banner h4{
   padding-top: 12px;
@@ -733,7 +718,7 @@ only screen and (max-device-width : 320px){
 .btn-brooklyn a, .btn-manhattan a{
   color: #FFF;
 }
-.btn-bk-mh{ margin-top: 50px;}
+.btn-bk-mh{ margin-top: 28px;}
 p.lead a{
   color: blue;
 }
@@ -749,6 +734,11 @@ p.lead a{
   width: 55px;
   padding-bottom: 15px;
 }
+table.table.table-bordered.text-center{
+  border-bottom: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
 /* -------====FERRY SCHEDULE END==--------- */
 /*SITE STAPLES/GLOBAL SYLING*/ 
 .activebtn{background-color: #5FA77A; color: #FFF;}
@@ -756,15 +746,22 @@ p.lead a{
 .coole{background-color: #4099FF;}
 .lead{padding-right: 5px; padding-left: 5px;}
 .text-indent{text-indent: 5%;}
-/*SPRITES*/
-.ferry-off, .ferry-on, .headphones-off, .headphones-on, .calendar-off, 
-.calendar-on, .map-pin-off, .map-pin-on
+.activeinfo{color: #000;}
+.activehome{color:#5FA77A;}
+section, .table, table, tr, td{padding: 0; margin: 0;}
+
+/*SPRITES*/ 
+.ferry0, .ferry1, .headphones0, .headphones1, .calendar0, 
+.calendar1, .mappin0, .mappin1
 { display: inline-block; background: url('../images/navicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
-.ferry-off { background-position: -0px -0px; width: 131px; height: 91px; }
-.ferry-on { background-position: -0px -91px; width: 131px; height: 90px;}
-.headphones-off { background-position: -0px -182px; width: 115px; height: 96px; }
-.headphones-on { background-position: -0px -278px; width: 115px; height: 96px; }
-.calendar-off { background-position: -0px -374px; width: 105px; height: 96px; }
-.calendar-on { background-position: -0px -470px; width: 105px; height: 96px; }
-.map-pin-off { background-position: -0px -566px; width: 60px; height: 96px; }
-.map-pin-on { background-position: -60px -566px; width: 60px; height: 96px; }
+.ferry0 { background-position: -3px -0px; width: 65px; height: 45px; }
+.ferry1 { background-position: -3px -48px; width: 65px; height: 45px; }
+.headphones0 { background-position: -3px -96px; width: 54px; height: 45px; }
+.headphones1 { background-position: -3px -144px; width: 54px; height: 45px; }
+.calendar0 { background-position: -3px -192px; width: 49px; height: 45px; }
+.calendar1 { background-position: -3px -240px; width: 49px; height: 45px; }
+.mappin0 { background-position: -3px -288px; width: 28px; height: 45px; }
+.mappin1 { background-position: -34px -288px; width: 28px; height: 45px; }
+
+
+

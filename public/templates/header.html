@@ -1,13 +1,11 @@
-<div data-ng-controller="HeaderController" ng-show="navHeader">
-	<nav class="navbar-fixed-top" id="nav-beta" ng-controller="NavController">
-	    <div class="nav-ui" ng-show="headerview">
-	    	<div class="container">
-		        <ul class="nav-header-link nav-inlineblock">
-		            <li class="pull-right navright-btn"><a ui-sref="about"><span class="glyphicon glyphicon-info-sign"></span></a></li>
-		            <li class="nav-gov-brand"><a ui-sref="ferry">GOVERNORS ISLAND</a></li>
-		            <li class="pull-left navleft-btn"><a ui-sref="/"><span class="glyphicon glyphicon-home"></span></a></li>
-		        </ul>
-	        </div>
-	    </div>
-	</nav>
-</div>
+<nav class="navbar-fixed-top" id="nav-beta" data-ng-controller="NavController">
+    <div class="nav-ui" ng-show="headerview">
+    	<div class="container">
+	        <ul class="nav-header-link nav-inlineblock">
+	        	<li class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activehome:isActive(0)}" class="glyphicon glyphicon-home"></span></a></li>
+	            <li class="nav-gov-brand"><a ui-sref="/">GOVERNORS ISLAND</a></li>
+	            <li class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicon glyphicon-info-sign"></span></a></li>
+	        </ul>
+        </div>
+    </div>
+</nav>

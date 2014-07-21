@@ -8,6 +8,20 @@ services.factory('Shared', [function(){
 }]);
 
 services.factory('NavService',function($rootScope){
+    var activelink=null;
+    return {
+        updateBtn : function(newval) {
+            activelink=newval;
+            $rootScope.$broadcast('XChanged', activelink);
+        },
+        getBtn :function(){
+            return activelink;
+        }
+   };
+})
+
+/*
+services.factory('NavService',function($rootScope){
     var navHeader=true;
     return {
         increase : function() {
@@ -15,8 +29,9 @@ services.factory('NavService',function($rootScope){
             $rootScope.$broadcast('XChanged', navHeader);
         },
         decrease: function(){
-        	navHeader=false;
-        	$rootScope.$broadcast('XChanged', navHeader);
+            navHeader=false;
+            $rootScope.$broadcast('XChanged', navHeader);
         }
    };
 })
+*/

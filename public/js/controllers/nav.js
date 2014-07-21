@@ -2,38 +2,23 @@
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('NavController', ['$scope','$location', '$state', '$stateParams', 'NavService',function($scope, $location, $state, $stateParams, NavService){
-    // console.log('In HomeController. $stateParams.view', $stateParams.view);
-   	var view = $stateParams.view;
+controllers.controller('NavController', ['$scope','$location', 'NavService',function($scope, $location, NavService){
+    console.log('In NavController');
    	var path = $location.path();
-    view = view ? view : 'map';
-    //$state.go(path+"."+ view);
-    $scope.navHeader = true;
-    $scope.showNav= function() {
-        NavService.increase();            
-    }
-    $scope.hideNav= function() {
-        NavService.decrease();
-    }   
-    $scope.$on('XChanged', function(event, x) {
-        $scope.navHeader = x;
-    });
-
-    $scope.isHome=false;
-    if(path==='/'){
-    	$scope.isHome=true;
-    }
-
     $scope.headerview=true;
-    $scope.listormap=true;
-    $scope.uiup=true;
-
-    /*
-        $scope.$watch(function(){return Shared.uiup}, function(newVal, oldVal){
-        console.log('Shared.uiup changed', newVal, oldVal);
-        $scope.headerview = Shared.uiup;
+    
+    var paths=["/","/about","/events/list","/events/map","events/tour","/ferry"];
+    $scope.currentLink=paths.indexOf(path);
+    console.log($scope.currentLink+"link");
+    //$scope.navHeader = true;
+    $scope.activelink = function(numbtn) {
+        NavService.updateBtn(numbtn);            
+    };
+    $scope.isActive=function(checkTab){
+        return NavService.getBtn()===checkTab;
+    };
+    $scope.$on('XChanged', function(event, x) {
+       $scope.currentLink = x;
     });
-
-*/
 
 }]);
