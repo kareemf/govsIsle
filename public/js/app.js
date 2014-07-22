@@ -78,7 +78,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
         })
         .state('events.map',{
             url: '/map',
-            templateUrl: 'templates/map/maplist.html'
+            //templateUrl: 'templates/map/maplist.html'
+            templateUrl: 'templates/events/eventmap.html'
         })
         .state('events.list',{
             url: '/list',

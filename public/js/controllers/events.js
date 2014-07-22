@@ -210,23 +210,15 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
     }
 }]);
 
-controllers.controller('EventListController', ['$scope', '$state','$stateParams','$location','Events', function($scope, $state, $stateParams, $location, Events){
-    console.log('in EventListController');
-    var view = $stateParams.view;
-    var path = $location.path();
-    view = view ? view : 'map';
+controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){
+    console.log('In EventListController');
+    //var view = $stateParams.view;
+    //view = view ? view : 'map';
 
-    if(path==='/events/map'){
-       //  $scope.headerview=false;
-             console.log('pass');
-    }
-
-    $scope.mybutton=true;
-    $scope.listormap=true;
     /*playing with maps*/
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
-        streetViewControl: true,
+        streetViewControl: false,
         panControl: true,
         zoom: 15,
         maxZoom: 20,

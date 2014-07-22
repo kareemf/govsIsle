@@ -8,19 +8,17 @@
 
 	            <li ng-show="isActive(3)" class="pull-right navright-btn">
 					<a type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li ng-click="toggleFilters('all')"><a><i class="fa fa-plus fa-all circle"></i>All</a></li>
-						<li ng-click="toggleFilters('info')"><a><i class="fa fa-info fa-all circle"></i> info</a></li>
-					    <li ng-click="toggleFilters('food, drink')"><a><i class="fa fa-building fa-all circle"></i> Food and Drink</a></li>
-					    <li ng-click="toggleFilters('activites')"><a><i class="fa fa-university fa-all circle"></i> Activities</a></li>
-					    <li ng-click="toggleFilters('venus')"><a><i class="fa fa-glass fa-all circle"></i> Venus</a></li>
-					    <li ng-click="toggleFilters('facilities')"><a><i class="fa fa-cutlery fa-all circle"></i> Facilities</a></li>
-					    <li ng-click="toggleFilters('tours')"><a><i class="fa fa-headphones fa-all circle"></i> History</a></li>
-					    <li ng-click="toggleFilters('events')"><a><i class="fa fa-headphones fa-all circle"></i> Events</a></li>
+					<ul class="dropdown-menu map-ui-filter" role="menu">
+						<li ng-click="toggleFilters('info')"><a><i class="info"></i><span class="map-ui-btn">INFORMATION</span></a></li>
+					    <li ng-click="toggleFilters('activites')"><a><i class="activities"></i><span class="map-ui-btn">ACTIVITIES</span></a></li>
+					    <li ng-click="toggleFilters('food, drink')"><a><i class="food"></i><span class="map-ui-btn">FOOD &amp; DRINK</span></a></li>
+					    <li ng-click="toggleFilters('tours')"><a><i class="history"></i><span class="map-ui-btn">HISTORY</span></a></li>
+					    <li ng-click="toggleFilters('venus')"><a><i class="venues"></i><span class="map-ui-btn">VENUS</span></a></li>
+					    <li ng-click="toggleFilters('facilities')"><a><i class="facilities"></i><span class="map-ui-btn">FACILITIES</span></a></li>
 					</ul>
 				</li>
-				<li ng-show="isActive(2)" class="pull-right navright-btn"><a ui-sref="events.events" ng-click="activelink(6)"><span class="glyphicon glyphicon-th-list"></span></a></li>
-				<li ng-show="isActive(6)" class="pull-right navright-btn"><a ui-sref="events.list" ng-click="activelink(2)"><span class="glyphicon glyphicon-th-large"></span></a></li>
+				<li ng-show="isActive(2)" class="pull-right navright-btn"><a ui-sref="events.events" ng-click="activelink(6)"><span class="glyphicon glyphicon-th-large"></span></a></li>
+				<li ng-show="isActive(6)" class="pull-right navright-btn"><a ui-sref="events.list" ng-click="activelink(2)"><span class="glyphicon glyphicon-th-list"></span></a></li>
 	        </ul>
         </div>
     </div>
