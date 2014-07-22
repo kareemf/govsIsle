@@ -29,7 +29,7 @@ footer, header, hgroup, menu, nav, section {
 a{
   margin: 0;
   padding: 0;
-  color: pink;
+  color: black;
 }
 /* old gov colors #4099FF #3B5998 #019AD5*/
 a, a:link, a:hover, a:visited, a:active{
@@ -42,6 +42,13 @@ a:hover, .nav a:hover{color: #4099FF;}
 }
 .map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
   color: #5FA77A;
+}
+
+.nav-ui a{
+  color: white;
+}
+.nav-ui a:hover, .nav-ui a:active{
+  color: black;
 }
 
 .cleartop{clear: top;}
@@ -86,17 +93,11 @@ a:hover, .nav a:hover{color: #4099FF;}
   font-size: 32px;
   text-align: center;
   font-family: govsle;
-  padding-bottom: 100px;
 }
 .nav-header-link{
   padding-top: 8px;
 }
-.nav-ui a{
-  color: white;
-}
-.nav-ui a:hover, .nav-ui a:active{
-  color: black;
-}
+
 .nav-inlineblock li{
   display: inline-block;
   list-style-type: none;
@@ -646,11 +647,6 @@ p.lead a{
   height: 55px;
   width: 55px;
   padding-bottom: 15px;
-}
-table.table.table-bordered.text-center{
-  border-bottom: 0px;
-  margin-bottom: 0px;
-  padding-bottom: 0px;
 }
 /* -------====FERRY SCHEDULE END==--------- */
 /*SITE STAPLES/GLOBAL SYLING*/ 
