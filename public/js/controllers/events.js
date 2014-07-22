@@ -236,7 +236,7 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
     };
 
     $scope.googlemap = function initCall() {
-        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        map = new google.maps.Map(document.getElementById('eventmap'), mapOptions);
         map.setMapTypeId(google.maps.MapTypeId.HYBRID);
         map.fitBounds(mapBounds);
         var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
