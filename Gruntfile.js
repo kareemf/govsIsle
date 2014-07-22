@@ -20,22 +20,25 @@ module.exports = function(grunt) {
             js: {
                 files: paths.js,
                 tasks: ['jshint'],
-                options: {
+                /*options: {
                     livereload: true
                 }
+                */
             },
             html: {
                 files: paths.html,
-                options: {
+                /*options: {
                     livereload: true
                 }
+                */
             },
             css: {
                 files: paths.css,
                 tasks: ['csslint'],
-                options: {
+                /*options: {
                     livereload: true
                 }
+                */
             }
         },
         jshint: {

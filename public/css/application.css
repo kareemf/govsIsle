@@ -84,12 +84,12 @@ a:hover, .nav a:hover{color: #4099FF;}
 .nav-gov-brand{
   color: white;
   font-size: 32px;
-  line-height: 32px;
   text-align: center;
   font-family: govsle;
+  padding-bottom: 100px;
 }
 .nav-header-link{
-  padding-top: 15px;
+  padding-top: 8px;
 }
 .nav-ui a{
   color: white;

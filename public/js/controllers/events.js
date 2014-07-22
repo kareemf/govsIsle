@@ -210,20 +210,65 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
     }
 }]);
 
+
 controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){
     console.log('In EventListController');
     //var view = $stateParams.view;
     //view = view ? view : 'map';
+    var map;
+    var mapMinZoom = 14;
+    var mapMaxZoom = 19;
+    var mapBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(40.682183, -74.027019),
+        new google.maps.LatLng(40.695688, -74.008764));
+    var mapGetTile = function(x,y,z) { 
+        return z + "/" + x + "/" + y + ".png";
+    };
 
-    /*playing with maps*/
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
         streetViewControl: false,
         panControl: true,
         zoom: 15,
-        maxZoom: 20,
-        minZoom: 14,
+        maxZoom: mapMaxZoom,
+        minZoom: mapMinZoom,
         mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    $scope.googlemap = function initCall() {
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+        map.fitBounds(mapBounds);
+        var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
+        var opacitycontrol = new klokantech.OpacityControl(map, maptiler);
+    }   
+
+
+    $scope.myMarkers = [];
+
+
+
+    $scope.addMarker = function($event, $params) {
+        $scope.myMarkers.push(new google.maps.Marker({
+            map: $scope.myMap,
+            position: $params[0].latLng
+        }));
+    };
+
+    $scope.setZoomMessage = function(zoom) {
+        $scope.zoomMessage = 'You just zoomed to '+zoom+'!';
+        console.log(zoom,'zoomed')
+    };
+
+    $scope.openMarkerInfo = function(marker) {
+        $scope.currentMarker = marker;
+        $scope.currentMarkerLat = marker.getPosition().lat();
+        $scope.currentMarkerLng = marker.getPosition().lng();
+        $scope.myInfoWindow.open($scope.myMap, marker);
+    };
+
+    $scope.setMarkerPosition = function(marker, lat, lng) {
+        marker.setPosition(new google.maps.LatLng(lat, lng));
     };
 }]);
 
