@@ -203,8 +203,34 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     }, true);
 
     $scope.toggleFilter('all');
-
-
-
-
 }]);
+
+controllers.controller('GeoLocationController', ['$scope', 'Events', function ($scope, Events) {
+
+    $scope.geo=function(){
+        var coordinates= function(position){
+            var lat= position.coords.latitude,
+                lon= position.coords.longitude,
+                accu= position.coords.accuracy; //return the accuracy in meters
+            //alert(accu);
+            var coords = lat+ ', '+ lon;
+            document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
+
+        };
+
+        var  err = function(error){
+            //1 no premission, 2 no internet conncetion, 3 timeout
+            if(error.code===1){alert('please allow us to access your location');}
+            if(error.code===3){alert('The browser timeout')}
+        };
+        document.getElementById('get_location').onclick=function(){
+            //enableHighAccuracy: true -> increase by 10 meters
+            navigator.geolocation.getCurrentPosition(coordinates, err, 
+                {enableHighAccuracy: true, 
+                    maximumAge: 30000, //in millisecond to refresh the cach
+                    //timeout: 300         //time in seconds for the browser to get the location
+                });
+            return false;
+        }
+    }();
+  }]);
