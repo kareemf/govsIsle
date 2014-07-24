@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>govsoverlay_revised_dimension_deletedline</title>
+    <title>govsoverlay_revised_3</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
-    <script src="maptiler.js"></script>
+    <script src="https://maptilercdn.s3.amazonaws.com/klokantech.js"></script>
     <script>
-      var map;
-      var mapMinZoom = 14;
-      var mapMaxZoom = 19;
-      var mapBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(40.682183, -74.027019),
-        new google.maps.LatLng(40.695688, -74.008764));
-      var mapGetTile = function(x,y,z) { 
-        return z + "/" + x + "/" + y + ".png";
-      }
+var map;
+var mapMinZoom = 14;
+var mapMaxZoom = 19;
+var mapBounds = new google.maps.LatLngBounds(
+  new google.maps.LatLng(40.682001, -74.027692),
+  new google.maps.LatLng(40.695683, -74.009763));
+var mapGetTile = function(x,y,z) { 
+  return z + "/" + x + "/" + y + ".png";
+}
 
-      function init() {
-        var opts = {
-          streetViewControl: false,
-          center: new google.maps.LatLng(0,0),
-          zoom: 14
-        };
-        map = new google.maps.Map(document.getElementById('map'), opts);
-        map.setMapTypeId(google.maps.MapTypeId.HYBRID);
-        map.fitBounds(mapBounds);
-        var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
-        var opacitycontrol = new klokantech.OpacityControl(map, maptiler);
-      }
+function init() {
+  var opts = {
+    streetViewControl: false,
+    center: new google.maps.LatLng(0,0),
+    zoom: 14
+  };
+  map = new google.maps.Map(document.getElementById('map'), opts);
+  map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+  map.fitBounds(mapBounds);
+  var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
+  var opacitycontrol = new klokantech.OpacityControl(map, maptiler);
+}
+
     </script>
     <style>
       html, body, #map { width:100%; height:100%; margin:0; padding:0; }

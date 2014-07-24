@@ -113,7 +113,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
 			});	
 	
 	
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
 		
 	$sceDelegateProvider.resourceUrlWhitelist([
 				   'self',

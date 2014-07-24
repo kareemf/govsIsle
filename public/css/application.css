@@ -656,7 +656,7 @@ p.lead a{
 .lead{padding-right: 5px; padding-left: 5px;}
 .text-indent{text-indent: 5%;}
 .activeinfo{color: #000;}
-.activehome{color:#5FA77A;}
+.activehome{color:#000;/*#5FA77A*/;}
 
 /*SPRITES*/ 
 .ferry0, .ferry1, .headphones0, .headphones1, .calendar0, 

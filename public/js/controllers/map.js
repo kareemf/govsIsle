@@ -233,4 +233,4 @@ controllers.controller('GeoLocationController', ['$scope', 'Events', function ($
             return false;
         }
     }();
-  }]);
+}]);
