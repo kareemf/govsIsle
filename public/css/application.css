@@ -172,6 +172,19 @@ footer, header, hgroup, menu, nav, section {
 #first-carousel{
   margin-top: 15px;
 }
+
+#first-carousel .carousel-indicators{
+  position: absolute;
+  top: 10px;
+  left: 110%;
+  z-index: 200;
+  /*background-color: blue;*/
+  height: 25px;
+  width: 50px;
+}
+.carousel-control{
+  z-index: 1000;
+}
 .img-container{
   background-color: #FFF;
   height: 100%;width:100%;
@@ -214,15 +227,26 @@ footer, header, hgroup, menu, nav, section {
   background-color: #5FA77A;
 }
 /*----------====SECOND CAROUSEL====-------*/
-#carousel{
-  text-align: center;
+#myCarousel{
+  /*odd stuff 252px*/
+  margin-top: 15px;
 }
+#myCarousel .carousel-inner .active.left { left: -10%; }
+#myCarousel .carousel-inner .next        { left:  10%; }
+#myCarousel .carousel-control.left, #myCarousel .carousel-control.right {
+  background-image:none;
+}
+#myCarousel .item{  
+  white-space: nowrap; 
+  overflow: hidden;
+}
+
 .img-collection{
   box-shadow: 0 0 0px #aaa;
 }
 .img-container-sm{
   position: relative;
-  width: 150px;height: 150px;
+  width: 175px;height: 175px;
   display: inline-block;
   margin: 0 auto 0 auto;
   border: none;
@@ -255,15 +279,7 @@ footer, header, hgroup, menu, nav, section {
   padding-top: 25px;
 }
 
-#myCarousel{
-  /*odd stuff 190px*/
-  margin-top: 205px;
-}
 
-#myCarousel .carousel-inner .active.left { left: -10%; }
-#myCarousel .carousel-inner .next        { left:  10%; }
-#myCarousel .carousel-control.left, #myCarousel .carousel-control.right {background-image:none;}
-#myCarousel .item{  white-space: nowrap; overflow: hidden;}
 /*----------===MAPS===---------------*/
 .angular-google-map-container { height: 400px; }
 .map-container{
