@@ -51,7 +51,7 @@ footer, header, hgroup, menu, nav, section {
   background-color: #5FA77A;
   border-collapse: separate;
   z-index: 999;
-  border-bottom: 1px solid #E7E7E7;
+  /*border-bottom: 1px solid #E7E7E7;*/
   min-width: 300px;
 }
 .nav-ui{
@@ -155,22 +155,22 @@ footer, header, hgroup, menu, nav, section {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1005px;
+    width: 1004px;
   }
 }
-/*The start of the middle section
-in between the header and footer */
-.main-content{
-  height: 100%;width: 100%;
-  margin-top: 61px;
-}
+
+
+/*THE MAIN CONTENT AKA THE MIDDLE SECTION*/
+.main-content{margin-top: 60px;}
+/*THE MAIN FOOTER AKA THE FOOTER*/
 .main-footer{
   margin-bottom: 60px; /*lower navigation bar*/
 }
+
+
 /*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
-.carousel-wrapper{}
 #first-carousel{
-  margin-top: 0px;
+  margin-top: 15px;
 }
 .img-container{
   background-color: #FFF;
@@ -218,7 +218,6 @@ in between the header and footer */
   text-align: center;
 }
 .img-collection{
-  margin-top: 25px;
   box-shadow: 0 0 0px #aaa;
 }
 .img-container-sm{
@@ -256,6 +255,15 @@ in between the header and footer */
   padding-top: 25px;
 }
 
+#myCarousel{
+  /*odd stuff 190px*/
+  margin-top: 205px;
+}
+
+#myCarousel .carousel-inner .active.left { left: -10%; }
+#myCarousel .carousel-inner .next        { left:  10%; }
+#myCarousel .carousel-control.left, #myCarousel .carousel-control.right {background-image:none;}
+#myCarousel .item{  white-space: nowrap; overflow: hidden;}
 /*----------===MAPS===---------------*/
 .angular-google-map-container { height: 400px; }
 .map-container{
@@ -668,13 +676,15 @@ a:hover, .nav a:hover{color: #4099FF;}
 
 /* -------====FERRY SCHEDULE END==--------- */
 /*SITE STAPLES/GLOBAL SYLING*/ 
+
 .activebtn{background-color: #5FA77A; color: #FFF;}
-.dangere{background-color: #FF0101;}
+/*.dangere{background-color: #FF0101;}
 .coole{background-color: #4099FF;}
+*/
 .lead{padding-right: 5px; padding-left: 5px;}
 .text-indent{text-indent: 5%;}
 .activeinfo{color: #000;}
-.activehome{color:#FFF;/*#5FA77A*/;}
+.activehome{color:#5FA77A;/*#FFF*/;}
 
 /*SPRITES*/ 
 .ferry0, .ferry1, .headphones0, .headphones1, .calendar0, 
