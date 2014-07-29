@@ -25,32 +25,6 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-/*ALL LINKS ARE DEFINED HERE*/
-a{
-  margin: 0;
-  padding: 0;
-  color: black;
-}
-/* old gov colors #4099FF #3B5998 #019AD5*/
-a, a:link, a:hover, a:visited, a:active{
-  text-decoration: none;
-}
-a:hover, .nav a:hover{color: #4099FF;}
-/* ALL LINKS*/
-.map-ui a, .map-ui-toggle a, .map-filter a{
-  color: white;
-}
-.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
-  color: #5FA77A;
-}
-
-.nav-ui a{
-  color: white;
-}
-.nav-ui a:hover, .nav-ui a:active{
-  color: black;
-}
-
 .cleartop{clear: top;}
 .clearboth{clear: both;}
 .header-shadow{
@@ -117,6 +91,11 @@ a:hover, .nav a:hover{color: #4099FF;}
   vertical-align: top;
   display: inline-block;
 }
+.logo{
+  height: 50px;
+  width: 50px;
+  background-color: #FFF;
+}
 /*MAIN-FOOTER NAVIGATION*/
 .map-ui{
   height: 60px; width: 100%;
@@ -168,6 +147,17 @@ a:hover, .nav a:hover{color: #4099FF;}
   #custom-nav{height: 55px;}
 }
 
+/*the max page size should remain 1005px*/
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1005px;
+  }
+}
 /*The start of the middle section
 in between the header and footer */
 .main-content{
@@ -237,7 +227,6 @@ in between the header and footer */
   display: inline-block;
   margin: 0 auto 0 auto;
   border: none;
-  display: block;
   float: center;
   padding: 0px 0px 0px 0px;
 }
@@ -281,7 +270,7 @@ in between the header and footer */
     width: 100%;
 }
 #eventmap{
-    height:400px;
+    height:100vh;
     width: 100%;
     min-height: 100%;
 }
@@ -648,6 +637,35 @@ p.lead a{
   width: 55px;
   padding-bottom: 15px;
 }
+
+/*ALL LINKS ARE DEFINED HERE*/
+a{
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+/* old gov colors #4099FF #3B5998 #019AD5*/
+/* ALL LINKS*/
+a, a:link, a:hover, a:visited, a:active{
+  text-decoration: none;
+  color: #FFF;
+}
+a:hover, .nav a:hover{color: #4099FF;}
+
+.map-ui a, .map-ui-toggle a, .map-filter a{
+  color: white;
+}
+.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
+  color: #5FA77A;
+}
+
+.nav-ui a{
+  color: white;
+}
+.nav-ui a:hover, .nav-ui a:active{
+  color: black;
+}
+
 /* -------====FERRY SCHEDULE END==--------- */
 /*SITE STAPLES/GLOBAL SYLING*/ 
 .activebtn{background-color: #5FA77A; color: #FFF;}
@@ -656,32 +674,30 @@ p.lead a{
 .lead{padding-right: 5px; padding-left: 5px;}
 .text-indent{text-indent: 5%;}
 .activeinfo{color: #000;}
-.activehome{color:#000;/*#5FA77A*/;}
+.activehome{color:#FFF;/*#5FA77A*/;}
 
 /*SPRITES*/ 
 .ferry0, .ferry1, .headphones0, .headphones1, .calendar0, 
-.calendar1, .mappin0, .mappin1{ 
-  display: inline-block; background: url('../images/navicons.png') no-repeat; 
-  overflow: hidden; text-indent: -9999px; text-align: left; 
-}
+.calendar1, .activities, .facilities, .food, .history, 
+.info, .venues, .facebook, .instagram, .twitter, 
+.wordpress, .mappin0, .mappin1
+{ display: inline-block; background: url('../images/siteicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
 .ferry0 { background-position: -3px -0px; width: 65px; height: 45px; }
 .ferry1 { background-position: -3px -48px; width: 65px; height: 45px; }
 .headphones0 { background-position: -3px -96px; width: 54px; height: 45px; }
 .headphones1 { background-position: -3px -144px; width: 54px; height: 45px; }
 .calendar0 { background-position: -3px -192px; width: 49px; height: 45px; }
 .calendar1 { background-position: -3px -240px; width: 49px; height: 45px; }
-.mappin0 { background-position: -3px -288px; width: 28px; height: 45px; }
-.mappin1 { background-position: -34px -288px; width: 28px; height: 45px; }
-
-.activities, .facilities, .food, .history, .info, .venues{ 
-  display: inline-block; background: url('../images/filtericons.png') no-repeat; overflow: hidden;
-  text-indent: -9999px; text-align: left; 
- }
-.activities { background-position: -3px -0px; width: 45px; height: 45px; }
-.facilities { background-position: -51px -0px; width: 45px; height: 45px; }
-.food { background-position: -3px -48px; width: 45px; height: 45px; }
-.history { background-position: -51px -48px; width: 45px; height: 45px; }
-.info { background-position: -3px -96px; width: 45px; height: 45px; }
-.venues { background-position: -51px -96px; width: 45px; height: 45px; }
-
+.activities { background-position: -3px -288px; width: 45px; height: 45px; }
+.facilities { background-position: -3px -336px; width: 45px; height: 45px; }
+.food { background-position: -3px -384px; width: 45px; height: 45px; }
+.history { background-position: -3px -432px; width: 45px; height: 45px; }
+.info { background-position: -3px -480px; width: 45px; height: 45px; }
+.venues { background-position: -3px -528px; width: 45px; height: 45px; }
+.facebook { background-position: -3px -576px; width: 32px; height: 32px; }
+.instagram { background-position: -3px -611px; width: 32px; height: 32px; }
+.twitter { background-position: -3px -646px; width: 32px; height: 32px; }
+.wordpress { background-position: -3px -681px; width: 32px; height: 32px; }
+.mappin0 { background-position: -3px -716px; width: 28px; height: 45px; }
+.mappin1 { background-position: -34px -716px; width: 28px; height: 45px; }
 

@@ -85,6 +85,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
             url: '/list',
             templateUrl: 'templates/events/eventlist.html'
         })
+        .state('events.grid',{
+            url: '/grid',
+            templateUrl: 'templates/events/eventgrid.html'
+        })
         .state('events.events',{
             url: '/events',
             templateUrl: 'templates/events/events.html'

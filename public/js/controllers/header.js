@@ -41,3 +41,28 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
         });
     }
 ]);
+
+controllers.controller('NavController', ['$scope','$location', 'NavService',function($scope, $location, NavService){
+    console.log('In NavController');
+    var path = $location.path();
+    $scope.headerview=true;
+    
+    var paths=["/","/about","/events/grid","/events/map","/tours","/ferry", "/events/list"];
+
+    $scope.currentLink=paths.indexOf(path);
+    console.log($scope.currentLink+"link");
+    
+    $scope.activelink = function(numbtn) {
+        NavService.updateBtn(numbtn);            
+    };
+    $scope.isActive=function(checkTab){
+        return NavService.getBtn()===checkTab;
+    };
+    $scope.buttonswap= function(){  
+        return NavService.getHiddenBtn();
+    };
+    $scope.$on('XChanged', function(event, x) {
+       $scope.currentLink = x;
+    });
+
+}]);

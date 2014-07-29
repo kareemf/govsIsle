@@ -215,6 +215,13 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
     console.log('In EventListController');
     //var view = $stateParams.view;
     //view = view ? view : 'map';
+
+}]);
+
+controllers.controller('EventMapController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){
+    console.log('In EventListController');
+    //var view = $stateParams.view;
+    //view = view ? view : 'map';
     var map;
     var mapMinZoom = 14;
     var mapMaxZoom = 17;
@@ -243,5 +250,6 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
         var opacitycontrol = new klokantech.OpacityControl(map, maptiler);
     }
 }]);
+
 
 
