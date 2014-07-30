@@ -44,6 +44,28 @@ footer, header, hgroup, menu, nav, section {
 .facilitie{background-color: #0099ff;}
 .hist{background-color: #ccff33;}
 .title{font-size: bold;}
+.softtop-padding{padding-top: 20px;}
+/* old gov colors #4099FF #3B5998 #019AD5*/
+/* ALL LINKS*/
+a, a:link, a:hover, a:visited, a:active{
+  text-decoration: none;
+  color: #FFF;
+}
+a:hover, .nav a:hover{color: #4099FF;}
+
+.map-ui a, .map-ui-toggle a, .map-filter a{
+  color: white;
+}
+.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
+  color: #5FA77A;
+}
+
+.nav-ui a{
+  color: white;
+}
+.nav-ui a:hover, .nav-ui a:active{
+  color: black;
+}
 
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
@@ -164,7 +186,7 @@ footer, header, hgroup, menu, nav, section {
 .main-content{margin-top: 60px;}
 /*THE MAIN FOOTER AKA THE FOOTER*/
 .main-footer{
-  margin-bottom: 60px; /*lower navigation bar*/
+  margin-bottom: 30px; /*lower navigation bar*/
 }
 
 
@@ -203,6 +225,10 @@ footer, header, hgroup, menu, nav, section {
     /*padding-top: 20px;
     padding-bottom: 20px;*/
 }
+/*DETAIL VIEW*/
+.img-detail{
+  width: 100%;
+}
 .custom-caption{
   right: 2%;left: 2%;
   background-color: black;
@@ -227,12 +253,9 @@ footer, header, hgroup, menu, nav, section {
   background-color: #5FA77A;
 }
 /*----------====SECOND CAROUSEL====-------*/
-#myCarousel{
-  /*odd stuff 252px*/
-  margin-top: 15px;
-}
-#myCarousel .carousel-inner .active.left { left: -10%; }
-#myCarousel .carousel-inner .next        { left:  10%; }
+#myCarousel{margin-top: 15px;}
+#myCarousel .carousel-inner .active.left { left: -25px;}
+#myCarousel .carousel-inner .next        { left: 0px;}
 #myCarousel .carousel-control.left, #myCarousel .carousel-control.right {
   background-image:none;
 }
@@ -240,18 +263,23 @@ footer, header, hgroup, menu, nav, section {
   white-space: nowrap; 
   overflow: hidden;
 }
+#myCarousel .carousel-control{
+  height: 25px;
+  width: 25px;
+  padding-top: 100px;
+}
 
 .img-collection{
   box-shadow: 0 0 0px #aaa;
 }
 .img-container-sm{
-  position: relative;
   width: 175px;height: 175px;
   display: inline-block;
-  margin: 0 auto 0 auto;
   border: none;
   float: center;
   padding: 0px 0px 0px 0px;
+  margin-left: 5px;
+  margin-right:5px;
 }
 .img-custom-sm{
   vertical-align: middle;
@@ -649,7 +677,9 @@ only screen and (max-device-width : 320px){
 p.lead a{
   color: blue;
 }
-
+ul.lead{
+  list-style-type: none;
+}
 /*detail view image*/
 .info-img{
   height: 250%;
@@ -668,36 +698,14 @@ a{
   padding: 0;
   color: black;
 }
-/* old gov colors #4099FF #3B5998 #019AD5*/
-/* ALL LINKS*/
-a, a:link, a:hover, a:visited, a:active{
-  text-decoration: none;
-  color: #FFF;
-}
-a:hover, .nav a:hover{color: #4099FF;}
-
-.map-ui a, .map-ui-toggle a, .map-filter a{
-  color: white;
-}
-.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
-  color: #5FA77A;
-}
-
-.nav-ui a{
-  color: white;
-}
-.nav-ui a:hover, .nav-ui a:active{
-  color: black;
-}
-
 /* -------====FERRY SCHEDULE END==--------- */
-/*SITE STAPLES/GLOBAL SYLING*/ 
 
+/*SITE STAPLES/GLOBAL SYLING*/ 
 .activebtn{background-color: #5FA77A; color: #FFF;}
 /*.dangere{background-color: #FF0101;}
 .coole{background-color: #4099FF;}
 */
-.lead{padding-right: 5px; padding-left: 5px;}
+.lead{padding-right: 25px; padding-left: 25px;}
 .text-indent{text-indent: 5%;}
 .activeinfo{color: #000;}
 .activehome{color:#5FA77A;/*#FFF*/;}

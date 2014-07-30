@@ -1,4 +1,4 @@
-<div class="container">
+<div ng-controller="NavController">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div id="first-carousel" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
@@ -41,7 +41,6 @@
 			</a>
 		</div>
 	</div>
-</div>
 	<!--
 	<div class="img-collection">
 		<div id="carousel">
@@ -72,28 +71,29 @@
 		</div>
 	</div>
 	-->
-<div class="container">
-	<div class="carousel slide" id="myCarousel">
-		<div class="img-collection">
-			<div class="carousel-inner">
-				<div class="item active">
-				  <div class="img-container-sm"><a ui-sref="events.grid"><img ng-src="images/landing/Thumb_discover_320x250.jpg" class="img-responsive"></a></div>
-				</div>
-				<div class="item">
-				  <div class="img-container-sm"><a href="#"><img ng-src="images/landing/Thumb_eat_320x250.jpg" class="img-responsive"></a></div>
-				</div>
-				<div class="item">
-				  <div class="img-container-sm"><a href="#"><img ng-src="images/landing/Thumb_enjoy_320x250.jpg" class="img-responsive"></a></div>
-				</div>
-				<div class="item">
-				  <div class="img-container-sm"><a href="#"><img ng-src="images/landing/Thumb_learn_320x250.jpg" class="img-responsive"></a></div>
+	<div class="container">
+		<div class="carousel slide" id="myCarousel">
+			<div class="img-collection">
+				<div class="carousel-inner">
+					<div class="item active">
+					  <div class="img-container-sm"><a ng-click="activelink(2)" ui-sref="events.grid"><img ng-src="images/landing/Thumb_discover_320x250.jpg" class="img-responsive"></a></div>
+					</div>
+					<div class="item">
+					  <div class="img-container-sm"><a href="#"><img ng-src="images/landing/Thumb_eat_320x250.jpg" class="img-responsive"></a></div>
+					</div>
+					<div class="item">
+					  <div class="img-container-sm"><a href="#"><img ng-src="images/landing/Thumb_enjoy_320x250.jpg" class="img-responsive"></a></div>
+					</div>
+					<div class="item">
+					  <div class="img-container-sm"><a href="#"><img ng-src="images/landing/Thumb_learn_320x250.jpg" class="img-responsive"></a></div>
+					</div>
 				</div>
 			</div>
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+			<a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 		</div>
-		<a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-		<a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-	</div>
-</div><!-- END OF CAROUSEL -->
+	</div><!-- END OF CAROUSEL -->
+</div>
 <script type="text/javascript">
 	$('#myCarousel').carousel({
 	  interval: 4000

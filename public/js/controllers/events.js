@@ -208,6 +208,13 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
 
         Events.getBySlug({slug: slug}, successCallback, failureCallback);
     }
+
+    $scope.event=[{'id':1},
+         {'title':"Girl With The Red Dress"},
+         {'name': 'still love you'},
+         {'src': 'images/test1.jpg'},
+         {'description': "what you know about that, i know all about that"}
+    ];
 }]);
 
 
