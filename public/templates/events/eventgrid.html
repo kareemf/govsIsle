@@ -1,6 +1,8 @@
-<div id="allTours" ng-controller="ToursController">
-	<h3 id="featuredLabel">FEATURED AUDIO</h3>
-	<div class="container carousel-wrapper">
+<div id="allTours" ng-controller="EventDetailController">
+	<div class="info-banner info-banner-left">
+		<h4>UPCOMING EVENTS</h4>
+	</div>
+	<div class="container">
 		<div id="caroContainer" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div id="main-carousel" class="carousel slide" data-ride="carousel">
 					<!-- Indicators -->
@@ -11,45 +13,62 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner">
 					    <div class="item active">
-				        	<img src="{{getImageSrc(myTours[1].imageLoc)}}" alt="gov's island" class="img-custom-lg img-reponsive">
-				        	 <div class="carousel-caption  "><h3>EVENTS ON THE ISLAND</h3></div>
+				        	<img src="{{getImgSrc(1)}}" alt="gov's island" class="img-custom-lg img-responsive">
+				        	 <div class="carousel-caption"><h3>{{gridcarousel[0].title}}</h3></div>
 					    </div>
 					    <div class="item">
-					      		<img src="{{getImageSrc(myTours[0].imageLoc)}}" alt="gov's island" class="img-custom-lg img-responsive">
-					    	<div class="carousel-caption  "><h3>PAST, PRESENT, FUTURE</h3></div>
+					      		<img src="{{getImgSrc(2)}}" alt="gov's island" class="img-custom-lg img-responsive">
+					    	<div class="carousel-caption"><h3>{{gridcarousel[1].title}}</h3></div>
 					    </div>
 					</div><!--ENDING OF CAROUSEL-INNER nav-pills-->
-
-					<!-- Controls -->
-					<a data-target=" #main-carousel" class="left carousel-control" role="button" data-slide="prev">
-					 	   <span class="glyphicon glyphicon-chevron-left"></span>
+					<!-- Controls --><a data-target=" #main-carousel" class="left carousel-control" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span>
 					</a>
 					<a data-target=" #main-carousel" class="right carousel-control" role="button" data-slide="next">
-					 	   <span class="glyphicon glyphicon-chevron-right"></span>
+					 	<span class="glyphicon glyphicon-chevron-right"></span>
 					</a>
-
 				</div>
 				<div id="bottomBar">
 				</div>
 		</div>
-		
 	</div>
-	<h3 id="curatedLabel">CURATED TOURS</h3>
+	<h3 class="info-banner-left">MUSIC</h3>
 	<ul id="curatedlist" class="tourlist"> 
+		<li data-ng-repeat="event in eventsMusic">
+			<a ui-sref="events.detail({id: event.id})">
+				<img src="{{event.src}}" alt="" width="150px" height="150px">
+				<div class="caption">
+					<h5>{{event.title}}</h5>
+				</div>
+			</a>
+		</li>
+	</ul>
+	<h3 class="info-banner-left">Art</h3>
+	<ul id="artistlist" class="tourlist"> 
 		<li data-ng-repeat="tour in myTours">
 			<a ui-sref="tourlist({ id: tour.id })">
-				<img src="{{getImageSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
+				<img src="{{getImgSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
 				<div class="caption">
 					<h5>{{tour.tourName}}</h5>
 				</div>
 			</a>
 		</li>
 	</ul>
-	<h3 id="artistLabel">ARTIST CONTRIBUTORS</h3>
-	<ul id="artistlist" class="tourlist"> 
-		<li data-ng-repeat="tour in allTours">
+	<h3 class="info-banner-left">FESTIVALS</h3>
+	<ul id="curatedlist" class="tourlist"> 
+		<li data-ng-repeat="tour in myTours">
 			<a ui-sref="tourlist({ id: tour.id })">
-				<img src="{{getImageSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
+				<img src="{{getImgSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
+				<div class="caption">
+					<h5>{{tour.tourName}}</h5>
+				</div>
+			</a>
+		</li>
+	</ul>
+	<h3 class="info-banner-left">ATHLETIC</h3>
+	<ul id="curatedlist" class="tourlist"> 
+		<li data-ng-repeat="tour in myTours">
+			<a ui-sref="tourlist({ id: tour.id })">
+				<img src="{{getImgSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
 				<div class="caption">
 					<h5>{{tour.tourName}}</h5>
 				</div>

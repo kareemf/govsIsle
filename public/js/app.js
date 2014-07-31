@@ -94,7 +94,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
             templateUrl: 'templates/events/events.html'
         })
         .state('events.detail', {
-            url: '/:slug',
+            url: '/detail/{id}',
             templateUrl: 'templates/events/event.html',
         });
 		

@@ -191,9 +191,42 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
 
 controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Events', function($scope, $stateParams, Events){
     console.log('in EventDetailController');
+    $scope.events =[
+        {'id':1,
+        'title':"Halm",
+        'startTime': '10AM',
+        'endTime':'11PM',
+        'startDate':'Monday, June 9',
+        'endDate':'Sunday, June 15',
+        'location':'Building 17',
+        'geoLocation': [7444.422,-145.1111],
+        'src': 'images/events/detail/details_haim_640x310.jpg',
+        'description': "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+        },
 
-    var slug = $stateParams.slug;
-    if(slug){
+        {'id':2,
+        'title':"Halm",
+        'startTime': '10AM',
+        'endTime':'11PM',
+        'startDate':'Monday, June 9',
+        'endDate':'Sunday, June 15',
+        'location':'Building 17',
+        'geoLocation': [7444.422,-145.1111],
+        'src': 'images/events/detail/details_kendrick_640x310.jpg',
+        'description': "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+    ];
+    
+
+    var id = $stateParams.id;
+    if(id){
+        console.log("In EventDetailController Id found "+id);
+        $scope.theEvent=$scope.events[id-1];
+        //console.log($scope.theEvent);
+
+
+
+        /*
         var successCallback = function(event, headers){
             console.log('getBySlug event', event);
 
@@ -206,22 +239,46 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
             $scope.error = response.data;
         };
 
-        Events.getBySlug({slug: slug}, successCallback, failureCallback);
+        Events.getBySlug({id: id}, successCallback, failureCallback);
+        */
     }
-
-    $scope.event=[{'id':1},
-         {'title':"Girl With The Red Dress"},
-         {'name': 'still love you'},
-         {'src': 'images/test1.jpg'},
-         {'description': "what you know about that, i know all about that"}
-    ];
 }]);
 
 
-controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){
+controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','$http', function($scope, $state, $stateParams, Events,$http){
     console.log('In EventListController');
-    //var view = $stateParams.view;
-    //view = view ? view : 'map';
+
+    $scope.getImgSrc = function (imageFile) {
+      return 'http://res.cloudinary.com/hqsaer6gs/image/upload/v1406740285/govsisle/langing/music-feature'+imageFile+'.png';
+    };
+    //data set-replace this with mongodb query
+    $scope.gridcarousel=[
+        {'title': 'FIGMENT| 07/25',
+        'date': '07/25',
+        'time': 'Now',
+        'src': 'images/test1.jpg',
+        'description': "what you know about that, i know all about that"},
+        {'title':"JAZZ AGE | 07/31",
+        'date': '07/31',
+        'time': '11:30AM',
+        'src': 'images/test1.jpg',
+        'description': "what you know about that, i know all about that"}
+    ];
+    $scope.eventsMusic=[
+        {'id':1,
+        'title': "Halm",
+        'date': "July 26",
+        'time': "10:00 AM",
+        'src': 'images/events/thumbnails/Thumb_haim.jpg',
+        'link': function(id){
+            return "hey"+id
+        }},
+        {'id':2,
+        'title': 'Kendrick',
+        'date': "Angust 1",
+        'time': "7:30PM",
+        'src': 'images/events/thumbnails/Thumb_kendrick.jpg'}
+    ];
 
 }]);
 

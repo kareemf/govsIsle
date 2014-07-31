@@ -1,9 +1,9 @@
 <div ng-controller="EventDetailController">
-	<div class="info-banner">
-		<h4>{{event.title}}</h4>
-	</div>
 	<div class="img-detail">
-		<img alt="{{event.name}}" ng-src="{{event.src}}" class="img-responsive"/>
+		<img alt="{{theEvent.title}}" ng-src="{{theEvent.src}}" class="img-responsive"/>
 	</div>
-	<p class="lead text-indent">{{event.description}}</p>
-</div>
+	<div class="info-banner">
+		<h4>{{theEvent.title}}</h4>
+	</div>
+	<p class="lead text-indent">{{theEvent.description}}</p>
+</div><br/>
