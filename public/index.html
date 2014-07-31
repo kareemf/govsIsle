@@ -1,33 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
     <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-        <style type="text/css">
-            html { height: 100% }
-            body { height: 100%; margin: 0; padding: 0 }
-            #map-canvas { height: 100% }
-        </style>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="govsIsland" content="">
+        <!--<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />-->
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/application.css">
+        <link rel="stylesheet" type="text/css" href="bower_components/fontawesome/css/font-awesome.css">
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+        <!--DEVELOPMENT HOME--><script src="http://192.168.1.9:35729/livereload.js?snipver=1"></script>
+        <!--DEVELOPMENT WORK<script src="http://10.255.16.107:35729/livereload.js?snipver=1"></script>-->
+        <title>Culture Island</title>
     </head>
     <body>
-        <div id= "map pull-center" align="center">
-            <h3>Testing Maps</h3>
-            <h4><a href="#" id="get_location">Get location</a></h4>
-            <iframe id= "google_map" width="1000" height= "500" frameborder="0" marginwidth="0" scrolling="yes" src="https://maps.google.com?q=40.6880492, -74.0188415&z=16&output=embed"></iframe>
+        <div class="main-header"><!--MAIN-HEADER-->
+           <div ng-include="'templates/header.html'" data-role="navigation"></div>
+        </div>
+        <div class="main-content"><!--MAIN-CONTENT-->
+             <!--<div ui-view autoscroll="false"></div> -->
+            <ui-view autoscroll='false'/>
+        </div>
+        <div class="main-footer"><!-- MAIN-FOOTER-->
+            <div ng-include=" 'templates/nav.html' "></div>
         </div>
 
-        <script type="text/javascript">
+        <!-- Bower installs-->
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-utils/ui-utils.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.js"></script>
 
-            var coordinates= function(position){
-                var lat= position.coords.latitude,
-                    lon= position.coords.longitude;
-                var coords = lat+ ', '+ lon;
-                document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
+        <!-- Special functionality-footer--> <!--my verison will come soon-->
+        <script type="text/javascript" src="js/smartmenus-min.js"></script>
+        <script type="text/javascript" src="js/smartmenus-bootstrap.js"></script>
 
-            }
-            document.getElementById('get_location').onclick=function(){
-                navigator.geolocation.getCurrentPosition(coordinates);
-                return false;
-            }
-        </script>
+        <!--Back-end Controllers-->
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/services/shared.js"></script>
+        <script type="text/javascript" src="js/services/events.js"></script>
+        <script type="text/javascript" src="js/services/amenities.js"></script>
+        <script type="text/javascript" src="js/services/alerts.js"></script>
+        <script type="text/javascript" src="js/services/geocoder.js"></script>
+        <script type="text/javascript" src="js/services/meanio.js"></script>
+
+        <!--Front-End Controllers-->
+        <script type="text/javascript" src="js/controllers/auth.js"></script>
+        <script type="text/javascript" src="js/controllers/home.js"></script>
+        <script type="text/javascript" src="js/controllers/map.js"></script>
+        <script type="text/javascript" src="js/controllers/events.js"></script>
+        <script type="text/javascript" src="js/controllers/header.js"></script>
+		<script type="text/javascript" src="js/controllers/tours.js"></script>
+		<audio id="audioPlayer"></audio>
     </body>
 </html>

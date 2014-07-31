@@ -1,0 +1,20 @@
+<div id="tourPoints" ng-controller="TourListController"> 
+	<div id="tourImage">
+		<img src="{{getImageSrc(tour.imageLoc)}}">
+	</div>
+	<div id="tourInfo">
+		<h3>{{tour.tourName}}</h3>
+		<p>{{tour.description}}</p>
+	</div>
+	<ul id="pointlist">
+		<li data-ng-repeat="point in tourpoints">
+				<a ui-sref="tourpoint({ id: point.id })">
+				<div class="caption">
+					<h5>{{$index + 1}} : {{point.postName}}</h5>
+					<img src="../images/play.png" width="40px" height="40px">
+				</div>
+				</a>
+			</a>
+		</li>
+	</ul>
+</div><br/>

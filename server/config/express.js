@@ -24,6 +24,7 @@ var express = require('express'),
     assetmanager = require('assetmanager'),
     fs = require('fs'),
     Grid = require('gridfs-stream');
+    var multer = require('multer');
 
 module.exports = function(app, passport, db) {
 
@@ -58,6 +59,7 @@ module.exports = function(app, passport, db) {
 
     // Set views path, template engine and default layout
     // app.set('views', config.root + '/server/views');
+    //app.set('views', config.root + '/public/templates');
 
     // Enable jsonp
     app.enable('jsonp callback');
@@ -67,6 +69,7 @@ module.exports = function(app, passport, db) {
 
     // Request body parsing middleware should be above methodOverride
     app.use(expressValidator());
+    app.use(multer({ dest: './uploads/'}))
     app.use(bodyParser());
     app.use(methodOverride());
 
@@ -106,7 +109,9 @@ module.exports = function(app, passport, db) {
     app.use(flash());
 
     // Setting the fav icon and static folder
-    // app.use(favicon(appPath + '/public/system/assets/img/favicon.ico'));
+    app.use(favicon(appPath + '/public/images/favicon.ico'));
+    //app.use(express.favicon(path.join(__dirname, 'public','images','favicon.ico'))); 
+
 
     app.get('/modules/aggregated.js', function(req, res) {
         res.setHeader('content-type', 'text/javascript');

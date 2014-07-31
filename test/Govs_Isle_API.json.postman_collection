@@ -1,0 +1,897 @@
+{
+	"id": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+	"name": "Govs_Isle_API",
+	"description": "",
+	"order": [
+		"e6d9c579-a236-a785-899f-6cf41ad3cd54",
+		"f04a9634-98b3-aab4-c4c7-efffdf7c54e6",
+		"78d1ceb9-c4c8-416b-ad69-e606029f5762",
+		"9b8d4a5d-239c-d6d8-59c5-e28cc413cf5d",
+		"32bc61e0-4405-442f-f1c6-99087771c37c"
+	],
+	"folders": [
+		{
+			"id": "526b0431-448c-ce37-76f3-b092867c8a37",
+			"name": "Alerts",
+			"description": "",
+			"order": [
+				"c556c61f-e1c4-1e81-94d4-38d5c534348c",
+				"f408bdae-64f8-3edb-aa22-f66864d71b2b",
+				"5469225c-a065-d2d9-3ff1-4c1b650f88e7",
+				"c646bc8a-ed92-b6e3-8340-ae3e5c162eeb",
+				"0db847cd-1380-f785-b1d4-7257a58caded",
+				"cff5ef53-ed6e-bb68-1c9b-07fcf2769aef",
+				"41293abc-7767-df67-5851-2bfb5fbb2f1e"
+			],
+			"collection_name": "Govs_Isle_API",
+			"collection_id": "89ed06b2-0de7-5765-2425-0d6391970ef2"
+		},
+		{
+			"id": "45230a44-d30b-0707-d57f-2014ef1b1f2c",
+			"name": "Amenities",
+			"description": "",
+			"order": [
+				"4657d0a8-bb44-0af1-3088-1e95f6fdc963",
+				"08600487-2a7d-c5a0-4d78-d99203ebe5b5",
+				"3dac5238-c06a-6516-9cfc-7bab74903d0b",
+				"4eab4cd0-e0bf-36c9-bfd3-43397d154ab3",
+				"15b3f2a7-4853-b01b-4b65-c55f37042b8c",
+				"636329a7-34fd-4a7a-1d00-11c41f5adc0e",
+				"4c0b1a86-4bfa-271f-80ee-e716cd4800b6",
+				"f8333085-8a99-0080-d725-c8282b248c73"
+			],
+			"collection_name": "Govs_Isle_API",
+			"collection_id": "89ed06b2-0de7-5765-2425-0d6391970ef2"
+		},
+		{
+			"id": "2bfa0b8a-b18d-64a4-cfa5-8c9489f97d8b",
+			"name": "Events",
+			"description": "",
+			"order": [
+				"78e57f48-53fd-215a-b085-ceb1994845e9",
+				"fb4f2a26-c878-4938-7e1d-e867c33085fc",
+				"f0fc736e-81df-2eae-1624-6ca8c9d4639f",
+				"ba77bd75-7052-81e5-da16-e08d6d3bfef7",
+				"daab762d-7f05-a4d8-8142-75f89f02eea6",
+				"90deb89a-d0be-fd76-fde9-1af4294068c4",
+				"4805dccc-5160-b2f0-73a0-6184af4189d1",
+				"e6d9c579-a236-a785-899f-6cf41ad3cd54"
+			],
+			"collection_name": "Govs_Isle_API",
+			"collection_id": "89ed06b2-0de7-5765-2425-0d6391970ef2"
+		},
+		{
+			"id": "240bea22-2eee-0b76-1ecc-427e2c542a5e",
+			"name": "Media",
+			"description": "",
+			"order": [
+				"76026ac3-a9ca-794e-c7e5-629773f36f90",
+				"6c0af6b4-8453-6d3c-2ca1-ae76e127516b",
+				"54865b2b-8fdc-9fc7-e383-b62f503ecc4a",
+				"6a7491ea-4d58-df07-8837-1c066e41d571",
+				"59865806-1d3c-d047-a40d-fdff245c91ae",
+				"50aee616-5ed4-fa7b-200b-7702aeb1693f"
+			],
+			"collection_name": "Govs_Isle_API",
+			"collection_id": "89ed06b2-0de7-5765-2425-0d6391970ef2"
+		}
+	],
+	"timestamp": 1402369412737,
+	"synced": false,
+	"requests": [
+		{
+			"id": "08600487-2a7d-c5a0-4d78-d99203ebe5b5",
+			"headers": "",
+			"url": "localhost:3000/api/v1/amenities/53c28d400596201db3e8d74e/publish",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405259522140,
+			"name": "Publish",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "0db847cd-1380-f785-b1d4-7257a58caded",
+			"headers": "",
+			"url": "localhost:3000/api/v1/alerts?sort='name'&paginate=1",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405265362633,
+			"name": "Get All Paginated",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "15b3f2a7-4853-b01b-4b65-c55f37042b8c",
+			"headers": "",
+			"url": "localhost:3000/api/v1/amenities?limit=10&offset=0&sort=name",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405233881982,
+			"name": "Get all",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "32bc61e0-4405-442f-f1c6-99087771c37c",
+			"headers": "",
+			"url": "localhost:3000/users/me",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "GET me (current user)",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1404188411507,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"synced": false
+		},
+		{
+			"id": "3dac5238-c06a-6516-9cfc-7bab74903d0b",
+			"headers": "",
+			"url": "localhost:3000/api/v1/amenities/53c2f09625418ededf02af71",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405285788719,
+			"name": "Get",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "41293abc-7767-df67-5851-2bfb5fbb2f1e",
+			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
+			"url": "localhost:3000/api/v1/alerts/53c28f390596201db3e8d750",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [
+				{
+					"key": "name",
+					"value": "First Event!",
+					"type": "text"
+				},
+				{
+					"key": "type",
+					"value": "Exhibit",
+					"type": "text"
+				},
+				{
+					"key": "description",
+					"value": "Loren ipsum dolor sit amet!!!",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1405265375438,
+			"name": "Delete",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "4657d0a8-bb44-0af1-3088-1e95f6fdc963",
+			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
+			"url": "localhost:3000/api/v1/amenities/",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "First Amenity",
+					"type": "text"
+				},
+				{
+					"key": "type",
+					"value": "Food",
+					"type": "text"
+				},
+				{
+					"key": "description",
+					"value": "Little food cart",
+					"type": "text"
+				},
+				{
+					"key": "geoLocation",
+					"value": "40.6880492",
+					"type": "text"
+				},
+				{
+					"key": "geoLocation",
+					"value": "-74.0188415",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1405259069529,
+			"name": "Create",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "4805dccc-5160-b2f0-73a0-6184af4189d1",
+			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
+			"url": "localhost:3000/api/v1/events/53bf70a084874208546a131b",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "name",
+					"value": "First Event!",
+					"type": "text"
+				},
+				{
+					"key": "type",
+					"value": "Exhibit",
+					"type": "text"
+				},
+				{
+					"key": "description",
+					"value": "Loren ipsum dolor sit amet!!!",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1405128034144,
+			"name": "Update event",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "4c0b1a86-4bfa-271f-80ee-e716cd4800b6",
+			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
+			"url": "localhost:3000/api/v1/amenities/53c28d400596201db3e8d74e",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "name",
+					"value": "First Amenity!",
+					"type": "text"
+				},
+				{
+					"key": "type",
+					"value": "Food",
+					"type": "text"
+				},
+				{
+					"key": "description",
+					"value": "Loren ipsum dolor sit amet!!!",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1405259569010,
+			"name": "Update",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "4eab4cd0-e0bf-36c9-bfd3-43397d154ab3",
+			"headers": "",
+			"url": "localhost:3000/api/v1/amenities/slug/first-amenity",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405259107569,
+			"name": "Get by Slug",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "50aee616-5ed4-fa7b-200b-7702aeb1693f",
+			"headers": "",
+			"url": "localhost:3000/api/v1/media/53be067f3de5a18c0f2f1772",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [
+				{
+					"key": "file",
+					"value": "",
+					"type": "file"
+				}
+			],
+			"dataMode": "params",
+			"name": "Delete Media",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1405049021555,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"synced": false
+		},
+		{
+			"id": "5469225c-a065-d2d9-3ff1-4c1b650f88e7",
+			"headers": "",
+			"url": "localhost:3000/api/v1/alerts/53c2ea7c9417615edba70855",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405284311613,
+			"name": "Get",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "54865b2b-8fdc-9fc7-e383-b62f503ecc4a",
+			"headers": "",
+			"url": "localhost:3000/api/v1/media/53be067f3de5a18c0f2f1772",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "Get Media by Id",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1405048809460,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"synced": false
+		},
+		{
+			"id": "59865806-1d3c-d047-a40d-fdff245c91ae",
+			"headers": "",
+			"url": "localhost:3000/api/v1/media/info/53bf5d30b196e57937be772e",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "file",
+					"value": "",
+					"type": "file"
+				}
+			],
+			"dataMode": "params",
+			"name": "Get Mediia Info",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1405051206151,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"synced": false
+		},
+		{
+			"id": "636329a7-34fd-4a7a-1d00-11c41f5adc0e",
+			"headers": "",
+			"url": "localhost:3000/api/v1/amenities?sort='name'&paginate=1",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405259373741,
+			"name": "Get All Paginated",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "6a7491ea-4d58-df07-8837-1c066e41d571",
+			"headers": "",
+			"url": "localhost:3000/api/v1/media/slug/screen-shot-2014-06-28-at-7.18.14-pm.png",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "file",
+					"value": "",
+					"type": "file"
+				}
+			],
+			"dataMode": "params",
+			"name": "Get Media by Slug",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1405048917691,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"synced": false
+		},
+		{
+			"id": "6c0af6b4-8453-6d3c-2ca1-ae76e127516b",
+			"headers": "",
+			"url": "localhost:3000/api/v1/media/",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "Get All Media",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1405045375309,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"synced": false
+		},
+		{
+			"id": "76026ac3-a9ca-794e-c7e5-629773f36f90",
+			"headers": "",
+			"url": "localhost:3000/api/v1/media/Event/53c18b4f6820490992e730b2",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "file",
+					"value": "",
+					"type": "file"
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405193062726,
+			"name": "File upload",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "78d1ceb9-c4c8-416b-ad69-e606029f5762",
+			"headers": "",
+			"url": "localhost:3000/login",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "K F",
+					"type": "text"
+				},
+				{
+					"key": "email",
+					"value": "francis.kareem@gmail.com",
+					"type": "text"
+				},
+				{
+					"key": "password",
+					"value": "Password1",
+					"type": "text"
+				},
+				{
+					"key": "confirmPassword",
+					"value": "Password1",
+					"type": "text"
+				},
+				{
+					"key": "username",
+					"value": "kfrancis",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1402813507102,
+			"name": "Login",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "78e57f48-53fd-215a-b085-ceb1994845e9",
+			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
+			"url": "localhost:3000/api/v1/events/",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "First Event",
+					"type": "text"
+				},
+				{
+					"key": "type",
+					"value": "Activity",
+					"type": "text"
+				},
+				{
+					"key": "description",
+					"value": "Loren ipsum dolor sit amet",
+					"type": "text"
+				},
+				{
+					"key": "geoLocation",
+					"value": "40.6880492",
+					"type": "text"
+				},
+				{
+					"key": "geoLocation",
+					"value": "-74.0188415",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1402633355699,
+			"name": "Create an Event",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "90deb89a-d0be-fd76-fde9-1af4294068c4",
+			"headers": "",
+			"url": "localhost:3000/api/v1/events?sort='name'&filter=Activity&paginate=1",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "Get All Events Paginated",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1404567879825,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"synced": false
+		},
+		{
+			"id": "9b8d4a5d-239c-d6d8-59c5-e28cc413cf5d",
+			"headers": "",
+			"url": "localhost:3000/logout",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "Logout",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1404187873793,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"synced": false
+		},
+		{
+			"id": "ba77bd75-7052-81e5-da16-e08d6d3bfef7",
+			"headers": "",
+			"url": "localhost:3000/api/v1/events/slug/first-event",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1404187608414,
+			"name": "Get Event by Slug",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "c556c61f-e1c4-1e81-94d4-38d5c534348c",
+			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
+			"url": "localhost:3000/api/v1/alerts/",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "type",
+					"value": "Weather",
+					"type": "text"
+				},
+				{
+					"key": "description",
+					"value": "Bike rack closed due to storm",
+					"type": "text"
+				},
+				{
+					"key": "geoLocation",
+					"value": "40.6880492",
+					"type": "text"
+				},
+				{
+					"key": "geoLocation",
+					"value": "-74.0188415",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1405266026466,
+			"name": "Create",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "c646bc8a-ed92-b6e3-8340-ae3e5c162eeb",
+			"headers": "",
+			"url": "localhost:3000/api/v1/alerts?limit=10&offset=0&sort=name",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405265358073,
+			"name": "Get all",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "cff5ef53-ed6e-bb68-1c9b-07fcf2769aef",
+			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
+			"url": "localhost:3000/api/v1/alerts/53c28d400596201db3e8d74e",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "name",
+					"value": "First Amenity!",
+					"type": "text"
+				},
+				{
+					"key": "type",
+					"value": "Food",
+					"type": "text"
+				},
+				{
+					"key": "description",
+					"value": "Loren ipsum dolor sit amet!!!",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1405265367180,
+			"name": "Update",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "daab762d-7f05-a4d8-8142-75f89f02eea6",
+			"headers": "",
+			"url": "localhost:3000/api/v1/events?limit=10&offset=0&sort=name&filter=Exhibit",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1404661146106,
+			"name": "Get all events",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "e6d9c579-a236-a785-899f-6cf41ad3cd54",
+			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
+			"url": "localhost:3000/api/v1/events/53b233a2d4ae5dfb8d907a95",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [
+				{
+					"key": "name",
+					"value": "First Event!",
+					"type": "text"
+				},
+				{
+					"key": "type",
+					"value": "Exhibit",
+					"type": "text"
+				},
+				{
+					"key": "description",
+					"value": "Loren ipsum dolor sit amet!!!",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1404271783923,
+			"name": "Delete event",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "f04a9634-98b3-aab4-c4c7-efffdf7c54e6",
+			"headers": "",
+			"url": "localhost:3000/register",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "K F",
+					"type": "text"
+				},
+				{
+					"key": "email",
+					"value": "francis.kareem@gmail.com",
+					"type": "text"
+				},
+				{
+					"key": "password",
+					"value": "Password1",
+					"type": "text"
+				},
+				{
+					"key": "confirmPassword",
+					"value": "Password1",
+					"type": "text"
+				},
+				{
+					"key": "username",
+					"value": "kfrancis",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1402813411282,
+			"name": "User Registration",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "f0fc736e-81df-2eae-1624-6ca8c9d4639f",
+			"headers": "",
+			"url": "localhost:3000/api/v1/events/53c18b4f6820490992e730b2",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405213250385,
+			"name": "Get an event",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "f408bdae-64f8-3edb-aa22-f66864d71b2b",
+			"headers": "",
+			"url": "localhost:3000/api/v1/alerts/53c2ea7c9417615edba70855/publish",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405284329392,
+			"name": "Publish",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "f8333085-8a99-0080-d725-c8282b248c73",
+			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
+			"url": "localhost:3000/api/v1/amenities/53c28f390596201db3e8d750",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [
+				{
+					"key": "name",
+					"value": "First Event!",
+					"type": "text"
+				},
+				{
+					"key": "type",
+					"value": "Exhibit",
+					"type": "text"
+				},
+				{
+					"key": "description",
+					"value": "Loren ipsum dolor sit amet!!!",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1405259593385,
+			"name": "Delete",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "fb4f2a26-c878-4938-7e1d-e867c33085fc",
+			"headers": "",
+			"url": "localhost:3000/api/v1/events/53bf70a084874208546a131b/publish",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1405055190748,
+			"name": "Publish an event",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		}
+	]
+}

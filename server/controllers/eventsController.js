@@ -3,7 +3,8 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+var _ = require('lodash'),
+    mongoose = require('mongoose'),
     Event = mongoose.model('Event'),
     base = require('./baseController')(Event);
 
@@ -12,6 +13,13 @@ var mongoose = require('mongoose'),
  */
 exports.get = function(req, res, next, id) {
     base.get(req, res, next, id);
+};
+
+/**
+ * Find event by slug
+ */
+exports.getBySlug = function(req, res, next, id) {
+    base.getByQuery(req, res, next, {slug: id});
 };
 
 /**
@@ -46,5 +54,28 @@ exports.show = function(req, res) {
  * List of Events
  */
 exports.all = function(req, res) {
-    base.all(req, res);
+    var query = null;
+    var filter = req.query.filter;
+
+    if(filter){
+        if(_.isArray(filter)){
+            query = {
+                type: {$in: filter}
+            };
+        }
+        else{
+            query = {
+                type: filter
+            };
+        }
+    }
+
+    base.all(req, res, query);
 };
+
+/**
+* Publish an Event
+*/
+exports.publish = function(req, res){
+    base.publish(req, res);
+}

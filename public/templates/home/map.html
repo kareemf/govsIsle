@@ -1,0 +1,52 @@
+<section class="event-map" ng-controller="MapController" >
+    <!-- render map. ui-map will be the name of scope property -->
+    <div class="map-container">
+    	<div id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="map-canvas"></div>
+	</div>
+    <div ng-controller="MarkerListController">
+        <!-- populate map with event markers -->
+        <div ng-repeat="marker in existingMarkers">
+            <span ui-map-marker="existingMarkers[$index]"
+            ui-event="markerEvents"></span>
+
+            <!-- create a hidden edit form for each event -->
+            <div ng-init="event = events[$index]" ng-controller="ExistingEventController">
+                <!-- TODO: is this an abuse of ng-init? -->
+                <div ng-show="isEditMode && showForm" ng-init="markers = existingMarkers"
+                     ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- populate map with new markers/events -->
+    <div ng-repeat="marker in newMarkers"
+        ng-controller="NewEventController"
+        ui-map-marker="newMarkers[$index]"
+        ui-event="newMarkerEvents">
+
+        <!-- create a hidden edit form for each new event/marker -->
+        <div ng-show="isEditMode && showForm" ng-init="markers = newMarkers"
+             ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+        </div>
+    </div>
+
+    <!-- only one infoWindow, gets moved and populated dynamically -->
+    <div ui-map-info-window="myInfoWindow">
+      <h1>{{currentEvent.name}}</h1>
+      <p>{{currentEvent.description}}</p>
+      <p>{{currentEvent.location}}</p>
+      <a ng-href="#/events/{{currentEvent.slug}}" title="">Details</a>
+    </div>
+
+    <div>
+        Edit mode: <input type="checkbox" ng-model="isEditMode" ng-change="toggleEditMode(isEditMode)">
+    </div>
+</section>
+
+
+<!-- TODO: display text list of markers -->
+<!-- TODO: event/marker detail page(s) -->
+<!-- TODO: filtering -->
+

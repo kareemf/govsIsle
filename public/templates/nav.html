@@ -1,0 +1,32 @@
+<div class="navbar-fixed-bottom" ng-controller="NavController" ng-init="activelink(currentLink)">
+    <div class="map-ui">
+        <ul class="nav-inlineblock">
+            <li class="nav-begin"><a ng-click="activelink(2)" ui-sref="events.grid"><span ng-class="{calendar1: isActive(2) || isActive(6)}" class="calendar0"></span></a></li>
+            <li class="nav-map"><a ng-click="activelink(3);buttonswap()" ui-sref="events.map"><span ng-class="{mappin1:isActive(3)}" class="mappin0"></span></a></li>
+            <li class="nav-headphone"><a ng-click="activelink(4)" ui-sref="tours"><span ng-class="{headphones1:isActive(4)}" class="headphones0"></span></a></li>
+            <li class="nav-end"><a ng-click="activelink(5)" ui-sref="ferry"><span ng-class="{ferry1:isActive(5)}" class="ferry0"></span></a></li>
+            <!--<li><a href=""> link ({{currentLink}})</a></li>-->
+        </ul>
+    </div>
+    <!-- TOGGLE GONE FOR NOW
+    <div class="map-ui-toggle">
+        <ul class="nav-inlineblock">
+            <li><a class="toggle-up" ng-hide="headerview" ng-click="headerview=true"><span class="glyphicon glyphicon-chevron-up"></span></a></li>
+            <li><a class="toggle-down" ng-show="headerview" ng-click="headerview=false"><span class="glyphicon glyphicon-chevron-down"></span></a></li>
+        </ul>
+    </div>
+    -->
+</div>
+<!--
+<script type="text/javascript">
+/*$(function() {
+    $('.toggle-down').on('click', function () {
+        $('.map-ui-toggle').css("bottom","0px");
+    });
+
+    $('.toggle-up').on('click', function () {
+        $('.map-ui-toggle').css("bottom",'60px');
+    });
+}); */
+</script>
+-->

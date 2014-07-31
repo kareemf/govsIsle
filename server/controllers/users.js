@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    User = mongoose.model('User');
-
+    User = mongoose.model('User'),
+    Role = mongoose.model('Role');
 /**
  * Auth callback
  */
@@ -58,26 +58,44 @@ exports.create = function(req, res, next) {
         return res.status(400).send(errors);
     }
 
-    // Hard coded for now. Will address this with the user permissions system in v0.3.5
-    user.roles = ['authenticated'];
-    user.save(function(err) {
-        if (err) {
-            switch (err.code) {
-                case 11000:
-                case 11001:
-                    res.status(400).send('Username already taken');
-                    break;
-                default:
-                    res.status(400).send('Please fill all the required fields');
+    User.count(function(err, count){
+        var roleQueryParams = {name: 'authenticated'};
+
+        //If this is the frist user, give admin role
+        if(!count){
+            roleQueryParams = {name: 'admin'};
+        }
+        console.log('searching for role:', roleQueryParams);
+
+        Role.findOne(roleQueryParams).exec(function(err, role){
+            console.log('giving user role:', role);
+
+            if(role){
+                user.roles = [role];
             }
 
-            return res.status(400);
-        }
-        req.logIn(user, function(err) {
-            if (err) return next(err);
-            return res.redirect('/');
+            user.save(function(err) {
+                console.log('user saved');
+                if (err) {
+                    switch (err.code) {
+                        case 11000:
+                        case 11001:
+                            res.status(400).send('Username already taken');
+                            break;
+                        default:
+                            res.status(400).send('Please fill all the required fields');
+                    }
+
+                    return res.status(400);
+                }
+                req.logIn(user, function(err) {
+                    if (err) return next(err);
+                    return res.redirect('/');
+                });
+                res.status(200);
+            });
+
         });
-        res.status(200);
     });
 };
 /**
@@ -95,6 +113,7 @@ exports.user = function(req, res, next, id) {
         .findOne({
             _id: id
         })
+        .populate('roles', 'name permissions')
         .exec(function(err, user) {
             if (err) return next(err);
             if (!user) return next(new Error('Failed to load User ' + id));

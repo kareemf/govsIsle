@@ -18,6 +18,45 @@ module.exports = function(passport, db) {
 
     bootstrapModels();
 
+    function bootstrapRoles(){
+        var mongoose = require('mongoose');
+        var Role = mongoose.model('Role');
+        var permissionsManager = require('../../controllers/permissionsManager')(null);
+
+        ['admin', 'authenticated'].forEach(function(roleName){
+            //create roles iff they doesn't exist
+            // TODO: if new model/permission type is added, grant to admin user
+            Role.findOne({name: roleName}).exec(function(err, role){
+                if(role){
+                    console.log('Role exists:', roleName);
+                    return;
+                }
+
+                role = new Role({name: roleName});
+
+                var permissions = permissionsManager.grantBasicPermissions();
+
+                if(roleName == 'admin'){
+                    permissions = permissionsManager.grantAllBasePermissions();
+
+                    var allFieldPermissions = permissionsManager.grantAllFieldPermissions();
+                    permissions = permissions.concat(allFieldPermissions);
+                }
+
+                console.log('granting', roleName, 'permissions', permissions);
+                role.permissions = permissions;
+
+                console.log('bootstraping role', roleName);
+
+                role.save(function(err){
+                    console.log('role bootstraped:', roleName);
+                });
+            });
+        });
+    };
+
+    bootstrapRoles();
+
     // Bootstrap passport config
     require(appPath + '/server/config/passport')(passport);
 
