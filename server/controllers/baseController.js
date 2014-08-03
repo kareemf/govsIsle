@@ -151,6 +151,7 @@ module.exports = function(Model){
                     //if a cover photo, etc, was uploaded, create the Media instance.
                     if(files) {
                         req.doc = doc;
+                        req.model = Model;
 
                         var mediaController = require('./mediaController');
                         mediaController.create(req, res, function (mediaResponseJson) {
@@ -158,7 +159,10 @@ module.exports = function(Model){
                         });
 
                     }
-                    res.jsonp(doc);
+                    else{
+                        res.jsonp(doc);
+                    }
+
                 }
             });
         },

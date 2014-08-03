@@ -1,6 +1,7 @@
 'use strict';
 
-var fs = require('fs'),
+var _ = require('lodash'),
+    fs = require('fs'),
     async = require('async'),
     mongoose = require('mongoose'),
     Media = mongoose.model('Media'),
@@ -45,14 +46,28 @@ exports.getModelInstance = function(req, res, next, id) {
 };
 
 exports.create = function(req, res, _callback) {
-    // console.log('media create req.files:', req.files);
+    console.log('media create req.files:', req.files);
     // return res.jsonp({files: req.files, body: req.body});
-    var responseJson = {};
+    var Model = req.model;
+    var files = req.files;
     var fields = [];
+    var responseJson = {};
 
-    for(var fieldName in req.files){
-        var field = req.files[fieldName];
-        fields.push(field);
+    for(var fieldName in files){
+        var field = files[fieldName];
+
+        //make sure the field user is attempting to update:
+        //1. is part of the model
+        var modelFieldNames = Object.keys(Model.schema.paths);
+        if(_.contains(modelFieldNames, fieldName)){
+            //2. is a Media reference
+            //TODO: make file path is Media ref
+
+            //3. user has permission to update
+            //TODO: permission check
+
+            fields.push(field);
+        }
     }
 
     if(!fields.length){
@@ -91,12 +106,14 @@ exports.create = function(req, res, _callback) {
             }
             else{
                 var mediaJson = media.toObject();
-                delete mediaJson.file
+                //do not want the JSON response to contain the file binary data
+                delete mediaJson.file;
 
                 permissionsManager.grantCreatorPermissions(req.user, media);
                 if(responseJson) {
                     responseJson[name] = {
                         status: 200,
+                        fieldName: field.fieldname,
                         media: mediaJson
                     };
                 }
@@ -122,16 +139,26 @@ exports.create = function(req, res, _callback) {
             if (mediaResponse.status != 200){
                 return callback();
             }
-            //TODO: permission check
-            //TODO: make file path is Media ref
-            //TODO: update any arbitrary field
-            doc.media.push(mediaResponse.media.id);
+
+            //allow user to Update any arbitrary Media field
+            //doc.media.push(mediaResponse.media.id);
+            var fieldName = mediaResponse.fieldName;
+            if(_.isArray(doc[fieldName])){
+                doc[fieldName].push(mediaResponse.media.id);
+            }
+            else{
+                doc[fieldName] = mediaResponse.media.id;
+            }
+
             doc.save(function(err, doc){
-                responseJson.doc = {id: doc.id};
                 if(err){
                     mediaResponse.status = 500;
                     mediaResponse.error = err;
                 }
+                if(doc){
+                    responseJson.doc = {id: doc.id};
+                }
+
                 callback();
             });
         };
@@ -140,7 +167,7 @@ exports.create = function(req, res, _callback) {
             if(!_callback){
                 return res.jsonp(responseJson);
             }
-            return callback(responseJson);
+            return _callback(responseJson);
         };
 
         async.each(mediaResponses, updatedAssociatedDoc, sendResponse);
