@@ -2,10 +2,12 @@
 
 var controllers = angular.module('app.controllers', []);
 var services = angular.module('app.services', []);
+var filter = angular.module('app.filter', []);
 
 var app = angular.module('app', [
     'app.controllers',
     'app.services',
+    'app.filter',
     'ngResource',
     'ui.router',
     'ui.map']);
