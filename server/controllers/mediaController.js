@@ -49,6 +49,7 @@ exports.create = function(req, res, _callback) {
     console.log('media create req.files:', req.files);
     // return res.jsonp({files: req.files, body: req.body});
     var Model = req.model;
+    var modelFieldNames = Object.keys(Model.schema.paths);
     var files = req.files;
     var fields = [];
     var responseJson = {};
@@ -56,9 +57,10 @@ exports.create = function(req, res, _callback) {
     for(var fieldName in files){
         var field = files[fieldName];
 
+        //TODO: handle case where field is an array
+
         //make sure the field user is attempting to update:
         //1. is part of the model
-        var modelFieldNames = Object.keys(Model.schema.paths);
         if(_.contains(modelFieldNames, fieldName)){
             //2. is a Media reference
             //TODO: make file path is Media ref
