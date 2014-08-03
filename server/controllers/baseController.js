@@ -135,23 +135,6 @@ module.exports = function(Model){
                 return res.send(403, 'User does not have update access to this content');
             }
 
-            if(files){
-                var mediaController = require('./mediaController');
-
-                for(var fieldName in files){
-                    if(_.contains(Model.schema.paths, fileName)){
-                        //TODO: permission check
-                        //TODO: make file path is Media ref
-                        var field = files[fieldName];
-                        mediaController.createMediaFromField(field, function(){
-                            //doc.coverPhoto
-                            //TODO - need a handle
-                            doc[fieldName] = null;
-                        });
-                    }
-                }
-            }
-
             //prevent user from updating fields to which they dont have access
             //ex prevent user from updating his/her own permissions
             body = permissionsManager.removeNonPermitedUpdateFields(permissions, doc, body, req.params);
@@ -165,6 +148,16 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
+                    //if a cover photo, etc, was uploaded, create the Media instance.
+                    if(files) {
+                        req.doc = doc;
+
+                        var mediaController = require('./mediaController');
+                        mediaController.create(req, res, function (mediaResponseJson) {
+                            res.jsonp(doc);
+                        });
+
+                    }
                     res.jsonp(doc);
                 }
             });

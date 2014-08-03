@@ -44,53 +44,7 @@ exports.getModelInstance = function(req, res, next, id) {
     }
 };
 
-var createMediaFromField = exports.createMediaFromField = function(field, callback){
-    var name = field.originalname;
-    var media = new Media(field);
-    //TODO: may not want to do this if there are more than one files
-    var attribution = req.body.attribution;
-    var caption = req.body.caption;
-    media.name = name;
-
-    if(attribution){
-        media.attribution = attribution;
-    }
-    if(caption){
-        media.caption = caption;
-    }
-
-    media.file = fs.readFileSync(field.path);
-
-    //Media instances are published by default
-    media.published = new Date();
-    media.publishedBy = req.user.id;
-
-    media.save(function(err, media){
-        if(err){
-            if(responseJson) {
-                responseJson[name] = {
-                    status: 500,
-                    error: err
-                };
-            }
-        }
-        else{
-            var mediaJson = media.toObject();
-            delete mediaJson.file
-
-            permissionsManager.grantCreatorPermissions(req.user, media);
-            if(responseJson) {
-                responseJson[name] = {
-                    status: 200,
-                    media: mediaJson
-                };
-            }
-        }
-        callback();
-    });
-};
-
-exports.create = function(req, res) {
+exports.create = function(req, res, _callback) {
     // console.log('media create req.files:', req.files);
     // return res.jsonp({files: req.files, body: req.body});
     var responseJson = {};
@@ -100,9 +54,56 @@ exports.create = function(req, res) {
         var field = req.files[fieldName];
         fields.push(field);
     }
+
     if(!fields.length){
         return res.jsonp(500, 'Nothing to upload');
     }
+
+    var createMediaFromField = function(field, callback){
+        var name = field.originalname;
+        var media = new Media(field);
+        //TODO: may not want to do this if there are more than one files
+        var attribution = req.body.attribution;
+        var caption = req.body.caption;
+        media.name = name;
+
+        if(attribution){
+            media.attribution = attribution;
+        }
+        if(caption){
+            media.caption = caption;
+        }
+
+        media.file = fs.readFileSync(field.path);
+
+        //Media instances are published by default
+        media.published = new Date();
+        media.publishedBy = req.user.id;
+
+        media.save(function(err, media){
+            if(err){
+                if(responseJson) {
+                    responseJson[name] = {
+                        status: 500,
+                        error: err
+                    };
+                }
+            }
+            else{
+                var mediaJson = media.toObject();
+                delete mediaJson.file
+
+                permissionsManager.grantCreatorPermissions(req.user, media);
+                if(responseJson) {
+                    responseJson[name] = {
+                        status: 200,
+                        media: mediaJson
+                    };
+                }
+            }
+            callback();
+        });
+    };
 
     var addMediaToDoc = function(err){
         var doc = req.doc;
@@ -121,7 +122,9 @@ exports.create = function(req, res) {
             if (mediaResponse.status != 200){
                 return callback();
             }
-
+            //TODO: permission check
+            //TODO: make file path is Media ref
+            //TODO: update any arbitrary field
             doc.media.push(mediaResponse.media.id);
             doc.save(function(err, doc){
                 responseJson.doc = {id: doc.id};
@@ -134,7 +137,10 @@ exports.create = function(req, res) {
         };
 
         var sendResponse = function(err){
-            return res.jsonp(responseJson);
+            if(!_callback){
+                return res.jsonp(responseJson);
+            }
+            return callback(responseJson);
         };
 
         async.each(mediaResponses, updatedAssociatedDoc, sendResponse);
