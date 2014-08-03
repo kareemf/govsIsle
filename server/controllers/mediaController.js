@@ -44,6 +44,52 @@ exports.getModelInstance = function(req, res, next, id) {
     }
 };
 
+var createMediaFromField = exports.createMediaFromField = function(field, callback){
+    var name = field.originalname;
+    var media = new Media(field);
+    //TODO: may not want to do this if there are more than one files
+    var attribution = req.body.attribution;
+    var caption = req.body.caption;
+    media.name = name;
+
+    if(attribution){
+        media.attribution = attribution;
+    }
+    if(caption){
+        media.caption = caption;
+    }
+
+    media.file = fs.readFileSync(field.path);
+
+    //Media instances are published by default
+    media.published = new Date();
+    media.publishedBy = req.user.id;
+
+    media.save(function(err, media){
+        if(err){
+            if(responseJson) {
+                responseJson[name] = {
+                    status: 500,
+                    error: err
+                };
+            }
+        }
+        else{
+            var mediaJson = media.toObject();
+            delete mediaJson.file
+
+            permissionsManager.grantCreatorPermissions(req.user, media);
+            if(responseJson) {
+                responseJson[name] = {
+                    status: 200,
+                    media: mediaJson
+                };
+            }
+        }
+        callback();
+    });
+};
+
 exports.create = function(req, res) {
     // console.log('media create req.files:', req.files);
     // return res.jsonp({files: req.files, body: req.body});
@@ -57,48 +103,6 @@ exports.create = function(req, res) {
     if(!fields.length){
         return res.jsonp(500, 'Nothing to upload');
     }
-    var createMediaFromField = function(field, callback){
-        var name = field.originalname;
-        var media = new Media(field);
-        //TODO: may not want to do this if there are more than one files
-        var attribution = req.body.attribution;
-        var caption = req.body.caption;
-        media.name = name;
-
-        if(attribution){
-            media.attribution = attribution;
-        }
-        if(caption){
-            media.caption = caption;
-        }
-
-        media.file = fs.readFileSync(field.path);
-
-        //Media instances are published by default
-        media.published = new Date();
-        media.publishedBy = req.user.id;
-
-        media.save(function(err, media){
-            if(err){
-                responseJson[name] = {
-                    status: 500,
-                    error: err
-                };
-            }
-            else{
-                var mediaJson = media.toObject();
-                delete mediaJson.file
-
-                permissionsManager.grantCreatorPermissions(req.user, media);
-
-                responseJson[name] = {
-                    status: 200,
-                    media: mediaJson
-                };
-            }
-            callback();
-        });
-    };
 
     var addMediaToDoc = function(err){
         var doc = req.doc;

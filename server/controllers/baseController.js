@@ -129,9 +129,27 @@ module.exports = function(Model){
             var user = req.user;
             var permissions = permissionsManager.ascertainPermissions(req.user, doc);
             var body = req.body;
+            var files = req.files;
 
             if(!_.contains(permissions, Model.updatePermission())){
                 return res.send(403, 'User does not have update access to this content');
+            }
+
+            if(files){
+                var mediaController = require('./mediaController');
+
+                for(var fieldName in files){
+                    if(_.contains(Model.schema.paths, fileName)){
+                        //TODO: permission check
+                        //TODO: make file path is Media ref
+                        var field = files[fieldName];
+                        mediaController.createMediaFromField(field, function(){
+                            //doc.coverPhoto
+                            //TODO - need a handle
+                            doc[fieldName] = null;
+                        });
+                    }
+                }
             }
 
             //prevent user from updating fields to which they dont have access
