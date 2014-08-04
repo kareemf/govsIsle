@@ -188,22 +188,6 @@ services.factory('SiteData', function($rootScope){
         'location': ' ',
         'geoLocation': [40.690746, -74.019037],
         'media': 'http://3.bp.blogspot.com/-VKuk8R3wnxI/Tkg1Fygm34I/AAAAAAAAAmw/e57pGX5A1iA/s1600/081311171716.jpg'
-        },
-        {'id':11,
-        'name':"",
-        'type': "tour",
-        "isFeautred": "none",
-        "description": "",
-        'visibility': 'public',
-        'setupDateTime': new Date('08/02/2014 12:00:00'),
-        'startDateTime': new Date('08/24/2014 13:00:00'),
-        'endDateTime': new Date('08/24/2014 15:00:00'),
-        'cleanupDateTime': new Date('08/24/2014 18:00:00'),
-        'isReccuring': true,
-        'anticipatedAttendance': 0,
-        'location': '',
-        'geoLocation': [, ],
-        'media': ''
         }
     ];
 
