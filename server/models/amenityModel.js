@@ -73,4 +73,13 @@ AmenitySchema.statics.permissionsGrantedToAnon = function(){
     ];
 };
 
+AmenitySchema.statics.load = function(id, callback){
+    this.findOne({
+        _id: id
+    })
+        .populate('media', 'slug id')
+        .populate('coverPhoto', 'slug id')
+        .exec(callback);
+};
+
 mongoose.model('Amenity', AmenitySchema);
