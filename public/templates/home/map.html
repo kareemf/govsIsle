@@ -35,7 +35,7 @@
 
     <!-- only one infoWindow, gets moved and populated dynamically -->
     <div ui-map-info-window="myInfoWindow">
-      <h1>{{currentEvent.name}}</h1>
+      <h1><a class="black" ui-sref="events.detail({ id: currentEvent.id })">{{currentEvent.name}}</a></h1>
       <p>{{currentEvent.description}}</p>
       <p>{{currentEvent.location}}</p>
       <a ng-href="#/events/{{currentEvent.slug}}" title="">Details</a>

@@ -153,6 +153,10 @@ a:hover, .nav a:hover{color: #4099FF;}
 .nav-map{ padding-left: 6%; padding-right: 5%;}
 .nav-end{padding-left: 6%;}
 
+.black{
+    color: #000000 !important;
+}
+
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
   .col-xs-12{width: 100%;
