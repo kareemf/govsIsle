@@ -10,6 +10,7 @@ exports.properties = _.extend(base.properties, {
     published: {type: Date},
     publishedBy: {type: ObjectId, ref: 'User'},
     slug: String,
+    isFeatured: String //ex none, main, event, or tour
 });
 
 exports.preSave = function(model){

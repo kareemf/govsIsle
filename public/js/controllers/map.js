@@ -93,6 +93,7 @@ controllers.controller('MapController', ['$scope', 'Events', function ($scope, E
 controllers.controller('MarkerListController', ['$scope', '$state','$stateParams','Events', 'Amenities','Shared', function($scope, $state, $stateParams, Events, Amenities, Shared){
     console.log('in MarkerListController');
 
+    $scope.items = [];
     $scope.newMarkers = [];
     $scope.existingMarkers = [];
     $scope.filters = [];
@@ -127,6 +128,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                 console.log('events', events);
                 events.forEach(function(event){
                     $scope.existingMarkers.push(createMarker(event, $scope.myMap));
+                    $scope.items.push(event);
                 });
             });
 
@@ -148,6 +150,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                 console.log('amenities', amenities);
                 amenities.forEach(function(activity){
                     $scope.existingMarkers.push(createMarker(activity, $scope.myMap));
+                    $scope.items.push(activity);
                 });
             });
         }

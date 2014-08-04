@@ -19,7 +19,8 @@ var properties = _.extend({
     anticipatedAttendance: Number,
     location: String,
     geoLocation: {type: [Number], index: '2d'},
-    media: [{type: ObjectId, ref: 'Media'}]
+    media: [{type: ObjectId, ref: 'Media'}],
+    coverPhoto: {type: ObjectId, ref: 'Media'}
 }, base.properties);
 
 var EventSchema = new Schema(properties, {
@@ -89,6 +90,15 @@ EventSchema.statics.permissionsGrantedToAnon = function(){
         fieldPermissions['geoLocation'][readPermission],
         fieldPermissions['media'][readPermission],
     ];
+};
+
+EventSchema.statics.load = function(id, callback){
+    this.findOne({
+        _id: id
+    })
+    .populate('media', 'slug id')
+    .populate('coverPhoto', 'slug id')
+    .exec(callback);
 };
 
 mongoose.model('Event', EventSchema);

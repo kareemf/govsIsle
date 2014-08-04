@@ -18,7 +18,7 @@ module.exports = function(Model){
     var load = function(id, callback){
         Model.findOne({
             _id: id
-        }).exec(callback);
+        }).populate('media', 'slug id').exec(callback);
     };
 
     return {
@@ -129,6 +129,7 @@ module.exports = function(Model){
             var user = req.user;
             var permissions = permissionsManager.ascertainPermissions(req.user, doc);
             var body = req.body;
+            var files = req.files;
 
             if(!_.contains(permissions, Model.updatePermission())){
                 return res.send(403, 'User does not have update access to this content');
@@ -147,7 +148,21 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
-                    res.jsonp(doc);
+                    //if a cover photo, etc, was uploaded, create the Media instance.
+                    if(files) {
+                        req.doc = doc;
+                        req.model = Model;
+
+                        var mediaController = require('./mediaController');
+                        mediaController.create(req, res, function (mediaResponseJson) {
+                            res.jsonp(doc);
+                        });
+
+                    }
+                    else{
+                        res.jsonp(doc);
+                    }
+
                 }
             });
         },
