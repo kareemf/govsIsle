@@ -65,20 +65,14 @@ controllers.controller('NavController', ['$scope','$location', 'NavService', 'Sh
        $scope.currentLink = x;
     });
 
-    $scope.filters = [];
-    var allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event'];
+
+    var allFilters = Shared.allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event'];
+    $scope.filters = allFilters;
 
     $scope.toggleFilters = function(oneOrMoreFilters){
-        console.log('toggleFilter!');
+        //console.log('toggleFilter!');
         var scopeFilters = $scope.filters;
-        var filters = [];
-
-        if(angular.isArray(oneOrMoreFilters)){
-            filters = oneOrMoreFilters
-        }
-        else{
-            filters = [oneOrMoreFilters];
-        }
+        var filters = oneOrMoreFilters.split(", ");
 
         if(filters.indexOf('all') >= 0){
             if(scopeFilters.length){
@@ -105,7 +99,7 @@ controllers.controller('NavController', ['$scope','$location', 'NavService', 'Sh
         }
 
         $scope.filters = scopeFilters;
-        console.log('scopeFilters', scopeFilters);
+       // console.log('scopeFilters', scopeFilters);
 
         Shared.filters = scopeFilters;
     };

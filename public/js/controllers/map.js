@@ -158,8 +158,12 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
 
     $scope.$watch(function(){return Shared.filters}, function(newVal, oldVal){
-        console.log('FILTERS_CHANGED', newVal);
-    });
+        //console.log('FILTERS_CHANGED', newVal, oldVal);
+        if(!newVal){
+            return getContentByFilters(Shared.allFilters);
+        }
+        getContentByFilters(newVal);
+    }, true);
 }]);
 
 controllers.controller('GeoLocationController', ['$scope', 'Events', function ($scope, Events) {
