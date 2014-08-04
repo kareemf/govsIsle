@@ -29,11 +29,7 @@ controllers.controller('MapController', ['$scope', 'Events', function ($scope, E
         //'map-rightclick': 'addNewMarker($event, $params)',
     };
 
-    $scope.markerEvents = {
-        'map-click': 'openMarkerInfo(marker, events[$index])',
-        'map-rightclick': 'editMarker(marker, events[$index])',
-        'map-dragend': 'updateGeolocationAfterDrag(events[$index], marker)'
-    };
+
 
     $scope.newMarkerEvents = {
         'map-click': 'openMarkerInfo(marker, event)',
@@ -97,6 +93,12 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     $scope.items = [];
     $scope.newMarkers = [];
     $scope.existingMarkers = [];
+
+    $scope.markerEvents = {
+        'map-click': 'openMarkerInfo(marker, items[$index])',
+        'map-rightclick': 'editMarker(marker, items[$index])',
+        'map-dragend': 'updateGeolocationAfterDrag(items[$index], marker)'
+    };
 
     var createMarker = function(content, map){
         var position = new google.maps.LatLng(content.geoLocation[0], content.geoLocation[1]);
