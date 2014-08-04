@@ -96,8 +96,6 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     $scope.items = [];
     $scope.newMarkers = [];
     $scope.existingMarkers = [];
-    $scope.filters = [];
-    var allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event'];
 
     var createMarker = function(content, map){
         var position = new google.maps.LatLng(content.geoLocation[0], content.geoLocation[1]);
@@ -158,54 +156,10 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
     };
 
-    $scope.toggleFilter = function(oneOrMoreFilters){
-        var scopeFilters = $scope.filters;
-        var filters = [];
 
-        if(angular.isArray(oneOrMoreFilters)){
-            filters = oneOrMoreFilters
-        }
-        else{
-            filters = [oneOrMoreFilters];
-        }
-
-        if(filters.indexOf('all') >= 0){
-            if(scopeFilters.length){
-                //turn all filters off
-                scopeFilters = [];
-            }
-            else{
-                //turn all filters on
-                scopeFilters = allFilters;
-            }
-        }
-        else{
-            for (var i = filters.length - 1; i >= 0; i--) {
-                var filter = filters[i];
-                if(scopeFilters.indexOf(filter) >= 0){
-                    scopeFilters = scopeFilters.filter(function(f){
-                        return f != filter
-                    });
-                }
-                else{
-                    scopeFilters.push(filter);
-                }
-            };
-        }
-
-        $scope.filters = scopeFilters;
-        console.log('scopeFilters', scopeFilters);
-    };
-
-    $scope.$watch('filters', function(newVal, oldVal){
-        console.log('$scope.$watch filters triggered', newVal, oldVal);
-        if(newVal == oldVal){
-            // return;
-        }
-        getContentByFilters($scope.filters);
-    }, true);
-
-    $scope.toggleFilter('all');
+    $scope.$watch(function(){return Shared.filters}, function(newVal, oldVal){
+        console.log('FILTERS_CHANGED', newVal);
+    });
 }]);
 
 controllers.controller('GeoLocationController', ['$scope', 'Events', function ($scope, Events) {

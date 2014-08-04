@@ -42,7 +42,7 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
     }
 ]);
 
-controllers.controller('NavController', ['$scope','$location', 'NavService',function($scope, $location, NavService){
+controllers.controller('NavController', ['$scope','$location', 'NavService', 'Shared', function($scope, $location, NavService, Shared){
     console.log('In NavController');
     var path = $location.path();
     $scope.headerview=true;
@@ -64,5 +64,50 @@ controllers.controller('NavController', ['$scope','$location', 'NavService',func
     $scope.$on('XChanged', function(event, x) {
        $scope.currentLink = x;
     });
+
+    $scope.filters = [];
+    var allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event'];
+
+    $scope.toggleFilters = function(oneOrMoreFilters){
+        console.log('toggleFilter!');
+        var scopeFilters = $scope.filters;
+        var filters = [];
+
+        if(angular.isArray(oneOrMoreFilters)){
+            filters = oneOrMoreFilters
+        }
+        else{
+            filters = [oneOrMoreFilters];
+        }
+
+        if(filters.indexOf('all') >= 0){
+            if(scopeFilters.length){
+                //turn all filters off
+                scopeFilters = [];
+            }
+            else{
+                //turn all filters on
+                scopeFilters = allFilters;
+            }
+        }
+        else{
+            for (var i = filters.length - 1; i >= 0; i--) {
+                var filter = filters[i];
+                if(scopeFilters.indexOf(filter) >= 0){
+                    scopeFilters = scopeFilters.filter(function(f){
+                        return f != filter
+                    });
+                }
+                else{
+                    scopeFilters.push(filter);
+                }
+            };
+        }
+
+        $scope.filters = scopeFilters;
+        console.log('scopeFilters', scopeFilters);
+
+        Shared.filters = scopeFilters;
+    };
 
 }]);
