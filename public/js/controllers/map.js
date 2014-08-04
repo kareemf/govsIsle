@@ -25,7 +25,8 @@ controllers.controller('MapController', ['$scope', 'Events', function ($scope, E
     };
 
     $scope.mapEvents = {
-        'map-rightclick': 'addNewMarker($event, $params)',
+        //TODO: temportarily disabled.
+        //'map-rightclick': 'addNewMarker($event, $params)',
     };
 
     $scope.markerEvents = {
