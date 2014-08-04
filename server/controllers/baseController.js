@@ -18,7 +18,7 @@ module.exports = function(Model){
     var load = function(id, callback){
         Model.findOne({
             _id: id
-        }).exec(callback);
+        }).populate('media', 'slug id').exec(callback);
     };
 
     return {
