@@ -220,10 +220,12 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
 
 controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','$filter', function($scope, $state, $stateParams, Events, $filter){
     console.log('In EventListController');
-
     $scope.featuredEvents=$filter('SelecteByFeatured')('event');
     $scope.specialEvent=$filter('SelecteByType')('event');
     $scope.parkServices=$filter('SelecteByType')('tour');
+    $scope.venues=$filter('SelecteByType')('venue');
+    $scope.activities=$filter('SelecteByType')('activity');
+    $scope.landing=$filter('SelecteByType')('main');
 }]);
 
 controllers.controller('EventMapController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){
@@ -231,7 +233,7 @@ controllers.controller('EventMapController', ['$scope', '$state','$stateParams',
     //var view = $stateParams.view;
     //view = view ? view : 'map';
     var map;
-    var mapMinZoom = 14;
+    var mapMinZoom = 15;
     var mapMaxZoom = 17;
     var mapBounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(40.682183, -74.027019),
@@ -241,22 +243,23 @@ controllers.controller('EventMapController', ['$scope', '$state','$stateParams',
     }
 
     var mapOptions = {
-        center: new google.maps.LatLng(0, 0),
+        center: new google.maps.LatLng(40.682183, -74.027019),
         streetViewControl: false,
         panControl: true,
-        zoom: 14
-        //maxZoom: mapMaxZoom,
-        //minZoom: mapMinZoom
-        //mapTypeId: google.maps.MapTypeId.HYBRID
+        zoom: 15,
+        maxZoom: mapMaxZoom,
+        minZoom: mapMinZoom,
+        mapTypeId: google.maps.MapTypeId.HYBRID
     };
 
     $scope.init = function() {
+        
         map = new google.maps.Map(document.getElementById('eventmap'), mapOptions);
         map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
         map.fitBounds(mapBounds);
         var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
         var opacitycontrol = new klokantech.OpacityControl(map, maptiler);
-    }
+    };
 }]);
 
 
