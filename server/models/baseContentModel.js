@@ -102,3 +102,16 @@ exports.permissionsGrantedOnUserCreation = function(Schema, _grant){
     }
     return grant;
 };
+
+exports.permissionsGrantedToAnon = function(Schema){
+    var fieldPermissions = Schema.fieldPermissions();
+    var readPermission = Schema.readPermission();
+
+    return [
+        fieldPermissions['slug'][readPermission],
+        fieldPermissions['published'][readPermission],
+        fieldPermissions['publishedBy'][readPermission],
+        fieldPermissions['isFeatured'][readPermission],
+        fieldPermissions['slug'][readPermission]
+    ];
+};

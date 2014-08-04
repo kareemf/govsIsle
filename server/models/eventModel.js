@@ -89,7 +89,7 @@ EventSchema.statics.permissionsGrantedToAnon = function(){
         fieldPermissions['location'][readPermission],
         fieldPermissions['geoLocation'][readPermission],
         fieldPermissions['media'][readPermission],
-    ];
+    ].concat(base.permissionsGrantedToAnon(this));
 };
 
 EventSchema.statics.load = function(id, callback){
