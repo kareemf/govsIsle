@@ -2,15 +2,15 @@
 
 var controllers = angular.module('app.controllers', []);
 var services = angular.module('app.services', []);
+var filter = angular.module('app.filter', []);
 
 var app = angular.module('app', [
     'app.controllers',
     'app.services',
+    'app.filter',
     'ngResource',
     'ui.router',
     'ui.map']);
-	
-
 
 app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', function($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
     //Lading page routes
@@ -80,18 +80,23 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
         })
         .state('events.map',{
             url: '/map',
-            templateUrl: 'templates/map/maplist.html'
+            //templateUrl: 'templates/map/maplist.html'
+            templateUrl: 'templates/events/eventmap.html'
         })
         .state('events.list',{
             url: '/list',
             templateUrl: 'templates/events/eventlist.html'
         })
-        .state('events.calendar',{
-            url: '/calendar',
-            templateUrl: 'templates/events/eventcalendar.html'
+        .state('events.grid',{
+            url: '/grid',
+            templateUrl: 'templates/events/eventgrid.html'
+        })
+        .state('events.events',{
+            url: '/events',
+            templateUrl: 'templates/events/events.html'
         })
         .state('events.detail', {
-            url: '/:slug',
+            url: '/detail/{id}',
             templateUrl: 'templates/events/event.html',
         });
 		
@@ -114,7 +119,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
 			});	
 	
 	
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
 		
 	$sceDelegateProvider.resourceUrlWhitelist([
 				   'self',

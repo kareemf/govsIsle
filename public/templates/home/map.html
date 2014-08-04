@@ -1,5 +1,4 @@
 <section class="event-map" ng-controller="MapController" >
-
     <!-- render map. ui-map will be the name of scope property -->
     <div class="map-container">
     	<div id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="eventmap"></div>
@@ -20,7 +19,6 @@
             </div>
         </div>
     </div>
-
         <!-- populate map with event markers -->
         <div ng-repeat="marker in existingMarkers">
             <span ui-map-marker="existingMarkers[$index]"

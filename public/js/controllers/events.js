@@ -189,11 +189,17 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
 }]);
 
 
-controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Events', function($scope, $stateParams, Events){
+controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Events', 'SiteData', function($scope, $stateParams, Events, SiteData){
     console.log('in EventDetailController');
+    
+    $scope.events=SiteData.getEvents();         //getting all events
+    var id = $stateParams.id;
 
-    var slug = $stateParams.slug;
-    if(slug){
+    if(id){
+        console.log("In EventDetailController Id found "+id);
+        $scope.specialEvent=$scope.events[id-1];
+
+        /*
         var successCallback = function(event, headers){
             console.log('getBySlug event', event);
 
@@ -206,33 +212,52 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
             $scope.error = response.data;
         };
 
-        Events.getBySlug({slug: slug}, successCallback, failureCallback);
+        Events.getBySlug({id: id}, successCallback, failureCallback);
+        */
     }
 }]);
 
-controllers.controller('EventListController', ['$scope', '$state','$stateParams','$location','Events', function($scope, $state, $stateParams, $location, Events){
-    console.log('in EventListController');
-    var view = $stateParams.view;
-    var path = $location.path();
-    view = view ? view : 'map';
 
-    if(path==='/events/map'){
-       //  $scope.headerview=false;
-             console.log('pass');
+controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','$filter', function($scope, $state, $stateParams, Events, $filter){
+    console.log('In EventListController');
+
+    $scope.featuredEvents=$filter('SelecteByFeatured')('event');
+    $scope.specialEvent=$filter('SelecteByType')('event');
+    $scope.parkServices=$filter('SelecteByType')('tour');
+}]);
+
+controllers.controller('EventMapController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){
+    console.log('In EventListController');
+    //var view = $stateParams.view;
+    //view = view ? view : 'map';
+    var map;
+    var mapMinZoom = 14;
+    var mapMaxZoom = 17;
+    var mapBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(40.682183, -74.027019),
+        new google.maps.LatLng(40.695688, -74.008764));
+    var mapGetTile = function(x,y,z) { 
+        return "templates/map/"+z + "/" + x + "/" + y + ".png";
     }
 
-    $scope.mybutton=true;
-    $scope.listormap=true;
-    /*playing with maps*/
-    $scope.mapOptions = {
-        center: new google.maps.LatLng(40.6880492, -74.0188415),
-        streetViewControl: true,
+    var mapOptions = {
+        center: new google.maps.LatLng(0, 0),
+        streetViewControl: false,
         panControl: true,
-        zoom: 15,
-        maxZoom: 20,
-        minZoom: 14,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        zoom: 14
+        //maxZoom: mapMaxZoom,
+        //minZoom: mapMinZoom
+        //mapTypeId: google.maps.MapTypeId.HYBRID
     };
+
+    $scope.init = function() {
+        map = new google.maps.Map(document.getElementById('eventmap'), mapOptions);
+        map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+        map.fitBounds(mapBounds);
+        var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
+        var opacitycontrol = new klokantech.OpacityControl(map, maptiler);
+    }
 }]);
+
 
 

@@ -24,43 +24,56 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
-a{
-  margin: 0;
-  padding: 0;
-  color: black;
-}
-/* old gov colors #4099FF #3B5998 #019AD5*/
-a, a:link, a:hover, a:visited, a:active{
-  text-decoration: none;
-}
-a:hover, .nav a:hover{color: #4099FF;}
-.cleartop{clear: top;}
-.clearboth{clear: both;}
+.clear{clear: both;}
 .header-shadow{
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
 }
-.navSpacingFix{
-  margin-top: 85px;
-}
-.gov-size{font-size: 32px;font-family: govsle;}
+.navSpacingFix{margin-top: 85px;}
+.gov-size{font-size: 26px;font-family: govsle;}
 /*The site main colors*/
 .information{background-color: #ff9900;}
 .food-drink{background-color: #ff66cc;}
-.activities{background-color: #33cc66;}
-.venues{background-color: #000066}
-.facilities{background-color: #0099ff;}
-.history{background-color: #ccff33;}
+.activitie{background-color: #33cc66;}
+.venue{background-color: #000066}
+.facilitie{background-color: #0099ff;}
+.hist{background-color: #ccff33;}
+.title{font-size: bold;}
+.softtop-padding{padding-top: 20px;}
+/* old gov colors #4099FF #3B5998 #019AD5*/
+/* ALL LINKS*/
+a, a:link, a:hover, a:visited, a:active{
+  text-decoration: none;
+  color: #FFF;
+}
+a:hover, .nav a:hover{color: #4099FF;}
 
+.map-ui a, .map-ui-toggle a, .map-filter a{
+  color: white;
+}
+.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
+  color: #5FA77A;
+}
+
+.nav-ui a{
+  color: white;
+}
+.nav-ui a:hover, .nav-ui a:active{
+  color: black;
+}
+
+#curatedlist a ,#artistlist a , #tourPoints a{
+  color: #000;
+}
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
-  padding: 0px 0px 0px 0px;
+  height: 60px;
   background-color: #5FA77A;
   border-collapse: separate;
-  z-index: 999;
-  border-bottom: 1px solid #E7E7E7;
-  margin-bottom: 100px;
+  z-index: 9999;
+  /*border-bottom: 1px solid #E7E7E7;*/
+  min-width: 300px;
 }
 .nav-ui{
   width: 100%;height: 60px;
@@ -73,22 +86,18 @@ a:hover, .nav a:hover{color: #4099FF;}
 .nav-gov-brand{
   color: white;
   font-size: 32px;
-  vertical-align: middle;
   text-align: center;
   font-family: govsle;
-  line-height: 32px;
-  padding-top: 3px;
 }
 .nav-header-link{
-  padding-top: 15px;
+  padding-top: 8px;
 }
-.nav-ui a{
-  color: white;
-}
-.nav-ui a:hover, .nav-ui a:active{
-  color: black;
-}
+
 .nav-inlineblock li{
+  display: inline-block;
+  list-style-type: none;
+}
+.nav-login li{
   display: inline-block;
   list-style-type: none;
 }
@@ -103,62 +112,46 @@ a:hover, .nav a:hover{color: #4099FF;}
   vertical-align: top;
   display: inline-block;
 }
-.nav-icon{
-  padding-right: 15px;
-  padding-left: 15px;
+.logo{
+  height: 50px;
+  width: 50px;
+  background-color: #FFF;
 }
-/* if we bring log back
-.navheader-logo{display: inline-block;}
-.navimg-logo{
-   display: block;
-   margin: 0 auto;
-}
-*/
 /*MAIN-FOOTER NAVIGATION*/
 .map-ui{
-  position: relative;
-  width: inherit;height: 60px;
-  bottom: 0px;
-  background-color: #797F8F;
+  height: 60px; width: 100%;
+  background-color: #4F535E;
   color: white;
-  z-index: 900;
-  padding-top: 3px;
-  font-size: 45px;
-  /*opacity: 0.3;*/
+  padding-top: 6px;
+  font-size:45px;
   text-align: center;
 }
 .map-ui-toggle{
   position: absolute;
-  width: 70px;
-  height: 50px;
-  bottom: 60px;
-  right: 10px;
-  background-color: #797F8F;
+  width: 45px;height: 50px;
+  bottom: 60px;right: 0px;
+  background-color: #4F535E;
   color: white;
-  z-index: 900;
-  font-size: 45px;
-  /*opacity: 0.3;*/
-  text-align: center;
+  font-size: 35px;
+  padding: 0;
 }
-.map-filter{
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 10px;
-  left: 75px;
-  font-weight: bold;
-  font-style: italic;
-  z-index: 900;
-  opacity: 0.7; 
-  font-size: 25px;
-  padding-top: 15px;
+.map-ui-filter{
+  background-color: #454953;
+  text-align: left;
+  width: 75%;
 }
-.map-ui a, .map-ui-toggle a, .map-filter a{
-  color: white;
+.map-ui-filter li{
+  display: block;
 }
-.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
-  color: #5FA77A;
+.map-ui-btn{
+  position: relative;
+  font-size: 18px;
+  color: #FFF;
+  bottom:17px;
+  right:-10px;
 }
+.nav-map{ padding-left: 6%; padding-right: 5%;}
+.nav-end{padding-left: 6%;}
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
@@ -175,64 +168,43 @@ a:hover, .nav a:hover{color: #4099FF;}
   #custom-nav{height: 55px;}
 }
 
-.nav-login li{
-  display: inline-block;
-  list-style-type: none;
+/*the max page size should remain 1005px*/
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1004px;
+  }
 }
 
-/*The start of the middle section
-in between the header and footer */
-.main-content{
-  margin-top: 61px;
-}
+
+/*THE MAIN CONTENT AKA THE MIDDLE SECTION*/
+.main-content{margin-top: 60px;}
+/*THE MAIN FOOTER AKA THE FOOTER*/
 .main-footer{
-  margin-bottom: 60px; /*lower navigation bar*/
+  margin-bottom: 30px; /*lower navigation bar*/
 }
-/*----------= CALENDAR EVENTS PAGES=----------*/
-#calendar{
-  width: auto;
-  margin: 0px 0px 0px 0px;
-  margin-bottom: 120px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  border-collapse: separate;
-  z-index: 999;
-}
-.map-container{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-width: 200px;
-  margin-top: 0px;
-  padding: 0;
-}
-.fc table {
-  background-color: #FFFFFF;
-}
-.fc-widget-header {  /* <td>, usually */
-  /*background-color: green;*/
-}
-.fc-header-left{
-  width: 100%;
-}
-@media screen and (max-width: 600px){
-  .fc-header{
-    height: 75px;
-  }
-  .fc-header-center {
-    position: absolute;
-    top: 30px;
-    left: 100px;
-    display: block;
-    text-align: center;
-  }
-}
+
 
 /*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
-.carousel-wrapper{}
 #first-carousel{
-  margin-top: 0px;
+  margin-top: 15px;
+}
+
+#first-carousel .carousel-indicators{
+  position: absolute;
+  top: 10px;
+  left: 110%;
+  z-index: 200;
+  /*background-color: blue;*/
+  height: 25px;
+  width: 50px;
+}
+.carousel-control{
+  z-index: 1000;
 }
 .img-container{
   background-color: #FFF;
@@ -251,6 +223,10 @@ in between the header and footer */
     width: 100%;
     /*padding-top: 20px;
     padding-bottom: 20px;*/
+}
+/*DETAIL VIEW*/
+.img-detail{
+  width: 100%;
 }
 .custom-caption{
   right: 2%;left: 2%;
@@ -276,22 +252,33 @@ in between the header and footer */
   background-color: #5FA77A;
 }
 /*----------====SECOND CAROUSEL====-------*/
-#carousel{
-  text-align: center;
+#myCarousel{margin-top: 15px;}
+#myCarousel .carousel-inner .active.left { left: -25px;}
+#myCarousel .carousel-inner .next        { left: 0px;}
+#myCarousel .carousel-control.left, #myCarousel .carousel-control.right {
+  background-image:none;
 }
+#myCarousel .item{  
+  white-space: nowrap; 
+  overflow: hidden;
+}
+#myCarousel .carousel-control{
+  height: 25px;
+  width: 25px;
+  padding-top: 100px;
+}
+
 .img-collection{
-  margin-top: 25px;
   box-shadow: 0 0 0px #aaa;
 }
 .img-container-sm{
-  position: relative;
-  width: 150px;height: 150px;
+  width: 175px;height: 175px;
   display: inline-block;
-  margin: 0 auto 0 auto;
   border: none;
-  display: block;
   float: center;
   padding: 0px 0px 0px 0px;
+  margin-left: 5px;
+  margin-right:5px;
 }
 .img-custom-sm{
   vertical-align: middle;
@@ -301,8 +288,10 @@ in between the header and footer */
   top: 0;
   height: 77px;
   width: 150px;
-  opacity: .5;
-  padding-top: 15px;
+  opacity: .7;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  line-height: 25px;
 }
 
 .img-collection section{
@@ -316,77 +305,25 @@ in between the header and footer */
   font-family: myFirstFont;
   padding-top: 25px;
 }
-/*---======SHAPES=====----*/
-.circle{
-  border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50px;
-}
 
-.fa-all{
-  color: #FFFFFF;
-  padding: .4em 0.5em .4em .6em;
-  margin: 0;
-  font-size: 1.3em;
-}
-.fa-plus{
-  background-color: grey;
-}
-.fa-info{
-  background-color: Crimson;
-}
-.fa-building{
-  background-color: blue;
-}
-.fa-university{
-  background-color: black;
-}
-.fa-glass{
-  background-color: CadetBlue;
-}
-.fa-cutlery{
-  background-color: lightblue;
-}
-.fa-restroom{
-  background-color: pink;
-}
-.fa-headphones{
-  background-color: green;
-}
-.fa-facebook{
-background: black;
-color: #FFFFFF;
-padding: .3em 0.3em;
-}
-.fa-twitter{
-background: black;
-color: #FFFFFF;
-padding: 0.3em 0.2em;
-}
 
-.fa-wordpress{
-  background-color: black;
-  color: #FFFFFF;
-  padding: 0.3em 0.2em;
-}
-.fa-facebook:hover, .fa-twitter:hover, .fa-wordpress:hover{
-  background-color: blue;
-}
-/*----------Events--and--MAPS---------------*/
+/*----------===MAPS===---------------*/
 .angular-google-map-container { height: 400px; }
+.map-container{
+  position: relative;
+  width: 100%;height: 100%;
+}
 /* i dont know what .gm does*/
 /*.gm-style-iw {top: 0 !important;}*/
-.map-canvas { height: 500px; }
-.event-map{ height: 100%;  margin: 0;padding-bottom: 60px;}
+.map-canvas { height: 400px; }
 #map{
-    height: 100px;
+    height: 100%;
     width: 100%;
 }
-
 #eventmap{
-    height: 100vh;
+    height:100vh;
     width: 100%;
+    min-height: 100%;
 }
 
 
@@ -702,16 +639,22 @@ only screen and (max-device-width : 320px){
 /*-----======And Detain view-----------*/
 .info-banner{
   padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   height: 50px;
   width: 100%;
   background-color: #FFF;
   text-align: center;
+  font-style: bold;
 }
 .info-banner h3, .info-banner h4{
   padding-top: 12px;
 }
 .info-banner-space{
   margin-bottom: 10px;
+}
+.info-banner-left{
+  text-align: left;
+  padding-left: 20px;
 }
 .btn-brooklyn, .btn-manhattan{
   display: inline-block;
@@ -733,11 +676,13 @@ only screen and (max-device-width : 320px){
 .btn-brooklyn a, .btn-manhattan a{
   color: #FFF;
 }
-.btn-bk-mh{ margin-top: 50px;}
+.btn-bk-mh{ margin-top: 28px;}
 p.lead a{
   color: blue;
 }
-
+ul.lead{
+  list-style-type: none;
+}
 /*detail view image*/
 .info-img{
   height: 250%;
@@ -749,22 +694,48 @@ p.lead a{
   width: 55px;
   padding-bottom: 15px;
 }
+
+/*ALL LINKS ARE DEFINED HERE*/
+a{
+  margin: 0;
+  padding: 0;
+  color: black;
+}
 /* -------====FERRY SCHEDULE END==--------- */
+
+
 /*SITE STAPLES/GLOBAL SYLING*/ 
 .activebtn{background-color: #5FA77A; color: #FFF;}
-.dangere{background-color: #FF0101;}
+/*.dangere{background-color: #FF0101;}
 .coole{background-color: #4099FF;}
-.lead{padding-right: 5px; padding-left: 5px;}
+*/
+.lead{padding-right: 25px; padding-left: 25px;}
 .text-indent{text-indent: 5%;}
-/*SPRITES*/
-.ferry-off, .ferry-on, .headphones-off, .headphones-on, .calendar-off, 
-.calendar-on, .map-pin-off, .map-pin-on
-{ display: inline-block; background: url('../images/navicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
-.ferry-off { background-position: -0px -0px; width: 131px; height: 91px; }
-.ferry-on { background-position: -0px -91px; width: 131px; height: 90px;}
-.headphones-off { background-position: -0px -182px; width: 115px; height: 96px; }
-.headphones-on { background-position: -0px -278px; width: 115px; height: 96px; }
-.calendar-off { background-position: -0px -374px; width: 105px; height: 96px; }
-.calendar-on { background-position: -0px -470px; width: 105px; height: 96px; }
-.map-pin-off { background-position: -0px -566px; width: 60px; height: 96px; }
-.map-pin-on { background-position: -60px -566px; width: 60px; height: 96px; }
+.activeinfo{color: #000;}
+.activehome{color:#5FA77A;/*#FFF*/;}
+
+/*SPRITES*/ 
+.ferry0, .ferry1, .headphones0, .headphones1, .calendar0, 
+.calendar1, .activities, .facilities, .food, .history, 
+.info, .venues, .facebook, .instagram, .twitter, 
+.wordpress, .mappin0, .mappin1
+{ display: inline-block; background: url('../images/siteicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+.ferry0 { background-position: -3px -0px; width: 65px; height: 45px; }
+.ferry1 { background-position: -3px -48px; width: 65px; height: 45px; }
+.headphones0 { background-position: -3px -96px; width: 54px; height: 45px; }
+.headphones1 { background-position: -3px -144px; width: 54px; height: 45px; }
+.calendar0 { background-position: -3px -192px; width: 49px; height: 45px; }
+.calendar1 { background-position: -3px -240px; width: 49px; height: 45px; }
+.activities { background-position: -3px -288px; width: 45px; height: 45px; }
+.facilities { background-position: -3px -336px; width: 45px; height: 45px; }
+.food { background-position: -3px -384px; width: 45px; height: 45px; }
+.history { background-position: -3px -432px; width: 45px; height: 45px; }
+.info { background-position: -3px -480px; width: 45px; height: 45px; }
+.venues { background-position: -3px -528px; width: 45px; height: 45px; }
+.facebook { background-position: -3px -576px; width: 32px; height: 32px; }
+.instagram { background-position: -3px -611px; width: 32px; height: 32px; }
+.twitter { background-position: -3px -646px; width: 32px; height: 32px; }
+.wordpress { background-position: -3px -681px; width: 32px; height: 32px; }
+.mappin0 { background-position: -3px -716px; width: 28px; height: 45px; }
+.mappin1 { background-position: -34px -716px; width: 28px; height: 45px; }
+

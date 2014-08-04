@@ -1,13 +1,26 @@
-<div data-ng-controller="HeaderController" ng-show="navHeader">
-	<nav class="navbar-fixed-top" id="nav-beta" ng-controller="NavController">
-	    <div class="nav-ui" ng-show="headerview">
-	    	<div class="container">
-		        <ul class="nav-header-link nav-inlineblock">
-		            <li class="pull-right navright-btn"><a ui-sref="about"><span class="glyphicon glyphicon-info-sign"></span></a></li>
-		            <li class="nav-gov-brand"><a ui-sref="ferry">GOVERNORS ISLAND</a></li>
-		            <li class="pull-left navleft-btn"><a ui-sref="/"><span class="glyphicon glyphicon-home"></span></a></li>
-		        </ul>
-	        </div>
-	    </div>
-	</nav>
-</div>
+<nav class="navbar-fixed-top" id="nav-beta" data-ng-controller="NavController" ng-init="activelink(currentLink)">
+    <div class="nav-ui" ng-show="headerview">
+    	<div class="container">
+	        <ul class="nav-header-link nav-inlineblock">
+	        	<li class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activehome:isActive(0)}" class="glyphicon glyphicon-home"></span></a></li>
+	        	<!--<li class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><img src="images/resizegov.png" class="img-responsive logo img-circle"></a></li>-->
+	            <li class="nav-gov-brand"><a ui-sref="/">GOVERNORS ISLAND</a></li>
+	            <li ng-hide="buttonswap()" class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicon glyphicon-info-sign"></span></a></li>
+
+	            <li ng-show="isActive(3)" class="pull-right navright-btn">
+					<a type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span></a>
+					<ul class="dropdown-menu map-ui-filter" role="menu">
+						<li ng-click="toggleFilters('info')"><a><i class="info"></i><span class="map-ui-btn">INFORMATION</span></a></li>
+					    <li ng-click="toggleFilters('activites')"><a><i class="activities"></i><span class="map-ui-btn">ACTIVITIES</span></a></li>
+					    <li ng-click="toggleFilters('food, drink')"><a><i class="food"></i><span class="map-ui-btn">FOOD &amp; DRINK</span></a></li>
+					    <li ng-click="toggleFilters('tours')"><a><i class="history"></i><span class="map-ui-btn">HISTORY</span></a></li>
+					    <li ng-click="toggleFilters('venus')"><a><i class="venues"></i><span class="map-ui-btn">VENUS</span></a></li>
+					    <li ng-click="toggleFilters('facilities')"><a><i class="facilities"></i><span class="map-ui-btn">FACILITIES</span></a></li>
+					</ul>
+				</li>
+				<li ng-show="isActive(6)" class="pull-right navright-btn"><a ui-sref="events.grid" ng-click="activelink(2)"><span class="glyphicon glyphicon-th-large"></span></a></li>
+				<li ng-show="isActive(2)" class="pull-right navright-btn"><a ui-sref="events.list" ng-click="activelink(6)"><span class="glyphicon glyphicon-th-list"></span></a></li>
+	        </ul>
+        </div>
+    </div>
+</nav>
