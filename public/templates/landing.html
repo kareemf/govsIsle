@@ -1,4 +1,4 @@
-<div ng-controller="NavController">
+<div ng-controller="NavController" ng-controller="EventListController">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div id="first-carousel" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
@@ -13,12 +13,12 @@
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 			    <div class="item active">
-		        	<a> <img ng-src="images/landing/hero_figment_640x475.jpg" alt="gov's island" class="img-custom-lg img-reponsive">
+		        	<a> <img ng-src="images/landing/hero_figment_640x475.jpg" alt="gov's island" class="img-custom-lg img-reponsive" style="width:640px;height:475;">
 		        	</a>
 		        	 <!--<div class="carousel-caption  "><h3>VISIT THE ISLAND</h3><h4><a type="button" class="btn btn-custom">More ... </a></h4></div>-->
 			    </div>
 			    <div class="item">
-			      		<a><img src="images/landing/hero_jazzfest_640x475.jpg" alt="gov's island" class="img-custom-lg img-responsive"></a>
+			      		<a><img src="images/landing/hero_jazzfest_640x475.jpg" alt="gov's island" class="img-custom-lg img-responsive" style="width:640px;height:475;"></a>
 			    	<!--<div class="carousel-caption  "><h3>PROGRAMS THIS WEEK</h3><h4><a type="button" class="btn btn-custom">More ... </a></h4></div>-->
 			    </div>
 			    <!--
@@ -80,13 +80,13 @@
 					  <div class="img-container-sm"><a ng-click="activelink(2)" ui-sref="events.grid"><img ng-src="images/landing/Thumb_discover_320x250.jpg" class="img-responsive"></a></div>
 					</div>
 					<div class="item">
-					  <div class="img-container-sm"><a href="#"><img ng-src="images/landing/Thumb_eat_320x250.jpg" class="img-responsive"></a></div>
+					  <div class="img-container-sm"><a ng-click="activelink(3)" ui-sref="events.map"><img ng-src="images/landing/Thumb_eat_320x250.jpg" class="img-responsive"></a></div>
 					</div>
 					<div class="item">
-					  <div class="img-container-sm"><a href="#"><img ng-src="images/landing/Thumb_enjoy_320x250.jpg" class="img-responsive"></a></div>
+					  <div class="img-container-sm"><a ng-click="activelink(3)" ui-sref="events.map"><img ng-src="images/landing/Thumb_enjoy_320x250.jpg" class="img-responsive"></a></div>
 					</div>
 					<div class="item">
-					  <div class="img-container-sm"><a href="#"><img ng-src="images/landing/Thumb_learn_320x250.jpg" class="img-responsive"></a></div>
+					  <div class="img-container-sm"><a ng-click="activelink(4)" ui-sref="tours"><img ng-src="images/landing/Thumb_learn_320x250.jpg" class="img-responsive"></a></div>
 					</div>
 				</div>
 			</div>
