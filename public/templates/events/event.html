@@ -1,9 +1,20 @@
-<div ng-controller="EventDetailController">
-	<div class="img-detail">
-		<img alt="{{specialEvent.name}}" ng-src="{{specialEvent.media}}" class="img-responsive"/>
-	</div>
-	<h4 class="lead"><b>{{specialEvent.name}}<b></h4>
-	<p class="lead">{{specialEvent.startDateTime.toDateString()+" - "+specialEvent.endDateTime.toDateString();}}<br/>
-	{{specialEvent.startDateTime.toLocaleTimeString()+" - "+specialEvent.endDateTime.toLocaleTimeString()+" | "+specialEvent.location}}</p>
-	<p class="lead text-indent" ng-bind-html="specialEvent.description | trustedHtml"></p>
+
+<div id="point" ng-controller="EventDetailController">
+
+    <div id="pointImg">
+        <span ng-if="event.coverPhoto">
+            <img src="{{event.coverPhoto.url}}">
+        </span>
+        <span ng-if="!event.coverPhoto.url">
+            <img src="/images/landing/Thumb_enjoy_320x250.jpg">
+        </span>
+
+    </div>
+
+    <div id="pointInfo">
+        <h3>{{event.name}}</h3>
+        <p id="info">
+            {{event.description}}
+        </p>
+    </div>
 </div><br/>
