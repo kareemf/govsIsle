@@ -191,15 +191,13 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
 
 controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Events', 'SiteData', function($scope, $stateParams, Events, SiteData){
     console.log('in EventDetailController');
-    
-    $scope.events=SiteData.getEvents();         //getting all events
-    var id = $stateParams.id;
 
-    if(id){
-        console.log("In EventDetailController Id found "+id);
-        $scope.specialEvent=$scope.events[id-1];
+    //$scope.events=SiteData.getEvents();         //getting all events
+    var slug = $stateParams.slug;
 
-        /*
+    if(slug){
+        console.log("In EventDetailController slug found "+slug);
+
         var successCallback = function(event, headers){
             console.log('getBySlug event', event);
 
@@ -212,8 +210,8 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
             $scope.error = response.data;
         };
 
-        Events.getBySlug({id: id}, successCallback, failureCallback);
-        */
+        Events.getBySlug({slug: slug}, successCallback, failureCallback);
+
     }
 }]);
 
@@ -238,7 +236,7 @@ controllers.controller('EventMapController', ['$scope', '$state','$stateParams',
     var mapBounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(40.682183, -74.027019),
         new google.maps.LatLng(40.695688, -74.008764));
-    var mapGetTile = function(x,y,z) { 
+    var mapGetTile = function(x,y,z) {
         return "templates/map/"+z + "/" + x + "/" + y + ".png";
     }
 
@@ -253,7 +251,7 @@ controllers.controller('EventMapController', ['$scope', '$state','$stateParams',
     };
 
     $scope.init = function() {
-        
+
         map = new google.maps.Map(document.getElementById('eventmap'), mapOptions);
         map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
         map.fitBounds(mapBounds);
