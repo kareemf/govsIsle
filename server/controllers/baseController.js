@@ -261,6 +261,7 @@ module.exports = function(Model){
 
             query.select(select)
             .populate('media', 'slug id')
+            .populate('coverPhoto', 'slug id')//TODO: move to Model specific location
             .populate('user', 'name username')
             .exec(function(err, docs) {
                 if (err) {
