@@ -179,7 +179,13 @@ exports.create = function(req, res, _callback) {
 };
 
 exports.get = function(req, res, next, id) {
-    base.get(req, res, next, id);
+
+    if (id.match(/^[0-9a-fA-F]{24}$/)) {
+        base.get(req, res, next, id);
+    }
+    else{
+        base.getByQuery(req, res, next, {slug: id});
+    }
 };
 
 exports.getBySlug = function(req, res, next, id) {
