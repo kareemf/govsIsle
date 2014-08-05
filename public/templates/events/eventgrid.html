@@ -33,7 +33,7 @@
 	<h3 class="info-banner-left">SPECIAL EVENTS</h3>
 	<ul id="curatedlist" class="tourlist"> 
 		<li data-ng-repeat="event in specialEvent">
-			<a ui-sref="events.detail({id: event.id})">
+			<a ui-sref="events.detail({slug: event.slug})">
 				<img src="{{event.media}}" alt="" width="150px" height="150px">
 				<div class="caption">
 					<h5>{{event.name}}</h5>

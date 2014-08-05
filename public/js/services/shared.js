@@ -30,6 +30,7 @@ services.factory('SiteData', function($rootScope){
     //replace event with queries
     var events=[
         {'id':1,
+        'slug': "first-ever-nolan-park-scavenger",
         'name':"First Ever Nolan Park Scavenger",
         'type': "event",
         "isFeautred": "none",
