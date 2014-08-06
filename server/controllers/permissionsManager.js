@@ -113,23 +113,32 @@ module.exports = function(Model){
             return doc;
         },
 
-        /*Before commiting a user's update, remove fields that they dont have write access to*/
+        /*Before commiting a user's update, remove fields that they don't have write access to*/
         removeNonPermitedUpdateFields: function(permissions, doc, body, params){
             var modelFieldPermissions =  Model.fieldPermissions();
-            var readPermission = Model.readPermission();
-
+            var updatePermission = Model.updatePermission();
 
             for(var field in body) {
+                if(!body.hasOwnProperty(field)){
+                    continue;
+                }
+
                 if (field == '_id' || field == '__v'){
                     //can't manually update id or version
                     delete body[field];
                     continue;
                 }
-                if(params[field] != doc[field]){
+
+                if(body[field] != doc[field]){
                     console.log('DIRTY FIELD', field);
 
-                    var requiredPermission = modelFieldPermissions[field][readPermission];
+                    if(!modelFieldPermissions[field]){
+                        //attempting to update a field that is not a part of the model
+                        delete body[field];
+                        continue;
+                    }
 
+                    var requiredPermission = modelFieldPermissions[field][updatePermission];
                     if(!_.contains(permissions, requiredPermission)){
                         console.log('DONT HAVE permission', requiredPermission, 'to update', field);
                         delete body[field];
