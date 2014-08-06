@@ -7,11 +7,25 @@ function initCall() {
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('MapController', ['$scope', 'Events', function ($scope, Events) {
+controllers.controller('MapController', ['$scope', '$rootScope', 'Events', function ($scope, $rootScope, Events) {
     console.log('Google maps controller.');
 
     /* $scope.myMap auto-populated with google map object */
     $scope.isEditMode = true;
+    $scope.isAdmin = false;
+
+    console.log('$rootScope.user', $rootScope.user);
+    var user = $rootScope.user;
+    if(user){
+        //TODO: use actual permissions
+        if(user.roles){
+            user.roles.forEach(function(role){
+                if(role.name === 'admin'){
+                    $scope.isAdmin = true;
+                }
+            });
+        }
+    }
 
 
     $scope.mapOptions = {

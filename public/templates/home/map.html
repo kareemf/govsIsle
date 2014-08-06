@@ -42,7 +42,7 @@
       <a ng-href="#/events/{{currentEvent.slug}}" title="">Details</a>
     </div>
 
-    <div>
+    <div ng-show="isAdmin">
         Edit mode: <input type="checkbox" ng-model="isEditMode" ng-change="toggleEditMode(isEditMode)">
     </div>
 </section>
