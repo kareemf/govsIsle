@@ -152,7 +152,7 @@ module.exports = function(Model){
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
                     //if a cover photo, etc, was uploaded, create the Media instance.
-                    if(files) {
+                    if(files && Object.keys(files).length) {
                         req.doc = doc;
                         req.model = Model;
 

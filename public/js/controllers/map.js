@@ -88,8 +88,9 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Events', funct
 
     //TODO: do not duplicate. see BaseEventController
     var getMarkerGeoLocation = $scope.getMarkerGeoLocation = function(marker){
-        var position = marker.position
-        return [position.k, position.A];
+        var position = marker.position;
+        //8/6/14: Position.A seems to have been replaced with position.B
+        return [position.k, position.A || position.B];
     };
 
     $scope.updateGeolocationAfterDrag = function(event, marker){
