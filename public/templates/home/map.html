@@ -9,8 +9,9 @@
                       ui-event="markerEvents"></span>
 
                 <!-- create a hidden edit form for each event -->
-                <div ng-init="event = events[$index]" ng-controller="ExistingEventController">
+                <div ng-init="event = items[$index]" ng-controller="ExistingEventController">
                     <!-- TODO: is this an abuse of ng-init? -->
+                    <!--TODO: separate per content type-->
                     <div ng-show="isEditMode && showForm" ng-init="markers = existingMarkers"
                          ng-include="'/templates/events/eventForm.html'" scope="" onload="">
                     </div>

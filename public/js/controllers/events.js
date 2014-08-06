@@ -127,7 +127,7 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
 }]);
 
 controllers.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
-    console.log('in ExistingEventController');
+    console.log('in ExistingEventController. event:', $scope.event);
 
     $controller('BaseEventController', {$scope: $scope});
 
