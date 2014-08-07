@@ -40,10 +40,10 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Events', funct
 
     $scope.mapEvents = {
         //TODO: temportarily disabled.
-        //'map-rightclick': 'addNewMarker($event, $params)',
+        'map-rightclick': 'addNewMarker($event, $params)',
     };
 
-
+    $scope.newMarkers = [];
 
     $scope.newMarkerEvents = {
         'map-click': 'openMarkerInfo(marker, event)',
@@ -110,8 +110,6 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
     $scope.amenities = [];
     $scope.existingAmenityMarkers = [];
-
-    $scope.newMarkers = [];
 
     $scope.markerEvents = {
         'map-click': 'openMarkerInfo(marker, entity)',
