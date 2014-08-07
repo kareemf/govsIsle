@@ -104,4 +104,13 @@ controllers.controller('NavController', ['$scope','$location', 'NavService', 'Sh
         Shared.filters = scopeFilters;
     };
 
+    $scope.isFilterActive = function(filter){
+        var filters = $scope.filters;
+        for(var i = filters.length - 1; i > 0; i--){
+            if(filters[i] === filter){
+                return true;
+            }
+        }
+        return false;
+    }
 }]);
