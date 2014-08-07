@@ -119,11 +119,45 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
     var createMarker = function(content, map){
         var position = new google.maps.LatLng(content.geoLocation[0], content.geoLocation[1]);
-        var marker = new google.maps.Marker({
+        var icon;
+
+        switch(content.type){
+            default:
+            case 'event':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+                break;
+            case 'food':
+            case 'drink':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png';
+                break;
+            case 'info':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+                break;
+            case 'activity':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
+                break;
+            case 'facility':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png';
+                break;
+            case 'tour':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+                break;
+            case 'venue':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png';
+                break;
+        }
+
+        var markerOptions = {
             map: map,
             position: position,
             draggable: false
-        });
+        };
+
+        if(icon) {
+            markerOptions.icon = icon;
+        }
+
+        var marker = new google.maps.Marker(markerOptions);
 
         console.log('existing content', content, 'marker', marker);
         return marker;
