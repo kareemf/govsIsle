@@ -5,7 +5,7 @@ var controllers = angular.module('app.controllers');
 controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', function($scope, Events, Geocoder){
     var getMarkerGeoLocation = $scope.getMarkerGeoLocation = function(marker){
         var position = marker.position
-        return [position.k, position.A];
+        return [position.k, position.A || position.B];
     };
 
     var saveSuccessCallback = function(newEvent, headers){
