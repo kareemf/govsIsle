@@ -105,14 +105,18 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Events', funct
 controllers.controller('MarkerListController', ['$scope', '$state','$stateParams','Events', 'Amenities','Shared', function($scope, $state, $stateParams, Events, Amenities, Shared){
     console.log('in MarkerListController');
 
-    $scope.items = [];
+    $scope.events = [];
+    $scope.existingEventMarkers = [];
+
+    $scope.amenities = [];
+    $scope.existingAmenityMarkers = [];
+
     $scope.newMarkers = [];
-    $scope.existingMarkers = [];
 
     $scope.markerEvents = {
-        'map-click': 'openMarkerInfo(marker, items[$index])',
-        'map-rightclick': 'editMarker(marker, items[$index])',
-        'map-dragend': 'updateGeolocationAfterDrag(items[$index], marker)'
+        'map-click': 'openMarkerInfo(marker, entity)',
+        'map-rightclick': 'editMarker(marker, entity)',
+        'map-dragend': 'updateGeolocationAfterDrag(entity, marker)'
     };
 
     var createMarker = function(content, map){
@@ -136,19 +140,21 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     // TODO: filters are case sensitive
     var getContentByFilters = function(filters){
         console.log('getContentByFilters', filters);
-        clearMarkers($scope.existingMarkers);
-        $scope.existingMarkers = [];
+        clearMarkers($scope.existingEventMarkers);
+        clearMarkers($scope.existingAmenityMarkers);
+        $scope.existingEventMarkers = [];
+        $scope.existingAmenityMarkers = [];
 
         if(filters.indexOf('event') >= 0){
             Events.query(function(events){
                 console.log('events', events);
                 events.forEach(function(event){
-                    $scope.existingMarkers.push(createMarker(event, $scope.myMap));
-                    $scope.items.push(event);
+                    $scope.existingEventMarkers.push(createMarker(event, $scope.myMap));
+                    $scope.events.push(event);
                 });
             });
 
-            //remove events from the set of filters to prevent including
+            //remove 'event' filter from the set of filters to prevent including
             //amenities query
             filters = filters.filter(function(f){
                 return f != 'event'
@@ -165,15 +171,12 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             Amenities.query({filter: filters}, function(amenities){
                 console.log('amenities', amenities);
                 amenities.forEach(function(activity){
-                    $scope.existingMarkers.push(createMarker(activity, $scope.myMap));
-                    $scope.items.push(activity);
+                    $scope.existingAmenityMarkers.push(createMarker(activity, $scope.myMap));
+                    $scope.amenities.push(activity);
                 });
             });
         }
-
-
     };
-
 
     $scope.$watch(function(){return Shared.filters}, function(newVal, oldVal){
         //console.log('FILTERS_CHANGED', newVal, oldVal);
