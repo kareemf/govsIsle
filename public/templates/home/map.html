@@ -17,6 +17,20 @@
                     </div>
                 </div>
             </div>
+            <div ng-repeat="marker in existingAmenityMarkers">
+                <span
+                        ng-init="entity = amenities[$index]"
+                        ui-map-marker="marker"
+                        ui-event="markerEvents"></span>
+
+                <!-- create a hidden edit form for each event -->
+                <!--TODO-->
+                <div ng-init="event = entity" ng-controller="ExistingEventController">
+                    <div ng-show="isEditMode && showForm" ng-init="markers = existingEventMarkers"
+                         ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
