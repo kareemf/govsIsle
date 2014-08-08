@@ -11,6 +11,7 @@
                     ui-event="markerEvents"></span>
 
                 <!-- create a hidden edit form for each event -->
+                <!--markers handle is there so current marker can be cleanly removed if need be-->
                 <div ng-init="event = entity" ng-controller="ExistingEventController">
                     <div ng-show="isEditMode && showForm" ng-init="markers = existingEventMarkers"
                          ng-include="'/templates/events/eventForm.html'" scope="" onload="">
@@ -35,13 +36,23 @@
 
     <!-- populate map with new markers/events -->
     <div ng-repeat="marker in newMarkers"
-        ng-controller="NewEventController"
         ui-map-marker="newMarkers[$index]"
         ui-event="newMarkerEvents">
 
+        <select ng-model="newEntityContentType"
+                ng-options="contentType for contentType in contentTypes">
+            <option value="">-- choose content type --</option>
+        </select>
+
         <!-- create a hidden edit form for each new event/marker -->
-        <div ng-show="isEditMode && showForm" ng-init="markers = newMarkers"
-             ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+        <div ng-show="isEditMode" ng-init="markers = newMarkers"
+             >
+            <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventController"
+                 ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+             </div>
+            <div ng-if="newEntityContentType == 'amenity'" ng-controller="NewAmenityMarkerController"
+                 ng-include="'/templates/amenities/amenityForm.html'" scope="" onload="">
+            </div>
         </div>
     </div>
 
