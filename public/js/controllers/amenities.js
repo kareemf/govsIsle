@@ -12,11 +12,6 @@ var controllers = angular.module('app.controllers');
  * $scope.updateFailureCallback = function(entity, headers)
  */
 controllers.controller('BaseEntityController', ['$scope', function($scope){
-    //TODO: move
-    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = function(marker){
-        var position = marker.position
-        return [position.k, position.A || position.B];
-    };
 
     $scope.save = function(_entity){
         console.log('saving entity of type', $scope.Resource);
@@ -113,5 +108,49 @@ controllers.controller('ExistingAmenityMarkerController', ['$scope', '$controlle
         $scope.marker = marker;
         $scope.$apply();
     });
+
+}]);
+
+controllers.controller('NewAmenityMarkerController', ['$scope', '$controller', 'Amenities', 'Shared', function($scope, $controller, Amenities, Shared){
+    console.log('inside NewAmenityMarkerController', $scope.marker);
+
+    // TODO: hide form when amenity saved
+
+    // 'inherit' from Base
+    $controller('BaseEntityController', {$scope: $scope});
+
+    var marker = $scope.marker;
+    var getMarkerGeoLocation = Shared.getMarkerGeoLocation;
+
+    $scope.Resource = Amenities;
+
+    $scope.amenity = {
+        name: '',
+        type: '', // Activity, Exhibit, Tour, Program/Festival
+        description: '',
+        specialities: [],
+        location: '',
+        geoLocation: getMarkerGeoLocation(marker)
+    };
+
+    $scope.options = {
+        lookupGeo: false,
+        lookupLocation: false
+    };
+
+    $scope.showForm = true;
+
+    $scope.cancel = function(amenity, marker, markers){
+        console.log('NewAmenityMarkerController canceling marker', marker, 'amenity', amenity);
+
+        marker.setMap(null);
+
+        for (var i = markers.length - 1; i >= 0; i--) {
+            if(markers[i].__gm_id == marker.__gm_id){
+                markers.splice(i, 1);
+                break;
+            }
+        }
+    };
 
 }]);
