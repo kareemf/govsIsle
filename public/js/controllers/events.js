@@ -167,7 +167,7 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
     //     $scope.addMarkerDragListener($scope, event, marker);
     // });
 
-    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(event, args){
+    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(entity, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in BaseEventController');
 
         /*
@@ -175,7 +175,7 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
          -> a 'MARKER_CAN_BE_EDITED_EVENT' event is dispatched.
          */
 
-        if(args.event.id != $scope.event.id){
+        if(args.entity.id != $scope.entity.id){
             return;
         }
         var marker = args.marker;

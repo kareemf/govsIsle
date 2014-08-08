@@ -76,12 +76,12 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Events', funct
         $scope.myInfoWindow.open($scope.myMap, marker);
     };
 
-    $scope.editMarker = function(marker, event){
-        console.log('editting marker', marker, 'event', event);
+    $scope.editMarker = function(marker, entity){
+        console.log('editting marker', marker, 'entity', entity);
 
         $scope.$broadcast('MARKER_CAN_BE_EDITED_EVENT', {
             marker: marker,
-            event: event
+            entity: entity
         });
     };
 

@@ -93,15 +93,15 @@ controllers.controller('ExistingAmenityMarkerController', ['$scope', '$controlle
         }
     });
 
-    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(amenity, args){
+    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(entity, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in ExistingAmenityMarkerController');
 
         /*
          user right-clicked an existing marker (handled by ExistingMarkerController)
-         -> a 'MARKER_CAN_BE_EDITED_EVENT' amenity is dispatched.
+         -> a 'MARKER_CAN_BE_EDITED_EVENT' entity is dispatched.
          */
 
-        if(args.amenity.id != $scope.amenity.id){
+        if(args.entity.id != $scope.entity.id){
             return;
         }
         var marker = args.marker;
