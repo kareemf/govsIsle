@@ -27,7 +27,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Events', funct
         }
     }
 
-
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
         streetViewControl: true,
