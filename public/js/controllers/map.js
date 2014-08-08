@@ -33,7 +33,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         center: new google.maps.LatLng(40.6880492, -74.0188415),
         streetViewControl: true,
         panControl: true,
-        zoom: 15,
+        zoom: 16,
         maxZoom: 20,
         minZoom: 14,
         mapTypeId: google.maps.MapTypeId.ROADMAP
