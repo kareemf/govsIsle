@@ -40,16 +40,17 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
     };
 
     $scope.mapEvents = {
-        //TODO: temportarily disabled.
-        'map-rightclick': 'addNewMarker($event, $params)',
+        'map-rightclick': 'addNewMarker($event, $params)'
     };
+
+    $scope.contentTypes = ['event', 'amenity'];
 
     $scope.newMarkers = [];
 
     $scope.newMarkerEvents = {
-        'map-click': 'openMarkerInfo(marker, event)',
-        'map-rightclick': 'editMarker(marker, event)',
-        'map-dragend': 'updateGeolocationAfterDrag(event, marker)'
+        'map-click': 'openMarkerInfo(marker, entity)',
+        'map-rightclick': 'editMarker(marker, entity)',
+        'map-dragend': 'updateGeolocationAfterDrag(entity, marker)'
     };
 
     $scope.addNewMarker = function ($event, $params) {
@@ -89,11 +90,11 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         });
     };
 
-    $scope.updateGeolocationAfterDrag = function(event, marker){
-        console.log('updating event position');
+    $scope.updateGeolocationAfterDrag = function(entity, marker){
+        console.log('updating entity position. entiy', entity, 'marker', marker);
 
         var geoLocation = getMarkerGeoLocation(marker);
-        event.geoLocation = geoLocation;
+        entity.geoLocation = geoLocation;
     };
 
   }]);

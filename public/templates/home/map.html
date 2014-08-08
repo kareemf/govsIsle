@@ -45,8 +45,7 @@
         </select>
 
         <!-- create a hidden edit form for each new event/marker -->
-        <div ng-show="isEditMode" ng-init="markers = newMarkers"
-             >
+        <div ng-show="isEditMode" ng-init="markers = newMarkers">
             <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventController"
                  ng-include="'/templates/events/eventForm.html'" scope="" onload="">
              </div>
