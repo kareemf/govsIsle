@@ -7,7 +7,7 @@ function initCall() {
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('MapController', ['$scope', '$rootScope', 'Events', function ($scope, $rootScope, Events) {
+controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', function ($scope, $rootScope, Shared) {
     console.log('Google maps controller.');
 
     /* $scope.myMap auto-populated with google map object */
@@ -26,6 +26,8 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Events', funct
             });
         }
     }
+
+    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
 
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
@@ -83,13 +85,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Events', funct
             marker: marker,
             entity: entity
         });
-    };
-
-    //TODO: do not duplicate. see BaseEventController
-    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = function(marker){
-        var position = marker.position;
-        //8/6/14: Position.A seems to have been replaced with position.B
-        return [position.k, position.A || position.B];
     };
 
     $scope.updateGeolocationAfterDrag = function(event, marker){
