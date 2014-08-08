@@ -70,11 +70,13 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         $scope.newMarkers.push(marker);
     };
 
-    $scope.openMarkerInfo = function (marker, event) {
-        console.log('openMarkerInfo marker', marker, 'event', event );
+    $scope.openMarkerInfo = function (marker, entity) {
+        console.log('openMarkerInfo marker', marker, 'entity', entity );
 
         $scope.currentMarker = marker;
-        $scope.currentEvent = event;
+
+        //TODO: swtich on entyity.type or rename currentEvent
+        $scope.currentEvent = entity;
         $scope.myInfoWindow.open($scope.myMap, marker);
     };
 

@@ -5,6 +5,7 @@ services.factory('Shared', [function(){
 	var self = this;
 	self.data = {
         getMarkerGeoLocation: function(marker){
+            //8/6/14: Position.A seems to have been replaced with position.B
             var position = marker.position
             return [position.k, position.A || position.B];
         }
