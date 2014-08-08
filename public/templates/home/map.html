@@ -23,11 +23,9 @@
                         ui-map-marker="marker"
                         ui-event="markerEvents"></span>
 
-                <!-- create a hidden edit form for each event -->
-                <!--TODO-->
-                <div ng-init="event = entity" ng-controller="ExistingEventController">
-                    <div ng-show="isEditMode && showForm" ng-init="markers = existingEventMarkers"
-                         ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+                <div ng-init="amenity = entity" ng-controller="ExistingAmenityMarkerController">
+                    <div ng-show="isEditMode && showForm" ng-init="markers = existingAmenityMarkers"
+                         ng-include="'/templates/amenities/amenityForm.html'" scope="" onload="">
                     </div>
                 </div>
             </div>
