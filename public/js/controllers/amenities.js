@@ -36,6 +36,8 @@ controllers.controller('BaseEntityController', ['$scope', function($scope){
 controllers.controller('ExistingAmenityMarkerController', ['$scope', '$controller', 'Amenities', function($scope, $controller, Amenities){
     console.log('in ExistingAmenityController. amenity:', $scope.amenity);
 
+    var marker = $scope.marker;
+
     $controller('BaseEntityController', {$scope: $scope});
 
     $scope.Resource = Amenities;
@@ -56,7 +58,7 @@ controllers.controller('ExistingAmenityMarkerController', ['$scope', '$controlle
         $scope.error = response.data;
     };
 
-    $scope.updateSuccessCallback = function(newAmenity, headers){
+    $scope.updateSuccessCallback = function(amenity, headers){
         //update successful, close the form
         $scope.showForm = false;
 
