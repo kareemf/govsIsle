@@ -5,7 +5,7 @@
     Hours: <input type="text" ng-model="amenity.hours" /><br />
     <!--TODO: list-->
     Specialities: <input type="text" ng-model="amenity.specialities" /><br />
-    Location: <input type="text" ng-model="amenity.location" /><!--<button ng-click="lookupGeo(amenity, marker)">Lookup Coords</button-->><br />
+    Location: <input type="text" ng-model="amenity.location" /><!--<button ng-click="lookupGeo(amenity, marker)">Lookup Coords</button--><br />
     Coords: <input type="text" ng-model="amenity.geoLocation" /><button ng-click="lookupLocation(amenity, marker)">Lookup Location</button><br />
     <span class="error" ng-show="error">Error: {{error}}</span><br>
     <button ng-show="amenity.id" ng-click="update(amenity, marker)">Edit</button>
