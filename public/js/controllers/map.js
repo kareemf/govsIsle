@@ -112,17 +112,16 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         'map-dragend': 'updateGeolocationAfterDrag(marker, entity)'
     };
 
-    var createMarker = function(content, map){
-        var position = new google.maps.LatLng(content.geoLocation[0], content.geoLocation[1]);
+    var determineMarkerIcon = function(entity){
         var icon;
 
-        //using marker dot to distinguish between published and unpublished content
-        switch(content.type){
+        //using marker dot to distinguish between published and unpublished entity
+        switch(entity.type){
             default:
             case 'event':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
 
-                if(!content.published){
+                if(!entity.published){
                     icon = 'http://maps.google.com/mapfiles/ms/icons/red.png';
                 }
                 break;
@@ -130,46 +129,51 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             case 'drink':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png';
 
-                if(!content.published){
+                if(!entity.published){
                     icon = 'http://maps.google.com/mapfiles/ms/icons/pink.png';
                 }
                 break;
             case 'info':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
 
-                if(!content.published){
+                if(!entity.published){
                     icon = 'http://maps.google.com/mapfiles/ms/icons/green.png';
                 }
                 break;
             case 'activity':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
 
-                if(!content.published){
+                if(!entity.published){
                     icon = 'http://maps.google.com/mapfiles/ms/icons/orange.png';
                 }
                 break;
             case 'facility':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png';
 
-                if(!content.published){
+                if(!entity.published){
                     icon = 'http://maps.google.com/mapfiles/ms/icons/lightblue.png';
                 }
                 break;
             case 'tour':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
 
-                if(!content.published){
+                if(!entity.published){
                     icon = 'http://maps.google.com/mapfiles/ms/icons/blue.png';
                 }
                 break;
             case 'venue':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png';
 
-                if(!content.published){
+                if(!entity.published){
                     icon = 'http://maps.google.com/mapfiles/ms/icons/purple.png';
                 }
                 break;
         }
+        return icon;
+    };
+
+    var createMarker = function(entity, map){
+        var position = new google.maps.LatLng(entity.geoLocation[0], entity.geoLocation[1]);
 
         var markerOptions = {
             map: map,
@@ -177,13 +181,15 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             draggable: false
         };
 
+        var icon = determineMarkerIcon(entity);
+
         if(icon) {
             markerOptions.icon = icon;
         }
 
         var marker = new google.maps.Marker(markerOptions);
 
-        console.log('existing content', content, 'marker', marker);
+        console.log('existing entity', entity, 'marker', marker);
         return marker;
     };
 
@@ -191,7 +197,16 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         markers.forEach(function(marker){
             marker.setMap(null);
         });
+    };
+
+    var updateMarkerIcon = function(entity, marker, markers){
+        for(var i = markers.length - 1; i >= 0; i--){
+            if(markers[i] == marker){
+                var icon = determineMarkerIcon(entity);
+                marker.setIcon(icon);
     }
+        }
+    };
 
     // TODO: filters are case sensitive
     var getContentByFilters = function(filters){
@@ -241,6 +256,16 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         }
         getContentByFilters(newVal);
     }, true);
+
+    $scope.$on('MARKER_UPDATED_EVENT', function(event, args){
+        if(args.event){
+            updateMarkerIcon(args.event, args.marker, $scope.existingEventMarkers);
+        }
+        else if(args.amenity){
+            updateMarkerIcon(args.amenity, args.marker, $scope.existingAmenityMarkers);
+        }
+
+    });
 }]);
 
 controllers.controller('NewMarkerListController', ['$scope', '$controller', function($scope, $controller){
