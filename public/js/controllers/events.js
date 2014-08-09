@@ -124,6 +124,10 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
         };
     };
 
+    $scope.$emit('NEW_ENTITY_EVENT', {
+        entity: $scope.event
+    });
+
 }]);
 
 controllers.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
@@ -167,7 +171,7 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
     //     $scope.addMarkerDragListener($scope, event, marker);
     // });
 
-    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(entity, args){
+    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(event, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in BaseEventController');
 
         /*

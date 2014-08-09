@@ -90,7 +90,7 @@ controllers.controller('ExistingAmenityMarkerController', ['$scope', '$controlle
         }
     });
 
-    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(entity, args){
+    $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(event, args){
         console.log('responding to MARKER_CAN_BE_EDITED_EVENT in ExistingAmenityMarkerController');
 
         /*
@@ -152,5 +152,9 @@ controllers.controller('NewAmenityMarkerController', ['$scope', '$controller', '
             }
         }
     };
+
+    $scope.$emit('NEW_ENTITY_EVENT', {
+        entity: $scope.amenity
+    });
 
 }]);

@@ -35,22 +35,25 @@
     </div>
 
     <!-- populate map with new markers/events -->
-    <div ng-repeat="marker in newMarkers"
-        ui-map-marker="newMarkers[$index]"
-        ui-event="newMarkerEvents">
+    <div ng-controller="NewMarkerListController">
+        <div ng-repeat="marker in newMarkers"
+            ui-map-marker="marker"
+            ui-event="newMarkerEvents">
 
-        <select ng-model="newEntityContentType"
-                ng-options="contentType for contentType in contentTypes">
-            <option value="">-- choose content type --</option>
-        </select>
+            <select ng-model="newEntityContentType"
+                    ng-options="contentType for contentType in contentTypes">
+                <option value="">-- choose content type --</option>
+            </select>
 
-        <!-- create a hidden edit form for each new event/marker -->
-        <div ng-show="isEditMode" ng-init="markers = newMarkers">
-            <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventController"
-                 ng-include="'/templates/events/eventForm.html'" scope="" onload="">
-             </div>
-            <div ng-if="newEntityContentType == 'amenity'" ng-controller="NewAmenityMarkerController"
-                 ng-include="'/templates/amenities/amenityForm.html'" scope="" onload="">
+            <!-- create a hidden edit form for each new event/marker -->
+            <div ng-show="isEditMode" ng-init="markers = newMarkers">
+                <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventController"
+                     ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+                </div>
+
+                <div ng-if="newEntityContentType == 'amenity'" ng-controller="NewAmenityMarkerController"
+                     ng-include="'/templates/amenities/amenityForm.html'" scope="" onload="">
+                </div>
             </div>
         </div>
     </div>

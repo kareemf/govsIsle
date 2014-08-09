@@ -43,15 +43,20 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         'map-rightclick': 'addNewMarker($event, $params)'
     };
 
+    //TODO: use permissions to determine what content user can create if any
     $scope.contentTypes = ['event', 'amenity'];
 
-    $scope.newMarkers = [];
+    $scope.openMarkerInfo = function (marker, entity) {
+        console.log('openMarkerInfo marker', marker, 'entity', entity );
 
-    $scope.newMarkerEvents = {
-        'map-click': 'openMarkerInfo(marker, entity)',
-        'map-rightclick': 'editMarker(marker, entity)',
-        'map-dragend': 'updateGeolocationAfterDrag(entity, marker)'
+        $scope.currentMarker = marker;
+
+        //TODO: swtich on entyity.type or rename currentEvent
+        $scope.currentEvent = entity;
+        $scope.myInfoWindow.open($scope.myMap, marker);
     };
+
+    $scope.newMarkers = [];
 
     $scope.addNewMarker = function ($event, $params) {
         console.log('rightclick', $event, $params);
@@ -71,16 +76,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         $scope.newMarkers.push(marker);
     };
 
-    $scope.openMarkerInfo = function (marker, entity) {
-        console.log('openMarkerInfo marker', marker, 'entity', entity );
-
-        $scope.currentMarker = marker;
-
-        //TODO: swtich on entyity.type or rename currentEvent
-        $scope.currentEvent = entity;
-        $scope.myInfoWindow.open($scope.myMap, marker);
-    };
-
     $scope.editMarker = function(marker, entity){
         console.log('editting marker', marker, 'entity', entity);
 
@@ -90,11 +85,14 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         });
     };
 
-    $scope.updateGeolocationAfterDrag = function(entity, marker){
+    $scope.updateGeolocationAfterDrag = function(marker, entity){
         console.log('updating entity position. entiy', entity, 'marker', marker);
 
         var geoLocation = getMarkerGeoLocation(marker);
-        entity.geoLocation = geoLocation;
+        if(entity){
+            entity.geoLocation = geoLocation;
+        }
+
     };
 
   }]);
@@ -111,7 +109,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     $scope.markerEvents = {
         'map-click': 'openMarkerInfo(marker, entity)',
         'map-rightclick': 'editMarker(marker, entity)',
-        'map-dragend': 'updateGeolocationAfterDrag(entity, marker)'
+        'map-dragend': 'updateGeolocationAfterDrag(marker, entity)'
     };
 
     var createMarker = function(content, map){
@@ -214,6 +212,36 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         }
         getContentByFilters(newVal);
     }, true);
+}]);
+
+controllers.controller('NewMarkerListController', ['$scope', 'Events', 'Amenities','Shared', function($scope, Events, Amenities, Shared){
+    console.log('in NewMarkerListController');
+
+    $scope.newMarkerEvents = {
+        'map-click': 'openMarkerInfo(marker, findRelatedEntity(marker))',
+        'map-rightclick': 'editMarker(marker, findRelatedEntity(marker))',
+        'map-dragend': 'updateGeolocationAfterDrag(marker, findRelatedEntity(marker))'
+    };
+
+    $scope.newEntities = [];
+
+    $scope.$on('NEW_ENTITY_EVENT', function(event, args){
+        console.log('responding to NEW_ENTITY_EVENT. args', args);
+        $scope.newEntities.push(args.entity);
+    });
+
+     $scope.findRelatedEntity = function(marker){
+        var markers = $scope.newMarkers;
+        var entities = $scope.newEntities;
+
+        for(var i = markers.length - 1; i >= 0; i--){
+            if(markers[i] == marker){
+                return entities[i];
+            }
+        }
+        return null;
+    };
+
 }]);
 
 controllers.controller('GeoLocationController', ['$scope', 'Events', function ($scope, Events) {
