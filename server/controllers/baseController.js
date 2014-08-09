@@ -145,6 +145,16 @@ module.exports = function(Model){
             doc.edit = new Date();
             doc.editedBy = user.id;
             doc = _.extend(doc, body);
+
+            //do not store null values. unpermitted updates have already been filtered,
+            //so there shouln't be any unintended deletes
+            for(var field in body){
+                if(body[field] === null){
+                    //console.log('deleting field', field);
+                    doc[field] = undefined;
+                }
+            }
+
             doc.save(function(err) {
                 if (err) {
                     var data = {errors: err.errors};
