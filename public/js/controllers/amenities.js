@@ -26,17 +26,31 @@ controllers.controller('BaseEntityController', ['$scope', function($scope){
 
         $scope.Resource.update(_entity, $scope.updateSuccessCallback, $scope.updateFailureCallback);
     };
+
+    $scope.togglePublished = function(entity){
+        if (entity.published) {
+            delete entity.published;
+            $scope.isPublished = false;
+        }
+        else {
+            entity.published = new Date();
+            $scope.isPublished = true;
+        }
+    }
 }]);
 
 controllers.controller('ExistingAmenityMarkerController', ['$scope', '$controller', 'Amenities', function($scope, $controller, Amenities){
-    console.log('in ExistingAmenityController. amenity:', $scope.amenity);
+    console.log('in ExistingAmenityController. amenity:', $scope.entity);
 
     var marker = $scope.marker;
+    var amenity = $scope.entity;
 
     $controller('BaseEntityController', {$scope: $scope});
 
     $scope.Resource = Amenities;
     $scope.showForm = false;
+    $scope.isPublished = amenity.published ? true : false;
+
 
     $scope.saveSuccessCallback = function(amenity, headers){
         //save successful, close the form
@@ -124,6 +138,10 @@ controllers.controller('NewAmenityMarkerController', ['$scope', '$controller', '
 
     $scope.Resource = Amenities;
 
+    $scope.showForm = true;
+
+    $scope.isPublished = false;
+
     $scope.amenity = {
         name: '',
         type: '', // Activity, Exhibit, Tour, Program/Festival
@@ -137,8 +155,6 @@ controllers.controller('NewAmenityMarkerController', ['$scope', '$controller', '
         lookupGeo: false,
         lookupLocation: false
     };
-
-    $scope.showForm = true;
 
     $scope.cancel = function(amenity, marker, markers){
         console.log('NewAmenityMarkerController canceling marker', marker, 'amenity', amenity);
