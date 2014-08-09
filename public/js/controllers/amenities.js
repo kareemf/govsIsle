@@ -9,11 +9,6 @@ controllers.controller('BaseAmenityController', ['$scope', '$rootScope', 'Amenit
         // TODO: validate
 
         $scope.Resource.save(amenity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
-
-        $scope.$emit('MARKER_UPDATED_EVENT', {
-            marker: marker,
-            amenity: amenity
-        });
     };
 
     $scope.update = function(amenity, marker){
@@ -22,10 +17,6 @@ controllers.controller('BaseAmenityController', ['$scope', '$rootScope', 'Amenit
 
         $scope.Resource.update(amenity, $scope.updateSuccessCallback, $scope.updateFailureCallback);
 
-        $scope.$emit('MARKER_UPDATED_EVENT', {
-            marker: marker,
-            amenity: amenity
-        });
     };
 
     $scope.togglePublished = function(entity){
