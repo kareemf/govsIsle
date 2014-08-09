@@ -2,7 +2,16 @@
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('BaseAmenityController', ['$scope', '$rootScope', function($scope, $rootScope){
+/**
+ * To use:
+ * $controller('BaseEntityController', {$scope: $scope});
+ * $scope.Resource = {Angular Resource}
+ * $scope.saveSuccessCallback = function(entity, headers)
+ * $scope.saveFailureCallback = function(entity, headers)
+ * $scope.updateSuccessCallback = function(entity, headers)
+ * $scope.updateFailureCallback = function(entity, headers)
+ */
+controllers.controller('BaseEntityController', ['$scope', '$rootScope', function($scope, $rootScope){
 
     $scope.save = function(entity, marker){
         console.log('saving Entity', entity);
@@ -33,45 +42,6 @@ controllers.controller('BaseAmenityController', ['$scope', '$rootScope', functio
     }
 }]);
 
-/**
- * To use:
- * $controller('BaseEntityController', {$scope: $scope});
- * $scope.Resource = {Angular Resource}
- * $scope.saveSuccessCallback = function(entity, headers)
- * $scope.saveFailureCallback = function(entity, headers)
- * $scope.updateSuccessCallback = function(entity, headers)
- * $scope.updateFailureCallback = function(entity, headers)
- */
-controllers.controller('BaseEntityController', ['$scope', '$rootScope', 'Amenities', function($scope, $rootScope, Amenities){
-
-    $scope.save = function(_entity){
-        console.log('saving entity of type', $scope.Resource);
-        // TODO: validate
-
-        $scope.Resource.save(_entity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
-//        Amenities.save(_entity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
-    };
-
-    $scope.update = function(_entity){
-        console.log('updating entity of type', $scope.Resource);
-        // TODO: validate
-
-        $scope.Resource.update(_entity, $scope.updateSuccessCallback, $scope.updateFailureCallback);
-    };
-
-    $scope.togglePublished = function(entity){
-        if (entity.published) {
-            entity.published = null;
-            entity.publishedBy = null;
-            $scope.isPublished = false;
-        }
-        else {
-            entity.published = new Date();
-            entity.pushedBy = $rootScope.user.id;
-            $scope.isPublished = true;
-        }
-    }
-}]);
 
 controllers.controller('ExistingAmenityMarkerController', ['$scope', '$controller', 'Amenities', function($scope, $controller, Amenities){
     console.log('in ExistingAmenityController. amenity:', $scope.entity);
@@ -166,7 +136,7 @@ controllers.controller('NewAmenityMarkerController', ['$scope', '$controller', '
 
     // 'inherit' from Base
     //$controller('BaseEntityController', {$scope: $scope});
-    $controller('BaseAmenityController', {$scope: $scope});
+    $controller('BaseEntityController', {$scope: $scope});
 
     var marker = $scope.marker;
     var getMarkerGeoLocation = Shared.getMarkerGeoLocation;
