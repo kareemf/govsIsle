@@ -1,76 +1,39 @@
-<div ng-controller="NavController" ng-controller="EventListController">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<div id="first-carousel" class="carousel slide" data-ride="carousel">
+<div ng-controller="NavController">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="carouselTest">
+		<div id="mainCaro" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
-				<li data-target=" #first-carousel" data-slide-to="0" class="active"></li>
-				<li data-target=" #first-carousel" data-slide-to="1"></li>
-				<!--
-				<li data-target=" #first-carousel" data-slide-to="2"></li>
-				<li data-target=" #first-carousel" data-slide-to="3"></li>
-				-->
+				<li ng-repeat="feature in featured" data-target=" #mainCaro" data-slide-to="{{$index}}" ng-class="{active: initLanding($index)}"></li>
+				<!--<li data-target="#mainCaro" data-slide-to="0" class="active"></li>
+				<li data-target="#mainCaro" data-slide-to="1"></li>-->
 			</ol>
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
+				<!-- Lonique fix me ;-) 
+					 later buddy later i will fix you
+	    			<div ng-repeat="item in featured" ng-class="{'item':initLanding($index)}">
+			        	<a ui-sref="item.detail({id: item.id})"> <img ng-src="{{item.media}}" alt="{{item.name}}" class="img-custom-lg img-reponsive">	 
+			        	<div class="carousel-caption"><p>{{item.name}} | {{item.startDateTime | date:'MM/dd/yyyy'}}</p></div>
+			        	</a>
+				    </div>
+				-->
 			    <div class="item active">
-		        	<a> <img ng-src="images/landing/hero_figment_640x475.jpg" alt="gov's island" class="img-custom-lg img-reponsive" style="width:640px;height:475;">
-		        	</a>
-		        	 <!--<div class="carousel-caption  "><h3>VISIT THE ISLAND</h3><h4><a type="button" class="btn btn-custom">More ... </a></h4></div>-->
+		        	<img ng-src="{{featured[0].media}}" alt="{{featured[0].name}}" class="img-custom-lg img-reponsive"/>	 
+		        	<div class="carousel-caption"><p>{{featured[0].name}} | {{featured[0].startDateTime | date:'MM/dd/yyyy'}}</p></div>
+		        
+					<a ui-sref="events.detail({id: featured[0].id})"><div class="carouselMore">more >></div></a>
+					<div class="swapePanel"></div>
 			    </div>
 			    <div class="item">
-			      		<a><img src="images/landing/hero_jazzfest_640x475.jpg" alt="gov's island" class="img-custom-lg img-responsive" style="width:640px;height:475;"></a>
-			    	<!--<div class="carousel-caption  "><h3>PROGRAMS THIS WEEK</h3><h4><a type="button" class="btn btn-custom">More ... </a></h4></div>-->
-			    </div>
-			    <!--
-			    <div class="item">
-			     		<img src="http://res.cloudinary.com/hqsaer6gs/image/upload/v1406496123/govsisle/slide_3.jpg" alt="gov's island" class="img-custom-lg img-responsive">
-			      	<div class="carousel-caption  "><h3>FERRY SCHEDULE</h3><h4><a type="button" class="btn btn-custom">More ... </a></h4></div>
-			    </div>
-			    <div class="item">
-			      		<img src="http://res.cloudinary.com/hqsaer6gs/image/upload/v1406496126/govsisle/slide_4.jpg" alt="gov's island" class="img-custom-lg img-responsive">
-			      	<div class="carousel-caption  "><h3>PERMITS</h3><h4><a type="button" class="btn btn-custom">More ... </a></h4></div>
-			    </div>
-			    -->
-			</div><!--ENDING OF CAROUSEL-INNER nav-pills-->
-			
-			<!-- Controls --><a data-target=" #first-carousel" class="left carousel-control" role="button" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-left"></span>
-			</a>
-			<a data-target=" #first-carousel" class="right carousel-control" role="button" data-slide="next">
-			    <span class="glyphicon glyphicon-chevron-right"></span>
-			</a>
+			      	<a ui-sref="events.detail({id: featured[0].id})"><img ng-src="{{featured[1].media}}" alt="{{featured[0].media}}" class="img-custom-lg img-responsive"/>
+			    	<div class="carousel-caption"><p>{{featured[1].name}} | {{featured[1].startDateTime | date:'MM/dd/yyyy'}}</p></div>
+			    	</a>
+					<a ui-sref="events.detail({id: featured[1].id})"><div class="carouselMore">more >></div></a>
+					<div class="swapePanel"></div>
+			    </div>    
+			</div><!--ENDING OF CAROUSEL-INNER-->
 		</div>
 	</div>
-	<!--
-	<div class="img-collection">
-		<div id="carousel">
-			<section>
-				<div class="img-container-sm">
-					<a><img src="images/rsz_slide_1.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
-					<div class="img-cover information"><p>Discover</p></div>
-				</div>
-			</section>
-			<section>
-				<div class="img-container-sm">
-						<a><img src="images/rsz_slide_2.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
-						<div class="img-cover food-drink"><p>Enjoy</p></div>
-				</div>
-			</section>
-			<section>
-				<div class="img-container-sm">
-						<a><img src="images/rsz_slide_3.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
-						<div class="img-cover activitie"><p>Eat</p></div>
-				</div>
-			</section>
-			<section>
-				<div class="img-container-sm">
-						<a><img src="images/rsz_slide_0.jpg" alt="gov's island" class="img-custom-sm img-responsive"></a>
-						<div class="img-cover venue"><p>Learn</p></div>
-				</div>
-			</section>
-		</div>
-	</div>
-	-->
 	<div class="clear"></div>
 	<div class="container">
 		<div class="carousel slide" id="myCarousel">
@@ -95,25 +58,5 @@
 		</div>
 	</div><!-- END OF CAROUSEL -->
 </div>
-<script type="text/javascript">
-	$('#myCarousel').carousel({
-	  interval: 4000
-	})
+<script type="text/javascript" src="js/carousel.js"></script>
 
-	$('#myCarousel .item').each(function(){
-	  var next = $(this).next();
-	  if (!next.length) {
-	    next = $(this).siblings(':first');
-	  }
-	  next.children(':first-child').clone().appendTo($(this));
-	  
-	  for (var i=0;i<2;i++) {
-	    next=next.next();
-	    if (!next.length) {
-	    	next = $(this).siblings(':first');
-	  	}
-	    
-	    next.children(':first-child').clone().appendTo($(this));
-	  }
-	});
-</script>

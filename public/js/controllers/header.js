@@ -42,10 +42,9 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
     }
 ]);
 
-controllers.controller('NavController', ['$scope','$location', 'NavService', 'Shared', function($scope, $location, NavService, Shared){
+controllers.controller('NavController', ['$scope','$location', '$filter','NavService', 'Shared', function($scope, $location, $filter, NavService, Shared){
     console.log('In NavController');
     var path = $location.path();
-    $scope.headerview=true;
     
     var paths=["/","/about","/events/grid","/events/map","/tours","/ferry", "/events/list"];
 
@@ -65,6 +64,12 @@ controllers.controller('NavController', ['$scope','$location', 'NavService', 'Sh
        $scope.currentLink = x;
     });
 
+    //For the landing page area
+    $scope.featured=$filter('SelecteByFeatured')('main');
+    console.log("the featured= "+ $scope.featured);
+    $scope.initLanding=function(tmp){
+        return (tmp===0);
+    };
 
     var allFilters = Shared.allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event'];
     $scope.filters = allFilters;
@@ -105,3 +110,4 @@ controllers.controller('NavController', ['$scope','$location', 'NavService', 'Sh
     };
 
 }]);
+

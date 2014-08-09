@@ -220,7 +220,9 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
 
 controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','$filter', function($scope, $state, $stateParams, Events, $filter){
     console.log('In EventListController');
+    
     $scope.featuredEvents=$filter('SelecteByFeatured')('event');
+
     $scope.specialEvent=$filter('SelecteByType')('event');
     $scope.parkServices=$filter('SelecteByType')('tour');
     $scope.venues=$filter('SelecteByType')('venue');

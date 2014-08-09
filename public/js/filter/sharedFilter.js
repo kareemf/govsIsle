@@ -1,7 +1,6 @@
 'use strict';
 var filters = angular.module('app.filter');
 
-//filter for trusted html
 filters.filter('trustedHtml', ['$sce', function($sce){
     return function(text) {
         return $sce.trustAsHtml(text);
@@ -24,16 +23,16 @@ filters.filter('SelecteByType', ['SiteData', function(SiteData){
 }]);
 
 filters.filter('SelecteByFeatured', ['SiteData', function(SiteData){
-    return function(featured) {
+    return function(typeOfFeature) {
 
     	var temp = SiteData.getEvents(),
-    				typeArray= [];
+    				theArray= [];
     	
     	for( var i=0; i<temp.length; i+=1){
-    		if(temp[i].isFeautred===featured){
-    			typeArray.push(temp[i]);
+    		if(temp[i].isFeautred.indexOf(typeOfFeature) >=0){
+    			theArray.push(temp[i]);
     		}
     	}
-        return typeArray;
+        return theArray;
     };
 }]);
