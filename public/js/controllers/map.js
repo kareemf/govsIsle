@@ -214,7 +214,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     }, true);
 }]);
 
-controllers.controller('NewMarkerListController', ['$scope', 'Events', 'Amenities','Shared', function($scope, Events, Amenities, Shared){
+controllers.controller('NewMarkerListController', ['$scope', '$controller', function($scope, $controller){
     console.log('in NewMarkerListController');
 
     $scope.newMarkerEvents = {

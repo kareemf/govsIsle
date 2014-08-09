@@ -87,7 +87,7 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
 
     var marker = $scope.marker;
 
-    var getMarkerGeoLocation = $scope.getMarkerGeoLocation
+    var getMarkerGeoLocation = $scope.getMarkerGeoLocation;
 
     $scope.event = {
         name: '',
