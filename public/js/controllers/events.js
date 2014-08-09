@@ -91,7 +91,7 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
 
     $scope.event = {
         name: '',
-        type: '', // Activity, Exhibit, Tour, Program/Festival
+        type: 'event', // Activity, Exhibit, Tour, Program/Festival
         description: '',
         visibility: '', //Private/Public
         setupDateTime: null,
