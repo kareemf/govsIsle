@@ -2,6 +2,94 @@
 
 var controllers = angular.module('app.controllers');
 
+controllers.controller('BaseAmenityController', ['$scope', '$rootScope', 'Amenities', function($scope, $rootScope, Amenities){
+    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = function(marker){
+        var position = marker.position
+        return [position.k, position.A || position.B];
+    };
+
+    var saveSuccessCallback = function(newAmenity, headers){
+        //save successful, close the form
+        $scope.showForm = false;
+    };
+
+    var saveFailureCallback = function(response){
+        console.log('failed to save amenity', response);
+        $scope.error = response.data;
+    };
+
+    $scope.save = function(amenity, marker){
+        console.log('saving Amenity');
+        // TODO: validate
+
+        Amenities.save(amenity, saveSuccessCallback, saveFailureCallback);
+
+        $scope.$emit('MARKER_UPDATED_EVENT', {
+            marker: marker,
+            amenity: amenity
+        });
+    };
+
+    var updateSuccessCallback = function(newAmenity, headers){
+        //update successful, close the form
+        $scope.showForm = false;
+    };
+
+    var updateFailureCallback = function(response){
+        console.log('failed to update amenity', response);
+        $scope.error = response.data;
+    };
+
+    $scope.update = function(amenity, marker){
+        console.log('updating Amenity');
+        // TODO: validate
+
+        Amenities.update(amenity, updateSuccessCallback, updateFailureCallback);
+
+        $scope.$emit('MARKER_UPDATED_EVENT', {
+            marker: marker,
+            amenity: amenity
+        });
+    };
+
+    $scope.lookupGeo = function(amenity){
+        Geocoder.lookup(amenity.location).then(function(response){
+            console.log('got reverseLookup response', response);
+
+            // TODO: if multiple results, allow user to pick
+            if(response.results){
+                var geoLocation = response.results[0].geometry.location;
+                amenity.geoLocation = [geoLocation.k, geoLocation.A];
+            }
+        });
+    };
+
+    $scope.lookupLocation = function(amenity, marker){
+        var geoLocation = getMarkerGeoLocation(marker);
+
+        Geocoder.reverseLookup(geoLocation).then(function(response){
+            console.log('got reverseLookup response', response);
+            // TODO: if multiple results, allow user to pick
+            if(response.results){
+                amenity.location = response.results[0].formatted_address;
+            }
+        });
+    };
+
+    $scope.togglePublished = function(entity){
+        if (entity.published) {
+            entity.published = null;
+            entity.publishedBy = null;
+            $scope.isPublished = false;
+        }
+        else {
+            entity.published = new Date();
+            entity.pushedBy = $rootScope.user.id;
+            $scope.isPublished = true;
+        }
+    }
+}]);
+
 /**
  * To use:
  * $controller('BaseEntityController', {$scope: $scope});
@@ -11,13 +99,14 @@ var controllers = angular.module('app.controllers');
  * $scope.updateSuccessCallback = function(entity, headers)
  * $scope.updateFailureCallback = function(entity, headers)
  */
-controllers.controller('BaseEntityController', ['$scope', '$rootScope', function($scope, $rootScope){
+controllers.controller('BaseEntityController', ['$scope', '$rootScope', 'Amenities', function($scope, $rootScope, Amenities){
 
     $scope.save = function(_entity){
         console.log('saving entity of type', $scope.Resource);
         // TODO: validate
 
         $scope.Resource.save(_entity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
+//        Amenities.save(_entity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
     };
 
     $scope.update = function(_entity){
@@ -133,7 +222,8 @@ controllers.controller('NewAmenityMarkerController', ['$scope', '$controller', '
     // TODO: hide form when amenity saved
 
     // 'inherit' from Base
-    $controller('BaseEntityController', {$scope: $scope});
+    //$controller('BaseEntityController', {$scope: $scope});
+    $controller('BaseAmenityController', {$scope: $scope});
 
     var marker = $scope.marker;
     var getMarkerGeoLocation = Shared.getMarkerGeoLocation;
