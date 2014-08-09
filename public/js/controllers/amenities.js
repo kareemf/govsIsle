@@ -8,7 +8,7 @@ controllers.controller('BaseAmenityController', ['$scope', '$rootScope', 'Amenit
         console.log('saving Amenity');
         // TODO: validate
 
-        Amenities.save(amenity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
+        $scope.Resource.save(amenity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
 
         $scope.$emit('MARKER_UPDATED_EVENT', {
             marker: marker,
@@ -20,7 +20,7 @@ controllers.controller('BaseAmenityController', ['$scope', '$rootScope', 'Amenit
         console.log('updating Amenity');
         // TODO: validate
 
-        Amenities.update(amenity, $scope.updateSuccessCallback, $scope.updateFailureCallback);
+        $scope.Resource.update(amenity, $scope.updateSuccessCallback, $scope.updateFailureCallback);
 
         $scope.$emit('MARKER_UPDATED_EVENT', {
             marker: marker,
