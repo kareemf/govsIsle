@@ -13,19 +13,18 @@ var controllers = angular.module('app.controllers');
  */
 controllers.controller('BaseEntityController', ['$scope', '$rootScope', function($scope, $rootScope){
 
-    $scope.save = function(entity, marker){
+    $scope.save = function(entity){
         console.log('saving Entity', entity);
         // TODO: validate
 
         $scope.Resource.save(entity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
     };
 
-    $scope.update = function(entity, marker){
+    $scope.update = function(entity){
         console.log('updating Entity', entity);
         // TODO: validate
 
         $scope.Resource.update(entity, $scope.updateSuccessCallback, $scope.updateFailureCallback);
-
     };
 
     $scope.togglePublished = function(entity){
