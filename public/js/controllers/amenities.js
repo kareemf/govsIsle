@@ -4,18 +4,18 @@ var controllers = angular.module('app.controllers');
 
 controllers.controller('BaseAmenityController', ['$scope', '$rootScope', function($scope, $rootScope){
 
-    $scope.save = function(amenity, marker){
-        console.log('saving Amenity');
+    $scope.save = function(entity, marker){
+        console.log('saving Entity', entity);
         // TODO: validate
 
-        $scope.Resource.save(amenity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
+        $scope.Resource.save(entity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
     };
 
-    $scope.update = function(amenity, marker){
-        console.log('updating Amenity');
+    $scope.update = function(entity, marker){
+        console.log('updating Entity', entity);
         // TODO: validate
 
-        $scope.Resource.update(amenity, $scope.updateSuccessCallback, $scope.updateFailureCallback);
+        $scope.Resource.update(entity, $scope.updateSuccessCallback, $scope.updateFailureCallback);
 
     };
 
