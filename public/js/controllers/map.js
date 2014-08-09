@@ -116,29 +116,58 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         var position = new google.maps.LatLng(content.geoLocation[0], content.geoLocation[1]);
         var icon;
 
+        //using marker dot to distinguish between published and unpublished content
         switch(content.type){
             default:
             case 'event':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+
+                if(!content.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/red.png';
+                }
                 break;
             case 'food':
             case 'drink':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png';
+
+                if(!content.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/pink.png';
+                }
                 break;
             case 'info':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+
+                if(!content.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/green.png';
+                }
                 break;
             case 'activity':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
+
+                if(!content.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/orange.png';
+                }
                 break;
             case 'facility':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png';
+
+                if(!content.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/lightblue.png';
+                }
                 break;
             case 'tour':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+
+                if(!content.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/blue.png';
+                }
                 break;
             case 'venue':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png';
+
+                if(!content.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/purple.png';
+                }
                 break;
         }
 
