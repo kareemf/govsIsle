@@ -3,76 +3,28 @@
 var controllers = angular.module('app.controllers');
 
 controllers.controller('BaseAmenityController', ['$scope', '$rootScope', 'Amenities', function($scope, $rootScope, Amenities){
-    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = function(marker){
-        var position = marker.position
-        return [position.k, position.A || position.B];
-    };
-
-    var saveSuccessCallback = function(newAmenity, headers){
-        //save successful, close the form
-        $scope.showForm = false;
-    };
-
-    var saveFailureCallback = function(response){
-        console.log('failed to save amenity', response);
-        $scope.error = response.data;
-    };
 
     $scope.save = function(amenity, marker){
         console.log('saving Amenity');
         // TODO: validate
 
-        Amenities.save(amenity, saveSuccessCallback, saveFailureCallback);
+        Amenities.save(amenity, $scope.saveSuccessCallback, $scope.saveFailureCallback);
 
         $scope.$emit('MARKER_UPDATED_EVENT', {
             marker: marker,
             amenity: amenity
         });
-    };
-
-    var updateSuccessCallback = function(newAmenity, headers){
-        //update successful, close the form
-        $scope.showForm = false;
-    };
-
-    var updateFailureCallback = function(response){
-        console.log('failed to update amenity', response);
-        $scope.error = response.data;
     };
 
     $scope.update = function(amenity, marker){
         console.log('updating Amenity');
         // TODO: validate
 
-        Amenities.update(amenity, updateSuccessCallback, updateFailureCallback);
+        Amenities.update(amenity, $scope.updateSuccessCallback, $scope.updateFailureCallback);
 
         $scope.$emit('MARKER_UPDATED_EVENT', {
             marker: marker,
             amenity: amenity
-        });
-    };
-
-    $scope.lookupGeo = function(amenity){
-        Geocoder.lookup(amenity.location).then(function(response){
-            console.log('got reverseLookup response', response);
-
-            // TODO: if multiple results, allow user to pick
-            if(response.results){
-                var geoLocation = response.results[0].geometry.location;
-                amenity.geoLocation = [geoLocation.k, geoLocation.A];
-            }
-        });
-    };
-
-    $scope.lookupLocation = function(amenity, marker){
-        var geoLocation = getMarkerGeoLocation(marker);
-
-        Geocoder.reverseLookup(geoLocation).then(function(response){
-            console.log('got reverseLookup response', response);
-            // TODO: if multiple results, allow user to pick
-            if(response.results){
-                amenity.location = response.results[0].formatted_address;
-            }
         });
     };
 
@@ -264,5 +216,35 @@ controllers.controller('NewAmenityMarkerController', ['$scope', '$controller', '
     $scope.$emit('NEW_ENTITY_EVENT', {
         entity: $scope.amenity
     });
+
+    $scope.saveSuccessCallback = function(amenity, headers){
+        //save successful, close the form
+        $scope.showForm = false;
+
+        $scope.$emit('MARKER_UPDATED_EVENT', {
+            marker: marker,
+            amenity: amenity
+        });
+    };
+
+    $scope.saveFailureCallback = function(response){
+        console.log('failed to save amenity', response);
+        $scope.error = response.data;
+    };
+
+    $scope.updateSuccessCallback = function(amenity, headers){
+        //update successful, close the form
+        $scope.showForm = false;
+
+        $scope.$emit('MARKER_UPDATED_EVENT', {
+            marker: marker,
+            amenity: amenity
+        });
+    };
+
+    $scope.updateFailureCallback = function(response){
+        console.log('failed to update amenity', response);
+        $scope.error = response.data;
+    };
 
 }]);
