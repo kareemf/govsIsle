@@ -2,7 +2,7 @@
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('BaseAmenityController', ['$scope', '$rootScope', 'Amenities', function($scope, $rootScope, Amenities){
+controllers.controller('BaseAmenityController', ['$scope', '$rootScope', function($scope, $rootScope){
 
     $scope.save = function(amenity, marker){
         console.log('saving Amenity');
