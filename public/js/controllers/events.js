@@ -75,6 +75,17 @@ controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', f
             }
         });
     };
+
+    $scope.togglePublished = function(entity){
+        if(entity.published){
+            delete entity.published;
+            $scope.isPublished = false;
+        }
+        else{
+            entity.published = new Date();
+            $scope.isPublished = true;
+        }
+    };
 }]);
 
 controllers.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
@@ -111,6 +122,9 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
 
     $scope.showForm = true;
 
+    $scope.isPublished = event.published ? true : false;
+
+
     $scope.cancel = function(event, marker, markers){
         console.log('NewEventController canceling marker', marker, 'event', event);
 
@@ -131,11 +145,15 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
 }]);
 
 controllers.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
-    console.log('in ExistingEventController. event:', $scope.event);
+    console.log('in ExistingEventController. event:', $scope.entity);
 
     $controller('BaseEventController', {$scope: $scope});
 
+    var event = $scope.entity;
+
     $scope.showForm = false;
+
+    $scope.isPublished = event.published ? true : false;
 
     $scope.cancel = function(event, marker){
         console.log('ExistingEventController canceling marker', marker, 'event', event);
