@@ -11,7 +11,7 @@ var controllers = angular.module('app.controllers');
  * $scope.updateSuccessCallback = function(entity, headers)
  * $scope.updateFailureCallback = function(entity, headers)
  */
-controllers.controller('BaseEntityController', ['$scope', function($scope){
+controllers.controller('BaseEntityController', ['$scope', '$rootScope', function($scope, $rootScope){
 
     $scope.save = function(_entity){
         console.log('saving entity of type', $scope.Resource);
@@ -29,11 +29,13 @@ controllers.controller('BaseEntityController', ['$scope', function($scope){
 
     $scope.togglePublished = function(entity){
         if (entity.published) {
-            delete entity.published;
+            entity.published = null;
+            entity.publishedBy = null;
             $scope.isPublished = false;
         }
         else {
             entity.published = new Date();
+            entity.pushedBy = $rootScope.user.id;
             $scope.isPublished = true;
         }
     }

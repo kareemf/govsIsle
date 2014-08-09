@@ -77,15 +77,17 @@ controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', f
     };
 
     $scope.togglePublished = function(entity){
-        if(entity.published){
-            delete entity.published;
+        if (entity.published) {
+            entity.published = null;
+            entity.publishedBy = null;
             $scope.isPublished = false;
         }
-        else{
+        else {
             entity.published = new Date();
+            entity.pushedBy = $rootScope.user.id;
             $scope.isPublished = true;
         }
-    };
+    }
 }]);
 
 controllers.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
