@@ -103,7 +103,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
     // Amenity routes
     $stateProvider
         .state('amenityDetail',{
-            url: 'amenities/{slug}',
+            url: '/amenities/{slug}',
             templateUrl: 'templates/amenities/amenity.html',
         });
 		
