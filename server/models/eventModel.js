@@ -7,8 +7,8 @@ var mongoose = require('mongoose'),
     base = require('./baseContentModel');
 
 var properties = _.extend({
-    name: String,
-    type: String, // Activity, Exhibit, Tour, Program/Festival
+    name: {type: String, required: true},
+    type: {type: String, required: true}, // Activity, Exhibit, Tour, Program/Festival
     description: String,
     visibility: String, //Private/Public
     setupDateTime: Date,

@@ -7,8 +7,8 @@ var mongoose = require('mongoose'),
     base = require('./baseContentModel');
 
 var properties = _.extend({
-    name: String,
-    type: String, // Food, Beverage
+    name: {type: String, required: true},
+    type: {type: String, required: true}, // Food, Beverage
     description: String,
     hours: String,
     specialities: [String], //Vegan, Kosher, etc
@@ -17,7 +17,6 @@ var properties = _.extend({
     media: [{type: ObjectId, ref: 'Media'}],
     coverPhoto: {type: ObjectId, ref: 'Media'}
 }, base.properties);
-var AmenitySchema = new Schema(properties);
 
 var AmenitySchema = new Schema(properties, {
     toObject: { virtuals: true },
