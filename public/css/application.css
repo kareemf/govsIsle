@@ -369,6 +369,16 @@ a:hover, .nav a:hover{color: #4099FF;}
     width: 100%;
     min-height: 100%;
 }
+
+.map-form{
+    background: white;
+    border: 1px solid;
+    max-width: 400px;
+    position: absolute;
+    z-index: 100;
+    opacity: 0.90;
+    top:62px;
+}
 /*---------=Grid View=--------------*/
 #allEvents{
   background: #FFF;
