@@ -18,7 +18,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
         .state('/', {
             url: '/',
             templateUrl: 'templates/landing.html'
-        })
+        });
 
     //Home routes
     $stateProvider
@@ -76,7 +76,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
     $stateProvider
         .state('events', {
             url: '/events?view',
-            templateUrl: 'templates/events/events.html',
+            templateUrl: 'templates/events/events.html'
         })
         .state('events.map',{
             url: '/map',
@@ -97,13 +97,20 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
         })
         .state('events.detail', {
             url: '/{slug}',
-            templateUrl: 'templates/events/event.html',
+            templateUrl: 'templates/events/event.html'
+        });
+
+    // Amenity routes
+    $stateProvider
+        .state('amenityDetail',{
+            url: 'amenities/{slug}',
+            templateUrl: 'templates/amenities/amenity.html',
         });
 		
 	$stateProvider
 	        .state('tours', {
 	            url: '/tours',
-	            templateUrl: 'templates/tours/tours.html',
+	            templateUrl: 'templates/tours/tours.html'
 	        });
 	
 	$stateProvider
@@ -115,7 +122,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
 	$stateProvider
 			.state('tourpoint', {
 				url: '/tourpoint/{id}',
-				templateUrl: 'templates/tours/tourpoint.html',
+				templateUrl: 'templates/tours/tourpoint.html'
 			});	
 	
 	

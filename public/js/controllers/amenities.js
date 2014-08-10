@@ -143,3 +143,32 @@ controllers.controller('NewAmenityMarkerController', ['$scope', '$controller', '
         entity: $scope.amenity
     });
 }]);
+
+/**
+ * NON-MAP CONTROLLERS
+ **/
+controllers.controller('AmenityDetailController', ['$scope', '$stateParams', 'Amenities', 'SiteData', function($scope, $stateParams, Amenities, SiteData){
+    //TODO: duplicate of EntityDetailController. Abstract out commonalities
+    console.log('in AmenityDetailController');
+
+    var slug = $stateParams.slug;
+
+    if(slug){
+        console.log("In AmenityDetailController slug found "+slug);
+
+        var successCallback = function(amenity, headers){
+            console.log('getBySlug amenity', amenity);
+
+            $scope.amenity = amenity;
+        };
+
+        var failureCallback = function(response){
+            console.log('getBySlug failed', response);
+
+            $scope.error = response.data;
+        };
+
+        Amenities.getBySlug({slug: slug}, successCallback, failureCallback);
+
+    }
+}]);
