@@ -21,6 +21,21 @@ filters.filter('SelecteByType', ['SiteData', function(SiteData){
         return typeArray;
     };
 }]);
+//going to improve for now. ill repeat code 
+filters.filter('subSelectByType', ['SiteData', function(SiteData){
+    return function(type) {
+
+        var temp = SiteData.getSubEvents(),
+                    typeArray= [];
+
+        for( var i=0; i<temp.length; i+=1){
+            if(temp[i].type===type){
+                typeArray.push(temp[i]);
+            }
+        }
+        return typeArray;
+    };
+}]);
 
 filters.filter('SelecteByFeatured', ['SiteData', function(SiteData){
     return function(typeOfFeature) {

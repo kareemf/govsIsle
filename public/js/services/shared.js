@@ -33,7 +33,7 @@ services.factory('SiteData', function($rootScope){
         {'id':1,
         'name':"First Ever Nolan Park Scavenger",
         'type': "event",
-        'isFeautred': [],
+        'isFeautred': ['archive'],
         'description': "Download the <a href='http://www.govisland.com/downloads/pdf/explore-nolan-scavenger-hunt.pdf'>scavenger hunt</a> or pick it up a sheet at the Governors Island Alliance (GIA) welcome tables on the Island. Answer 11 questions correctly, take and post a selfie in Nolan Park and complete the scavenger hunt! Then bring the completed sheet to the GIA table at Soissons Landing and get a prize. Visitors can compete in one of three categories: as a team, an individual or a child under 12. The first five teams to complete the hunt get a gift certificate for a free surrey from Blazing Saddles. There are a variety of additional prizes for those in the individuals and children categories. All prizes are provided by a number of organizations and vendors on the Island.",
         'visibility': 'public',
         'setupDateTime': new Date(),
@@ -49,7 +49,7 @@ services.factory('SiteData', function($rootScope){
         {'id':2,
         'name':"Rite of Summer presents Pam Goldberg",
         'type': "event",
-        'isFeautred': [],
+        'isFeautred': ['archive'],
         'description': "American and Argentine Sounds from Ives to Piazzolla featuring ROS Co-Founder & pianist Pam Goldberg, violinist Esther Noh, cellist Caitlin Sullivan and soprano Allison Charney.<br/><a href='http://www.riteofsummer.com'>www.riteofsummer.com</a>",
         'visibility': 'public',
         'setupDateTime': new Date(),
@@ -65,7 +65,7 @@ services.factory('SiteData', function($rootScope){
         {'id':3,
         'name':"Jazz Age Lawn Party",
         'type': "event",
-        'isFeautred': ['event', 'main'],
+        'isFeautred': ['event','main'],
         'description': "Michael Arenella and His Dreamland Orchestra invite you to the beloved Jazz Age Lawn Party -- a dream of the 1920s nestled right in the heart of New York Harbor! Under a canopy of century trees, caressed by fresh sea air, a delightful array of offerings abound throughout the day including: live music and dance performances, dance instruction for the hottest dance steps of the time, games for all ages and a wide variety of 1920's inspired refreshments and gourmet food for purchase. Tickets are required for this event and can be purchased at <a href='http://www.jazzagelawnparty.com'>www.jazzagelawnparty.com</a>. If space is available, tickets will be sold at the door.",
         'visibility': 'public',
         'setupDateTime': new Date(),
@@ -97,7 +97,7 @@ services.factory('SiteData', function($rootScope){
         {'id':5,
         'name':"The NYC Volkswagen Traffic",
         'type': "event",
-        'isFeautred': ['event', 'main'],
+        'isFeautred': ['event'],
         "description": "The Traffic Jam is a spectator-judged vintage Volkswagen car show and picnic. With great views behind a vibrant line-up of nearly 100 Beetles, buses, dune buggies, Things, and other original VW's circa 1950's - 1970's, this car show is a one-of-a-kind event for both the casual spectator and classic VW enthusiast. Because show cars ride a ferry to get to the event, registration is mandatory to secure a spot at the show. Registration opens June 30th. Registration will be first-come, first-served. Car Registration $20.00 and spectators attend for free. Visit <a href='http://www.vwtrafficjam.com'>www.vwtrafficjam.com</a>",
         'visibility': 'public',
         'setupDateTime': new Date(),
@@ -145,7 +145,7 @@ services.factory('SiteData', function($rootScope){
         {'id':8,
         'name':"Explore Castle Williams",
         'type': "tour",
-        'isFeautred': [],
+        'isFeautred': ['main'],
         "description": "Tours on the half hour from 11:30 AM till 4:30 PM. About 30 minutes. Get some history in the round at the best-preserved circular fortification in the nation. A portion of Castle Williams is without power. Castle roof tours are suspended and Castle interiors are closed to the public. The courtyard remains open Wednesday through Sunday and rangers are there waiting to see you",
         'visibility': 'public',
         'setupDateTime': new Date('08/02/2014 10:00:00'),
@@ -273,7 +273,7 @@ services.factory('SiteData', function($rootScope){
         {'id':16,
         'name':"Envision the Dream Artworks by Seniors",
         'type': "venue",
-        'isFeautred': [],
+        'isFeautred': ['main'],
         "description": "Eleven senior artists will exhibit work in group and solo exhibitions in all media. Because the art world tends to focus on new and upcoming artists or established artists often mid-career senior artists find themselves overlooked by the mainstream media. This exhibition will draw attention and recognition to a diverse group of talented senior artists working in both traditional and non-traditional styles. <a href='http://www.newcenturyartists.org'>www.newcenturyartists.org</a>",
         'visibility': 'public',
         'setupDateTime': new Date(),
@@ -384,11 +384,48 @@ services.factory('SiteData', function($rootScope){
         }
     ];
 
+    var subEvents= [
+        {'id':1,
+         'name': 'Discover',
+         'type': 'active',
+         'visibility': 'public',
+         'activeBtn': 2,
+         'link': 'events.grid',
+         'media': "images/landing/Thumb_discover_320x250.jpg"
+        },
+        {'id':2,
+         'name': 'Eat',
+         'type': 'active',
+         'visibility': 'public',
+         'activeBtn': 3,
+         'link': 'events.map',
+         'media': "images/landing/Thumb_eat_320x250.jpg"
+        },
+        {'id':3,
+         'name': 'Enjoy',
+         'type': 'active',
+         'visibility': 'public',
+         'activeBtn': 3,
+         'link': 'events.map',
+         'media': "images/landing/Thumb_enjoy_320x250.jpg"
+        },
+        {'id':4,
+         'name': 'Learn',
+         'type': 'active',
+         'visibility': 'public',
+         'activeBtn': 4,
+         'link': 'tours',
+         'media': "images/landing/Thumb_learn_320x250.jpg"
+        }
+    ];
+
     return {
         updateSiteData : function(newval) {
             $rootScope.$broadcast('YChanged', activelink);
         },
-        getEvents :function(){return events;}
+        getEvents :function(){return events;},
+        getSubEvents :function(){return subEvents;},
+
    };
 })
 

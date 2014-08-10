@@ -66,11 +66,14 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
 
     //For the landing page area
     $scope.featured=$filter('SelecteByFeatured')('main');
+    $scope.subEvents=$filter('subSelectByType')('active');
+    console.log("testing= "+ $scope.subEvents);
+    /* need to be fix niquepg
     console.log("the featured= "+ $scope.featured);
     $scope.initLanding=function(tmp){
         return (tmp===0);
     };
-
+    */
     var allFilters = Shared.allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event'];
     $scope.filters = allFilters;
 

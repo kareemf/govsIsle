@@ -4,12 +4,20 @@ html{
   min-height: 100%;
 }
 @font-face {
-  font-family: myFirstFont sans-serif;
+  font-family: myFirstFont;
 	src: url(../font/dinregularwebfont.ttf);
 }
 @font-face {
     font-family: govsle;
     src: url(../font/DINEngschriftStd.otf);
+}
+@font-face {
+    font-family: guppy;
+    src: url(../font/GuppySans.otf);
+}
+@font-face {
+    font-family: avenyt;
+    src: url(../font/AvenyT.otf);
 }
 body{
   height: 100%; width: 100%; 
@@ -25,15 +33,20 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+
+/*GENERAL STYLING AREA*/
 .clear{clear: both;}
 .header-shadow{
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
 }
+.lead{padding-right: 25px; padding-left: 25px;}
+/*SPECIAL CASES*/
 .navSpacingFix{margin-top: 85px;}
 .gov-size{font-size: 26px;font-family: govsle;}
-/*The site main colors*/
+
+/*SITE COLORS*/
 .information{background-color: #ff9900;}
 .food-drink{background-color: #ff66cc;}
 .activitie{background-color: #33cc66;}
@@ -42,58 +55,43 @@ footer, header, hgroup, menu, nav, section {
 .hist{background-color: #ccff33;}
 .title{font-size: bold;}
 .softtop-padding{padding-top: 20px;}
-/* old gov colors #4099FF #3B5998 #019AD5*/
+.hrstyle{
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+}
 /* ALL LINKS*/
 a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
   color: #FFF;
 }
-a:hover, .nav a:hover{color: #4099FF;}
-
-.map-ui a, .map-ui-toggle a, .map-filter a{
-  color: white;
-}
-.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
-  color: #5FA77A;
-}
-
-.nav-ui a{
-  color: white;
-}
-.nav-ui a:hover, .nav-ui a:active{
-  color: black;
-}
-
-#curatedlist a ,#artistlist a , #tourPoints a{
+#curatedlist a ,#artistlist a , #tourPoints a, .eventlist a{
   color: #000;
-}
-/*temp area for testing */
-.test{
-  background-color: black;
-  color: white;
-  height: 300px;
-  width: 100%;
-}
-
-.box{
-  height: 150px;
-  margin-left: 20px;
-  margin-right: 20px;
-  color: red;
-  background-color: white;
 }
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
   height: 60px;
-  background-color: #5FA77A;
+  /*background-color: #129068;*/
   border-collapse: separate;
   z-index: 9999;
-  /*border-bottom: 1px solid #E7E7E7;*/
   min-width: 300px;
+  /*border-bottom: 1px solid #E7E7E7;*/
+  background: #129068;
+  background: -moz-linear-gradient(top,  #129068 0%, #3b9d71 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#129068), color-stop(100%,#3b9d71));
+  background: -webkit-linear-gradient(top,  #129068 0%,#3b9d71 100%);
+  background: -o-linear-gradient(top,  #129068 0%,#3b9d71 100%);
+  background: -ms-linear-gradient(top,  #129068 0%,#3b9d71 100%);
+  background: linear-gradient(to bottom,  #129068 0%,#3b9d71 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#129068', endColorstr='#3b9d71',GradientType=0 );
 }
 .nav-ui{
-  width: 100%;height: 60px;
-  background-color: #5FA77A;
+  width: 100%;height: 100%;
+  line-height: 60px;
+  padding-top: 4px;
   color: white;
   z-index: 900;
   font-size: 30px;
@@ -101,14 +99,11 @@ a:hover, .nav a:hover{color: #4099FF;}
 }
 .nav-gov-brand{
   color: white;
-  font-size: 32px;
-  text-align: center;
-  font-family: govsle;
+  font-size: 36px;
+  text-align: left;
+  font-family: guppy;
+  text-align: left;
 }
-.nav-header-link{
-  padding-top: 8px;
-}
-
 .nav-inlineblock li{
   display: inline-block;
   list-style-type: none;
@@ -117,28 +112,21 @@ a:hover, .nav a:hover{color: #4099FF;}
   display: inline-block;
   list-style-type: none;
 }
-.navright-btn{
-  padding-right: 10px; 
-}  
-.navleft-btn{
-  padding-left: 10px;
-}
+.navright-btn{padding-right: 10px;}  
+.navleft-btn{padding-left: 10px;}
 .center-brand{
   text-align: center;
   vertical-align: top;
   display: inline-block;
 }
-.logo{
-  height: 50px;
-  width: 50px;
-  background-color: #FFF;
-}
 /*MAIN-FOOTER NAVIGATION*/
 .map-ui{
-  height: 60px; width: 100%;
+  height: 70px; width: 100%;
+  line-height: 70px;
+  padding-top: 10px;
   background-color: #4F535E;
   color: white;
-  padding-top: 6px;
+
   font-size:45px;
   text-align: center;
 }
@@ -169,9 +157,6 @@ a:hover, .nav a:hover{color: #4099FF;}
 .nav-map{ padding-left: 6%; padding-right: 5%;}
 .nav-end{padding-left: 6%;}
 
-.black{
-    color: #000000 !important;
-}
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
@@ -188,7 +173,7 @@ a:hover, .nav a:hover{color: #4099FF;}
   #custom-nav{height: 55px;}
 }
 
-/*the max page size should remain 1005px*/
+/*the max page size should remain 1004px*/
 @media (min-width: 992px) {
   .container {
     width: 970px;
@@ -222,7 +207,7 @@ a:hover, .nav a:hover{color: #4099FF;}
   width: 50px;
   /*background-color: blue;*/
 }
-#mainCaro .swapePanel{
+#mainCaro .swapePanel, #allEvents .swapePanel{
   position: absolute;
   z-index: 0;
   top: 0;
@@ -347,52 +332,98 @@ a:hover, .nav a:hover{color: #4099FF;}
   font-family: myFirstFont;
   padding-top: 25px;
 }
-
-/*----------===MAPS===---------------*/
-.angular-google-map-container { height: 400px; }
-.map-container{
-  position: relative;
-  width: 100%;height: 100%;
+/*LANING PAGE*/
+#landing .eventlist{
+  height: 220px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space:nowrap;
+  margin-top: 10px;
 }
-/* i dont know what .gm does*/
-/*.gm-style-iw {top: 0 !important;}*/
-.map-canvas { height: 400px; }
-#map{
-    height: 100%;
-    width: 100%;
+#landing .eventlist li{ 
+  max-width:230px;
+  padding: 10px;
+  display:inline-block;
+  *display:inline;/* For IE7*/
+  *zoom:1;/* For IE7*/
+  vertical-align:top;
+  /*box-shadow: 1px 1px 10px #999;*/
 }
-#eventmap{
-    height:500px;
-    width: 100%;
-    min-height: 100%;
+/*---------=EVENTGRID View=--------------*/
+#allEvents{background-color: #FFF;}
+#allEvents #eventCaro{overflow:hidden;}
+/*#eventCaro .item{height: 250px;} good with all image the same size*/
+#eventCaro .carousel-indicators {
+  position: absolute;
+  bottom: 5px;
+  left: 110%;
+  height: 25px;
+  width: 50px;
+  /*background-color: blue;*/
 }
-/*---------=Grid View=--------------*/
-#allEvents{
-  background: #FFF;
+#eventCaro .carousel-caption {
+  position: absolute;
+  bottom: 0px;left:0px;
+  height: 50px;
+  width: 100%;
+  text-align: left;
+  line-height: 50px;
+  padding: 0px 0px 0px 10px;
+  margin: 0px 0px 0px 0px;
+  color: white;
+  font-family: govsle;
+  font-size: 20px;
+  filter:alpha(opacity=80);opacity: .8;
+  background-color: #000;
 }
-
-/*----------=LIST VIEW=-------------*/
+#allEvents .eventlist{
+  height: 240px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space:nowrap;
+  border-bottom: solid 2px gray;
+}
+#allEvents .eventlist li{ 
+  max-width:230px;
+  padding: 10px;
+  display:inline-block;
+  *display:inline;/* For IE7*/
+  *zoom:1;/* For IE7*/
+  vertical-align:top;
+  /*box-shadow: 1px 1px 10px #999;*/
+}
+#allEvents .eventlist .caption { 
+  max-width: 230px;
+  height: 50px;
+  white-space:normal;
+}
+#allEvents .eventlist .caption h5 {
+  font-size:16px;
+  margin:10px 0px 0px 0px;
+  font-weight: bold;
+}
+#allEvents .eventlist h5.sp1 {
+  margin-top: 5px;
+  font-weight: normal;
+}
+/*----------=END EventLIST VIEW=-------------*/
 .largeTitle{
   font-size: 10pt;
 }
-
 .list-container{
   width: 80%;
   margin: 30px auto;
   overflow: hidden;
 }
-
 .gridItem h3{
     text-transform: uppercase;
 }
- 
 .gridItem img{
     max-width: 100%;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
-
 .gridItem{
     color: #797478;
     font: 10px/1.5 Verdana, Helvetica, sans-serif;
@@ -400,7 +431,6 @@ a:hover, .nav a:hover{color: #4099FF;}
     width: 16%;
     margin:  2% 2% 50px 2%; 
 }
-
 @media only screen and (max-width : 940px),
 only screen and (max-device-width : 940px){
     .gridItem {width: 21%;}
@@ -423,7 +453,91 @@ only screen and (max-device-width : 320px){
     .gridItem h3 {font-size: 18px;}
     .gridItem p, {font-size: 18px;}
 }
-/*----------=END LIST VIEW=-------------*/
+/*----------=END EVENTLIST VIEW=-------------*/
+
+
+/*----------===MAPS===---------------*/
+.angular-google-map-container { height: 400px; }
+.map-container{
+  position: relative;
+  width: 100%;height: 100%;
+}
+/* i dont know what .gm does*/
+/*.gm-style-iw {top: 0 !important;}*/
+.map-canvas { height: 400px; }
+#map{
+    height: 100%;
+    width: 100%;
+}
+#eventmap{
+    height:500px;
+    width: 100%;
+    min-height: 100%;
+}
+
+
+/* -------====FERRY SCHEDULE==--------- */
+.info-banner{
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+  background-color: #FFF;
+  text-align: center;
+  font-style: bold;
+  font-family: avenyt;
+}
+.info-banner h3, .info-banner h4{
+  line-height: inherit;
+}
+
+.info-banner-space{
+  margin-bottom: 10px;
+}
+.info-banner-left{
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 0px;
+  margin: 13px 0px 5px 0px;
+}
+.btn-brooklyn, .btn-manhattan{
+  display: inline-block;
+  text-align: center;
+  vertical-align: center;
+  height: 50px;
+  line-height: 50px;
+  background-color: #454953;
+  padding-top: 3px;
+}
+.btn-brooklyn{
+  width: 50%;
+  float: right;
+}
+.btn-manhattan{
+  width: 50%;
+  float: left;
+}
+.btn-brooklyn a, .btn-manhattan a{
+  color: #FFF;
+}
+.btn-bk-mh{ margin-top: 28px;}
+p.lead a{color: blue;}
+ul.lead{list-style-type: none;}
+
+/*detail view image*/
+.info-img{
+  height: 250%;
+  width: 100%;
+}
+/*ICONS*/
+.navimg-icon{
+  height: 55px;
+  width: 55px;
+  padding-bottom: 15px;
+}
+/* -------====FERRY SCHEDULE END==--------- */
+
 
 /*----------=ALL TOURS VIEW=-------------*/
 #allTours {
@@ -445,14 +559,11 @@ only screen and (max-device-width : 320px){
 }
 
 #allTours #main-carousel .carousel-wrapper {
-	
-	
+
 }
 
 #allTours #main-carousel .carousel{
-	
 	padding:10px;
-	
 }
 
 #allTours #main-carousel .carousel-inner, #allTours .item, .carousel-wrapper, #caroContainer{
@@ -503,9 +614,7 @@ only screen and (max-device-width : 320px){
 
 .tourlist {
 	
-	/*height: 220px;*/
-  height: 240px;
-	
+	height: 220px;
 	overflow-x: auto;
 	overflow-y: hidden;
 	white-space:nowrap;
@@ -679,78 +788,21 @@ only screen and (max-device-width : 320px){
 }
 /*-----------END OF TOUR--------------*/
 
-/* -------====FERRY SCHEDULE==--------- */
-/*-----======And Detain view-----------*/
-.info-banner{
-  padding: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
-  height: 50px;
-  width: 100%;
-  background-color: #FFF;
-  text-align: center;
-  font-style: bold;
-}
-.info-banner h3, .info-banner h4{
-  padding-top: 12px;
-}
-.info-banner-space{
-  margin-bottom: 10px;
-}
-.info-banner-left{
-  text-align: left;
-  padding-left: 20px;
-}
-.btn-brooklyn, .btn-manhattan{
-  display: inline-block;
-  text-align: center;
-  vertical-align: center;
-  height: 50px;
-  line-height: 50px;
-  background-color: #454953;
-  padding-top: 3px;
-}
-.btn-brooklyn{
-  width: 50%;
-  float: right;
-}
-.btn-manhattan{
-  width: 50%;
-  float: left;
-}
-.btn-brooklyn a, .btn-manhattan a{
-  color: #FFF;
-}
-.btn-bk-mh{ margin-top: 28px;}
-p.lead a{
-  color: blue;
-}
-ul.lead{
-  list-style-type: none;
-}
-/*detail view image*/
-.info-img{
-  height: 250%;
-  width: 100%;
-}
-/*ICONS*/
-.navimg-icon{
-  height: 55px;
-  width: 55px;
-  padding-bottom: 15px;
-}
-/* -------====FERRY SCHEDULE END==--------- */
-
-
-/*SITE STAPLES/GLOBAL SYLING*/ 
 .activebtn{background-color: #5FA77A; color: #FFF;}
+.textLeft{text-align: left;padding-left: 20px;}
+
 /*.dangere{background-color: #FF0101;}
 .coole{background-color: #4099FF;}
 */
-.lead{padding-right: 25px; padding-left: 25px;}
-.text-indent{text-indent: 5%;}
-.activeinfo{color: #000;}
-.activehome{color:#5FA77A;/*#FFF*/;}
+.activeinfo{color:  #104432;}
+.activehome{ visibility: hidden;}
 
+li.wordpress, li.twiiter, li.instagram{
+ margin-left: 15px;
+}
+li.wordpress{
+  margin-right: 15px;
+}
 /*SPRITES*/ 
 .ferry0, .ferry1, .headphones0, .headphones1, .calendar0, 
 .calendar1, .activities, .facilities, .food, .history, 

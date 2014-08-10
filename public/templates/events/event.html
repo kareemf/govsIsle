@@ -3,7 +3,8 @@
 		<img alt="{{specialEvent.name}}" ng-src="{{specialEvent.media}}" class="img-responsive"/>
 	</div>
 	<h4 class="lead"><b>{{specialEvent.name}}<b></h4>
-	<p class="lead">{{specialEvent.startDateTime.toDateString()+" - "+specialEvent.endDateTime.toDateString();}}<br/>
-	{{specialEvent.startDateTime.toLocaleTimeString()+" - "+specialEvent.endDateTime.toLocaleTimeString()+" | "+specialEvent.location}}</p>
+	<p class="lead">{{specialEvent.startDateTime | date:'EEEE, MMM dd'}} - {{specialEvent.endDateTime| date:'EEEE, MMM dd'}}<br/>
+	{{specialEvent.startDateTime | date:'h:mma'}} - {{specialEvent.endDateTime |date:'h:mma'}} | {{specialEvent.location}}</p>
+	<hr class="hrstyle"/>
 	<p class="lead text-indent" ng-bind-html="specialEvent.description | trustedHtml"></p>
 </div><br/>

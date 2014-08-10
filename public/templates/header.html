@@ -2,11 +2,9 @@
     <div class="nav-ui">
     	<div class="container">
 	        <ul class="nav-header-link nav-inlineblock">
-	        	<li class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activehome:isActive(0)}" class="glyphicon glyphicon-home"></span></a></li>
-	        	<!--<li class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><img src="images/resizegov.png" class="img-responsive logo img-circle"></a></li>-->
+	        	<li ng-hide="isActive(0)"class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activehome:isActive(0)}" class="glyphicon glyphicon-home"></span></a></li>
 	            <li class="nav-gov-brand"><a ui-sref="/">GOVERNORS ISLAND</a></li>
 	            <li ng-hide="buttonswap()" class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicon glyphicon-info-sign"></span></a></li>
-
 	            <li ng-show="isActive(3)" class="pull-right navright-btn">
 					<a type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span></a>
 					<ul class="dropdown-menu map-ui-filter" role="menu">
