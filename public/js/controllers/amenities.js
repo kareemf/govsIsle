@@ -12,7 +12,6 @@ var controllers = angular.module('app.controllers');
  * $scope.updateFailureCallback = function(entity, headers)
  */
 controllers.controller('BaseEntityController', ['$scope', '$rootScope', function($scope, $rootScope){
-
     $scope.save = function(entity){
         console.log('saving Entity', entity);
         // TODO: validate
@@ -41,19 +40,12 @@ controllers.controller('BaseEntityController', ['$scope', '$rootScope', function
     }
 }]);
 
-
-controllers.controller('ExistingAmenityMarkerController', ['$scope', '$controller', 'Amenities', function($scope, $controller, Amenities){
-    console.log('in ExistingAmenityController. amenity:', $scope.entity);
-
-    var marker = $scope.marker;
-    var amenity = $scope.entity;
-
+controllers.controller('BaseAmenityMarkerController', ['$scope', '$controller', 'Amenities', function($scope, $controller, Amenities){
     $controller('BaseEntityController', {$scope: $scope});
 
     $scope.Resource = Amenities;
-    $scope.showForm = false;
-    $scope.isPublished = amenity.published ? true : false;
 
+    var marker = $scope.marker
 
     $scope.saveSuccessCallback = function(amenity, headers){
         //save successful, close the form
@@ -84,6 +76,18 @@ controllers.controller('ExistingAmenityMarkerController', ['$scope', '$controlle
         console.log('failed to update amenity', response);
         $scope.error = response.data;
     };
+}]);
+
+controllers.controller('ExistingAmenityMarkerController', ['$scope', '$controller', 'Amenities', function($scope, $controller, Amenities){
+    console.log('in ExistingAmenityController. amenity:', $scope.entity);
+
+    var marker = $scope.marker;
+    var amenity = $scope.entity;
+
+    $controller('BaseAmenityMarkerController', {$scope: $scope});
+
+    $scope.showForm = false;
+    $scope.isPublished = amenity.published ? true : false;
 
     $scope.cancel = function(amenity, marker){
         console.log('ExistingAmenityController canceling marker', marker, 'amenity', amenity);
@@ -135,7 +139,7 @@ controllers.controller('NewAmenityMarkerController', ['$scope', '$controller', '
 
     // 'inherit' from Base
     //$controller('BaseEntityController', {$scope: $scope});
-    $controller('BaseEntityController', {$scope: $scope});
+    $controller('BaseAmenityMarkerController', {$scope: $scope});
 
     var marker = $scope.marker;
     var getMarkerGeoLocation = Shared.getMarkerGeoLocation;
@@ -176,35 +180,4 @@ controllers.controller('NewAmenityMarkerController', ['$scope', '$controller', '
     $scope.$emit('NEW_ENTITY_EVENT', {
         entity: $scope.amenity
     });
-
-    $scope.saveSuccessCallback = function(amenity, headers){
-        //save successful, close the form
-        $scope.showForm = false;
-
-        $scope.$emit('MARKER_UPDATED_EVENT', {
-            marker: marker,
-            amenity: amenity
-        });
-    };
-
-    $scope.saveFailureCallback = function(response){
-        console.log('failed to save amenity', response);
-        $scope.error = response.data;
-    };
-
-    $scope.updateSuccessCallback = function(amenity, headers){
-        //update successful, close the form
-        $scope.showForm = false;
-
-        $scope.$emit('MARKER_UPDATED_EVENT', {
-            marker: marker,
-            amenity: amenity
-        });
-    };
-
-    $scope.updateFailureCallback = function(response){
-        console.log('failed to update amenity', response);
-        $scope.error = response.data;
-    };
-
 }]);
