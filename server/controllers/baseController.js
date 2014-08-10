@@ -111,7 +111,7 @@ module.exports = function(Model){
                 return res.send(403, 'User does not have create access to this content type');
             }
 
-            doc.save(function(err) {
+            doc.save(function(err, doc) {
                 if (err) {
                     var data = {errors: err.errors};
                     data[modelName] = doc;

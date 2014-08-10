@@ -17,7 +17,10 @@ exports.preSave = function(model){
     //generate a slug for this peice of content
     console.log('base preSave for model', model);
 
-    model.slug = slug(model.name).toLowerCase();
+    if(model.name){
+        model.slug = slug(model.name).toLowerCase();
+    }
+
 };
 
 exports.permissions = {
