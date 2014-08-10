@@ -12,7 +12,7 @@
 
                 <!-- create a hidden edit form for each event -->
                 <!--markers handle is there so current marker can be cleanly removed if need be-->
-                <div ng-init="event = entity" ng-controller="ExistingEventController">
+                <div ng-init="event = entity" ng-controller="ExistingEventMarkerController">
                     <div ng-show="isEditMode && showForm" ng-init="markers = existingEventMarkers"
                          ng-include="'/templates/events/eventForm.html'" scope="" onload="">
                     </div>
@@ -47,7 +47,7 @@
 
             <!-- create a hidden edit form for each new event/marker -->
             <div ng-show="isEditMode" ng-init="markers = newMarkers">
-                <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventController"
+                <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventMarkerController"
                      ng-include="'/templates/events/eventForm.html'" scope="" onload="">
                 </div>
 
