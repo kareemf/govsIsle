@@ -2,27 +2,31 @@
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', function($scope, Events, Geocoder){
-    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = function(marker){
-        var position = marker.position
-        return [position.k, position.A];
-    };
+controllers.controller('BaseEventMarkerController', ['$scope', '$controller', 'Events', function($scope, $controller, Events){
+    $controller('BaseEntityController', {$scope: $scope});
 
-    var saveSuccessCallback = function(newEvent, headers){
+    $scope.Resource = Events;
+
+    var marker = $scope.marker
+
+    $scope.saveSuccessCallback = function(event, headers){
         //save successful, close the form
         $scope.showForm = false;
+
+        $scope.$emit('MARKER_UPDATED_EVENT', {
+            marker: marker,
+            event: event
+        });
     };
 
-    var saveFailureCallback = function(response){
+    $scope.saveFailureCallback = function(response){
         console.log('failed to save event', response);
         $scope.error = response.data;
     };
 
-    $scope.save = function(event, marker){
-        console.log('saving Event');
-        // TODO: validate
-
-        Events.save(event, saveSuccessCallback, saveFailureCallback);
+    $scope.updateSuccessCallback = function(event, headers){
+        //update successful, close the form
+        $scope.showForm = false;
 
         $scope.$emit('MARKER_UPDATED_EVENT', {
             marker: marker,
@@ -30,68 +34,27 @@ controllers.controller('BaseEventController', ['$scope', 'Events', 'Geocoder', f
         });
     };
 
-    var updateSuccessCallback = function(newEvent, headers){
-        //update successful, close the form
-        $scope.showForm = false;
-    };
-
-    var updateFailureCallback = function(response){
+    $scope.updateFailureCallback = function(response){
         console.log('failed to update event', response);
         $scope.error = response.data;
     };
-
-    $scope.update = function(event, marker){
-        console.log('updating Event');
-        // TODO: validate
-
-        Events.update(event, updateSuccessCallback, updateFailureCallback);
-
-        $scope.$emit('MARKER_UPDATED_EVENT', {
-            marker: marker,
-            event: event
-        });
-    };
-
-    $scope.lookupGeo = function(event){
-        Geocoder.lookup(event.location).then(function(response){
-            console.log('got reverseLookup response', response);
-
-            // TODO: if multiple results, allow user to pick
-            if(response.results){
-                var geoLocation = response.results[0].geometry.location;
-                event.geoLocation = [geoLocation.k, geoLocation.A];
-            }
-        });
-    };
-
-    $scope.lookupLocation = function(event, marker){
-        var geoLocation = getMarkerGeoLocation(marker);
-
-        Geocoder.reverseLookup(geoLocation).then(function(response){
-            console.log('got reverseLookup response', response);
-            // TODO: if multiple results, allow user to pick
-            if(response.results){
-                event.location = response.results[0].formatted_address;
-            }
-        });
-    };
 }]);
 
-controllers.controller('NewEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
-    console.log('insdie NewEventController', $scope.marker);
+controllers.controller('NewEventMarkerController', ['$scope', '$controller', function($scope, $controller){
+    console.log('in NewEventMarkerController', $scope.marker);
 
     // TODO: hide form when event saved
 
     // 'inherit' from Base
-    $controller('BaseEventController', {$scope: $scope});
+    $controller('BaseEventMarkerController', {$scope: $scope});
 
     var marker = $scope.marker;
 
-    var getMarkerGeoLocation = $scope.getMarkerGeoLocation
+    var getMarkerGeoLocation = $scope.getMarkerGeoLocation;
 
     $scope.event = {
         name: '',
-        type: '', // Activity, Exhibit, Tour, Program/Festival
+        type: 'event', // Activity, Exhibit, Tour, Program/Festival
         description: '',
         visibility: '', //Private/Public
         setupDateTime: null,
@@ -111,8 +74,11 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
 
     $scope.showForm = true;
 
+    $scope.isPublished = event.published ? true : false;
+
+
     $scope.cancel = function(event, marker, markers){
-        console.log('NewEventController canceling marker', marker, 'event', event);
+        console.log('NewEventMarkerController canceling marker', marker, 'event', event);
 
         marker.setMap(null);
 
@@ -124,17 +90,25 @@ controllers.controller('NewEventController', ['$scope', '$controller', 'Events',
         };
     };
 
+    $scope.$emit('NEW_ENTITY_EVENT', {
+        entity: $scope.event
+    });
+
 }]);
 
-controllers.controller('ExistingEventController', ['$scope', '$controller', 'Events', 'Geocoder', function($scope, $controller, Events, Geocoder){
-    console.log('in ExistingEventController');
+controllers.controller('ExistingEventMarkerController', ['$scope', '$controller', 'Events', function($scope, $controller, Events){
+    console.log('in ExistingEventMarkerController. event:', $scope.entity);
 
-    $controller('BaseEventController', {$scope: $scope});
+    $controller('BaseEventMarkerController', {$scope: $scope});
+
+    var event = $scope.entity;
 
     $scope.showForm = false;
 
+    $scope.isPublished = event.published ? true : false;
+
     $scope.cancel = function(event, marker){
-        console.log('ExistingEventController canceling marker', marker, 'event', event);
+        console.log('ExistingEventMarkerController canceling marker', marker, 'event', event);
 
         //get the latest copy
         $scope.event = Events.get({eventId: event.id});
@@ -143,7 +117,7 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
 
     // if Event/Marker is not being edited, don't allow user to drag
     $scope.$watch('showForm', function(newVal, oldVal){
-        console.log('ExistingEventController showForm changed', newVal, oldVal);
+        console.log('ExistingEventMarkerController showForm changed', newVal, oldVal);
 
         if(newVal === oldVal){ return;}
 
@@ -155,27 +129,15 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
         }
     });
 
-    // register drag event handler (marker may not be draggable yet)
-    // $scope.$watch('marker', function(newVal, oldVal){
-    //     console.log('ExistingEventController marker changed', newVal, oldVal);
-
-    //     if(newVal === oldVal){ return;}
-
-    //     var marker = $scope.marker;
-    //     var event = $scope.event;
-
-    //     $scope.addMarkerDragListener($scope, event, marker);
-    // });
-
     $scope.$on('MARKER_CAN_BE_EDITED_EVENT', function(event, args){
-        console.log('responding to MARKER_CAN_BE_EDITED_EVENT in BaseEventController');
+        console.log('responding to MARKER_CAN_BE_EDITED_EVENT in ExistingEventMarkerController');
 
         /*
          user right-clicked an existing marker (handled by ExistingMarkerController)
          -> a 'MARKER_CAN_BE_EDITED_EVENT' event is dispatched.
          */
 
-        if(args.event.id != $scope.event.id){
+        if(args.entity.id != $scope.entity.id){
             return;
         }
         var marker = args.marker;
@@ -185,21 +147,20 @@ controllers.controller('ExistingEventController', ['$scope', '$controller', 'Eve
         $scope.marker = marker;
         $scope.$apply();
     });
-
 }]);
 
-
+/**
+ * NON-MAP CONTROLLERS
+ **/
 controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Events', 'SiteData', function($scope, $stateParams, Events, SiteData){
     console.log('in EventDetailController');
-    
-    $scope.events=SiteData.getEvents();         //getting all events
-    var id = $stateParams.id;
 
-    if(id){
-        console.log("In EventDetailController Id found "+id);
-        $scope.specialEvent=$scope.events[id-1];
+    //$scope.events=SiteData.getEvents();         //getting all events
+    var slug = $stateParams.slug;
 
-        /*
+    if(slug){
+        console.log("In EventDetailController slug found "+slug);
+
         var successCallback = function(event, headers){
             console.log('getBySlug event', event);
 
@@ -212,11 +173,10 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
             $scope.error = response.data;
         };
 
-        Events.getBySlug({id: id}, successCallback, failureCallback);
-        */
+        Events.getBySlug({slug: slug}, successCallback, failureCallback);
+
     }
 }]);
-
 
 controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','$filter', function($scope, $state, $stateParams, Events, $filter){
     console.log('In EventListController');
@@ -240,7 +200,7 @@ controllers.controller('EventMapController', ['$scope', '$state','$stateParams',
     var mapBounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(40.682183, -74.027019),
         new google.maps.LatLng(40.695688, -74.008764));
-    var mapGetTile = function(x,y,z) { 
+    var mapGetTile = function(x,y,z) {
         return "templates/map/"+z + "/" + x + "/" + y + ".png";
     }
 
@@ -255,7 +215,7 @@ controllers.controller('EventMapController', ['$scope', '$state','$stateParams',
     };
 
     $scope.init = function() {
-        
+
         map = new google.maps.Map(document.getElementById('eventmap'), mapOptions);
         map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
         map.fitBounds(mapBounds);
@@ -263,6 +223,3 @@ controllers.controller('EventMapController', ['$scope', '$state','$stateParams',
         var opacitycontrol = new klokantech.OpacityControl(map, maptiler);
     };
 }]);
-
-
-

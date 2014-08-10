@@ -1,9 +1,9 @@
 <div ng-controller="EventDetailController">
 	<div class="img-detail">
-		<img alt="{{specialEvent.name}}" ng-src="{{specialEvent.media}}" class="img-responsive"/>
+		<img alt="{{event.name}}" ng-src="{{event.coverPhoto.url}}" class="img-responsive"/>
 	</div>
-	<h4 class="lead"><b>{{specialEvent.name}}<b></h4>
-	<p class="lead">{{specialEvent.startDateTime.toDateString()+" - "+specialEvent.endDateTime.toDateString();}}<br/>
-	{{specialEvent.startDateTime.toLocaleTimeString()+" - "+specialEvent.endDateTime.toLocaleTimeString()+" | "+specialEvent.location}}</p>
-	<p class="lead text-indent" ng-bind-html="specialEvent.description | trustedHtml"></p>
+	<h4 class="lead"><b>{{event.name}}<b></h4>
+	<p class="lead">{{event.startDateTime + " - " + event.endDateTime}}<br/>
+	{{event.startDateTime + " - " + event.endDateTime + " | " + event.location}}</p>
+	<p class="lead text-indent" ng-bind-html="event.description | trustedHtml"></p>
 </div><br/>

@@ -159,6 +159,9 @@ a:hover, .nav a:hover{color: #4099FF;}
 .map-ui-filter li{
   display: block;
 }
+.dropdown-menu.map-ui-filter a.active{
+    background-color: #F5F5BD;
+}
 .map-ui-btn{
   position: relative;
   font-size: 18px;

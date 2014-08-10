@@ -1,0 +1,23 @@
+<form novalidate class="simple-form">
+    Name: <input type="text" ng-model="amenity.name" /><br />
+    Type:
+    <select
+            ng-model="amenity.type"
+            ng-options="type for type in ['info', 'food', 'drink', 'tour', 'activity', 'facility']">
+        <option value="">-- choose type of amenity --</option>
+    </select>
+    <br />
+    Desc: <input type="text" ng-model="amenity.description" /><br />
+    Hours: <input type="text" ng-model="amenity.hours" /><br />
+    <!--TODO: list for Specialities-->
+    <!--TODO: published boolean-->
+    <!--TODO: make type a select-->
+    Specialities: <input type="text" ng-model="amenity.specialities" /><br />
+    Location: <input type="text" ng-model="amenity.location" /><!--<button ng-click="lookupGeo(amenity, marker)">Lookup Coords</button--><br />
+    Coords: <input type="text" ng-model="amenity.geoLocation" /><button ng-click="lookupLocation(amenity, marker)">Lookup Location</button><br />
+    Published: <input type="checkbox" ng-model="isPublished" ng-change="togglePublished(amenity)"/>
+    <span class="error" ng-show="error">Error: {{error}}</span><br>
+    <button ng-show="amenity.id" ng-click="update(amenity, marker)">Edit</button>
+    <button ng-show="!amenity.id" ng-click="save(amenity, marker)">Save</button>
+    <button ng-click="cancel(amenity, marker, markers)">Cancel</button>
+</form>

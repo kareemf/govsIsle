@@ -67,7 +67,10 @@ module.exports = function(Model){
         getByQuery: function(req, res, next, query){
             console.log('getByField query', query);
 
-            Model.findOne(query).populate('media', 'slug id').exec(function(err, doc){
+            Model.findOne(query)
+                .populate('media', 'slug id')
+                .populate('coverPhoto', 'slug id')//TODO: move to Model specific location
+                .exec(function(err, doc){
                 if(err){ return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc by query' + query));}
 
@@ -142,6 +145,16 @@ module.exports = function(Model){
             doc.edit = new Date();
             doc.editedBy = user.id;
             doc = _.extend(doc, body);
+
+            //do not store null values. unpermitted updates have already been filtered,
+            //so there shouln't be any unintended deletes
+            for(var field in body){
+                if(body[field] === null){
+                    //console.log('deleting field', field);
+                    doc[field] = undefined;
+                }
+            }
+
             doc.save(function(err) {
                 if (err) {
                     var data = {errors: err.errors};
@@ -149,7 +162,7 @@ module.exports = function(Model){
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
                     //if a cover photo, etc, was uploaded, create the Media instance.
-                    if(files) {
+                    if(files && Object.keys(files).length) {
                         req.doc = doc;
                         req.model = Model;
 
@@ -258,6 +271,7 @@ module.exports = function(Model){
 
             query.select(select)
             .populate('media', 'slug id')
+            .populate('coverPhoto', 'slug id')//TODO: move to Model specific location
             .populate('user', 'name username')
             .exec(function(err, docs) {
                 if (err) {

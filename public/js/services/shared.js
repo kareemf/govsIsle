@@ -3,7 +3,13 @@ var services = angular.module('app.services');
 
 services.factory('Shared', [function(){
 	var self = this;
-	self.data = {};
+	self.data = {
+        getMarkerGeoLocation: function(marker){
+            //8/6/14: Position.A seems to have been replaced with position.B
+            var position = marker.position
+            return [position.k, position.A || position.B];
+        }
+    };
 	return self.data;
 }]);
 
@@ -31,6 +37,7 @@ services.factory('SiteData', function($rootScope){
     //note: isFeautred
     var events=[
         {'id':1,
+        'slug': "first-ever-nolan-park-scavenger",
         'name':"First Ever Nolan Park Scavenger",
         'type': "event",
         'isFeautred': [],
