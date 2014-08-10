@@ -1,17 +1,16 @@
-<!-- TODO: proper input types -->
 <form novalidate class="simple-form map-form">
     * Name: <input type="text" ng-model="event.name" /><br />
+    Desc: <textarea ng-model="event.description"></textarea><br />
     <!--Type: <input type="text" ng-model="event.type" /><br />-->
-    Desc: <input type="text" ng-model="event.description" /><br />
-    Vis: <input type="text" ng-model="event.visibility" /><br />
-    Setup: <input type="text" ng-model="event.setupDateTime" /><br />
-    Start: <input type="text" ng-model="event.startDateTime" /><br />
-    End: <input type="text" ng-model="event.endDateTime" /><br />
-    Cleanup: <input type="text" ng-model="event.cleanupDateTime" /><br />
-    Recurring?: <input type="checkbox" ng-model="event.isReccuring" /><br />
-    Head count: <input type="text" ng-model="event.anticipatedAttendance" /><br />
+    <!--Vis: <input type="text" ng-model="event.visibility" /><br />-->
+    <!--Recurring: <input type="checkbox" ng-model="event.isReccuring" /><br />-->
+    Setup: <input type="date" ng-model="event.setupDateTime" /><br />
+    Start: <input type="date" ng-model="event.startDateTime" /><br />
+    End: <input type="date" ng-model="event.endDateTime" /><br />
+    Cleanup: <input type="date" ng-model="event.cleanupDateTime" /><br />
+    Anticipated Attendance: <input type="number" ng-model="event.anticipatedAttendance" /><br />
     Location: <input type="text" ng-model="event.location" /><!--<button ng-click="lookupGeo(event, marker)">Lookup Coords</button--><br />
-    Coords: <input type="text" ng-model="event.geoLocation" /><!--<button ng-click="lookupLocation(event, marker)">Lookup Location</button><br />-->
+    Coords: <input type="text" ng-model="event.geoLocation" /><br/><!--<button ng-click="lookupLocation(event, marker)">Lookup Location</button><br />-->
     Published: <input type="checkbox" ng-model="isPublished" ng-change="togglePublished(event)"/>
     <span class="error" ng-show="error">Error: {{error}}</span><br>
     <button ng-show="event.id" ng-click="update(event, marker)">Edit</button>
