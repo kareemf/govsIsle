@@ -12,12 +12,15 @@
     Location: <input type="text" ng-model="event.location" /><!--<button ng-click="lookupGeo(event, marker)">Lookup Coords</button--><br />
     Coords: <input type="text" ng-model="event.geoLocation" /><br/><!--<button ng-click="lookupLocation(event, marker)">Lookup Location</button><br />-->
     Published: <input type="checkbox" ng-model="isPublished" ng-change="togglePublished(event)"/>
+    <br><br>You will be able to upload an image after the initial save<br>
     <span class="error" ng-show="error">Error: {{error}}</span><br>
     <button ng-show="event.id" ng-click="update(event, marker)">Edit</button>
     <button ng-show="!event.id" ng-click="save(event, marker)">Save</button>
     <button ng-click="cancel(event, marker, markers)">Cancel</button>
     <br/>
     <br/>
-    <div>MainPhoto: <span>{{event.coverPhoto.slug}}</span><br/>
-    <input type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null"><br></div>
+    <div ng-show="event.id">
+        MainPhoto: <span>{{event.coverPhoto.slug}}</span><br/>
+        <input type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null"><br>
+    </div>
 </form>
