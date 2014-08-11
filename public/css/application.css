@@ -147,6 +147,9 @@ a, a:link, a:hover, a:visited, a:active{
 .map-ui-filter li{
   display: block;
 }
+.dropdown-menu.map-ui-filter a.active{
+    background-color: #F5F5BD;
+}
 .map-ui-btn{
   position: relative;
   font-size: 18px;
@@ -458,6 +461,15 @@ height: 100px; width: 100px;
 }
 
 
+.map-form{
+    background: white;
+    border: 1px solid;
+    max-width: 400px;
+    position: absolute;
+    z-index: 100;
+    opacity: 0.90;
+    top:62px;
+}
 /* -------====FERRY SCHEDULE==--------- */
 .info-banner{
   padding: 0px 0px 0px 0px;

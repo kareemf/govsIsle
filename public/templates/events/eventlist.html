@@ -6,7 +6,7 @@
 		<div class="leftSide col-xs-6 col-sm-3 col-md-8 col-lg-8 img-detail">
 			<img alt="{{event.name}}" ng-src="{{event.media}}" class="img-responsive">
 		</div>
-		<div class="rightSide img-detail col-xs-6 col-sm-3 col-md-2 col-lg-8">
+		<div class="rightSide col-xs-6 col-sm-3 col-md-2 col-lg-8">
 			<h5><b>{{event.name}}<b></h5>
 			<p>{{event.startDateTime | date:'EEE, MMM dd'}} - {{event.endDateTime| date:'EEE, MMM dd'}}<br/>
 			{{event.startDateTime | date:'h:mma'}} - {{event.endDateTime |date:'h:mma'}} | {{event.location}}</p>

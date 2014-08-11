@@ -4,44 +4,71 @@
     	<div id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="eventmap"></div>
         <div ng-controller="MarkerListController">
             <!-- populate map with event markers -->
-            <div ng-repeat="marker in existingMarkers">
-                <span ui-map-marker="existingMarkers[$index]"
-                      ui-event="markerEvents"></span>
+            <div ng-repeat="marker in existingEventMarkers">
+                <span
+                    ng-init="entity = events[$index]"
+                    ui-map-marker="marker"
+                    ui-event="markerEvents"></span>
 
                 <!-- create a hidden edit form for each event -->
-                <div ng-init="event = events[$index]" ng-controller="ExistingEventController">
-                    <!-- TODO: is this an abuse of ng-init? -->
-                    <div ng-show="isEditMode && showForm" ng-init="markers = existingMarkers"
+                <!--markers handle is there so current marker can be cleanly removed if need be-->
+                <div ng-init="event = entity" ng-controller="ExistingEventMarkerController">
+                    <div ng-show="isEditMode && showForm" ng-init="markers = existingEventMarkers"
                          ng-include="'/templates/events/eventForm.html'" scope="" onload="">
                     </div>
                 </div>
+            </div>
+            <div ng-repeat="marker in existingAmenityMarkers">
+                <span
+                        ng-init="entity = amenities[$index]"
+                        ui-map-marker="marker"
+                        ui-event="markerEvents"></span>
 
+                <div ng-init="amenity = entity" ng-controller="ExistingAmenityMarkerController">
+                    <div ng-show="isEditMode && showForm" ng-init="markers = existingAmenityMarkers"
+                         ng-include="'/templates/amenities/amenityForm.html'" scope="" onload="">
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 
     <!-- populate map with new markers/events -->
-    <div ng-repeat="marker in newMarkers"
-        ng-controller="NewEventController"
-        ui-map-marker="newMarkers[$index]"
-        ui-event="newMarkerEvents">
+    <div ng-controller="NewMarkerListController">
+        <div ng-repeat="marker in newMarkers"
+            ui-map-marker="marker"
+            ui-event="newMarkerEvents">
 
-        <!-- create a hidden edit form for each new event/marker -->
-        <div ng-show="isEditMode && showForm" ng-init="markers = newMarkers"
-             ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+            <select ng-model="newEntityContentType"
+                    ng-options="contentType for contentType in contentTypes">
+                <option value="">-- choose content type --</option>
+            </select>
+
+            <!-- create a hidden edit form for each new event/marker -->
+            <div ng-show="isEditMode" ng-init="markers = newMarkers">
+                <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventMarkerController"
+                     ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+                </div>
+
+                <div ng-if="newEntityContentType == 'amenity'" ng-controller="NewAmenityMarkerController"
+                     ng-include="'/templates/amenities/amenityForm.html'" scope="" onload="">
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- only one infoWindow, gets moved and populated dynamically -->
     <div ui-map-info-window="myInfoWindow">
-      <h1><a class="black" ui-sref="events.detail({ id: currentEvent.id })">{{currentEvent.name}}</a></h1>
+      <h1>
+          <a class="black" ng-show="currentEvent.type === 'event'" ui-sref="events.detail({ slug: currentEvent.slug })">{{currentEvent.name}}</a>
+          <a class="black" ng-show="currentEvent.type !== 'event'" ui-sref="amenityDetail({ slug: currentEvent.slug })">{{currentEvent.name}}</a>
+      </h1>
       <p>{{currentEvent.description}}</p>
       <p>{{currentEvent.location}}</p>
-      <a ng-href="#/events/{{currentEvent.slug}}" title="">Details</a>
     </div>
 
-    <div>
+    <div ng-show="isAdmin">
         Edit mode: <input type="checkbox" ng-model="isEditMode" ng-change="toggleEditMode(isEditMode)">
     </div>
 </section>
