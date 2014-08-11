@@ -96,7 +96,7 @@ controllers.controller('NewEventMarkerController', ['$scope', '$controller', fun
 
 }]);
 
-controllers.controller('ExistingEventMarkerController', ['$scope', '$controller', '$upload', 'Events', function($scope, $controller, $upload, Events){
+controllers.controller('ExistingEventMarkerController', ['$scope', '$controller', 'Events', function($scope, $controller, Events){
     console.log('in ExistingEventMarkerController. event:', $scope.entity);
 
     $controller('BaseEventMarkerController', {$scope: $scope});
@@ -113,26 +113,6 @@ controllers.controller('ExistingEventMarkerController', ['$scope', '$controller'
         //get the latest copy
         $scope.event = Events.get({eventId: event.id});
         $scope.showForm = false;
-    };
-
-    $scope.onFileSelect = function($files) {
-        for (var i = 0; i < $files.length; i++) {
-            var file = $files[i];
-            $scope.upload = $upload.upload({
-                url: 'api/v1/events/' + event.id,
-                method: 'PUT',
-                file: file, // or list of files ($files) for html5 only
-                fileFormDataName: 'coverPhoto', //or a list of names for multiple files (html5). Default is 'file'
-            }).progress(function(evt) {
-                console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-            }).success(function(data, status, headers, config) {
-                // file is uploaded successfully
-                console.log('file upload success', data, status, headers, config);
-            }).error(function(){
-                console.log('file upload faile.');
-            });
-
-        }
     };
 
     // if Event/Marker is not being edited, don't allow user to drag

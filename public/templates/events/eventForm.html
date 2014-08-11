@@ -21,6 +21,6 @@
     <br/>
     <div ng-show="event.id">
         MainPhoto: <span>{{event.coverPhoto.slug}}</span><br/>
-        <input type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null"><br>
+        <input type="file" ng-file-select="coverPhotoUpload($files)" onclick="this.value=null"><br>
     </div>
 </form>
