@@ -48,11 +48,13 @@
             <!-- create a hidden edit form for each new event/marker -->
             <div ng-show="isEditMode" ng-init="markers = newMarkers">
                 <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventMarkerController"
-                     ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+                     ng-include="'/templates/events/eventForm.html'" scope="" onload=""
+                     ng-show="showForm">
                 </div>
 
                 <div ng-if="newEntityContentType == 'amenity'" ng-controller="NewAmenityMarkerController"
-                     ng-include="'/templates/amenities/amenityForm.html'" scope="" onload="">
+                     ng-include="'/templates/amenities/amenityForm.html'" scope="" onload=""
+                     ng-show="showForm">
                 </div>
             </div>
         </div>
