@@ -10,7 +10,7 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
             function(){return NavService.navHeader}, function(newVal, oldVal){
             console.log('NavService.navHeader', newVal, oldVal);
             $scope.headerview = NavService.navHeader;
-        });    
+        });
         */
 
         // Default hard coded menu items for main menu
@@ -45,19 +45,19 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
 controllers.controller('NavController', ['$scope','$location', '$filter','NavService', 'Shared', 'Events', function($scope, $location, $filter, NavService, Shared, Events){
     console.log('In NavController');
     var path = $location.path();
-    
+
     var paths=["/","/about","/events/grid","/events/map","/tours","/ferry", "/events/list"];
 
     $scope.currentLink=paths.indexOf(path);
     console.log($scope.currentLink+"link");
-    
+
     $scope.activelink = function(numbtn) {
-        NavService.updateBtn(numbtn);            
+        NavService.updateBtn(numbtn);
     };
     $scope.isActive=function(checkTab){
         return NavService.getBtn()===checkTab;
     };
-    $scope.buttonswap= function(){  
+    $scope.buttonswap= function(){
         return NavService.getHiddenBtn();
     };
     $scope.$on('XChanged', function(event, x) {
@@ -69,7 +69,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
     //TODO: only query fo featured Events
     Events.query(function(events){
         $scope.featured = events.filter(function(event){
-            return event.isFeatured && event.isFeatured.indexOf('event') >=0;
+            return event.isFeatured && event.isFeatured.indexOf('main') >=0;
         });
     });
     $scope.subEvents=$filter('subSelectByType')('active');
