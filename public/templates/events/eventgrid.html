@@ -12,12 +12,12 @@
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 			    <div class="item active">
-		        	<img ng-src="{{featured[0].media.url}}" alt="{{featured[0].name}}" class="img-custom-lg img-responsive">
+		        	<img ng-src="{{featured[0].coverPhotourl}}" alt="{{featured[0].name}}" class="img-custom-lg img-responsive">
 		        	<div class="carousel-caption"><p>{{featured[0].name}} |  {{featured[0].startDateTime| date: 'M/d'}}</p></div>
 		        	<a class="testtest" ui-sref="events.detail({id: featured[0].id})"><div class="swapePanel"></div></a>
 			    </div>
 			    <div class="item">
-			      	<img ng-src="{{featured[1].media.url}}" alt="{{featured[1].name}}" class="img-custom-lg img-responsive">
+			      	<img ng-src="{{featured[1].coverPhotourl}}" alt="{{featured[1].name}}" class="img-custom-lg img-responsive">
 			    	<div class="carousel-caption"><p>{{featured[1].name}} | {{featured[1].startDateTime | date: 'M/d'}} </p></div>
 			    	<a class="testtest" ui-sref="events.detail({id: featured[1].id})"><div class="swapePanel"></div></a>
 			    </div>
@@ -30,7 +30,7 @@
 		<ul class="eventlist">
 			<li ng-repeat="event in specialEvent">
 				<a ui-sref="events.detail({id: event.id})">
-					<img ng-src="{{event.media.url}}" alt="{{event.name}}" width="200px" height="150px">
+					<img ng-src="{{event.coverPhotourl}}" alt="{{event.name}}" width="200px" height="150px">
 					<div class="caption">
 						<h5>{{event.name}}</h5><h5 class="sp1">{{event.startDateTime|date:'MMMM dd'}}</h5>
 					</div>
@@ -43,7 +43,7 @@
 		<ul class="eventlist">
 			<li data-ng-repeat="event in parkServices">
 				<a ui-sref="events.detail({ id: event.id })">
-					<img ng-src="{{event.media.url}}" alt="{{event.name}}" width="200px" height="150px">
+					<img ng-src="{{event.coverPhotourl}}" alt="{{event.name}}" width="200px" height="150px">
 					<div class="caption">
 						<h5>{{event.name}}</h5><h5 class="sp1">{{event.startDateTime|date:'MMMM dd'}}</h5>
 					</div>
@@ -56,7 +56,7 @@
 		<ul class="eventlist">
 			<li data-ng-repeat="event in venues">
 				<a ui-sref="events.detail({ id: event.id })">
-					<img ng-src="{{event.media.url}}" alt="{{event.name}}" width="200px" height="150px">
+					<img ng-src="{{event.coverPhotourl}}" alt="{{event.name}}" width="200px" height="150px">
 					<div class="caption">
 						<h5>{{event.name}}</h5><h5 class="sp1">{{event.startDateTime|date:'MMMM dd'}}</h5>
 					</div>
@@ -70,7 +70,7 @@
 		<ul class="eventlist">
 			<li data-ng-repeat="event in activities">
 				<a ui-sref="events.detail({ id: event.id })">
-					<img ng-src="{{event.media.url}}" alt="{{event.name}}" width="200px" height="150px">
+					<img ng-src="{{event.coverPhotourl}}" alt="{{event.name}}" width="200px" height="150px">
 					<div class="caption">
 						<h5>{{event.name}}</h5><h5 class="sp1">{{event.startDateTime|date:'MMMM dd'}}</h5>
 					</div>
