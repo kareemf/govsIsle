@@ -14,12 +14,12 @@
 			    <div class="item active">
 		        	<img ng-src="{{featured[0].coverPhoto.url}}" alt="{{featured[0].name}}" class="img-custom-lg img-responsive">
 		        	<div class="carousel-caption"><p>{{featured[0].name}} |  {{featured[0].startDateTime| date: 'M/d'}}</p></div>
-		        	<a class="testtest" ui-sref="events.detail({id: featured[0].id})"><div class="swapePanel"></div></a>
+		        	<a class="testtest" ui-sref="events.detail({slug: featured[0].slug})"><div class="swapePanel"></div></a>
 			    </div>
 			    <div class="item">
 			      	<img ng-src="{{featured[1].coverPhoto.url}}" alt="{{featured[1].name}}" class="img-custom-lg img-responsive">
 			    	<div class="carousel-caption"><p>{{featured[1].name}} | {{featured[1].startDateTime | date: 'M/d'}} </p></div>
-			    	<a class="testtest" ui-sref="events.detail({id: featured[1].id})"><div class="swapePanel"></div></a>
+			    	<a class="testtest" ui-sref="events.detail({slug: featured[1].slug})"><div class="swapePanel"></div></a>
 			    </div>
 			</div><!--ENDING OF CAROUSEL-INNER-->
 		</div>
@@ -29,7 +29,7 @@
 		<h3 class="info-banner-left">SPECIAL EVENTS <span class="glyphicon glyphicon-boat"></span></h3>
 		<ul class="eventlist">
 			<li ng-repeat="event in specialEvent">
-				<a ui-sref="events.detail({id: event.id})">
+				<a ui-sref="events.detail({slug: event.slug})">
 					<img ng-src="{{event.coverPhoto.url}}" alt="{{event.name}}" width="200px" height="150px">
 					<div class="caption">
 						<h5>{{event.name}}</h5><h5 class="sp1">{{event.startDateTime|date:'MMMM dd'}}</h5>
@@ -42,7 +42,7 @@
 		<h3 class="info-banner-left">NATIONAL PARK SERVICE PROGRAMS</h3>
 		<ul class="eventlist">
 			<li data-ng-repeat="event in parkServices">
-				<a ui-sref="events.detail({ id: event.id })">
+				<a ui-sref="events.detail({ slug: event.slug })">
 					<img ng-src="{{event.coverPhoto.url}}" alt="{{event.name}}" width="200px" height="150px">
 					<div class="caption">
 						<h5>{{event.name}}</h5><h5 class="sp1">{{event.startDateTime|date:'MMMM dd'}}</h5>
@@ -55,7 +55,7 @@
 		<h3 class="info-banner-left">PROGRAMS</h3>
 		<ul class="eventlist">
 			<li data-ng-repeat="event in venues">
-				<a ui-sref="events.detail({ id: event.id })">
+				<a ui-sref="events.detail({ slug: event.slug })">
 					<img ng-src="{{event.coverPhoto.url}}" alt="{{event.name}}" width="200px" height="150px">
 					<div class="caption">
 						<h5>{{event.name}}</h5><h5 class="sp1">{{event.startDateTime|date:'MMMM dd'}}</h5>
@@ -69,7 +69,7 @@
 		<h3 class="info-banner-left">ACTIVITIES</h3>
 		<ul class="eventlist">
 			<li data-ng-repeat="event in activities">
-				<a ui-sref="events.detail({ id: event.id })">
+				<a ui-sref="events.detail({ slug: event.slug })">
 					<img ng-src="{{event.coverPhoto.url}}" alt="{{event.name}}" width="200px" height="150px">
 					<div class="caption">
 						<h5>{{event.name}}</h5><h5 class="sp1">{{event.startDateTime|date:'MMMM dd'}}</h5>
