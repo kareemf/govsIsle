@@ -1,10 +1,10 @@
 <div ng-controller="EventDetailController">
-	<div class="img-detail">
-		<img alt="{{event.name}}" ng-src="{{event.coverPhoto.url}}" class="img-responsive"/>
-	</div>
-	<h4 class="lead"><b>{{specialEvent.name}}<b></h4>
-	<p class="lead">{{specialEvent.startDateTime | date:'EEEE, MMM dd'}} - {{specialEvent.endDateTime| date:'EEEE, MMM dd'}}<br/>
-	{{specialEvent.startDateTime | date:'h:mma'}} - {{specialEvent.endDateTime |date:'h:mma'}} | {{specialEvent.location}}</p>
-	<hr class="hrstyle"/>
-	<p class="lead text-indent" ng-bind-html="specialEvent.description | trustedHtml"></p>
+    <div class="img-detail">
+        <img alt="{{event.name}}" ng-src="{{event.coverPhoto.url}}" class="img-responsive"/>
+    </div>
+    <h4 class="lead"><b>{{event.name}}<b></h4>
+    <p class="lead">{{event.startDateTime | date:'EEEE, MMM dd'}} - {{event.endDateTime| date:'EEEE, MMM dd'}}<br/>
+    {{event.startDateTime | date:'h:mma'}} - {{event.endDateTime |date:'h:mma'}} | {{event.location}}</p>
+    <hr class="hrstyle"/>
+    <p class="lead text-indent" ng-bind-html="event.description | trustedHtml"></p>
 </div><br/>
