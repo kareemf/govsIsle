@@ -1,5 +1,11 @@
 <form novalidate class="simple-form map-form">
     * Name: <input type="text" ng-model="event.name" /><br />
+    * Type:
+    <select
+            ng-model="event.type"
+            ng-options="type for type in ['event', 'info', 'food', 'drink', 'tour', 'activity', 'facility']">
+        <option value="">-- choose type of amenity --</option>
+    </select>
     Desc: <textarea ng-model="event.description"></textarea><br />
     <!--Type: <input type="text" ng-model="event.type" /><br />-->
     <!--Vis: <input type="text" ng-model="event.visibility" /><br />-->
