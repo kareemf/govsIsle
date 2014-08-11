@@ -207,7 +207,10 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
         $scope.featured = events.filter(function(event){
             return event.isFeatured && event.isFeatured.indexOf('event') >=0;
         });
+
+
     });
+    console.log("event array "+$scope.specialEvent);
 }]);
 
 controllers.controller('EventMapController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){
