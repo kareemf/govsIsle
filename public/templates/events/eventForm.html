@@ -6,6 +6,13 @@
             ng-options="type for type in ['event', 'info', 'food', 'drink', 'tour', 'activity', 'facility']">
         <option value="">-- choose type of amenity --</option>
     </select>
+    <br>
+    Featured: <select multiple
+            ng-model="event.isFeatured"
+            ng-options="carousel for carousel in ['main', 'event', 'tour']">
+        <option value="">-- choose type of amenity --</option>
+    </select>
+    <br>
     Desc: <textarea ng-model="event.description"></textarea><br />
     <!--Type: <input type="text" ng-model="event.type" /><br />-->
     <!--Vis: <input type="text" ng-model="event.visibility" /><br />-->
