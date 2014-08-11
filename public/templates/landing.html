@@ -19,21 +19,21 @@
 				    </div>
 				-->
 			    <div class="item active">
-		        	<img ng-src="{{featured[0].coverphoto.url}}" alt="{{featured[0].name}}" class="img-custom-lg img-reponsive"/>
+		        	<img ng-src="{{featured[0].coverPhoto.url}}" alt="{{featured[0].name}}" class="img-custom-lg img-reponsive"/>
 		        	<div class="carousel-caption"><p>{{featured[0].name}} | {{featured[0].startDateTime | date:'MM/dd/yyyy'}} </p></div>
 					<a ng-click="activelink(2)" ui-sref="events.detail({slug: featured[0].slug})"><div class="carouselMore">more >></div></a>
 					<a ng-click="activelink(2)" class="testtest" ui-sref="events.detail({slug: featured[0].slug})"><div class="swapePanel"></div></a>
 					<div class="card"><p>{{featured[0].startDateTime | date: 'hh:mm a'}}</p></div>
 			    </div>
 			    <div class="item">
-			      	<img ng-src="{{featured[1].coverphoto.url}}" alt="{{featured[0].name}}" class="img-custom-lg img-responsive"/>
+			      	<img ng-src="{{featured[1].coverPhoto.url}}" alt="{{featured[1].name}}" class="img-custom-lg img-responsive"/>
 			    	<div class="carousel-caption"><p>{{featured[1].name}} | {{featured[1].startDateTime | date:'MM/dd/yyyy'}}</p></div>
 					<a ng-click="activelink(2)" ui-sref="events.detail({slug: featured[1].slug})"><div class="carouselMore">more >></div></a>
 					<a ng-click="activelink(2)" class="testtest" ui-sref="events.detail({slug: featured[1].slug})"><div class="swapePanel"></div></a>
 					<div class="card"><p>{{featured[1].startDateTime | date: 'hh:mm a'}}</p></div>
 			    </div>
 			    <div class="item">
-			      	<img ng-src="{{featured[2].coverphoto.url}}" alt="{{featured[2].name}}" class="img-custom-lg img-responsive"/>
+			      	<img ng-src="{{featured[2].coverPhoto.url}}" alt="{{featured[2].name}}" class="img-custom-lg img-responsive"/>
 			    	<div class="carousel-caption"><p>{{featured[2].name}} | {{featured[2].startDateTime | date:'MM/dd/yyyy'}}</p></div>
 					<a ng-click="activelink(2)" ui-sref="events.detail({slug: featured[2].slug})"><div class="carouselMore">more >></div></a>
 					<a ng-click="activelink(2)" class="testtest" ui-sref="events.detail({slug: featured[2].slug})"><div class="swapePanel"></div></a>
