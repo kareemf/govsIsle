@@ -63,8 +63,9 @@
     <!-- only one infoWindow, gets moved and populated dynamically -->
     <div ui-map-info-window="myInfoWindow">
       <h1>
-          <a class="black" ng-show="currentEvent.type === 'event'" ui-sref="events.detail({ slug: currentEvent.slug })">{{currentEvent.name}}</a>
-          <a class="black" ng-show="currentEvent.type !== 'event'" ui-sref="amenityDetail({ slug: currentEvent.slug })">{{currentEvent.name}}</a>
+          <a class="black" ui-sref="events.detail({ slug: currentEvent.slug })">{{currentEvent.name}}</a>
+          <!--TODO: link to amenities detail page-->
+          <!--<a class="black" ng-show="currentEvent.type !== 'event'" ui-sref="amenityDetail({ slug: currentEvent.slug })">{{currentEvent.name}}</a>-->
       </h1>
       <p>{{currentEvent.description}}</p>
       <p>{{currentEvent.location}}</p>
