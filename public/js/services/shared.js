@@ -76,7 +76,7 @@ services.factory('SiteData', function($rootScope){
         'anticipatedAttendance': 0,
         'location': 'Colonels Row',
         'geoLocation': [40.690746, -74.019037],
-        'media': 'http://www.jazzagelawnparty.com/img/gallery/entertainment/6B6A8065.jpg'
+        'media': '/images/jazz.jpg'
         },
         {'id':4,
         'name':"RECESS BOCCE",
@@ -156,7 +156,7 @@ services.factory('SiteData', function($rootScope){
         'anticipatedAttendance': 0,
         'location': 'Castle Williams',
         'geoLocation': [40.692785, -74.019406],
-        'media': 'http://www.nps.gov/gois/planyourvisit/images/Castle-Williams-Banner.jpg'
+        'media': '../images/castle-williams.jpg'
         },
         {'id':9,
         'name':"Experience Fort Jay: An Island Star!",
@@ -284,7 +284,7 @@ services.factory('SiteData', function($rootScope){
         'anticipatedAttendance': 0,
         'location': '',
         'geoLocation': [, ],
-        'media': 'https://govislandblog.files.wordpress.com/2014/07/westcolang-lake.jpg'
+        'media': '../images/senior-art.jpg'
         },
         {'id':17,
         'name':"Interactive Exhibit",

@@ -51,3 +51,7 @@ filters.filter('SelecteByFeatured', ['SiteData', function(SiteData){
         return theArray;
     };
 }]);
+
+filters.filter('allData', ['SiteData', function(SiteData){
+        return SiteData.getEvents();
+}]);

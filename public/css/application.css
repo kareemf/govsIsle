@@ -25,7 +25,7 @@ body{
   /*background-color: #FFF;*/
   color: black;
   min-width: 250px;
-  font-family: myFirstFont;
+  font-family: Arial;
   font-size: 16px;
 }
 /* HTML5 display-role reset for older browsers */
@@ -235,10 +235,8 @@ a, a:link, a:hover, a:visited, a:active{
   position: absolute;
   z-index: 200;
   text-align: center;
-  right: 0;
-  bottom: 10px;
+  right: 0; bottom: 10px;
   width: 100px;height: 25px;
-  color: white;
   font-family: govsle;
   font-size: 20px;
   background-color: white;
@@ -349,6 +347,20 @@ a, a:link, a:hover, a:visited, a:active{
   vertical-align:top;
   /*box-shadow: 1px 1px 10px #999;*/
 }
+
+.card{
+  position: absolute;
+  left: 0;bottom: 10px;
+  width: 100px;height: 25px;
+  font-family: govsle;
+  font-size: 20px;
+  background-color: #FFF;
+  color: black;
+  opacity: 0.7;
+  text-align: center;
+  transition:all 0.6s ease;
+  transform-style: preserve-3d;
+}
 /*---------=EVENTGRID View=--------------*/
 #allEvents{background-color: #FFF;}
 #allEvents #eventCaro{overflow:hidden;}
@@ -407,52 +419,22 @@ a, a:link, a:hover, a:visited, a:active{
   font-weight: normal;
 }
 /*----------=END EventLIST VIEW=-------------*/
-.largeTitle{
-  font-size: 10pt;
+.leftSide{
+  float: left;
+  background-color: blue;
 }
-.list-container{
-  width: 80%;
-  margin: 30px auto;
-  overflow: hidden;
+.rightSide{
+  float: right;
+   background-color: red;
 }
-.gridItem h3{
-    text-transform: uppercase;
+#listEvents .img-detail{
+height: 100px; width: 100px;
+
 }
-.gridItem img{
-    max-width: 100%;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+#listEvents .listCol{
+
 }
-.gridItem{
-    color: #797478;
-    font: 10px/1.5 Verdana, Helvetica, sans-serif;
-    float: left;    
-    width: 16%;
-    margin:  2% 2% 50px 2%; 
-}
-@media only screen and (max-width : 940px),
-only screen and (max-device-width : 940px){
-    .gridItem {width: 21%;}
-}
- 
-@media only screen and (max-width : 720px),
-only screen and (max-device-width : 720px){
-    .gridItem {width: 29.33333%;}
-}
- 
-@media only screen and (max-width : 530px),
-only screen and (max-device-width : 530px){
-    .gridItem {width: 46%;}
-}
- 
-@media only screen and (max-width : 320px),
-only screen and (max-device-width : 320px){
-    .gridItem {width: 96%;}
-    .gridItem img {width: 96%;}
-    .gridItem h3 {font-size: 18px;}
-    .gridItem p, {font-size: 18px;}
-}
+
 /*----------=END EVENTLIST VIEW=-------------*/
 
 

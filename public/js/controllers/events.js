@@ -222,13 +222,12 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
     console.log('In EventListController');
     
     $scope.featured=$filter('SelecteByFeatured')('event');
-    //console.log("are there data"+ $scope.featured);
-
+    
     $scope.specialEvent=$filter('SelecteByType')('event');
     $scope.parkServices=$filter('SelecteByType')('tour');
     $scope.venues=$filter('SelecteByType')('venue');
     $scope.activities=$filter('SelecteByType')('activity');
-    $scope.landing=$filter('SelecteByType')('main');
+    $scope.eventList=$filter('allData');
 }]);
 
 controllers.controller('EventMapController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){
