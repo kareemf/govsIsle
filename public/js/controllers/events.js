@@ -181,14 +181,33 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
 
 controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','$filter', function($scope, $state, $stateParams, Events, $filter){
     console.log('In EventListController');
-    
-    $scope.featured=$filter('SelecteByFeatured')('event');
-    
-    $scope.specialEvent=$filter('SelecteByType')('event');
-    $scope.parkServices=$filter('SelecteByType')('tour');
-    $scope.venues=$filter('SelecteByType')('venue');
-    $scope.activities=$filter('SelecteByType')('activity');
-    $scope.eventList=$filter('allData');
+
+    // $scope.featured=$filter('SelecteByFeatured')('event');
+
+    // $scope.specialEvent=$filter('SelecteByType')('event');
+    // $scope.parkServices=$filter('SelecteByType')('tour');
+    // $scope.venues=$filter('SelecteByType')('venue');
+    // $scope.activities=$filter('SelecteByType')('activity');
+    // $scope.eventList=$filter('allData');
+
+    Events.query(function(events){
+        $scope.eventList = events;
+        $scope.activities = events.filter(function(event){
+            return event.type === 'activity';
+        });
+        $scope.venues = events.filter(function(event){
+            return event.type === 'venue';
+        });
+        $scope.parkServices = events.filter(function(event){
+            return event.type === 'tour';
+        });
+        $scope.specialEvent = events.filter(function(event){
+            return event.type === 'event';
+        });
+        $scope.featured = events.filter(function(event){
+            return event.isFeatured && event.isFeatured.indexOf('event') >=0;
+        });
+    });
 }]);
 
 controllers.controller('EventMapController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){

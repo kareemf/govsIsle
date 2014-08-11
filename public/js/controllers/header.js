@@ -42,7 +42,7 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
     }
 ]);
 
-controllers.controller('NavController', ['$scope','$location', '$filter','NavService', 'Shared', function($scope, $location, $filter, NavService, Shared){
+controllers.controller('NavController', ['$scope','$location', '$filter','NavService', 'Shared', 'Events', function($scope, $location, $filter, NavService, Shared, Events){
     console.log('In NavController');
     var path = $location.path();
     
@@ -65,7 +65,13 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
     });
 
     //For the landing page area
-    $scope.featured=$filter('SelecteByFeatured')('main');
+//    $scope.featured=$filter('SelecteByFeatured')('main');
+    //TODO: only query fo featured Events
+    Events.query(function(events){
+        $scope.featured = events.filter(function(event){
+            return event.isFeatured && event.isFeatured.indexOf('event') >=0;
+        });
+    });
     $scope.subEvents=$filter('subSelectByType')('active');
     console.log("testing= "+ $scope.subEvents);
     /* need to be fix niquepg
