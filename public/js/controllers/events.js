@@ -6,6 +6,7 @@ controllers.controller('BaseEventMarkerController', ['$scope', '$controller', 'E
     $controller('BaseEntityController', {$scope: $scope});
 
     $scope.Resource = Events;
+    $scope.baseUrl = 'api/v1/events/';
 
     var marker = $scope.marker
 

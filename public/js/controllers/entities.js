@@ -39,7 +39,7 @@ controllers.controller('BaseEntityController', ['$scope', '$rootScope', '$upload
         for (var i = 0; i < $files.length; i++) {
             var file = $files[i];
             $scope.upload = $upload.upload({
-                url: 'api/v1/events/' + event.id,
+                url: $scope.baseUrl + $scope.entity.id,
                 method: 'PUT',
                 file: file, // or list of files ($files) for html5 only
                 fileFormDataName: 'coverPhoto', //or a list of names for multiple files (html5). Default is 'file'

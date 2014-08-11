@@ -6,8 +6,9 @@ controllers.controller('BaseAmenityMarkerController', ['$scope', '$controller', 
     $controller('BaseEntityController', {$scope: $scope});
 
     $scope.Resource = Amenities;
+    $scope.baseUrl = 'api/v1/amenities/';
 
-    var marker = $scope.marker
+    var marker = $scope.marker;
 
     $scope.saveSuccessCallback = function(amenity, headers){
         //save successful, close the form
