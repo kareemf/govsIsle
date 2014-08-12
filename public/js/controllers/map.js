@@ -49,22 +49,20 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
 
         oms.addListener('click', function(marker) {
-            // iw.setContent(marker.desc);
-            // iw.open(map, marker);
             $scope.openMarkerInfo(marker, marker.entity);
         });
 
         oms.addListener('spiderfy', function(markers) {
             for(var i = 0; i < markers.length; i ++) {
-                markers[i].setIcon(iconWithColor(spiderfiedColor));
+                // markers[i].setIcon(iconWithColor(spiderfiedColor));
                 markers[i].setShadow(null);
             }
-            // iw.close();
+            $scope.myInfoWindow.close();
         });
 
         oms.addListener('unspiderfy', function(markers) {
             for(var i = 0; i < markers.length; i ++) {
-                markers[i].setIcon(iconWithColor(usualColor));
+                // markers[i].setIcon(iconWithColor(usualColor));
                 markers[i].setShadow(shadow);
             }
         });
@@ -113,7 +111,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             position: $params[0].latLng,
             draggable: true
         });
-
+        $scope.oms.addMarker(marker);
         $scope.newMarkers.push(marker);
     };
 
