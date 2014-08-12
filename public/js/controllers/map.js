@@ -31,12 +31,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     var spiderfiedColor = 'ffee22';
     var usualColor = 'eebb22';
-
-    var iconWithColor = function(color) {
-       return 'http://chart.googleapis.com/chart?chst=d_map_xpin_letter&chld=pin|+|' +
-        color + '|000000|ffff00';
-    };
-
     var gm = google.maps;
     var shadow = new gm.MarkerImage(
         'https://www.google.com/intl/en_ALL/mapfiles/shadow50.png',
@@ -54,7 +48,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
         oms.addListener('spiderfy', function(markers) {
             for(var i = 0; i < markers.length; i ++) {
-                // markers[i].setIcon(iconWithColor(spiderfiedColor));
                 markers[i].setShadow(null);
             }
             $scope.myInfoWindow.close();
@@ -62,7 +55,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
         oms.addListener('unspiderfy', function(markers) {
             for(var i = 0; i < markers.length; i ++) {
-                // markers[i].setIcon(iconWithColor(usualColor));
                 markers[i].setShadow(shadow);
             }
         });
