@@ -219,6 +219,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         }
 
         var marker = new google.maps.Marker(markerOptions);
+        marker.entity = entity;
 
         console.log('existing entity', entity, 'marker', marker);
         return marker;
@@ -253,10 +254,8 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                 events.forEach(function(event){
                     var marker = createMarker(event, $scope.myMap)
 
-                    marker.entity = event;
-
                     $scope.oms.addMarker(marker);
-                    $scope.existingEventMarkers.push();
+                    $scope.existingEventMarkers.push(marker);
                     $scope.events.push(event);
                 });
             });
@@ -280,10 +279,8 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                 amenities.forEach(function(amenity){
                     var marker = createMarker(amenity, $scope.myMap);
 
-                    marker.entity = amenity;
-
                     $scope.oms.addMarker(marker);
-                    $scope.existingAmenityMarkers.push();
+                    $scope.existingAmenityMarkers.push(marker);
                     $scope.amenities.push(amenity);
                 });
             });
