@@ -160,10 +160,6 @@ a, a:link, a:hover, a:visited, a:active{
 .nav-map{ padding-left: 6%; padding-right: 5%;}
 .nav-end{padding-left: 6%;}
 
-.black{
-    color: #000000 !important;
-}
-
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
   .col-xs-12{width: 100%;
@@ -200,40 +196,37 @@ a, a:link, a:hover, a:visited, a:active{
 }
 
 
-/*---==CAROUSEL-LANDING PAGE==---*/
+/*---==LANDING-CAROUSEL PAGE==---*/
 #mainCaro{
   margin-top: 15px;
 }
 #mainCaro .carousel-indicators{
   position: absolute;
-  top: 10px;
-  left: 110%;
+  top: 10px;left: 110%;
   z-index: 200;
-  height: 25px;
-  width: 50px;
+  height: 25px;width: 50px;
   /*background-color: blue;*/
+} 
+#mainCaro .carousel-inner{
+ max-height: 350px;
 }
 #mainCaro .swapePanel, #allEvents .swapePanel{
   position: absolute;
   z-index: 0;
-  top: 0;
-  bottom: 0;
+  top: 0;bottom: 0;
   width: 100%;
-  color: white;
   /*background-color: black;*/
 }
 #mainCaro .carousel-caption{
   position: absolute;
-  top: 0px;
-  left:-5px;
-  height: 50px;
-  width: 75%;
-  padding: 5px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
-  z-index: 200px;
-  color: white;
+  left: 15px;top: 10px;
+  width: 75%;height: 50px;
   font-family: govsle;
   font-size: 20px;
+  text-align: left;
+  padding: 0px 0px 0px 0px;
+  z-index: 200px;
+  color: white;
   /*background-color: red;*/
   /*opacity: 0.5;*/
 }
@@ -353,7 +346,6 @@ a, a:link, a:hover, a:visited, a:active{
   vertical-align:top;
   /*box-shadow: 1px 1px 10px #999;*/
 }
-
 .card{
   position: absolute;
   left: 0;bottom: 10px;
@@ -364,8 +356,6 @@ a, a:link, a:hover, a:visited, a:active{
   color: black;
   opacity: 0.7;
   text-align: center;
-  transition:all 0.6s ease;
-  transform-style: preserve-3d;
 }
 /*---------=EVENTGRID View=--------------*/
 #allEvents{background-color: #FFF;}
