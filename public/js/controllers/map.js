@@ -29,6 +29,10 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
 
+    $scope.$watch('myMap', function(map){
+        var oms = new OverlappingMarkerSpiderfier(map);
+    });
+
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
         streetViewControl: true,
@@ -318,8 +322,8 @@ controllers.controller('GeoLocationController', ['$scope', 'Events', function ($
         };
         document.getElementById('get_location').onclick=function(){
             //enableHighAccuracy: true -> increase by 10 meters
-            navigator.geolocation.getCurrentPosition(coordinates, err, 
-                {enableHighAccuracy: true, 
+            navigator.geolocation.getCurrentPosition(coordinates, err,
+                {enableHighAccuracy: true,
                     maximumAge: 30000, //in millisecond to refresh the cach
                     //timeout: 300         //time in seconds for the browser to get the location
                 });
