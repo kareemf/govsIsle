@@ -29,8 +29,45 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
 
+    var spiderfiedColor = 'ffee22';
+    var usualColor = 'eebb22';
+
+    var iconWithColor = function(color) {
+       return 'http://chart.googleapis.com/chart?chst=d_map_xpin_letter&chld=pin|+|' +
+        color + '|000000|ffff00';
+    };
+
+    var gm = google.maps;
+    var shadow = new gm.MarkerImage(
+        'https://www.google.com/intl/en_ALL/mapfiles/shadow50.png',
+        new gm.Size(37, 34),  // size   - for sprite clipping
+        new gm.Point(0, 0),   // origin - ditto
+        new gm.Point(10, 34)  // anchor - where to meet map location
+    );
+
     $scope.$watch('myMap', function(map){
-        var oms = new OverlappingMarkerSpiderfier(map);
+        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
+
+        oms.addListener('click', function(marker) {
+            // iw.setContent(marker.desc);
+            // iw.open(map, marker);
+            $scope.openMarkerInfo(marker, marker.entity);
+        });
+
+        oms.addListener('spiderfy', function(markers) {
+            for(var i = 0; i < markers.length; i ++) {
+                markers[i].setIcon(iconWithColor(spiderfiedColor));
+                markers[i].setShadow(null);
+            }
+            // iw.close();
+        });
+
+        oms.addListener('unspiderfy', function(markers) {
+            for(var i = 0; i < markers.length; i ++) {
+                markers[i].setIcon(iconWithColor(usualColor));
+                markers[i].setShadow(shadow);
+            }
+        });
     });
 
     $scope.mapOptions = {
@@ -224,7 +261,12 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             Events.query(function(events){
                 console.log('events', events);
                 events.forEach(function(event){
-                    $scope.existingEventMarkers.push(createMarker(event, $scope.myMap));
+                    var marker = createMarker(event, $scope.myMap)
+
+                    marker.entity = event;
+
+                    $scope.oms.addMarker(marker);
+                    $scope.existingEventMarkers.push();
                     $scope.events.push(event);
                 });
             });
@@ -245,9 +287,14 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         if(filters && filters.length){
             Amenities.query({filter: filters}, function(amenities){
                 console.log('amenities', amenities);
-                amenities.forEach(function(activity){
-                    $scope.existingAmenityMarkers.push(createMarker(activity, $scope.myMap));
-                    $scope.amenities.push(activity);
+                amenities.forEach(function(amenity){
+                    var marker = createMarker(amenity, $scope.myMap);
+
+                    marker.entity = amenity;
+
+                    $scope.oms.addMarker(marker);
+                    $scope.existingAmenityMarkers.push();
+                    $scope.amenities.push(amenity);
                 });
             });
         }
