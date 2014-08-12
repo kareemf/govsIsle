@@ -7,16 +7,16 @@ var mongoose = require('mongoose'),
     base = require('./baseContentModel');
 
 var properties = _.extend({
-    name: String,
-    type: String, // Food, Beverage
+    name: {type: String, required: true},
+    type: {type: String, required: true}, // Food, Beverage
     description: String,
     hours: String,
     specialities: [String], //Vegan, Kosher, etc
     location: String,
     geoLocation: {type: [Number], index: '2d'},
-    media: [{type: ObjectId, ref: 'Media'}]
+    media: [{type: ObjectId, ref: 'Media'}],
+    coverPhoto: {type: ObjectId, ref: 'Media'}
 }, base.properties);
-var AmenitySchema = new Schema(properties);
 
 var AmenitySchema = new Schema(properties, {
     toObject: { virtuals: true },
@@ -69,7 +69,17 @@ AmenitySchema.statics.permissionsGrantedToAnon = function(){
         fieldPermissions['location'][readPermission],
         fieldPermissions['geoLocation'][readPermission],
         fieldPermissions['media'][readPermission],
-    ];
+        fieldPermissions['coverPhoto'][readPermission]
+    ].concat(base.permissionsGrantedToAnon(this));
+};
+
+AmenitySchema.statics.load = function(id, callback){
+    this.findOne({
+        _id: id
+    })
+        .populate('media', 'slug id')
+        .populate('coverPhoto', 'slug id')
+        .exec(callback);
 };
 
 mongoose.model('Amenity', AmenitySchema);

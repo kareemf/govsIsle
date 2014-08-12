@@ -1,6 +1,7 @@
 'use strict';
 
-var fs = require('fs'),
+var _ = require('lodash'),
+    fs = require('fs'),
     async = require('async'),
     mongoose = require('mongoose'),
     Media = mongoose.model('Media'),
@@ -44,19 +45,37 @@ exports.getModelInstance = function(req, res, next, id) {
     }
 };
 
-exports.create = function(req, res) {
-    // console.log('media create req.files:', req.files);
+exports.create = function(req, res, _callback) {
+    console.log('media create req.files:', req.files);
     // return res.jsonp({files: req.files, body: req.body});
-    var responseJson = {};
+    var Model = req.model;
+    var modelFieldNames = Object.keys(Model.schema.paths);
+    var files = req.files;
     var fields = [];
+    var responseJson = {};
 
-    for(var fieldName in req.files){
-        var field = req.files[fieldName];
-        fields.push(field);
+    for(var fieldName in files){
+        var field = files[fieldName];
+
+        //TODO: handle case where field is an array
+
+        //make sure the field user is attempting to update:
+        //1. is part of the model
+        if(_.contains(modelFieldNames, fieldName)){
+            //2. is a Media reference
+            //TODO: make file path is Media ref
+
+            //3. user has permission to update
+            //TODO: permission check
+
+            fields.push(field);
+        }
     }
+
     if(!fields.length){
         return res.jsonp(500, 'Nothing to upload');
     }
+
     var createMediaFromField = function(field, callback){
         var name = field.originalname;
         var media = new Media(field);
@@ -80,21 +99,26 @@ exports.create = function(req, res) {
 
         media.save(function(err, media){
             if(err){
-                responseJson[name] = {
-                    status: 500,
-                    error: err
-                };
+                if(responseJson) {
+                    responseJson[name] = {
+                        status: 500,
+                        error: err
+                    };
+                }
             }
             else{
                 var mediaJson = media.toObject();
-                delete mediaJson.file
+                //do not want the JSON response to contain the file binary data
+                delete mediaJson.file;
 
                 permissionsManager.grantCreatorPermissions(req.user, media);
-
-                responseJson[name] = {
-                    status: 200,
-                    media: mediaJson
-                };
+                if(responseJson) {
+                    responseJson[name] = {
+                        status: 200,
+                        fieldName: field.fieldname,
+                        media: mediaJson
+                    };
+                }
             }
             callback();
         });
@@ -118,19 +142,34 @@ exports.create = function(req, res) {
                 return callback();
             }
 
-            doc.media.push(mediaResponse.media.id);
+            //allow user to Update any arbitrary Media field
+            //doc.media.push(mediaResponse.media.id);
+            var fieldName = mediaResponse.fieldName;
+            if(_.isArray(doc[fieldName])){
+                doc[fieldName].push(mediaResponse.media.id);
+            }
+            else{
+                doc[fieldName] = mediaResponse.media.id;
+            }
+
             doc.save(function(err, doc){
-                responseJson.doc = {id: doc.id};
                 if(err){
                     mediaResponse.status = 500;
                     mediaResponse.error = err;
                 }
+                if(doc){
+                    responseJson.doc = {id: doc.id};
+                }
+
                 callback();
             });
         };
 
         var sendResponse = function(err){
-            return res.jsonp(responseJson);
+            if(!_callback){
+                return res.jsonp(responseJson);
+            }
+            return _callback(responseJson);
         };
 
         async.each(mediaResponses, updatedAssociatedDoc, sendResponse);
@@ -140,7 +179,13 @@ exports.create = function(req, res) {
 };
 
 exports.get = function(req, res, next, id) {
-    base.get(req, res, next, id);
+
+    if (id.match(/^[0-9a-fA-F]{24}$/)) {
+        base.get(req, res, next, id);
+    }
+    else{
+        base.getByQuery(req, res, next, {slug: id});
+    }
 };
 
 exports.getBySlug = function(req, res, next, id) {

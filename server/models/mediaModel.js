@@ -37,6 +37,12 @@ MediaSchema.virtual('permissions')
         return this._permissions;
     });
 
+MediaSchema.virtual('url')
+    .get(function(){
+        // TODO: dont hardcode api url
+        return '/api/v1/media/' + this.id;
+    });
+
 MediaSchema.statics = base.permissions;
 
 MediaSchema.statics.fieldPermissions = function(){

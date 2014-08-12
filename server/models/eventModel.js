@@ -7,8 +7,8 @@ var mongoose = require('mongoose'),
     base = require('./baseContentModel');
 
 var properties = _.extend({
-    name: String,
-    type: String, // Activity, Exhibit, Tour, Program/Festival
+    name: {type: String, required: true},
+    type: {type: String, required: true}, // Activity, Exhibit, Tour, Program/Festival
     description: String,
     visibility: String, //Private/Public
     setupDateTime: Date,
@@ -19,7 +19,8 @@ var properties = _.extend({
     anticipatedAttendance: Number,
     location: String,
     geoLocation: {type: [Number], index: '2d'},
-    media: [{type: ObjectId, ref: 'Media'}]
+    media: [{type: ObjectId, ref: 'Media'}],
+    coverPhoto: {type: ObjectId, ref: 'Media'}
 }, base.properties);
 
 var EventSchema = new Schema(properties, {
@@ -88,7 +89,17 @@ EventSchema.statics.permissionsGrantedToAnon = function(){
         fieldPermissions['location'][readPermission],
         fieldPermissions['geoLocation'][readPermission],
         fieldPermissions['media'][readPermission],
-    ];
+        fieldPermissions['coverPhoto'][readPermission]
+    ].concat(base.permissionsGrantedToAnon(this));
+};
+
+EventSchema.statics.load = function(id, callback){
+    this.findOne({
+        _id: id
+    })
+    .populate('media', 'slug id')
+    .populate('coverPhoto', 'slug id')
+    .exec(callback);
 };
 
 mongoose.model('Event', EventSchema);

@@ -55,6 +55,7 @@
 				"daab762d-7f05-a4d8-8142-75f89f02eea6",
 				"90deb89a-d0be-fd76-fde9-1af4294068c4",
 				"4805dccc-5160-b2f0-73a0-6184af4189d1",
+				"24f8e789-c437-da65-f9fa-4a9e5d91bfbf",
 				"e6d9c579-a236-a785-899f-6cf41ad3cd54"
 			],
 			"collection_name": "Govs_Isle_API",
@@ -82,14 +83,14 @@
 		{
 			"id": "08600487-2a7d-c5a0-4d78-d99203ebe5b5",
 			"headers": "",
-			"url": "localhost:3000/api/v1/amenities/53c28d400596201db3e8d74e/publish",
+			"url": "localhost:3000/api/v1/amenities/53c5ebb32c555ac7447c9d1a/publish",
 			"pathVariables": {},
 			"method": "POST",
 			"data": [],
 			"dataMode": "params",
 			"version": 2,
 			"tests": "",
-			"time": 1405259522140,
+			"time": 1405481687446,
 			"name": "Publish",
 			"description": "",
 			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
@@ -125,6 +126,35 @@
 			"tests": "",
 			"time": 1405233881982,
 			"name": "Get all",
+			"description": "",
+			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "24f8e789-c437-da65-f9fa-4a9e5d91bfbf",
+			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
+			"url": "localhost:3000/api/v1/events/53de9a795c48a9a55272d40e",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "coverPhoto",
+					"value": "",
+					"type": "file"
+				},
+				{
+					"key": "media",
+					"value": "",
+					"type": "file"
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1407103070627,
+			"name": "Update event - CoverPhoto and Media",
 			"description": "",
 			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
 			"responses": [],
@@ -244,30 +274,26 @@
 		{
 			"id": "4805dccc-5160-b2f0-73a0-6184af4189d1",
 			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
-			"url": "localhost:3000/api/v1/events/53bf70a084874208546a131b",
+			"url": "localhost:3000/api/v1/events/53de9a795c48a9a55272d40e",
+			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "PUT",
 			"data": [
 				{
-					"key": "name",
-					"value": "First Event!",
-					"type": "text"
+					"key": "coverPhoto",
+					"value": "",
+					"type": "file"
 				},
 				{
-					"key": "type",
-					"value": "Exhibit",
-					"type": "text"
-				},
-				{
-					"key": "description",
-					"value": "Loren ipsum dolor sit amet!!!",
-					"type": "text"
+					"key": "media",
+					"value": "",
+					"type": "file"
 				}
 			],
-			"dataMode": "urlencoded",
+			"dataMode": "params",
 			"version": 2,
 			"tests": "",
-			"time": 1405128034144,
+			"time": 1407097538024,
 			"name": "Update event",
 			"description": "",
 			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
@@ -277,7 +303,8 @@
 		{
 			"id": "4c0b1a86-4bfa-271f-80ee-e716cd4800b6",
 			"headers": "Authorization: Basic a2ZyYW5jaXM6UGFzc3dvcmQx\n",
-			"url": "localhost:3000/api/v1/amenities/53c28d400596201db3e8d74e",
+			"url": "localhost:3000/api/v1/amenities/53c5ebb32c555ac7447c9d1a",
+			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "PUT",
 			"data": [
@@ -288,7 +315,7 @@
 				},
 				{
 					"key": "type",
-					"value": "Food",
+					"value": "food",
 					"type": "text"
 				},
 				{
@@ -300,7 +327,7 @@
 			"dataMode": "urlencoded",
 			"version": 2,
 			"tests": "",
-			"time": 1405259569010,
+			"time": 1405723207421,
 			"name": "Update",
 			"description": "",
 			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
@@ -470,11 +497,12 @@
 			"id": "76026ac3-a9ca-794e-c7e5-629773f36f90",
 			"headers": "",
 			"url": "localhost:3000/api/v1/media/Event/53c18b4f6820490992e730b2",
+			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "POST",
 			"data": [
 				{
-					"key": "file",
+					"key": "media",
 					"value": "",
 					"type": "file"
 				}
@@ -482,7 +510,7 @@
 			"dataMode": "params",
 			"version": 2,
 			"tests": "",
-			"time": 1405193062726,
+			"time": 1407103199262,
 			"name": "File upload",
 			"description": "",
 			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",
@@ -719,14 +747,26 @@
 		{
 			"id": "daab762d-7f05-a4d8-8142-75f89f02eea6",
 			"headers": "",
-			"url": "localhost:3000/api/v1/events?limit=10&offset=0&sort=name&filter=Exhibit",
+			"url": "localhost:3000/api/v1/events?limit=10&offset=0&sort=name&filter=Activity",
+			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
-			"data": [],
+			"data": [
+				{
+					"key": "coverPhoto",
+					"value": "",
+					"type": "file"
+				},
+				{
+					"key": "media",
+					"value": "",
+					"type": "file"
+				}
+			],
 			"dataMode": "params",
 			"version": 2,
 			"tests": "",
-			"time": 1404661146106,
+			"time": 1407103143468,
 			"name": "Get all events",
 			"description": "",
 			"collectionId": "89ed06b2-0de7-5765-2425-0d6391970ef2",

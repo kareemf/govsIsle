@@ -4,19 +4,28 @@ html{
   min-height: 100%;
 }
 @font-face {
-  font-family: myFirstFont sans-serif;
+  font-family: myFirstFont;
 	src: url(../font/dinregularwebfont.ttf);
 }
 @font-face {
     font-family: govsle;
     src: url(../font/DINEngschriftStd.otf);
 }
+@font-face {
+    font-family: guppy;
+    src: url(../font/GuppySans.otf);
+}
+@font-face {
+    font-family: avenyt;
+    src: url(../font/AvenyT.otf);
+}
 body{
   height: 100%; width: 100%; 
-  background-color: #E7E7E7; 
+  background-color: #E7E7E7;
+  /*background-color: #FFF;*/
   color: black;
   min-width: 250px;
-  font-family: myFirstFont;
+  font-family: Arial;
   font-size: 16px;
 }
 /* HTML5 display-role reset for older browsers */
@@ -24,15 +33,20 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+
+/*GENERAL STYLING AREA*/
 .clear{clear: both;}
 .header-shadow{
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
 }
+.lead{padding-right: 25px; padding-left: 25px;}
+/*SPECIAL CASES*/
 .navSpacingFix{margin-top: 85px;}
 .gov-size{font-size: 26px;font-family: govsle;}
-/*The site main colors*/
+
+/*SITE COLORS*/
 .information{background-color: #ff9900;}
 .food-drink{background-color: #ff66cc;}
 .activitie{background-color: #33cc66;}
@@ -41,43 +55,43 @@ footer, header, hgroup, menu, nav, section {
 .hist{background-color: #ccff33;}
 .title{font-size: bold;}
 .softtop-padding{padding-top: 20px;}
-/* old gov colors #4099FF #3B5998 #019AD5*/
+.hrstyle{
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+}
 /* ALL LINKS*/
 a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
   color: #FFF;
 }
-a:hover, .nav a:hover{color: #4099FF;}
-
-.map-ui a, .map-ui-toggle a, .map-filter a{
-  color: white;
-}
-.map-ui a:hover, .map-ui-toggle a:hover, .map-filter a:hover{
-  color: #5FA77A;
-}
-
-.nav-ui a{
-  color: white;
-}
-.nav-ui a:hover, .nav-ui a:active{
-  color: black;
-}
-
-#curatedlist a ,#artistlist a , #tourPoints a{
+#curatedlist a ,#artistlist a , #tourPoints a, .eventlist a{
   color: #000;
 }
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
   height: 60px;
-  background-color: #5FA77A;
+  /*background-color: #129068;*/
   border-collapse: separate;
   z-index: 9999;
-  /*border-bottom: 1px solid #E7E7E7;*/
   min-width: 300px;
+  /*border-bottom: 1px solid #E7E7E7;*/
+  background: #129068;
+  background: -moz-linear-gradient(top,  #129068 0%, #3b9d71 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#129068), color-stop(100%,#3b9d71));
+  background: -webkit-linear-gradient(top,  #129068 0%,#3b9d71 100%);
+  background: -o-linear-gradient(top,  #129068 0%,#3b9d71 100%);
+  background: -ms-linear-gradient(top,  #129068 0%,#3b9d71 100%);
+  background: linear-gradient(to bottom,  #129068 0%,#3b9d71 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#129068', endColorstr='#3b9d71',GradientType=0 );
 }
 .nav-ui{
-  width: 100%;height: 60px;
-  background-color: #5FA77A;
+  width: 100%;height: 100%;
+  line-height: 60px;
+  padding-top: 4px;
   color: white;
   z-index: 900;
   font-size: 30px;
@@ -85,14 +99,11 @@ a:hover, .nav a:hover{color: #4099FF;}
 }
 .nav-gov-brand{
   color: white;
-  font-size: 32px;
-  text-align: center;
-  font-family: govsle;
+  font-size: 36px;
+  text-align: left;
+  font-family: guppy;
+  text-align: left;
 }
-.nav-header-link{
-  padding-top: 8px;
-}
-
 .nav-inlineblock li{
   display: inline-block;
   list-style-type: none;
@@ -101,28 +112,21 @@ a:hover, .nav a:hover{color: #4099FF;}
   display: inline-block;
   list-style-type: none;
 }
-.navright-btn{
-  padding-right: 10px; 
-}  
-.navleft-btn{
-  padding-left: 10px;
-}
+.navright-btn{padding-right: 10px;}  
+.navleft-btn{padding-left: 10px;}
 .center-brand{
   text-align: center;
   vertical-align: top;
   display: inline-block;
 }
-.logo{
-  height: 50px;
-  width: 50px;
-  background-color: #FFF;
-}
 /*MAIN-FOOTER NAVIGATION*/
 .map-ui{
-  height: 60px; width: 100%;
+  height: 70px; width: 100%;
+  line-height: 70px;
+  padding-top: 10px;
   background-color: #4F535E;
   color: white;
-  padding-top: 6px;
+
   font-size:45px;
   text-align: center;
 }
@@ -143,6 +147,9 @@ a:hover, .nav a:hover{color: #4099FF;}
 .map-ui-filter li{
   display: block;
 }
+.dropdown-menu.map-ui-filter a.active{
+    background-color: #F5F5BD;
+}
 .map-ui-btn{
   position: relative;
   font-size: 18px;
@@ -152,6 +159,10 @@ a:hover, .nav a:hover{color: #4099FF;}
 }
 .nav-map{ padding-left: 6%; padding-right: 5%;}
 .nav-end{padding-left: 6%;}
+
+.black{
+    color: #000000 !important;
+}
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
@@ -168,7 +179,7 @@ a:hover, .nav a:hover{color: #4099FF;}
   #custom-nav{height: 55px;}
 }
 
-/*the max page size should remain 1005px*/
+/*the max page size should remain 1004px*/
 @media (min-width: 992px) {
   .container {
     width: 970px;
@@ -189,22 +200,54 @@ a:hover, .nav a:hover{color: #4099FF;}
 }
 
 
-/*---==CAROUSEL-LANDING PAGE--STYLING AREA==---*/
-#first-carousel{
+/*---==CAROUSEL-LANDING PAGE==---*/
+#mainCaro{
   margin-top: 15px;
 }
-
-#first-carousel .carousel-indicators{
+#mainCaro .carousel-indicators{
   position: absolute;
   top: 10px;
   left: 110%;
   z-index: 200;
-  /*background-color: blue;*/
   height: 25px;
   width: 50px;
+  /*background-color: blue;*/
 }
-.carousel-control{
-  z-index: 1000;
+#mainCaro .swapePanel, #allEvents .swapePanel{
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  /*background-color: black;*/
+}
+#mainCaro .carousel-caption{
+  position: absolute;
+  top: 0px;
+  left:-5px;
+  height: 50px;
+  width: 75%;
+  padding: 5px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  z-index: 200px;
+  color: white;
+  font-family: govsle;
+  font-size: 20px;
+  /*background-color: red;*/
+  /*opacity: 0.5;*/
+}
+#mainCaro .carouselMore{
+  position: absolute;
+  z-index: 200;
+  text-align: center;
+  right: 0; bottom: 10px;
+  width: 100px;height: 25px;
+  font-family: govsle;
+  font-size: 20px;
+  background-color: white;
+  color: black;
+  opacity: 0.7;
 }
 .img-container{
   background-color: #FFF;
@@ -214,13 +257,12 @@ a:hover, .nav a:hover{color: #4099FF;}
     display: block;
     margin: 0 auto;
     width: 90%;
-    /*padding-top: 20px;
-    padding-bottom: 20px;*/
 }
 .img-custom-lg{
     display: block;
     margin: 0 auto;
     width: 100%;
+    z-index: 300;
     /*padding-top: 20px;
     padding-bottom: 20px;*/
 }
@@ -228,20 +270,9 @@ a:hover, .nav a:hover{color: #4099FF;}
 .img-detail{
   width: 100%;
 }
-.custom-caption{
-  right: 2%;left: 2%;
-  background-color: black;
-  color: white;
-  font-weight: bold;font-style: italic;
-  /*-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-        filter: alpha(opacity=50);
-  */
-  opacity: 0.5;
-}
 .carousel-control{
   height: inherit;
 }
-
 .carousel-control.left, .carousel-control.right{
     /*background-image: none;*/
     font-size: 2em;
@@ -252,12 +283,14 @@ a:hover, .nav a:hover{color: #4099FF;}
   background-color: #5FA77A;
 }
 /*----------====SECOND CAROUSEL====-------*/
-#myCarousel{margin-top: 15px;}
-#myCarousel .carousel-inner .active.left { left: -25px;}
-#myCarousel .carousel-inner .next        { left: 0px;}
-#myCarousel .carousel-control.left, #myCarousel .carousel-control.right {
-  background-image:none;
+#myCarousel{
+  margin-top: 15px;
 }
+
+#myCarousel .carousel-inner .active.left { left: 0px;}
+#myCarousel .carousel-inner .next        { left: 0px;}
+#myCarousel .carousel-inner .prev        { left: 0px;}
+
 #myCarousel .item{  
   white-space: nowrap; 
   overflow: hidden;
@@ -267,7 +300,6 @@ a:hover, .nav a:hover{color: #4099FF;}
   width: 25px;
   padding-top: 100px;
 }
-
 .img-collection{
   box-shadow: 0 0 0px #aaa;
 }
@@ -293,7 +325,6 @@ a:hover, .nav a:hover{color: #4099FF;}
   padding-bottom: 0px;
   line-height: 25px;
 }
-
 .img-collection section{
   display: inline-block;
 }
@@ -305,6 +336,112 @@ a:hover, .nav a:hover{color: #4099FF;}
   font-family: myFirstFont;
   padding-top: 25px;
 }
+/*LANING PAGE*/
+#landing .eventlist{
+  height: 220px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space:nowrap;
+  margin-top: 10px;
+}
+#landing .eventlist li{ 
+  max-width:230px;
+  padding: 10px;
+  display:inline-block;
+  *display:inline;/* For IE7*/
+  *zoom:1;/* For IE7*/
+  vertical-align:top;
+  /*box-shadow: 1px 1px 10px #999;*/
+}
+
+.card{
+  position: absolute;
+  left: 0;bottom: 10px;
+  width: 100px;height: 25px;
+  font-family: govsle;
+  font-size: 20px;
+  background-color: #FFF;
+  color: black;
+  opacity: 0.7;
+  text-align: center;
+  transition:all 0.6s ease;
+  transform-style: preserve-3d;
+}
+/*---------=EVENTGRID View=--------------*/
+#allEvents{background-color: #FFF;}
+#allEvents #eventCaro{overflow:hidden;}
+/*#eventCaro .item{height: 250px;} good with all image the same size*/
+#eventCaro .carousel-indicators {
+  position: absolute;
+  bottom: 5px;
+  left: 110%;
+  height: 25px;
+  width: 50px;
+  /*background-color: blue;*/
+}
+#eventCaro .carousel-caption {
+  position: absolute;
+  bottom: 0px;left:0px;
+  height: 50px;
+  width: 100%;
+  text-align: left;
+  line-height: 50px;
+  padding: 0px 0px 0px 10px;
+  margin: 0px 0px 0px 0px;
+  color: white;
+  font-family: govsle;
+  font-size: 20px;
+  filter:alpha(opacity=80);opacity: .8;
+  background-color: #000;
+}
+#allEvents .eventlist{
+  height: 240px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space:nowrap;
+  border-bottom: solid 2px gray;
+}
+#allEvents .eventlist li{ 
+  max-width:230px;
+  padding: 10px;
+  display:inline-block;
+  *display:inline;/* For IE7*/
+  *zoom:1;/* For IE7*/
+  vertical-align:top;
+  /*box-shadow: 1px 1px 10px #999;*/
+}
+#allEvents .eventlist .caption { 
+  max-width: 230px;
+  height: 50px;
+  white-space:normal;
+}
+#allEvents .eventlist .caption h5 {
+  font-size:16px;
+  margin:10px 0px 0px 0px;
+  font-weight: bold;
+}
+#allEvents .eventlist h5.sp1 {
+  margin-top: 5px;
+  font-weight: normal;
+}
+/*----------=END EventLIST VIEW=-------------*/
+.leftSide{
+  float: left;
+  background-color: blue;
+}
+.rightSide{
+  float: right;
+   background-color: red;
+}
+#listEvents .img-detail{
+height: 100px; width: 100px;
+
+}
+#listEvents .listCol{
+
+}
+
+/*----------=END EVENTLIST VIEW=-------------*/
 
 
 /*----------===MAPS===---------------*/
@@ -321,65 +458,83 @@ a:hover, .nav a:hover{color: #4099FF;}
     width: 100%;
 }
 #eventmap{
-    height:100vh;
+    height:500px;
     width: 100%;
     min-height: 100%;
 }
 
 
-/*----------=LIST VIEW=-------------*/
-.largeTitle {
-  font-size: 10pt;
+.map-form{
+    background: white;
+    border: 1px solid;
+    max-width: 400px;
+    position: absolute;
+    z-index: 100;
+    opacity: 0.90;
+    top:62px;
+}
+/* -------====FERRY SCHEDULE==--------- */
+.info-banner{
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+  background-color: #FFF;
+  text-align: center;
+  font-style: bold;
+  font-family: avenyt;
+}
+.info-banner h3, .info-banner h4{
+  line-height: inherit;
 }
 
-.list-container{
-  width: 80%;
-  margin: 30px auto;
-  overflow: hidden;
+.info-banner-space{
+  margin-bottom: 10px;
 }
+.info-banner-left{
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 0px;
+  margin: 13px 0px 5px 0px;
+}
+.btn-brooklyn, .btn-manhattan{
+  display: inline-block;
+  text-align: center;
+  vertical-align: center;
+  height: 50px;
+  line-height: 50px;
+  background-color: #454953;
+  padding-top: 3px;
+}
+.btn-brooklyn{
+  width: 50%;
+  float: right;
+}
+.btn-manhattan{
+  width: 50%;
+  float: left;
+}
+.btn-brooklyn a, .btn-manhattan a{
+  color: #FFF;
+}
+.btn-bk-mh{ margin-top: 28px;}
+p.lead a{color: blue;}
+ul.lead{list-style-type: none;}
 
-.gridItem h3 {
-    text-transform: uppercase;
+/*detail view image*/
+.info-img{
+  height: 250%;
+  width: 100%;
 }
- 
-.gridItem img {
-    max-width: 100%;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+/*ICONS*/
+.navimg-icon{
+  height: 55px;
+  width: 55px;
+  padding-bottom: 15px;
 }
+/* -------====FERRY SCHEDULE END==--------- */
 
-.gridItem {
-    color: #797478;
-    font: 10px/1.5 Verdana, Helvetica, sans-serif;
-    float: left;    
-    width: 16%;
-    margin:  2% 2% 50px 2%; 
-}
-
-@media only screen and (max-width : 940px),
-only screen and (max-device-width : 940px){
-    .gridItem {width: 21%;}
-}
- 
-@media only screen and (max-width : 720px),
-only screen and (max-device-width : 720px){
-    .gridItem {width: 29.33333%;}
-}
- 
-@media only screen and (max-width : 530px),
-only screen and (max-device-width : 530px){
-    .gridItem {width: 46%;}
-}
- 
-@media only screen and (max-width : 320px),
-only screen and (max-device-width : 320px){
-    .gridItem {width: 96%;}
-    .gridItem img {width: 96%;}
-    .gridItem h3 {font-size: 18px;}
-    .gridItem p, {font-size: 18px;}
-}
-/*----------=END LIST VIEW=-------------*/
 
 /*----------=ALL TOURS VIEW=-------------*/
 #allTours {
@@ -391,7 +546,6 @@ only screen and (max-device-width : 320px){
 	padding: 10px;
 	margin:0px;
 	padding-bottom: 0px;
-
 }
 
 #allTours #main-carousel{
@@ -402,14 +556,11 @@ only screen and (max-device-width : 320px){
 }
 
 #allTours #main-carousel .carousel-wrapper {
-	
-	
+
 }
 
 #allTours #main-carousel .carousel{
-	
 	padding:10px;
-	
 }
 
 #allTours #main-carousel .carousel-inner, #allTours .item, .carousel-wrapper, #caroContainer{
@@ -461,7 +612,6 @@ only screen and (max-device-width : 320px){
 .tourlist {
 	
 	height: 220px;
-	
 	overflow-x: auto;
 	overflow-y: hidden;
 	white-space:nowrap;
@@ -485,7 +635,7 @@ only screen and (max-device-width : 320px){
 .tourlist .caption {
 	
 	width: 150px;
-	height: 40px;
+	height: 60px;
 	white-space:normal;
 }
 
@@ -635,85 +785,21 @@ only screen and (max-device-width : 320px){
 }
 /*-----------END OF TOUR--------------*/
 
-/* -------====FERRY SCHEDULE==--------- */
-/*-----======And Detain view-----------*/
-.info-banner{
-  padding: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
-  height: 50px;
-  width: 100%;
-  background-color: #FFF;
-  text-align: center;
-  font-style: bold;
-}
-.info-banner h3, .info-banner h4{
-  padding-top: 12px;
-}
-.info-banner-space{
-  margin-bottom: 10px;
-}
-.info-banner-left{
-  text-align: left;
-  padding-left: 20px;
-}
-.btn-brooklyn, .btn-manhattan{
-  display: inline-block;
-  text-align: center;
-  vertical-align: center;
-  height: 50px;
-  line-height: 50px;
-  background-color: #454953;
-  padding-top: 3px;
-}
-.btn-brooklyn{
-  width: 50%;
-  float: right;
-}
-.btn-manhattan{
-  width: 50%;
-  float: left;
-}
-.btn-brooklyn a, .btn-manhattan a{
-  color: #FFF;
-}
-.btn-bk-mh{ margin-top: 28px;}
-p.lead a{
-  color: blue;
-}
-ul.lead{
-  list-style-type: none;
-}
-/*detail view image*/
-.info-img{
-  height: 250%;
-  width: 100%;
-}
-/*ICONS*/
-.navimg-icon{
-  height: 55px;
-  width: 55px;
-  padding-bottom: 15px;
-}
-
-/*ALL LINKS ARE DEFINED HERE*/
-a{
-  margin: 0;
-  padding: 0;
-  color: black;
-}
-/* -------====FERRY SCHEDULE END==--------- */
-
-
-/*SITE STAPLES/GLOBAL SYLING*/ 
 .activebtn{background-color: #5FA77A; color: #FFF;}
+.textLeft{text-align: left;padding-left: 20px;}
+
 /*.dangere{background-color: #FF0101;}
 .coole{background-color: #4099FF;}
 */
-.lead{padding-right: 25px; padding-left: 25px;}
-.text-indent{text-indent: 5%;}
-.activeinfo{color: #000;}
-.activehome{color:#5FA77A;/*#FFF*/;}
+.activeinfo{color:  #104432;}
+.activehome{ visibility: hidden;}
 
+li.wordpress, li.twiiter, li.instagram{
+ margin-left: 15px;
+}
+li.wordpress{
+  margin-right: 15px;
+}
 /*SPRITES*/ 
 .ferry0, .ferry1, .headphones0, .headphones1, .calendar0, 
 .calendar1, .activities, .facilities, .food, .history, 

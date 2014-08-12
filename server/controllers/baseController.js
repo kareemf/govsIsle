@@ -18,7 +18,7 @@ module.exports = function(Model){
     var load = function(id, callback){
         Model.findOne({
             _id: id
-        }).exec(callback);
+        }).populate('media', 'slug id').exec(callback);
     };
 
     return {
@@ -67,7 +67,10 @@ module.exports = function(Model){
         getByQuery: function(req, res, next, query){
             console.log('getByField query', query);
 
-            Model.findOne(query).populate('media', 'slug id').exec(function(err, doc){
+            Model.findOne(query)
+                .populate('media', 'slug id')
+                .populate('coverPhoto', 'slug id')//TODO: move to Model specific location
+                .exec(function(err, doc){
                 if(err){ return next(err);}
                 if (!doc) {return next(new Error('Failed to load doc by query' + query));}
 
@@ -108,7 +111,7 @@ module.exports = function(Model){
                 return res.send(403, 'User does not have create access to this content type');
             }
 
-            doc.save(function(err) {
+            doc.save(function(err, doc) {
                 if (err) {
                     var data = {errors: err.errors};
                     data[modelName] = doc;
@@ -129,6 +132,7 @@ module.exports = function(Model){
             var user = req.user;
             var permissions = permissionsManager.ascertainPermissions(req.user, doc);
             var body = req.body;
+            var files = req.files;
 
             if(!_.contains(permissions, Model.updatePermission())){
                 return res.send(403, 'User does not have update access to this content');
@@ -141,13 +145,37 @@ module.exports = function(Model){
             doc.edit = new Date();
             doc.editedBy = user.id;
             doc = _.extend(doc, body);
+
+            //do not store null values. unpermitted updates have already been filtered,
+            //so there shouln't be any unintended deletes
+            for(var field in body){
+                if(body[field] === null){
+                    //console.log('deleting field', field);
+                    doc[field] = undefined;
+                }
+            }
+
             doc.save(function(err) {
                 if (err) {
                     var data = {errors: err.errors};
                     data[modelName] = doc;
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
-                    res.jsonp(doc);
+                    //if a cover photo, etc, was uploaded, create the Media instance.
+                    if(files && Object.keys(files).length) {
+                        req.doc = doc;
+                        req.model = Model;
+
+                        var mediaController = require('./mediaController');
+                        mediaController.create(req, res, function (mediaResponseJson) {
+                            res.jsonp(doc);
+                        });
+
+                    }
+                    else{
+                        res.jsonp(doc);
+                    }
+
                 }
             });
         },
@@ -243,6 +271,7 @@ module.exports = function(Model){
 
             query.select(select)
             .populate('media', 'slug id')
+            .populate('coverPhoto', 'slug id')//TODO: move to Model specific location
             .populate('user', 'name username')
             .exec(function(err, docs) {
                 if (err) {

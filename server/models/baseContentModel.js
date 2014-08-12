@@ -10,13 +10,17 @@ exports.properties = _.extend(base.properties, {
     published: {type: Date},
     publishedBy: {type: ObjectId, ref: 'User'},
     slug: String,
+    isFeatured: [String] //ex none, main, event, or tour
 });
 
 exports.preSave = function(model){
     //generate a slug for this peice of content
     console.log('base preSave for model', model);
 
-    model.slug = slug(model.name).toLowerCase();
+    if(model.name){
+        model.slug = slug(model.name).toLowerCase();
+    }
+
 };
 
 exports.permissions = {
@@ -100,4 +104,17 @@ exports.permissionsGrantedOnUserCreation = function(Schema, _grant){
         grant = grant.concat(_grant);
     }
     return grant;
+};
+
+exports.permissionsGrantedToAnon = function(Schema){
+    var fieldPermissions = Schema.fieldPermissions();
+    var readPermission = Schema.readPermission();
+
+    return [
+        fieldPermissions['slug'][readPermission],
+        fieldPermissions['published'][readPermission],
+        fieldPermissions['publishedBy'][readPermission],
+        fieldPermissions['isFeatured'][readPermission],
+        fieldPermissions['slug'][readPermission]
+    ];
 };

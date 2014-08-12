@@ -8,41 +8,41 @@
         <!--<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />-->
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/application.css">
-        <link rel="stylesheet" type="text/css" href="bower_components/fontawesome/css/font-awesome.css">
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
-        <!--DEVELOPMENT HOME--><script src="http://192.168.1.9:35729/livereload.js?snipver=1"></script>
-        <!--DEVELOPMENT WORK<script src="http://10.255.16.107:35729/livereload.js?snipver=1"></script>-->
         <title>Culture Island</title>
     </head>
-    <body>
+    <body ng-controller="AppController">
         <div class="main-header"><!--MAIN-HEADER-->
            <div ng-include="'templates/header.html'" data-role="navigation"></div>
         </div>
+
+        <div class="alerts"></div> <!--Site Alerts go Here-->
+
         <div class="main-content"><!--MAIN-CONTENT-->
-             <!--<div ui-view autoscroll="false"></div> -->
+             <!--<div ui-view></div> -->
             <ui-view autoscroll='false'/>
         </div>
         <div class="main-footer"><!-- MAIN-FOOTER-->
             <div ng-include=" 'templates/nav.html' "></div>
         </div>
-
         <!-- Bower installs-->
-        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+        <!--<script src="https://maps.google.com/maps/api/js?sensor=false"></script>-->
         <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
-        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-        <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
-        <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-        <script type="text/javascript" src="bower_components/angular-ui-utils/ui-utils.js"></script>
-        <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.js"></script>
+        <script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>
+        <script type="text/javascript" src="bower_components/ng-file-upload/angular-file-upload-shim.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="bower_components/ng-file-upload/angular-file-upload.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-utils/ui-utils.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.min.js"></script>
+        <script type="text/javascript" src="bower_components/jquery-touchswipe/jquery.touchSwipe.min.js"></script>
 
-        <!-- Special functionality-footer--> <!--my verison will come soon-->
-        <script type="text/javascript" src="js/smartmenus-min.js"></script>
-        <script type="text/javascript" src="js/smartmenus-bootstrap.js"></script>
-
-        <!--Back-end Controllers-->
+        <!--Front-end Controllers-->
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/services/shared.js"></script>
         <script type="text/javascript" src="js/services/events.js"></script>
@@ -51,13 +51,25 @@
         <script type="text/javascript" src="js/services/geocoder.js"></script>
         <script type="text/javascript" src="js/services/meanio.js"></script>
 
-        <!--Front-End Controllers-->
+        <!--Filter controllers-->
+        <script type="text/javascript" src="js/filter/sharedFilter.js"></script>
+
+        <!--back-End Controllers-->
+        <script type="text/javascript" src="js/controllers/index.js"></script>
         <script type="text/javascript" src="js/controllers/auth.js"></script>
         <script type="text/javascript" src="js/controllers/home.js"></script>
         <script type="text/javascript" src="js/controllers/map.js"></script>
+        <script type="text/javascript" src="js/controllers/entities.js"></script>
         <script type="text/javascript" src="js/controllers/events.js"></script>
+        <script type="text/javascript" src="js/controllers/amenities.js"></script>
         <script type="text/javascript" src="js/controllers/header.js"></script>
 		<script type="text/javascript" src="js/controllers/tours.js"></script>
 		<audio id="audioPlayer"></audio>
+        <!-- Special functionality-footer--> <!--my verison will come soon-->
+        <script type="text/javascript" src="js/smartmenus-min.js"></script>
+        <script type="text/javascript" src="js/smartmenus-bootstrap.js"></script>
+        <!--DEVELOPMENT HOME-->
+        <!--<script src="http://192.168.1.9:35729/livereload.js?snipver=1"></script>-->
+        <!--DEVELOPMENT WORK<script src="http://10.255.16.107:35729/livereload.js?snipver=1"></script>-->
     </body>
 </html>

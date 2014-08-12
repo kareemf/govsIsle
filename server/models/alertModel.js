@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
     base = require('./baseContentModel');
 
 var properties = _.extend(base.properties, {
+    name: String,
     type: String, //Weather (advisory), Ferry (delay)
     description: String,
     startDateTime: Date,

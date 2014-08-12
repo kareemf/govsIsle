@@ -1,58 +1,16 @@
-<div class="info-banner info-banner-left">
-	<h4>UPCOMING EVENTS</h4>
-</div>
-<div class="list-container">
-	<div class="gridItem">
-		<a  ui-sref="events.detail"> <img src="http://blogs.villagevoice.com/forkintheroad/sweetchilifood.jpg" alt=""></a>
-		<div class="caption">
-			<span class="label label-info">Dining</span>
-			<h5>El Paso Taco</h5>
-			<br />
-			<p>El Paso has been serving some of the best tacos from their Upper East Side restaurant for over a decade. They specialize in traditional tacos with interesting twists.</p>
-			<p><b>Located in King Ave. Food Court <br />
-				Open Saturdays & Sundays only
-			</b></p>
-		</div>
+<div id="listEvents">
+	<div class="info-banner textLeft">
+		<h3>UPCOMING EVENTS</h3>
 	</div>
-	<div class="gridItem">
-		<img src="http://govislandblog.files.wordpress.com/2008/06/2008_05_31-111.jpg" alt="">
-		<div class="caption">
-			<span class="label label-success">Activities</span>
-			<h5>Rent Bikes</h5>
-			<br />
-			<p>Bikes, quadracycles and tandems can be rented on Governors Island from Blazing Saddles.</p>
-			<b><a href="http://www.govisland.com/html/visit/biking.shtml">More Info</a></b>
+	<section class="listCol" ng-repeat="event in eventList">
+		<div class="leftSide col-xs-6 col-sm-3 col-md-8 col-lg-8 img-detail">
+			<img alt="{{event.name}}" ng-src="{{event.media}}" class="img-responsive">
 		</div>
-	</div>
-	<div class="gridItem">
-		<img src="http://nypress.com/wp-content/uploads/2012/05/NYC-Poetry-Festival.jpg" alt="">
-		<div class="caption">
-			<span class="label label-warning">Events</span>
-			<h5 class="largeTitle">NYC Poetry Festival</h5>
-			<br />
-			<p>The Poetry Society of New York will once again invite New Yorkers to come together for this two day festival to celebrate NYC's vibrant poetry community.  </p>
-			<!--The event will include over 60 poetry organizations and 250 poets on its three stages; a Vendor's Village where local booksellers, artists and craft makers will sell their wares; a beer garden sponsored by Brooklyn Brewery; healthy and delicious food options; poetic installation art throughout, the Ring of Daisies open mic; and last but not least, the Children's Poetry Festival, complete with writing games and its own fourth, all-kids stage.-->
-			<p><b>Saturday & Sunday, July 26th-27th, 11am-5pm</b></p>
+		<div class="rightSide col-xs-6 col-sm-3 col-md-2 col-lg-8">
+			<h5><b>{{event.name}}<b></h5>
+			<p>{{event.startDateTime | date:'EEE, MMM dd'}} - {{event.endDateTime| date:'EEE, MMM dd'}}<br/>
+			{{event.startDateTime | date:'h:mma'}} - {{event.endDateTime |date:'h:mma'}} | {{event.location}}</p>
 		</div>
-	</div>
-	<div class="gridItem">
-		<img src="http://static2.nydailynews.com/polopoly_fs/1.1805266.1401063357!/img/httpImage/image.jpg_gen/derivatives/article_970/memorial26n-8-web.jpg" alt="Liggett Terrace">
-		<div class="caption">
-			<span class="label label-danger">Parks & Attractions</span>
-			<h5>Liggett Terrace</h5>
-			<br />
-			<p>Come enjoy our new park with scattered hammocks overlooking the Statue of Liberty.</p>
-			<p><b>Next to Parade Ground and South Battery.</b></p>
-		</div>
-	</div>
-	<div class="gridItem">
-		<img src="http://cdn4.opensky.com/alchemy-creamery/images/ff709a1/f0699c7/generous/alchemy-creamery.jpg" alt="Alchemy Creamery">
-		<div class="caption">
-			<span class="label label-info">Dining</span>
-			<h5>Alchemy Creamery</h5>
-			<br />
-			<p>Alchemy Creamery, started by a few lactose intolerant friends in a cramped NYC apartment, creates unique flavor combinations fused with hazelnut, almond and coconut milk blends. Their creations are dairy-free, gluten-free, as well as certified kosher and vegan.</p>
-			<p><b>Located in Liggett Terrace Food Court.<br />Open Everyday.</b></p>
-		</div>
-	</div>
+
+	</section><br/><br/>
 </div>

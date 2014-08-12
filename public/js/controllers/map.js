@@ -7,38 +7,56 @@ function initCall() {
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('MapController', ['$scope', 'Events', function ($scope, Events) {
+controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', function ($scope, $rootScope, Shared) {
     console.log('Google maps controller.');
 
     /* $scope.myMap auto-populated with google map object */
     $scope.isEditMode = true;
+    $scope.isAdmin = false;
 
+    console.log('$rootScope.user', $rootScope.user);
+    var user = $rootScope.user;
+    if(user){
+        //TODO: use actual permissions
+        if(user.roles){
+            user.roles.forEach(function(role){
+                if(role.name === 'admin'){
+                    $scope.isAdmin = true;
+                }
+            });
+        }
+    }
+
+    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
 
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
         streetViewControl: true,
         panControl: true,
-        zoom: 15,
+        zoom: 16,
         maxZoom: 20,
         minZoom: 14,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
     $scope.mapEvents = {
-        'map-rightclick': 'addNewMarker($event, $params)',
+        'map-rightclick': 'addNewMarker($event, $params)'
     };
 
-    $scope.markerEvents = {
-        'map-click': 'openMarkerInfo(marker, events[$index])',
-        'map-rightclick': 'editMarker(marker, events[$index])',
-        'map-dragend': 'updateGeolocationAfterDrag(events[$index], marker)'
+    //TODO: use permissions to determine what content user can create if any
+    $scope.contentTypes = ['event', 'amenity'];
+
+    $scope.openMarkerInfo = function (marker, entity) {
+        console.log('openMarkerInfo marker', marker, 'entity', entity );
+
+        $scope.currentMarker = marker;
+
+        //TODO: swtich on entyity.type or rename currentEvent
+        $scope.currentEvent = entity;
+        $scope.myInfoWindow.open($scope.myMap, marker);
     };
 
-    $scope.newMarkerEvents = {
-        'map-click': 'openMarkerInfo(marker, event)',
-        'map-rightclick': 'editMarker(marker, event)',
-        'map-dragend': 'updateGeolocationAfterDrag(event, marker)'
-    };
+    $scope.newMarkers = [];
 
     $scope.addNewMarker = function ($event, $params) {
         console.log('rightclick', $event, $params);
@@ -58,34 +76,23 @@ controllers.controller('MapController', ['$scope', 'Events', function ($scope, E
         $scope.newMarkers.push(marker);
     };
 
-    $scope.openMarkerInfo = function (marker, event) {
-        console.log('openMarkerInfo marker', marker, 'event', event );
-
-        $scope.currentMarker = marker;
-        $scope.currentEvent = event;
-        $scope.myInfoWindow.open($scope.myMap, marker);
-    };
-
-    $scope.editMarker = function(marker, event){
-        console.log('editting marker', marker, 'event', event);
+    $scope.editMarker = function(marker, entity){
+        console.log('editting marker', marker, 'entity', entity);
 
         $scope.$broadcast('MARKER_CAN_BE_EDITED_EVENT', {
             marker: marker,
-            event: event
+            entity: entity
         });
     };
 
-    //TODO: do not duplicate. see BaseEventController
-    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = function(marker){
-        var position = marker.position
-        return [position.k, position.A];
-    };
-
-    $scope.updateGeolocationAfterDrag = function(event, marker){
-        console.log('updating event position');
+    $scope.updateGeolocationAfterDrag = function(marker, entity){
+        console.log('updating entity position. entiy', entity, 'marker', marker);
 
         var geoLocation = getMarkerGeoLocation(marker);
-        event.geoLocation = geoLocation;
+        if(entity){
+            entity.geoLocation = geoLocation;
+        }
+
     };
 
   }]);
@@ -93,20 +100,96 @@ controllers.controller('MapController', ['$scope', 'Events', function ($scope, E
 controllers.controller('MarkerListController', ['$scope', '$state','$stateParams','Events', 'Amenities','Shared', function($scope, $state, $stateParams, Events, Amenities, Shared){
     console.log('in MarkerListController');
 
-    $scope.newMarkers = [];
-    $scope.existingMarkers = [];
-    $scope.filters = [];
-    var allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event'];
+    $scope.events = [];
+    $scope.existingEventMarkers = [];
 
-    var createMarker = function(content, map){
-        var position = new google.maps.LatLng(content.geoLocation[0], content.geoLocation[1]);
-        var marker = new google.maps.Marker({
+    $scope.amenities = [];
+    $scope.existingAmenityMarkers = [];
+
+    $scope.markerEvents = {
+        'map-click': 'openMarkerInfo(marker, entity)',
+        'map-rightclick': 'editMarker(marker, entity)',
+        'map-dragend': 'updateGeolocationAfterDrag(marker, entity)'
+    };
+
+    var determineMarkerIcon = function(entity){
+        var icon;
+
+        //using marker dot to distinguish between published and unpublished entity
+        switch(entity.type){
+            default:
+            case 'event':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+
+                if(!entity.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/red.png';
+                }
+                break;
+            case 'food':
+            case 'drink':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png';
+
+                if(!entity.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/pink.png';
+                }
+                break;
+            case 'info':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+
+                if(!entity.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/green.png';
+                }
+                break;
+            case 'activity':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png';
+
+                if(!entity.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/orange.png';
+                }
+                break;
+            case 'facility':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png';
+
+                if(!entity.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/lightblue.png';
+                }
+                break;
+            case 'tour':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+
+                if(!entity.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/blue.png';
+                }
+                break;
+            case 'venue':
+                icon = 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png';
+
+                if(!entity.published){
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/purple.png';
+                }
+                break;
+        }
+        return icon;
+    };
+
+    var createMarker = function(entity, map){
+        var position = new google.maps.LatLng(entity.geoLocation[0], entity.geoLocation[1]);
+
+        var markerOptions = {
             map: map,
             position: position,
             draggable: false
-        });
+        };
 
-        console.log('existing content', content, 'marker', marker);
+        var icon = determineMarkerIcon(entity);
+
+        if(icon) {
+            markerOptions.icon = icon;
+        }
+
+        var marker = new google.maps.Marker(markerOptions);
+
+        console.log('existing entity', entity, 'marker', marker);
         return marker;
     };
 
@@ -114,23 +197,35 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         markers.forEach(function(marker){
             marker.setMap(null);
         });
+    };
+
+    var updateMarkerIcon = function(entity, marker, markers){
+        for(var i = markers.length - 1; i >= 0; i--){
+            if(markers[i] == marker){
+                var icon = determineMarkerIcon(entity);
+                marker.setIcon(icon);
     }
+        }
+    };
 
     // TODO: filters are case sensitive
     var getContentByFilters = function(filters){
         console.log('getContentByFilters', filters);
-        clearMarkers($scope.existingMarkers);
-        $scope.existingMarkers = [];
+        clearMarkers($scope.existingEventMarkers);
+        clearMarkers($scope.existingAmenityMarkers);
+        $scope.existingEventMarkers = [];
+        $scope.existingAmenityMarkers = [];
 
         if(filters.indexOf('event') >= 0){
             Events.query(function(events){
                 console.log('events', events);
                 events.forEach(function(event){
-                    $scope.existingMarkers.push(createMarker(event, $scope.myMap));
+                    $scope.existingEventMarkers.push(createMarker(event, $scope.myMap));
+                    $scope.events.push(event);
                 });
             });
 
-            //remove events from the set of filters to prevent including
+            //remove 'event' filter from the set of filters to prevent including
             //amenities query
             filters = filters.filter(function(f){
                 return f != 'event'
@@ -147,62 +242,60 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             Amenities.query({filter: filters}, function(amenities){
                 console.log('amenities', amenities);
                 amenities.forEach(function(activity){
-                    $scope.existingMarkers.push(createMarker(activity, $scope.myMap));
+                    $scope.existingAmenityMarkers.push(createMarker(activity, $scope.myMap));
+                    $scope.amenities.push(activity);
                 });
             });
         }
-
-
     };
 
-    $scope.toggleFilter = function(oneOrMoreFilters){
-        var scopeFilters = $scope.filters;
-        var filters = [];
-
-        if(angular.isArray(oneOrMoreFilters)){
-            filters = oneOrMoreFilters
+    $scope.$watch(function(){return Shared.filters}, function(newVal, oldVal){
+        //console.log('FILTERS_CHANGED', newVal, oldVal);
+        if(!newVal){
+            return getContentByFilters(Shared.allFilters);
         }
-        else{
-            filters = [oneOrMoreFilters];
-        }
-
-        if(filters.indexOf('all') >= 0){
-            if(scopeFilters.length){
-                //turn all filters off
-                scopeFilters = [];
-            }
-            else{
-                //turn all filters on
-                scopeFilters = allFilters;
-            }
-        }
-        else{
-            for (var i = filters.length - 1; i >= 0; i--) {
-                var filter = filters[i];
-                if(scopeFilters.indexOf(filter) >= 0){
-                    scopeFilters = scopeFilters.filter(function(f){
-                        return f != filter
-                    });
-                }
-                else{
-                    scopeFilters.push(filter);
-                }
-            };
-        }
-
-        $scope.filters = scopeFilters;
-        console.log('scopeFilters', scopeFilters);
-    };
-
-    $scope.$watch('filters', function(newVal, oldVal){
-        console.log('$scope.$watch filters triggered', newVal, oldVal);
-        if(newVal == oldVal){
-            // return;
-        }
-        getContentByFilters($scope.filters);
+        getContentByFilters(newVal);
     }, true);
 
-    $scope.toggleFilter('all');
+    $scope.$on('MARKER_UPDATED_EVENT', function(event, args){
+        if(args.event){
+            updateMarkerIcon(args.event, args.marker, $scope.existingEventMarkers);
+        }
+        else if(args.amenity){
+            updateMarkerIcon(args.amenity, args.marker, $scope.existingAmenityMarkers);
+        }
+
+    });
+}]);
+
+controllers.controller('NewMarkerListController', ['$scope', '$controller', function($scope, $controller){
+    console.log('in NewMarkerListController');
+
+    $scope.newMarkerEvents = {
+        'map-click': 'openMarkerInfo(marker, findRelatedEntity(marker))',
+        'map-rightclick': 'editMarker(marker, findRelatedEntity(marker))',
+        'map-dragend': 'updateGeolocationAfterDrag(marker, findRelatedEntity(marker))'
+    };
+
+    $scope.newEntities = [];
+
+    $scope.$on('NEW_ENTITY_EVENT', function(event, args){
+        console.log('responding to NEW_ENTITY_EVENT. args', args);
+        $scope.newEntities.push(args.entity);
+    });
+
+     $scope.findRelatedEntity = function(marker){
+        var markers = $scope.newMarkers;
+        var entities = $scope.newEntities;
+
+        for(var i = markers.length - 1; i >= 0; i--){
+            if(markers[i] == marker){
+                return entities[i];
+            }
+        }
+        return null;
+    };
+
 }]);
 
 controllers.controller('GeoLocationController', ['$scope', 'Events', function ($scope, Events) {
