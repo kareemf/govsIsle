@@ -20,7 +20,7 @@ html{
     src: url(../font/AvenyT.otf);
 }
 body{
-  height: 100%; width: 100%; 
+  height: 100%; width: 100%;
   background-color: #E7E7E7;
   /*background-color: #FFF;*/
   color: black;
@@ -58,10 +58,10 @@ footer, header, hgroup, menu, nav, section {
 .hrstyle{
     border: 0;
     height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
 /* ALL LINKS*/
 a, a:link, a:hover, a:visited, a:active{
@@ -112,7 +112,7 @@ a, a:link, a:hover, a:visited, a:active{
   display: inline-block;
   list-style-type: none;
 }
-.navright-btn{padding-right: 10px;}  
+.navright-btn{padding-right: 10px;}
 .navleft-btn{padding-left: 10px;}
 .center-brand{
   text-align: center;
@@ -160,6 +160,10 @@ a, a:link, a:hover, a:visited, a:active{
 .nav-map{ padding-left: 6%; padding-right: 5%;}
 .nav-end{padding-left: 6%;}
 
+.black{
+    color: #000000 !important;
+}
+
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
   .col-xs-12{width: 100%;
@@ -206,7 +210,7 @@ a, a:link, a:hover, a:visited, a:active{
   z-index: 200;
   height: 25px;width: 50px;
   /*background-color: blue;*/
-} 
+}
 #mainCaro .carousel-inner{
  max-height: 350px;
 }
@@ -284,8 +288,8 @@ a, a:link, a:hover, a:visited, a:active{
 #myCarousel .carousel-inner .next        { left: 0px;}
 #myCarousel .carousel-inner .prev        { left: 0px;}
 
-#myCarousel .item{  
-  white-space: nowrap; 
+#myCarousel .item{
+  white-space: nowrap;
   overflow: hidden;
 }
 #myCarousel .carousel-control{
@@ -337,7 +341,7 @@ a, a:link, a:hover, a:visited, a:active{
   white-space:nowrap;
   margin-top: 10px;
 }
-#landing .eventlist li{ 
+#landing .eventlist li{
   max-width:230px;
   padding: 10px;
   display:inline-block;
@@ -391,7 +395,7 @@ a, a:link, a:hover, a:visited, a:active{
   white-space:nowrap;
   border-bottom: solid 2px gray;
 }
-#allEvents .eventlist li{ 
+#allEvents .eventlist li{
   max-width:230px;
   padding: 10px;
   display:inline-block;
@@ -400,7 +404,7 @@ a, a:link, a:hover, a:visited, a:active{
   vertical-align:top;
   /*box-shadow: 1px 1px 10px #999;*/
 }
-#allEvents .eventlist .caption { 
+#allEvents .eventlist .caption {
   max-width: 230px;
   height: 50px;
   white-space:normal;
@@ -532,17 +536,17 @@ ul.lead{list-style-type: none;}
 }
 
 #allTours #featuredLabel, #curatedLabel, #artistLabel{
-	
+
 	padding: 10px;
 	margin:0px;
 	padding-bottom: 0px;
 }
 
 #allTours #main-carousel{
-	
+
 	height: 250px;
 	overflow:hidden;
-	
+
 }
 
 #allTours #main-carousel .carousel-wrapper {
@@ -554,13 +558,13 @@ ul.lead{list-style-type: none;}
 }
 
 #allTours #main-carousel .carousel-inner, #allTours .item, .carousel-wrapper, #caroContainer{
-	
+
 	height: 250px;
-	
+
 }
 
 #allTours #main-carousel .carousel-indicators {
-	
+
 	float:right;
 	width:37px;
 	right:10px;
@@ -569,7 +573,7 @@ ul.lead{list-style-type: none;}
 }
 
 #allTours #main-carousel .carousel-caption {
-	
+
 	text-align:left;
 	float:left;
 	padding-left:15px;
@@ -579,43 +583,43 @@ ul.lead{list-style-type: none;}
 	left:0;right:0;
 	width:290px;
 	height:50px;
-	
+
 }
 
 #allTours #main-carousel .carousel-caption h3 {
-	
+
 	font-size:21px !important;
-	
+
 }
 
 #allTours #bottomBar {
-	
+
 	padding: 10px;
 	background-color:black; filter:alpha(opacity=80); opacity:.8;
 	height: 50px;
 	position:relative;
 	top:-50px;
-	
+
 }
 
 
 .tourlist {
-	
+
 	height: 220px;
 	overflow-x: auto;
 	overflow-y: hidden;
 	white-space:nowrap;
 	border-bottom: solid 2px gray;
-	
+
 }
 
 .tourlist li{
-	
+
 	max-width:180px;
 	box-shadow: 1px 1px 10px #999;
 	background: #ffffff;
 	padding: 10px;
-	
+
 	display:inline-block;
 	*display:inline;/* For IE7*/
 	*zoom:1;/* For IE7*/
@@ -623,14 +627,14 @@ ul.lead{list-style-type: none;}
 }
 
 .tourlist .caption {
-	
+
 	width: 150px;
 	height: 60px;
 	white-space:normal;
 }
 
 .tourlist .caption h5 {
-	
+
 	font-size:18px;
 	padding-top:0px;
 	margin-top:10px;
@@ -638,62 +642,62 @@ ul.lead{list-style-type: none;}
 }
 
 #tourImage {
-	
+
 	width:100%;
 	height:50%;
-	
+
 }
 
 /*----------=SINGLE TOUR VIEW=-------------*/
 
 #tourPoints #tourInfo h3 {
-	
+
 	padding-left:10px;
 	margin-top:10px;
 	font-size:24px;
-	
+
 }
 
 #tourPoints #tourInfo p {
-	
+
 	padding-left:10px;
 	margin-top:10px;
 	font-size:18px;
-	
+
 }
 
 #tourPoints #pointlist {
-	
+
 	height: 100%;
 
 }
 
 #tourPoints #pointlist li{
-	
+
 	padding: 5px;
 	padding-left: 15px;
 	border-top:solid 2px gray;
 	height: 50px;
   line-height: 50px;
-	
+
 }
 
 #tourPoints #pointlist .caption{
-	
+
 	position:relative;
 	top:-5px;
-	
+
 }
 
 #tourPoints #pointlist li h5{
-	
+
 	font-size: 20px;
 	display:inline;
 	width:100%;
 }
 
 #tourPoints #pointlist img {
-	
+
 	float:right;
 	display:inline;
 	position:relative;
@@ -701,77 +705,77 @@ ul.lead{list-style-type: none;}
 }
 
 #point {
-	
+
 	text-align:center;
 	width: 100%;
 	height: 100px;
 	margin-top:25px;
-	
+
 }
 
 #point #pointInfo {
-	
+
 	text-align:left;
 	padding-left: 25px;
 	padding-right: 25px;
 	overflow-y:auto;
 	height:80vh;
 	line-height:130%
-	
+
 }
 
 #point #pointInfo h3{
-	
+
 	padding-bottom: 10px;
 	border-bottom: solid 2px gray;
-	
+
 }
 
 #point #pointImg {
-	
+
 	height: 200px;
 	overflow:hidden;
 	margin:0;
 }
 
 #point #pointImg img{
-	
+
 	width:100%;
 }
 
 #point .audioPlayer button{
-	
+
 	background: transparent;
 	border: none;
 	position:relative;
 	top:-170px
-	
+
 }
 
 #point .audioPlayer {
-	
+
 	height:0;
-	
+
 }
 
-  
+
 
 #tourpoints {
-	
-	
+
+
 }
 
 #tourImage {
-	
+
 	height: 225px;
 	overflow:hidden;
-	
+
 }
 
 #tourImage img{
-	
+
 	width: 100%;
-	
+
 }
 /*-----------END OF TOUR--------------*/
 
@@ -790,10 +794,10 @@ li.wordpress, li.twiiter, li.instagram{
 li.wordpress{
   margin-right: 15px;
 }
-/*SPRITES*/ 
-.ferry0, .ferry1, .headphones0, .headphones1, .calendar0, 
-.calendar1, .activities, .facilities, .food, .history, 
-.info, .venues, .facebook, .instagram, .twitter, 
+/*SPRITES*/
+.ferry0, .ferry1, .headphones0, .headphones1, .calendar0,
+.calendar1, .activities, .facilities, .food, .history,
+.info, .venues, .facebook, .instagram, .twitter,
 .wordpress, .mappin0, .mappin1
 { display: inline-block; background: url('../images/siteicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
 .ferry0 { background-position: -3px -0px; width: 65px; height: 45px; }
