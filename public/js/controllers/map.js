@@ -97,6 +97,11 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             return;
         }
 
+        if(!$scope.isAdmin){
+            console.log('not isAdmin');
+            return;
+        }
+
         // TODO: check user's permissions first
         var marker = new google.maps.Marker({
             map: $scope.myMap,
@@ -109,6 +114,11 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     $scope.editMarker = function(marker, entity){
         console.log('editting marker', marker, 'entity', entity);
+
+        if(!$scope.isAdmin){
+            console.log('not isAdmin');
+            return;
+        }
 
         $scope.$broadcast('MARKER_CAN_BE_EDITED_EVENT', {
             marker: marker,
