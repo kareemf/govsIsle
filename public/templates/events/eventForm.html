@@ -7,10 +7,10 @@
         <option value="">-- choose type of amenity --</option>
     </select>
     <br>
-    Featured: <select multiple
+    Featured:
+    <select multiple
             ng-model="event.isFeatured"
-            ng-options="carousel for carousel in ['main', 'event', 'tour']">
-        <option value="">-- choose type of amenity --</option>
+            ng-options="carousel for carousel in ['main', 'event', 'tour', null]">
     </select>
     <br>
     Desc: <textarea ng-model="event.description"></textarea><br />

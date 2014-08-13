@@ -29,6 +29,37 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
 
+    var spiderfiedColor = 'ffee22';
+    var usualColor = 'eebb22';
+    var gm = google.maps;
+    var shadow = new gm.MarkerImage(
+        'https://www.google.com/intl/en_ALL/mapfiles/shadow50.png',
+        new gm.Size(37, 34),  // size   - for sprite clipping
+        new gm.Point(0, 0),   // origin - ditto
+        new gm.Point(10, 34)  // anchor - where to meet map location
+    );
+
+    $scope.$watch('myMap', function(map){
+        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
+
+        oms.addListener('click', function(marker) {
+            $scope.openMarkerInfo(marker, marker.entity);
+        });
+
+        oms.addListener('spiderfy', function(markers) {
+            for(var i = 0; i < markers.length; i ++) {
+                markers[i].setShadow(null);
+            }
+            $scope.myInfoWindow.close();
+        });
+
+        oms.addListener('unspiderfy', function(markers) {
+            for(var i = 0; i < markers.length; i ++) {
+                markers[i].setShadow(shadow);
+            }
+        });
+    });
+
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
         streetViewControl: true,
@@ -66,18 +97,28 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             return;
         }
 
+        if(!$scope.isAdmin){
+            console.log('not isAdmin');
+            return;
+        }
+
         // TODO: check user's permissions first
         var marker = new google.maps.Marker({
             map: $scope.myMap,
             position: $params[0].latLng,
             draggable: true
         });
-
+        $scope.oms.addMarker(marker);
         $scope.newMarkers.push(marker);
     };
 
     $scope.editMarker = function(marker, entity){
         console.log('editting marker', marker, 'entity', entity);
+
+        if(!$scope.isAdmin){
+            console.log('not isAdmin');
+            return;
+        }
 
         $scope.$broadcast('MARKER_CAN_BE_EDITED_EVENT', {
             marker: marker,
@@ -188,6 +229,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         }
 
         var marker = new google.maps.Marker(markerOptions);
+        marker.entity = entity;
 
         console.log('existing entity', entity, 'marker', marker);
         return marker;
@@ -220,7 +262,10 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             Events.query(function(events){
                 console.log('events', events);
                 events.forEach(function(event){
-                    $scope.existingEventMarkers.push(createMarker(event, $scope.myMap));
+                    var marker = createMarker(event, $scope.myMap)
+
+                    $scope.oms.addMarker(marker);
+                    $scope.existingEventMarkers.push(marker);
                     $scope.events.push(event);
                 });
             });
@@ -241,9 +286,12 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         if(filters && filters.length){
             Amenities.query({filter: filters}, function(amenities){
                 console.log('amenities', amenities);
-                amenities.forEach(function(activity){
-                    $scope.existingAmenityMarkers.push(createMarker(activity, $scope.myMap));
-                    $scope.amenities.push(activity);
+                amenities.forEach(function(amenity){
+                    var marker = createMarker(amenity, $scope.myMap);
+
+                    $scope.oms.addMarker(marker);
+                    $scope.existingAmenityMarkers.push(marker);
+                    $scope.amenities.push(amenity);
                 });
             });
         }
@@ -318,8 +366,8 @@ controllers.controller('GeoLocationController', ['$scope', 'Events', function ($
         };
         document.getElementById('get_location').onclick=function(){
             //enableHighAccuracy: true -> increase by 10 meters
-            navigator.geolocation.getCurrentPosition(coordinates, err, 
-                {enableHighAccuracy: true, 
+            navigator.geolocation.getCurrentPosition(coordinates, err,
+                {enableHighAccuracy: true,
                     maximumAge: 30000, //in millisecond to refresh the cach
                     //timeout: 300         //time in seconds for the browser to get the location
                 });
