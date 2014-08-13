@@ -12,12 +12,12 @@
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 			    <div class="item active">
-		        	<img ng-src="{{featured[0].coverPhoto.url}}" alt="{{featured[0].name}}" class="img-custom-lg img-responsive">
+		        	<img ng-src="{{featured[0].coverPhoto.url}}" alt="{{featured[0].name}}" class="img-responsive">
 		        	<div class="carousel-caption"><p>{{featured[0].name}} |  {{featured[0].startDateTime| date: 'M/d'}}</p></div>
 		        	<a class="testtest" ui-sref="events.detail({slug: featured[0].slug})"><div class="swapePanel"></div></a>
 			    </div>
 			    <div class="item">
-			      	<img ng-src="{{featured[1].coverPhoto.url}}" alt="{{featured[1].name}}" class="img-custom-lg img-responsive">
+			      	<img ng-src="{{featured[1].coverPhoto.url}}" alt="{{featured[1].name}}" class="img-responsive">
 			    	<div class="carousel-caption"><p>{{featured[1].name}} | {{featured[1].startDateTime | date: 'M/d'}} </p></div>
 			    	<a class="testtest" ui-sref="events.detail({slug: featured[1].slug})"><div class="swapePanel"></div></a>
 			    </div>

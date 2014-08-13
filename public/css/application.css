@@ -197,9 +197,12 @@ a, a:link, a:hover, a:visited, a:active{
 
 
 /*---==LANDING-CAROUSEL PAGE==---*/
-#mainCaro{
-  margin-top: 15px;
+#mainCaro, #secCaro{
+  max-width: 700px;
+  margin: 15px auto;
+ /* background-color: pink;*/
 }
+#secCaro{}
 #mainCaro .carousel-indicators{
   position: absolute;
   top: 10px;left: 110%;
@@ -207,8 +210,8 @@ a, a:link, a:hover, a:visited, a:active{
   height: 25px;width: 50px;
   /*background-color: blue;*/
 } 
-#mainCaro .carousel-inner{
- max-height: 350px;
+#mainCaro .carousel-inner,#mainCaro .item{
+ max-height: 300px;
 }
 #mainCaro .swapePanel, #allEvents .swapePanel{
   position: absolute;
@@ -242,44 +245,25 @@ a, a:link, a:hover, a:visited, a:active{
   color: black;
   opacity: 0.7;
 }
-.img-container{
-  background-color: #FFF;
-  height: 100%;width:100%;
-}
-.img-custom{
-    display: block;
-    margin: 0 auto;
-    width: 90%;
-}
-.img-custom-lg{
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    z-index: 300;
+#mainCaro .img-responsive{
+   margin: 0 auto;
+   width: 100%;
     /*padding-top: 20px;
     padding-bottom: 20px;*/
 }
+
 /*DETAIL VIEW*/
-.img-detail{
-  width: 100%;
-}
-.carousel-control{
-  height: inherit;
-}
+.img-detail{ width: 100%;}
+.carousel-control{ height: inherit;}
 .carousel-control.left, .carousel-control.right{
     /*background-image: none;*/
     font-size: 2em;
     padding: 0;
     margin: 0;
 }
-.btn-custom{
-  background-color: #5FA77A;
-}
+.btn-custom{ background-color: #5FA77A; }
 /*----------====SECOND CAROUSEL====-------*/
-#myCarousel{
-  margin-top: 15px;
-}
-
+#myCarousel{margin-top: 15px;}
 #myCarousel .carousel-inner .active.left { left: 0px;}
 #myCarousel .carousel-inner .next        { left: 0px;}
 #myCarousel .carousel-inner .prev        { left: 0px;}
