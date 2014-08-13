@@ -405,7 +405,7 @@ services.factory('SiteData', function($rootScope){
          'type': 'active',
          'visibility': 'public',
          'activeBtn': 3,
-         'link': 'home.map',
+         'link': 'home',
          'media': "images/landing/Thumb_eat_320x250.jpg"
         },
         {'id':3,
@@ -413,7 +413,7 @@ services.factory('SiteData', function($rootScope){
          'type': 'active',
          'visibility': 'public',
          'activeBtn': 3,
-         'link': 'home.map',
+         'link': 'home',
          'media': "images/landing/Thumb_enjoy_320x250.jpg"
         },
         {'id':4,
