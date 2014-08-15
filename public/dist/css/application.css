@@ -6560,12 +6560,8 @@ ul.lead{list-style-type: none;}
 .activeinfo{color:  #104432;}
 .activehome{ visibility: hidden;}
 
-li.wordpress, li.twiiter, li.instagram{
- margin-left: 15px;
-}
-li.wordpress{
-  margin-right: 15px;
-}
+li.wordpress, li.twiiter, li.instagram{margin-left: 15px}
+li.wordpress{margin-right: 15px;}
 /*SPRITES*/
 .ferry0, .ferry1, .headphones0, .headphones1, .calendar0,
 .calendar1, .activities, .facilities, .food, .history,

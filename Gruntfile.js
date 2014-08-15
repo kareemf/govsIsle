@@ -1,5 +1,4 @@
 'use strict';
-
 var paths = {
     js:   ['server/js/**/*.js', 'public/**/*.js', 'public/libs/*.js','test/**/*.js'],
     html: ['public/index.html', 'public/templates/**/*.html'],
@@ -56,6 +55,32 @@ module.exports = function(grunt) {
               files: {
                 'public/dist/js/application.min.js': ['public/dist/js/jsbower.min.js','public/dist/js/application.js','public/dist/js/thirdparty.js']
               }
+            }
+        },
+        imagemin: {
+            png:{
+                options:{
+                    optimizationLevel:7
+                },
+                files: [{
+                    expand: true,
+                    cwd:'public/images',              
+                    src: ['**/*.png'],   
+                    dest: 'public/dist/images',
+                    ext: '.png'              
+                }]
+            },
+            jpg:{
+                options:{
+                    progressive: true
+                },
+                files: [{
+                    expand:true,
+                    cwd:'public/images',
+                    src: ['**/*.jpg'],
+                    dest:'public/dist/images',
+                    ext: '.jpg'
+                }]
             }
         },
         watch: {
@@ -137,17 +162,17 @@ module.exports = function(grunt) {
 
     //Load NPM tasks
     require('load-grunt-tasks')(grunt);
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
 
     //Default task(s).
     if (process.env.NODE_ENV === 'production') {
         grunt.registerTask('default', ['clean','cssmin', 'uglify', 'concurrent']);
     } else {
-        grunt.registerTask('default', ['concat','cssmin', 'uglify','jshint', 'csslint', 'concurrent']);
+        grunt.registerTask('default', ['concat','cssmin', 'uglify','imagemin','jshint', 'csslint', 'concurrent']);
     }
 
     //Test task.
     grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
-
     // For Heroku users only.
     // Docs: https://github.com/linnovate/mean/wiki/Deploying-on-Heroku
     grunt.registerTask('heroku:production', ['cssmin', 'uglify']);

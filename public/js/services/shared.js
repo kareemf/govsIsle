@@ -41,7 +41,7 @@ services.factory('SiteData', function($rootScope){
          'visibility': 'public',
          'activeBtn': 2,
          'link': 'events.grid',
-         'media': "images/landing/Thumb_discover_320x250.jpg"
+         'media': "dist/images/landing/Thumb_discover_320x250.jpg"
         },
         {'id':2,
          'name': 'Eat',
@@ -49,7 +49,7 @@ services.factory('SiteData', function($rootScope){
          'visibility': 'public',
          'activeBtn': 3,
          'link': 'home',
-         'media': "images/landing/Thumb_eat_320x250.jpg"
+         'media': "dist/images/landing/Thumb_eat_320x250.jpg"
         },
         {'id':3,
          'name': 'Enjoy',
@@ -57,7 +57,7 @@ services.factory('SiteData', function($rootScope){
          'visibility': 'public',
          'activeBtn': 3,
          'link': 'home',
-         'media': "images/landing/Thumb_enjoy_320x250.jpg"
+         'media': "dist/images/landing/Thumb_enjoy_320x250.jpg"
         },
         {'id':4,
          'name': 'Learn',
@@ -65,7 +65,7 @@ services.factory('SiteData', function($rootScope){
          'visibility': 'public',
          'activeBtn': 4,
          'link': 'tours',
-         'media': "images/landing/Thumb_learn_320x250.jpg"
+         'media': "dist/images/landing/Thumb_learn_320x250.jpg"
         }
     ];
     return {
