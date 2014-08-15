@@ -34,6 +34,7 @@ services.factory('NavService',function($rootScope){
 
 services.factory('SiteData', function($rootScope){
     //second carousel on main page
+    //testing
     var subEvents= [
         {'id':1,
          'name': 'Discover',

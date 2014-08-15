@@ -302,6 +302,7 @@ services.factory('NavService',function($rootScope){
 
 services.factory('SiteData', function($rootScope){
     //second carousel on main page
+    //testing
     var subEvents= [
         {'id':1,
          'name': 'Discover',
@@ -309,7 +310,7 @@ services.factory('SiteData', function($rootScope){
          'visibility': 'public',
          'activeBtn': 2,
          'link': 'events.grid',
-         'media': "images/landing/Thumb_discover_320x250.jpg"
+         'media': "dist/images/landing/Thumb_discover_320x250.jpg"
         },
         {'id':2,
          'name': 'Eat',
@@ -317,7 +318,7 @@ services.factory('SiteData', function($rootScope){
          'visibility': 'public',
          'activeBtn': 3,
          'link': 'home',
-         'media': "images/landing/Thumb_eat_320x250.jpg"
+         'media': "dist/images/landing/Thumb_eat_320x250.jpg"
         },
         {'id':3,
          'name': 'Enjoy',
@@ -325,7 +326,7 @@ services.factory('SiteData', function($rootScope){
          'visibility': 'public',
          'activeBtn': 3,
          'link': 'home',
-         'media': "images/landing/Thumb_enjoy_320x250.jpg"
+         'media': "dist/images/landing/Thumb_enjoy_320x250.jpg"
         },
         {'id':4,
          'name': 'Learn',
@@ -333,7 +334,7 @@ services.factory('SiteData', function($rootScope){
          'visibility': 'public',
          'activeBtn': 4,
          'link': 'tours',
-         'media': "images/landing/Thumb_learn_320x250.jpg"
+         'media': "dist/images/landing/Thumb_learn_320x250.jpg"
         }
     ];
     return {
@@ -1051,7 +1052,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
     });
 
     //For the landing page area
-//    $scope.featured=$filter('SelecteByFeatured')('main');
+    //$scope.featured=$filter('SelecteByFeatured')('main');
     //TODO: only query fo featured Events
     Events.query(function(events){
         $scope.featured = events.filter(function(event){
