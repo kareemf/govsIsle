@@ -5,16 +5,15 @@ var paths = {
     html: ['public/index.html', 'public/templates/**/*.html'],
     css:  ['public/css/*.css', 'packages/**/public/**/css/*.css'],
     productionCss:['public/bower_components/bootstrap/dist/css/bootstrap.css','public/css/application.css'],
-    productionJsBower: ["public/bower_components/angular/angular.min.js","public/bower_components/bootstrap/dist/js/bootstrap.min.js","public/bower_components/lodash/dist/lodash.min.js",
+    productionJsBower: ['public/bower_components/jquery/dist/jquery.min.js',"public/bower_components/angular/angular.min.js","public/bower_components/bootstrap/dist/js/bootstrap.min.js","public/bower_components/lodash/dist/lodash.min.js",
         "public/bower_components/ng-file-upload/angular-file-upload-shim.min.js", "public/bower_components/ng-file-upload/angular-file-upload.min.js",
         "public/bower_components/angular-resource/angular-resource.min.js","public/bower_components/angular-ui-router/release/angular-ui-router.min.js","public/bower_components/angular-bootstrap/ui-bootstrap.min.js",
         "public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js","public/bower_components/angular-ui-utils/ui-utils.min.js","public/bower_components/angular-ui-map/ui-map.min.js", "public/bower_components/jquery-touchswipe/jquery.touchSwipe.min.js"],
     productionJsF:['public/js/app.js','public/js/services/*.js','public/js/filter/sharedFilter.js','public/js/controllers/*.js'],
-    productionJsP:['libs/*.js']
+    productionJsP:['public/libs/*.js']
 };
 
 module.exports = function(grunt) {
-
     if (process.env.NODE_ENV !== 'production') {
         require('time-grunt')(grunt);
     }
@@ -26,15 +25,15 @@ module.exports = function(grunt) {
         concat:{
             css:{
                 src: paths.productionCss,
-                dest: 'public/dist/css/styles.css'
+                dest: 'public/dist/css/application.css'
             },
             jsBower:{
                 src: paths.productionJsBower,
                 dest: 'public/dist/js/jsbower.min.js'
             },
-            jsFront:{
+            jsApplication:{
                 src: paths.productionJsF,
-                dest: 'public/dist/js/sitejs.js'
+                dest: 'public/dist/js/application.js'
             },
             jsThirdparty:{
                 src: paths.productionJsP,
@@ -44,8 +43,8 @@ module.exports = function(grunt) {
         cssmin: {
                minify: {
                 expand: false,
-                src: ['public/dist/css/styles.css'],
-                dest: 'public/dist/css/styles.min.css',
+                src: ['public/dist/css/application.css'],
+                dest: 'public/dist/css/application.min.css',
                 ext: '.min.css'
               }
         },
@@ -55,7 +54,7 @@ module.exports = function(grunt) {
             },
             my_target: {
               files: {
-                'public/dist/js/sitejs.min.js': ['public/dist/js/sitejs.js','public/dist/js/thirdparty.js']
+                'public/dist/js/application.min.js': ['public/dist/js/jsbower.min.js','public/dist/js/application.js','public/dist/js/thirdparty.js']
               }
             }
         },
