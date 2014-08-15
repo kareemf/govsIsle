@@ -3,5 +3,9 @@ public/bower_components
 
 .idea
 .DS_STORE
-public/css/*.css
-public/js/*.js
+
+
+public/css
+public/js
+public/fonts
+
