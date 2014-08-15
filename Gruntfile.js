@@ -1,9 +1,9 @@
 'use strict';
 
 var paths = {
-    js: ['*.js', 'server/**/*.js', 'public/**/*.js', 'test/**/*.js', '!test/coverage/**', '!public/system/lib/**', 'packages/**/*.js', '!packages/**/node_modules/**'],
-    html: ['public/**/views/**', 'server/views/**', 'packages/**/public/**/views/**', 'packages/**/server/views/**'],
-    css: ['!public/system/lib/**', 'packages/**/public/**/css/*.css'],
+    js:   ['server/js/**/*.js', 'public/**/*.js', 'public/libs/*.js','test/**/*.js'],
+    html: ['public/index.html', 'public/templates/**/*.html'],
+    css:  ['public/css/*.css', 'packages/**/public/**/css/*.css'],
     productionCss:['public/bower_components/bootstrap/dist/css/bootstrap.css','public/css/application.css'],
     productionJsBower: ["public/bower_components/angular/angular.min.js","public/bower_components/bootstrap/dist/js/bootstrap.min.js","public/bower_components/lodash/dist/lodash.min.js",
         "public/bower_components/ng-file-upload/angular-file-upload-shim.min.js", "public/bower_components/ng-file-upload/angular-file-upload.min.js",
