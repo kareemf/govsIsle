@@ -6,7 +6,9 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     Media = mongoose.model('Media'),
     base = require('./baseController')(Media),
-    permissionsManager = require('./permissionsManager')(Media);
+    permissionsManager = require('./permissionsManager')(Media),
+    Imagemin = require('imagemin');
+
 
 exports.getModelType = function(req, res, next, modelType) {
     // console.log('getModelType');
@@ -220,4 +222,37 @@ exports.render = function(req, res) {
 
 exports.publish = function(req, res){
     base.publish(req, res);
-}
+};
+
+exports.compressImage = function(filename, img){
+    var fileExtention = filename.substr(-3).toLocaleLowerCase();
+    var imagemin = new Imagemin();
+
+    switch(fileExtention){
+        case 'gif':
+            imagemin.src('').
+            dest('').
+            user(Imagemin.gifsicle());
+        break;
+        case 'jpg':
+            imagemin.src('').
+            dest('').
+            use(Imagemin.jpegtran({ progressive: true }));
+        break;
+        case 'png':
+            imagemin.src('').
+            dest('').
+            use(Imagemin.optipng({ optimizationLevel: 7 }));
+        break;
+        default:
+            console.log("Not a recommanded file type or make sure the file extention is part of the name");
+        break;
+    }
+    imagemin.optimize(function (err, file) {
+        if (err) {
+            throw err;
+        }
+        console.log(file);
+    });
+};
+
