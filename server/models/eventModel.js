@@ -16,11 +16,21 @@ var properties = _.extend({
     endDateTime: Date,
     cleanupDateTime: Date,
     isReccuring: Boolean,
+    isAllDayEvent: Boolean,
     anticipatedAttendance: Number,
     location: String,
     geoLocation: {type: [Number], index: '2d'},
     media: [{type: ObjectId, ref: 'Media'}],
-    coverPhoto: {type: ObjectId, ref: 'Media'}
+    coverPhoto: {type: ObjectId, ref: 'Media'},
+    organizer: {
+        name: String,
+        email: {
+            type: String,
+            match: [/.+\@.+\..+/, 'Please enter a valid email']
+        },
+        phone: String
+    },
+    tourpointId: String //Entangled
 }, base.properties);
 
 var EventSchema = new Schema(properties, {
@@ -89,7 +99,10 @@ EventSchema.statics.permissionsGrantedToAnon = function(){
         fieldPermissions['location'][readPermission],
         fieldPermissions['geoLocation'][readPermission],
         fieldPermissions['media'][readPermission],
-        fieldPermissions['coverPhoto'][readPermission]
+        fieldPermissions['coverPhoto'][readPermission],
+        fieldPermissions['isAllDayEvent'][readPermission],
+        fieldPermissions['tourpointId'][readPermission],
+        fieldPermissions['organizer'][readPermission]
     ].concat(base.permissionsGrantedToAnon(this));
 };
 
