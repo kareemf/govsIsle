@@ -102,7 +102,9 @@ EventSchema.statics.permissionsGrantedToAnon = function(){
         fieldPermissions['coverPhoto'][readPermission],
         fieldPermissions['isAllDayEvent'][readPermission],
         fieldPermissions['tourpointId'][readPermission],
-        fieldPermissions['organizer'][readPermission]
+        fieldPermissions['organizer.name'][readPermission],
+        fieldPermissions['organizer.email'][readPermission],
+        fieldPermissions['organizer.phone'][readPermission]
     ].concat(base.permissionsGrantedToAnon(this));
 };
 
