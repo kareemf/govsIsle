@@ -133,7 +133,7 @@ module.exports = function(Model){
                     console.log('DIRTY FIELD', field);
 
                     if(!modelFieldPermissions[field]){
-                        //attempting to update a field that is not a part of the model
+                        console.log('attempting to update field "', field, '" that is not part of the model', Model.modelName);
                         delete body[field];
                         continue;
                     }
