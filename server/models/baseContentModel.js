@@ -55,11 +55,20 @@ exports.fieldPermissions = function(Schema){
             continue;
         }
 
-        // permissions[field] = 'update-' + field;
         permissions[field] = {
-            'read': 'read-' + field,
-            'update': 'update-' + field,
+                'read': 'read-' + field,
+            'update': 'update-' + field
         };
+
+        //mongoose schema.paths stores 'organizer.name' without storing 'organizer'
+        //make sure that permissions existing for base object
+        if(field.indexOf('.') >= 0){
+            var baseField = field.split('.')[0];
+            permissions[baseField] = {
+                'read': 'read-' + baseField,
+                'update': 'update-' + baseField
+            };
+        }
 
         //console.log('creating', Schema.modelName ,'field permissions', permissions[field]);
     };

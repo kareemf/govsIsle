@@ -15,7 +15,8 @@ var properties = _.extend({
     location: String,
     geoLocation: {type: [Number], index: '2d'},
     media: [{type: ObjectId, ref: 'Media'}],
-    coverPhoto: {type: ObjectId, ref: 'Media'}
+    coverPhoto: {type: ObjectId, ref: 'Media'},
+    tourpointId: String //Entangled
 }, base.properties);
 
 var AmenitySchema = new Schema(properties, {
