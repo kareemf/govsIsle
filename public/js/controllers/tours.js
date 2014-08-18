@@ -23,7 +23,7 @@ controllers.controller('TourpointDetailController', ['$scope', '$stateParams', '
     console.log('in TourpointDetailController');
 	
 	$scope.getAudioSrc = function (audioFile) {
-	  return 'http://www.entangledspace.com/data/' + audioFile;
+	  return 'http://www.entangledspace.com/data/postAudio/' + audioFile;
 	};
 	
 	$scope.getImageSrc = function (imageFile) {
@@ -57,6 +57,7 @@ controllers.controller('TourpointDetailController', ['$scope', '$stateParams', '
 	           success(function(data) {
 	               $scope.tourpoint = data['post'];
 		   		   $scope.audio.src = $scope.getAudioSrc($scope.tourpoint.clipLoc);
+				   
 	    });
 		
 	   
