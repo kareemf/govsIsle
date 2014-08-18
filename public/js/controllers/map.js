@@ -127,7 +127,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
     };
 
     $scope.updateGeolocationAfterDrag = function(marker, entity){
-        console.log('updating entity position. entiy', entity, 'marker', marker);
+        console.log('updating entity position. entity', entity, 'marker', marker);
 
         var geoLocation = getMarkerGeoLocation(marker);
         if(entity){
@@ -138,7 +138,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
   }]);
 
-controllers.controller('MarkerListController', ['$scope', '$state','$stateParams','Events', 'Amenities','Shared', function($scope, $state, $stateParams, Events, Amenities, Shared){
+controllers.controller('MarkerListController', ['$scope', '$state','$stateParams', '$http', 'Events', 'Amenities','Shared', 'Tours', function($scope, $state, $stateParams, $http, Events, Amenities, Shared, Tours){
     console.log('in MarkerListController');
 
     $scope.events = [];
@@ -146,6 +146,9 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
     $scope.amenities = [];
     $scope.existingAmenityMarkers = [];
+	
+    $scope.tourPoints = [];
+    $scope.tourMarkers = [];
 
     $scope.markerEvents = {
         'map-click': 'openMarkerInfo(marker, entity)',
@@ -198,9 +201,6 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             case 'tour':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
 
-                if(!entity.published){
-                    icon = 'http://maps.google.com/mapfiles/ms/icons/blue.png';
-                }
                 break;
             case 'venue':
                 icon = 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png';
@@ -234,6 +234,40 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         console.log('existing entity', entity, 'marker', marker);
         return marker;
     };
+	
+	
+    var createTourMarker = function(tourpoint, map){
+		
+		tourpoint.name = tourpoint.postName;
+		tourpoint.description = tourpoint.postText;
+		tourpoint.type = 'tour';
+		//tourpoint.geoLocation[0] = tourpoint.latitude;
+		//tourpoint.geoLocation[1] = tourpoint.longitude;
+		
+		
+        var position = new google.maps.LatLng(tourpoint.latitude, tourpoint.longitude);
+
+        var markerOptions = {
+            map: map,
+            position: position,
+            draggable: false
+        };
+
+        var icon = determineMarkerIcon(tourpoint);
+
+        if(icon) {
+            markerOptions.icon = icon;
+        }
+
+        var marker = new google.maps.Marker(markerOptions);
+		//console.log(tourpoint.description);
+		marker.entity = tourpoint; 
+
+        console.log('existing entity', tourpoint, 'marker', marker);
+        return marker;
+    };
+	
+	
 
     var clearMarkers = function(markers){
         markers.forEach(function(marker){
@@ -278,11 +312,28 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         }
 
         if(filters.indexOf('tour') >= 0){
-            //TODO: amenities with audio content
-            filters = filters.filter(function(f){
-                return f != 'tour'
-            });
+            			
+            var _tourpoints = [];
+			Tours.getTourpoints(function(data){
+				
+			   for(var i in data['tour_points']) {
+				   
+				   //console.log(data['tour_points'] [i]);
+			       	//_tourpoints.push(data['tour_points'] [i]);
+					console.log(data['tour_points'] [i]);
+	                var marker = createTourMarker(data['tour_points'] [i], $scope.myMap);
+
+	                $scope.oms.addMarker(marker);
+					$scope.tourMarkers.push(marker);
+	                $scope.tourPoints.push(data['tour_points'] [i]);
+					  
+			   }
+			   
+
+			});
+						
         }
+		
         if(filters && filters.length){
             Amenities.query({filter: filters}, function(amenities){
                 console.log('amenities', amenities);
