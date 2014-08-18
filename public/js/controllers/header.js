@@ -120,7 +120,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
 
     $scope.isFilterActive = function(filter){
         var filters = $scope.filters;
-        for(var i = filters.length - 1; i > 0; i--){
+        for(var i = filters.length - 1; i >= 0; i--){
             if(filters[i] === filter){
                 return true;
             }
