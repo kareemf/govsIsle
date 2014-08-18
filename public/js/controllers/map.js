@@ -29,8 +29,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
 
-    var spiderfiedColor = 'ffee22';
-    var usualColor = 'eebb22';
     var gm = google.maps;
     var shadow = new gm.MarkerImage(
         'https://www.google.com/intl/en_ALL/mapfiles/shadow50.png',
@@ -75,7 +73,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
     };
 
     //TODO: use permissions to determine what content user can create if any
-    $scope.contentTypes = ['event', 'amenity'];
+    $scope.contentTypes = ['event', 'amenity', 'alert'];
 
     $scope.openMarkerInfo = function (marker, entity) {
         console.log('openMarkerInfo marker', marker, 'entity', entity );
@@ -138,7 +136,8 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
   }]);
 
-controllers.controller('MarkerListController', ['$scope', '$state','$stateParams','Events', 'Amenities','Shared', function($scope, $state, $stateParams, Events, Amenities, Shared){
+controllers.controller('MarkerListController', ['$scope', '$state','$stateParams',
+    'Events', 'Amenities', 'Alerts', 'Shared', function($scope, $state, $stateParams, Events, Amenities, Alerts, Shared){
     console.log('in MarkerListController');
 
     $scope.events = [];
@@ -146,6 +145,9 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
     $scope.amenities = [];
     $scope.existingAmenityMarkers = [];
+
+    $scope.alerts = [];
+    $scope.existingAlertMarkers = [];
 
     $scope.markerEvents = {
         'map-click': 'openMarkerInfo(marker, entity)',
@@ -257,7 +259,8 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         clearMarkers($scope.existingAmenityMarkers);
         $scope.existingEventMarkers = [];
         $scope.existingAmenityMarkers = [];
-
+        
+        //TODO: events become activitites
         if(filters.indexOf('event') >= 0){
             Events.query(function(events){
                 console.log('events', events);
@@ -292,6 +295,18 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                     $scope.oms.addMarker(marker);
                     $scope.existingAmenityMarkers.push(marker);
                     $scope.amenities.push(amenity);
+                });
+            });
+        }
+        if(filters.indexOf('alert') >= 0){
+            Alerts.query({}, function(alerts){
+                console.log('alerts', alerts);
+                alerts.forEach(function(alert){
+                    var marker = createMarker(alert, $scope.myMap);
+
+                    $scope.oms.addMarker(marker);
+                    $scope.existingAlertMarkers.push(marker);
+                    $scope.alerts.push(alert);
                 });
             });
         }

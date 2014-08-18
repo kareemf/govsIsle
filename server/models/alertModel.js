@@ -13,7 +13,8 @@ var properties = _.extend(base.properties, {
     endDateTime: Date,
     isReccuring: Boolean,
     location: String,
-    geoLocation: {type: [Number], index: '2d'}
+    geoLocation: {type: [Number], index: '2d'},
+    tourpointId: String //Entangled
 });
 var AlertSchema = new Schema(properties);
 
