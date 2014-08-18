@@ -15,8 +15,8 @@
     End: <input type="text" ng-model="alert.endDateTime" /><br />
     Location: <input type="text" ng-model="alert.location" /><br/>
     Coords: <input type="text" ng-model="alert.geoLocation" /><br/>
-    Published: <input type="checkbox" ng-model="isPublished" ng-change="togglePublished(alert)"/>
     Tourpoint ID: <input type="text" ng-model="alert.tourpointId" /><br/>
+    Published: <input type="checkbox" ng-model="isPublished" ng-change="togglePublished(alert)"/>
     <!--TODO: isRecurring-->
     <span class="error" ng-show="error">Error: {{error}}</span><br>
     <button ng-show="alert.id" ng-click="update(alert, marker)">Edit</button>

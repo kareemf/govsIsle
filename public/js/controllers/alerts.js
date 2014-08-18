@@ -55,7 +55,7 @@ controllers.controller('NewAlertMarkerController', ['$scope', '$controller', fun
 
     $scope.isPublished = alert.published ? true : false; //TODO: is this needed for new entites?
 
-    $scope.alery = {
+    $scope.alert = {
         geoLocation: getMarkerGeoLocation(marker)
     };
 
