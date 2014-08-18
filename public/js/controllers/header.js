@@ -80,7 +80,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
         return (tmp===0);
     };
     */
-    var allFilters = Shared.allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event'];
+    var allFilters = Shared.allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event', 'alert'];
     $scope.filters = allFilters;
 
     $scope.toggleFilters = function(oneOrMoreFilters){
