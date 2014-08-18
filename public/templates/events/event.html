@@ -3,6 +3,22 @@
         <img alt="{{event.name}}" ng-src="{{event.coverPhoto.url}}" class="img-responsive"/>
     </div>
     <h4 class="lead"><b>{{event.name}}<b></h4>
+
+    <a ng-href="events/{{event.slug}}" title="Add to Calendar" class="addthisevent">
+        Add to Calendar
+        <span class="arrow">&nbsp;</span>
+        <span class="_start">{{event.startDateTime | date:'dd/mm/yyyy hh:mm:ss tt'}}</span>
+        <span class="_end">{{event.startDateTime | date:'dd/mm/yyyy hh:mm:ss tt'}}</span>
+        <span class="_zonecode">40</span>
+        <span class="_summary">{{event.name}}</span>
+        <span class="_description">{{event.description}}</span>
+        <span class="_location">{{event.location}}</span>
+        <span class="_organizer">{{event.organizer.name}}<</span>
+        <span class="_organizer_email">{{event.organizer.email }}<</span>
+        <span class="_all_day_event">{{event.isAllDayEvent? 'true' : 'false'}}<</span>
+        <span class="_date_format">DD/MM/YYYY</span>
+    </a>
+
     <p class="lead">{{event.startDateTime | date:'EEEE, MMM dd'}} - {{event.endDateTime| date:'EEEE, MMM dd'}}<br/>
     {{event.startDateTime | date:'h:mma'}} - {{event.endDateTime |date:'h:mma'}} | {{event.location}}</p>
     <hr class="hrstyle"/>
