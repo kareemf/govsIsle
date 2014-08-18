@@ -8,7 +8,7 @@ controllers.controller('BaseEventMarkerController', ['$scope', '$controller', 'E
     $scope.Resource = Events;
     $scope.baseUrl = 'api/v1/events/';
 
-    var marker = $scope.marker
+    var marker = $scope.marker;
 
     $scope.saveSuccessCallback = function(event, headers){
         //save successful, close the form
