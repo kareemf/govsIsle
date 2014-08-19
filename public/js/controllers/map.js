@@ -275,6 +275,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         markers.forEach(function(marker){
             marker.setMap(null);
         });
+        markers = [];
     };
 
     var updateMarkerIcon = function(entity, marker, markers){
@@ -291,15 +292,15 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         console.log('getContentByFilters', filters);
         clearMarkers($scope.existingEventMarkers);
         clearMarkers($scope.existingAmenityMarkers);
-        $scope.existingEventMarkers = [];
-        $scope.existingAmenityMarkers = [];
-        
+        clearMarkers($scope.existingAlertMarkers);
+        clearMarkers($scope.tourMarkers);
+
         //TODO: events become activitites
         if(filters.indexOf('event') >= 0){
             Events.query(function(events){
                 console.log('events', events);
                 events.forEach(function(event){
-                    var marker = createMarker(event, $scope.myMap)
+                    var marker = createMarker(event, $scope.myMap);
 
                     $scope.oms.addMarker(marker);
                     $scope.existingEventMarkers.push(marker);
