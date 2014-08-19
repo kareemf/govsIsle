@@ -153,7 +153,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
     $scope.existingAlertMarkers = [];
 
     $scope.markerEvents = {
-        'map-click': 'openMarkerInfo(marker, entity)',
+        //'map-click': 'openMarkerInfo(marker, entity)',
         'map-rightclick': 'editMarker(marker, entity)',
         'map-dragend': 'updateGeolocationAfterDrag(marker, entity)'
     };
@@ -383,7 +383,7 @@ controllers.controller('NewMarkerListController', ['$scope', '$controller', func
     console.log('in NewMarkerListController');
 
     $scope.newMarkerEvents = {
-        'map-click': 'openMarkerInfo(marker, findRelatedEntity(marker))',
+        //'map-click': 'openMarkerInfo(marker, findRelatedEntity(marker))',
         'map-rightclick': 'editMarker(marker, findRelatedEntity(marker))',
         'map-dragend': 'updateGeolocationAfterDrag(marker, findRelatedEntity(marker))'
     };
