@@ -1,0 +1,31 @@
+<form novalidate class="simple-form map-form">
+    * Name: <input type="text" ng-model="alert.name" /><br />
+    * Type:
+    <select
+            ng-model="alert.type"
+            ng-options="type for type in ['weather', 'ferry', 'construction']">
+        <option value="">-- choose type of alert --</option>
+    </select>
+    <!--TODO: select other-->
+    <br />
+    Type: <input type="text" ng-model="alert.type" /><br/>
+    <br />
+    Desc: <input type="text" ng-model="alert.description" /><br/>
+    Start: <input type="text" ng-model="alert.startDateTime" /><br />
+    End: <input type="text" ng-model="alert.endDateTime" /><br />
+    Location: <input type="text" ng-model="alert.location" /><br/>
+    Coords: <input type="text" ng-model="alert.geoLocation" /><br/>
+    Tourpoint ID: <input type="text" ng-model="alert.tourpointId" /><br/>
+    Published: <input type="checkbox" ng-model="isPublished" ng-change="togglePublished(alert)"/>
+    <!--TODO: isRecurring-->
+    <span class="error" ng-show="error">Error: {{error}}</span><br>
+    <button ng-show="alert.id" ng-click="update(alert, marker)">Edit</button>
+    <button ng-show="!alert.id" ng-click="save(alert, marker)">Save</button>
+    <button ng-click="cancel(alert, marker, markers)">Cancel</button>
+    <br/>
+    <br/>
+    <div ng-show="alert.id">
+        MainPhoto: <span>{{alert.coverPhoto.slug}}</span><br/>
+        <input type="file" ng-file-select="coverPhotoUpload($files)" onclick="this.value=null"><br>
+    </div>
+</form>
