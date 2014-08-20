@@ -2,75 +2,32 @@
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('ToursController', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http){
-    	console.log('in TourController');
+controllers.controller('ToursController', ['$scope', '$stateParams', '$http', 'Tours', function($scope, $stateParams, $http, Tours){
+    	
+		console.log('in TourController');
+		
+		$scope.entangledToken = 'a02e0202572aa6bf75423b9e355bb239ecc5ff849ffd000933b97ef292c09cc8';
 		
 		$scope.getImageSrc = function (imageFile) {
-		  return 'http://www.entangledspace.com/staging/' + imageFile;
+			//alert(imageFile);
+		  return 'http://www.entangledspace.com/data/' + imageFile;
 		};
-
-	    $http.get('http://entangledspace.com/staging/getTours.php?username=cultureisland&bl_lat=40.5&bl_lng=-74.1&tr_lat=40.7&tr_lng=-74.0').
-	           success(function(data) {
-	               $scope.allTours = data;
-				   
-				$scope.allTourpoints = [];   
-	   			var log = [];
-	   			angular.forEach($scope.allTours, function(value) {
-					
-	   	   	    	$http.get('http://entangledspace.com/staging/getTourpoints.php?username=cultureisland&tourID='+value.id+'').
-	   	   	           success(function(data_2) {	
-	
-	   	   	               var log2 = [];
-						   angular.forEach(data_2, function(point) {
-							   $scope.allTourpoints.push(point);
-							   //alert(point);
-						   }, log2);
-					   
-	   	   	    	   });
-
-	   			}, log);
-				//alert($scope.allTourpoints);
-				
-				   
-	    });
 		
-	    $http.get('http://entangledspace.com/staging/getTours.php?username=cultureisland').
-	           success(function(data) {
-	               $scope.myTours = data;
-				   
-				$scope.myTourpoints = [];   
-	   			var log = [];
-	   			angular.forEach($scope.myTours, function(value) {
-					
-	   	   	    	$http.get('http://entangledspace.com/staging/getTourpoints.php?username=cultureisland&tourID='+value.id+'').
-	   	   	           success(function(data_2) {	
-	
-	   	   	               var log2 = [];
-						   angular.forEach(data_2, function(point) {
-							   $scope.myTourpoints.push(point);
-							   //alert(point);
-						   }, log2);
-					   
-	   	   	    	   });
-
-	   			}, log);
-				//alert($scope.allTourpoints);
+		$scope.myTours = Tours.getMyTours();
+		$scope.contributedTours = Tours.getContributedTours();
 				
-				   
-	    });
-		
 }]);
 
 
-controllers.controller('TourpointDetailController', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http){
+controllers.controller('TourpointDetailController', ['$scope', '$stateParams', '$http', 'Tours', function($scope, $stateParams, $http, Tours){
     console.log('in TourpointDetailController');
 	
 	$scope.getAudioSrc = function (audioFile) {
-	  return 'http://www.entangledspace.com/staging/' + audioFile;
+	  return 'http://www.entangledspace.com/data/postAudio/' + audioFile;
 	};
 	
 	$scope.getImageSrc = function (imageFile) {
-	  return 'http://www.entangledspace.com/staging/' + imageFile;
+	  return 'http://www.entangledspace.com/data/postImages/' + imageFile;
 	};
 	
    $scope.playing = false;
@@ -95,38 +52,63 @@ controllers.controller('TourpointDetailController', ['$scope', '$stateParams', '
    var id = $stateParams.id;
    if(id){
 
-	    $http.get('http://entangledspace.com/staging/getPost.php?username=cultureisland&postID='+id).
+	    
+	    $http.get('http://entangledspace.com/api/v1/getPost.php?token=a02e0202572aa6bf75423b9e355bb239ecc5ff849ffd000933b97ef292c09cc8&username=cultureisland&postID='+id).
 	           success(function(data) {
-	               $scope.tourpoint = data;
+	               $scope.tourpoint = data['post'];
 		   		   $scope.audio.src = $scope.getAudioSrc($scope.tourpoint.clipLoc);
+				   
 	    });
 		
+	   
+	   //$scope.tourpoint = Tour.getPost(id);
+	   //$scope.audio.src = $scope.getAudioSrc($scope.tourpoint.clipLoc);
 		
 		
     }
 }]);
 
-controllers.controller('TourListController', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http){
+controllers.controller('TourListController', ['$scope', '$stateParams', '$http', 'Tours', function($scope, $stateParams, $http, Tours){
     console.log('in TourListController');
 	
 
 	$scope.getImageSrc = function (imageFile) {
-	  return 'http://www.entangledspace.com/staging/' + imageFile;
+	  return 'http://www.entangledspace.com/data/' + imageFile;
 	};
 	
     var id = $stateParams.id;
     if(id){
 		
-	    $http.get('http://entangledspace.com/staging/getTour.php?username=cultureisland&tourID='+id).
+
+	    $http.get('http://entangledspace.com/api/v1/getTour.php?token=a02e0202572aa6bf75423b9e355bb239ecc5ff849ffd000933b97ef292c09cc8&username=cultureisland&tourID='+id).
 	           success(function(data) {
-	               $scope.tour = data;
+	               $scope.tour = data['tour_data'];
 	    });
 
-	    $http.get('http://entangledspace.com/staging/getTourpoints.php?username=cultureisland&tourID='+id).
+	    $http.get('http://entangledspace.com/api/v1/getTourpoints.php?token=a02e0202572aa6bf75423b9e355bb239ecc5ff849ffd000933b97ef292c09cc8&username=cultureisland&tourID='+id).
 	           success(function(data) {
-	               $scope.tourpoints = data;
+	               $scope.tourpoints = data['tour_points'];
 	    });
+		
+		//$scope.tour = Tours.getTour(id);
+		//$scope.tourpoints = Tours.getTourpoints(id);
+		
+		//console.log(Tours.getTour(id)); 
 		
     }
 	
 }]);
+
+
+controllers.controller('TourMarkerController', ['$scope', '$controller', function($scope, $controller){
+
+    var marker = $scope.marker;
+
+    var getMarkerGeoLocation = [ $scope.marker.entity.latitude, $scope.marker.entity.longitude];
+
+	//$scope.marker.entity.name = $scope.marker.entity.postName;
+	//console.log($scope.marker.entity.postName);
+
+
+}]);
+

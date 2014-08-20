@@ -32,7 +32,9 @@
 
 
     Published: <input type="checkbox" ng-model="isPublished" ng-change="togglePublished(event)"/>
-    <br><br>You will be able to upload an image after the initial save<br>
+    <br><br>
+    <span ng-show="!event.id">You will be able to upload an image after the initial save</span>
+    <br>
     <span class="error" ng-show="error">Error: {{error}}</span><br>
     <button ng-show="event.id" ng-click="update(event, marker)">Edit</button>
     <button ng-show="!event.id" ng-click="save(event, marker)">Save</button>
