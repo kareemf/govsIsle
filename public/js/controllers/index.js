@@ -19,4 +19,10 @@ controllers.controller('AppController', ['$rootScope', '$http', function($rootSc
     };
 
     checkLoggedIn();
+
+    var socket = io.connect('http://localhost:3000');
+
+    socket.on('alert', function(alert){
+        console.log('alert recieved', alert);
+    });
 }]);
