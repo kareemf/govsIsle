@@ -45,8 +45,8 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
 controllers.controller('NavController', ['$scope','$location', '$filter','NavService', 'Shared', 'Events', function($scope, $location, $filter, NavService, Shared, Events){
     console.log('In NavController');
     var path = $location.path();
-
-    var paths=["/","/about","/events/grid","/events/map","/tours","/ferry", "/events/list"];
+    //0 1 2 3...
+    var paths=["/","/about","/events/grid","/events/map","/tours","/ferry", "/events/list", '/weather'];
 
     $scope.currentLink=paths.indexOf(path);
     console.log($scope.currentLink+"link");
@@ -128,3 +128,10 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
         return false;
     }
 }]);
+controllers.controller('AlertsController', ['$scope', function($scope){
+    console.log('In AlertsController');
+    $scope.isAlert = function(){
+        return true;
+    }
+}]);
+

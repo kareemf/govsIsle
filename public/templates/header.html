@@ -1,8 +1,9 @@
 <nav class="navbar-fixed-top" id="nav-beta" data-ng-controller="NavController" ng-init="activelink(currentLink)">
     <div class="nav-ui">
     	<div class="container">
-	        <ul class="nav-header-link nav-inlineblock">
+	        <ul class="nav-inlineblock">
 	        	<li ng-hide="isActive(0)"class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activehome:isActive(0)}" class="glyphicon glyphicon-home"></span></a></li>
+	        	<li ng-hide="!isActive(0)" class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{weather:isActive(0)}" class="resizeweather"></span></a></li>
 	            <li class="nav-gov-brand"><a ui-sref="/">GOVERNORS ISLAND</a></li>
 	            <li ng-hide="buttonswap()" class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicon glyphicon-info-sign"></span></a></li>
 	            <li ng-show="isActive(3)" class="pull-right navright-btn">
@@ -24,3 +25,4 @@
         </div>
     </div>
 </nav>
+<div id="headerspacing"></div>
