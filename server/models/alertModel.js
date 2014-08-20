@@ -16,11 +16,13 @@ var properties = _.extend(base.properties, {
     geoLocation: {type: [Number], index: '2d'},
     tourpointId: String //Entangled
 });
-var AlertSchema = new Schema(properties);
+
+var anticipatedDocSize = 256;
 
 var AlertSchema = new Schema(properties, {
     toObject: { virtuals: true },
-    toJSON: { virtuals: true }
+    toJSON: { virtuals: true },
+    capped: anticipatedDocSize * 99
 });
 
 AlertSchema.virtual('permissions')

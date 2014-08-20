@@ -8,7 +8,7 @@ module.exports = function(server){
     io.sockets.on('connection', function(socket) {
         console.log('user connected to socket', socket.id);
 
-        var stream = Alert.find().stream();
+        var stream = Alert.find().tailable().stream();
 
         stream.on('data', function (doc) {
             console.log('Alert stream doc', doc);
@@ -16,7 +16,7 @@ module.exports = function(server){
         });
 
         stream.on('error', function (err) {
-            console.log('Alert stream error', err);
+            console.error('Alert stream error', err);
         });
 
         stream.on('close', function () {
