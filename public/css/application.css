@@ -5,15 +5,15 @@ html{
 }
 @font-face {
     font-family: 'govsle';
-    src: url('../font/DINEngschriftStd.otf');
+    src: url('../fonts/DINEngschriftStd.otf');
 }
 @font-face {
-    font-family: 'guppy';
-    src: url('../font/guppySans.otf');
+    font-family: guppy;
+    src: url('../fonts/guppySans.otf');
 }
 @font-face {
     font-family: 'avenyt';
-    src: url('../font/avenyt.otf');
+    src: url('../fonts/avenyt.otf');
 }
 body{
   height: 100%; width: 100%;
@@ -97,7 +97,7 @@ a, a:link, a:hover, a:visited, a:active{
   color: white;
   font-size: 34px;
   text-align: left;
-  font-family: 'guppy';
+  font-family: guppy;
 }
 .nav-inlineblock li{
   display: inline-block;
@@ -189,7 +189,7 @@ a, a:link, a:hover, a:visited, a:active{
 }
 .alertbtn{padding-top: 10px;padding-left: 8%;}
 .alertclosingbtn{padding-top: 5px;padding-right: 5%;}
-.alert-title{font-family: 'guppy'; font-size: 24px; padding-top: 2px;}
+.alert-title{font-family: guppy; font-size: 24px; padding-top: 2px;}
 .fixme{background-color: green;}
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
