@@ -4,28 +4,24 @@ html{
   min-height: 100%;
 }
 @font-face {
-  font-family: myFirstFont;
-	src: url(../font/dinregularwebfont.ttf);
+    font-family: guppy;
+    src: url(../fonts/guppySans.otf);
 }
 @font-face {
     font-family: govsle;
-    src: url(../font/DINEngschriftStd.otf);
+    src: url(../fonts/DINEngschriftStd.otf);
 }
-@font-face {
-    font-family: guppy;
-    src: url(../font/GuppySans.otf);
-}
+
 @font-face {
     font-family: avenyt;
-    src: url(../font/AvenyT.otf);
+    src: url(../fonts/avenyt.otf);
 }
 body{
   height: 100%; width: 100%;
   background-color: #E7E7E7;
-  /*background-color: #FFF;*/
   color: black;
-  min-width: 250px;
-  font-family: Arial;
+  min-width: 300px;
+  font-family: Arial, verdana, helvetica;
   font-size: 16px;
 }
 /* HTML5 display-role reset for older browsers */
@@ -45,6 +41,7 @@ footer, header, hgroup, menu, nav, section {
 /*SPECIAL CASES*/
 .navSpacingFix{margin-top: 85px;}
 .gov-size{font-size: 26px;font-family: govsle;}
+#headerspacing{margin-top: 60px;}
 
 /*SITE COLORS*/
 .information{background-color: #ff9900;}
@@ -68,9 +65,10 @@ a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
   color: #FFF;
 }
-#curatedlist a ,#artistlist a , #tourPoints a, .eventlist a{
+#curatedlist a ,#artistlist a , #tourPoints a, .eventlist a, #light a,#fade a{
   color: #000;
 }
+
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
   height: 60px;
@@ -79,7 +77,6 @@ a, a:link, a:hover, a:visited, a:active{
   z-index: 9999;
   min-width: 300px;
   /*border-bottom: 1px solid #E7E7E7;*/
-  background: #129068;
   background: -moz-linear-gradient(top,  #129068 0%, #3b9d71 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#129068), color-stop(100%,#3b9d71));
   background: -webkit-linear-gradient(top,  #129068 0%,#3b9d71 100%);
@@ -99,10 +96,9 @@ a, a:link, a:hover, a:visited, a:active{
 }
 .nav-gov-brand{
   color: white;
-  font-size: 36px;
+  font-size: 34px;
   text-align: left;
   font-family: guppy;
-  text-align: left;
 }
 .nav-inlineblock li{
   display: inline-block;
@@ -114,11 +110,6 @@ a, a:link, a:hover, a:visited, a:active{
 }
 .navright-btn{padding-right: 10px;}
 .navleft-btn{padding-left: 10px;}
-.center-brand{
-  text-align: center;
-  vertical-align: top;
-  display: inline-block;
-}
 /*MAIN-FOOTER NAVIGATION*/
 .map-ui{
   height: 70px; width: 100%;
@@ -126,7 +117,6 @@ a, a:link, a:hover, a:visited, a:active{
   padding-top: 10px;
   background-color: #4F535E;
   color: white;
-
   font-size:45px;
   text-align: center;
 }
@@ -160,10 +150,48 @@ a, a:link, a:hover, a:visited, a:active{
 .nav-map{ padding-left: 6%; padding-right: 5%;}
 .nav-end{padding-left: 6%;}
 
-.black{
-    color: #000000 !important;
+.alert{margin-bottom: 0px;}
+.global-alerts{margin:0px;}
+.white-overlay{
+  display: none;
+  position: fixed;
+  top: 0;left: 0;
+  width: 100%;height: 100%;
+  background-color: #FFF;
+  z-index:1001;
+  -moz-opacity: 0.8;
+  opacity:.80;
+  filter: alpha(opacity=80);
 }
-
+.white-content{
+  display: none;
+  position: fixed;
+  top: 15%;left: 10%;
+  width: 80%;height: 60%;
+  background-color: black;
+  z-index:1002;
+  color: #FFF;
+  overflow: auto;
+}
+.alertbox-header{
+  width: 100%; height: 50px;
+  line-height: 50px;
+  background-color: #FB5751;
+  text-align: center;
+}
+.list-notification li{padding: 5px; margin: 0;}
+.dropdownwrap{
+    display:none;
+    height:auto;
+    float:center;
+    margin:0px 0px 0px 0px;
+    background-color:#434343;
+    padding:10px;
+}
+.alertbtn{padding-top: 10px;padding-left: 8%;}
+.alertclosingbtn{padding-top: 5px;padding-right: 5%;}
+.alert-title{font-family: guppy; font-size: 24px; padding-top: 2px;}
+.fixme{background-color: green;}
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
   .col-xs-12{width: 100%;
@@ -175,10 +203,15 @@ a, a:link, a:hover, a:visited, a:active{
     padding: 0px 0px 0px 0px;
   }
 }
-@media screen and (max-width: 253px){
-  #custom-nav{height: 55px;}
+@media (max-width: 308px){
+  /*stop header breakage*/
+  .nav-gov-brand{
+    font-size: 30px;
+  }
 }
-
+@media (max-width: 320px){
+  /*iphone optimization */
+}
 /*the max page size should remain 1004px*/
 @media (min-width: 992px) {
   .container {
@@ -193,7 +226,7 @@ a, a:link, a:hover, a:visited, a:active{
 
 
 /*THE MAIN CONTENT AKA THE MIDDLE SECTION*/
-.main-content{margin-top: 60px;}
+.main-content{margin: 0px;}
 /*THE MAIN FOOTER AKA THE FOOTER*/
 .main-footer{
   margin-bottom: 30px; /*lower navigation bar*/
@@ -316,7 +349,6 @@ a, a:link, a:hover, a:visited, a:active{
   font-size: 36px;
   vertical-align: middle;
   text-align: center;
-  font-family: myFirstFont;
   padding-top: 25px;
 }
 /*LANING PAGE*/
@@ -442,8 +474,6 @@ height: 100px; width: 100px;
     width: 100%;
     min-height: 100%;
 }
-
-
 .map-form{
     background: white;
     border: 1px solid;
@@ -462,8 +492,7 @@ height: 100px; width: 100px;
   width: 100%;
   background-color: #FFF;
   text-align: center;
-  font-style: bold;
-  font-family: avenyt;
+  font-family: 'avenyt';
 }
 .info-banner h3, .info-banner h4{
   line-height: inherit;
@@ -799,10 +828,9 @@ ul.lead{list-style-type: none;}
 
 .activebtn{background-color: #5FA77A; color: #FFF;}
 .textLeft{text-align: left;padding-left: 20px;}
-
+.textCenter{text-align: center;}
 /*.dangere{background-color: #FF0101;}
-.coole{background-color: #4099FF;}
-*/
+.coole{background-color: #4099FF;}*/
 .activeinfo{color:  #104432;}
 .activehome{ visibility: hidden;}
 
@@ -813,9 +841,9 @@ li.wordpress{
   margin-right: 15px;
 }
 /*SPRITES*/
-.ferry0, .ferry1, .headphones0, .headphones1, .calendar0,
+.resizeweather, .ferry0, .ferry1, .headphones0, .headphones1, .calendar0,
 .calendar1, .activities, .facilities, .food, .history,
-.info, .venues, .facebook, .instagram, .twitter,
+.info, .venues, .facebook, .instagram, .twitter,.alertclose, .alertopen,
 .wordpress, .mappin0, .mappin1
 { display: inline-block; background: url('../images/siteicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
 .ferry0 { background-position: -3px -0px; width: 65px; height: 45px; }
@@ -830,10 +858,13 @@ li.wordpress{
 .history { background-position: -3px -432px; width: 45px; height: 45px; }
 .info { background-position: -3px -480px; width: 45px; height: 45px; }
 .venues { background-position: -3px -528px; width: 45px; height: 45px; }
-.facebook { background-position: -3px -576px; width: 32px; height: 32px; }
-.instagram { background-position: -3px -611px; width: 32px; height: 32px; }
-.twitter { background-position: -3px -646px; width: 32px; height: 32px; }
-.wordpress { background-position: -3px -681px; width: 32px; height: 32px; }
-.mappin0 { background-position: -3px -716px; width: 28px; height: 45px; }
-.mappin1 { background-position: -34px -716px; width: 28px; height: 45px; }
+.weather { background-position: -3px -576px; width: 41px; height: 30px; }
+.facebook { background-position: -3px -609px; width: 32px; height: 32px; }
+.instagram { background-position: -3px -644px; width: 32px; height: 32px; }
+.twitter { background-position: -3px -679px; width: 32px; height: 32px; }
+.wordpress { background-position: -3px -714px; width: 32px; height: 32px; }
+.alertclose { background-position: -3px -749px; width: 30px; height: 30px; }
+.alertopen { background-position: -3px -782px; width: 30px; height: 30px; }
+.mappin0 { background-position: -36px -749px; width: 28px; height: 45px; }
+.mappin1 { background-position: -36px -797px; width: 28px; height: 45px; }
 

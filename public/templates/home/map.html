@@ -30,19 +30,27 @@
                     </div>
                 </div>
             </div>
-			
+            <div ng-repeat="marker in existingAlertMarkers">
+                <span
+                    ng-init="entity = alerts[$index]"
+                    ui-map-marker="marker"
+                    ui-event="markerEvents"></span>
+
+                <div ng-init="alert = entity" ng-controller="ExistingAlertMarkerController">
+                    <div ng-show="isEditMode && showForm" ng-init="markers = existingAlertMarkers"
+                         ng-include="'/templates/alerts/alertForm.html'" scope="" onload="">
+                    </div>
+                </div>
+            </div>
 			<!-- write the tour marker -->
-			
             <div ng-repeat="marker in tourMarkers">
                 <span
                         ng-init="entity = tourPoints[$index]"
                         ui-map-marker="marker"
                         ui-event="markerEvents"></span>
-
                 <div ng-controller="TourMarkerController">
                 </div>
             </div>
-
         </div>
 
     </div>
@@ -67,6 +75,11 @@
 
                 <div ng-if="newEntityContentType == 'amenity'" ng-controller="NewAmenityMarkerController"
                      ng-include="'/templates/amenities/amenityForm.html'" scope="" onload=""
+                     ng-show="showForm">
+                </div>
+
+                <div ng-if="newEntityContentType == 'alert'" ng-controller="NewAlertMarkerController"
+                     ng-include="'/templates/alerts/alertForm.html'" scope="" onload=""
                      ng-show="showForm">
                 </div>
             </div>
@@ -105,5 +118,4 @@
 
 
 <!-- TODO: display text list of markers -->
-<!-- TODO: event/marker detail page(s) -->
 

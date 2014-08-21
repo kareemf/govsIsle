@@ -5,7 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="govsIsland" content="travel trip fun">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />-->
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/application.css">
         <link rel="stylesheet" type="text/css" href="css/addthisevent.css">
@@ -15,9 +14,31 @@
         <div class="main-header"><!--MAIN-HEADER-->
            <div ng-include="'templates/header.html'" data-role="navigation"></div>
         </div>
+        <div ng-controller="AlertsController">
+            <div ng-show="isAlert()" class="global-alerts"> 
+                                <!--  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+                    <div class="alert alert-danger" data-dismiss="alert" role="alert">
+                        <strong>3 pedding notifications!</strong> ...
+                    </div>
+                </a>
+                <div id="light" class="white-content">
+                    <ul class="nav-inlineblock alertbox-header">
+                        <li class="pull-left alertbtn"><span class="alertopen"></span></li>
+                        <li class="alert-title">SPECIAL ALERT</li> <!--We may want to change the title depending on the alert-->
+                        <li class="pull-right alertclosingbtn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="alertclose"></span></a></li>
+                    </ul> 
 
-        <div class="alerts"></div> <!--Site Alerts go Here-->
-
+                    <ul class="list-notification">                  <!--TODO: type of alert and short message-->
+                        <li class="notif-dropdown">Weather: raining... </li>
+                        <div class="dropdownwrap"><p>Please find shelter. heavy rain fall in 1 hour</p></div>
+                        <li class="notif-dropdown">Park: park closing in 5 minutes...</li>
+                        <div class="dropdownwrap"><p>Please head to Manttan ferry, closing is in 10 minutes. there is no food on the island.</p></div>
+                    </ul>
+                </div>
+                <div id="fade" class="white-overlay"></div>
+            </div>
+        </div>
         <div class="main-content"><!--MAIN-CONTENT-->
              <!--<div ui-view></div> -->
             <ui-view autoscroll='false'/>
@@ -51,10 +72,8 @@
         <script type="text/javascript" src="js/services/geocoder.js"></script>
         <script type="text/javascript" src="js/services/meanio.js"></script>
 		<script type="text/javascript" src="js/services/tours.js"></script>
-
         <!--Filter controllers-->
         <script type="text/javascript" src="js/filter/sharedFilter.js"></script>
-
         <!--back-End Controllers-->
         <script type="text/javascript" src="js/controllers/index.js"></script>
         <script type="text/javascript" src="js/controllers/auth.js"></script>
@@ -63,13 +82,13 @@
         <script type="text/javascript" src="js/controllers/entities.js"></script>
         <script type="text/javascript" src="js/controllers/events.js"></script>
         <script type="text/javascript" src="js/controllers/amenities.js"></script>
+        <script type="text/javascript" src="js/controllers/alerts.js"></script>
         <script type="text/javascript" src="js/controllers/header.js"></script>
 		<script type="text/javascript" src="js/controllers/tours.js"></script>
 		<audio id="audioPlayer"></audio>
         <!-- Special functionality-footer--> <!--my verison will come soon-->
         <script type="text/javascript" src="js/smartmenus-min.js"></script>
         <script type="text/javascript" src="js/smartmenus-bootstrap.js"></script>
-
         <!--AddThisEvent-->
         <script type="text/javascript" src="https://addthisevent.com/libs/1.5.8/ate.min.js"></script>
         <!-- AddThisEvent Settings -->
@@ -85,9 +104,15 @@
                 facebook	: {show:true, text:"Facebook Calendar"}
             });
         </script>
-
+        <script>
+            $(document).ready(function(e){
+               $('.notif-dropdown').on('click',function(){
+                    $(this).next('.dropdownwrap').slideToggle();
+               });
+            })
+        </script>
         <!--DEVELOPMENT HOME-->
-        <!-- <script src="http://192.168.1.9:35729/livereload.js?snipver=1"></script> -->
+        <script src="http://192.168.1.5:35729/livereload.js?snipver=1"></script>
         <!--DEVELOPMENT WORK<script src="http://10.255.16.107:35729/livereload.js?snipver=1"></script>-->
     </body>
 </html>
