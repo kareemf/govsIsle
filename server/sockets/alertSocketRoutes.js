@@ -34,7 +34,8 @@ module.exports = function(server){
         console.log('user connected to socket. num_connections', ++num_connections);
 
         //connecting user may have missed out on all previous transmissions, get them up to speed
-        io.sockets.socket(socket.id).emit('alerts', previous_data);
+        console.log('sending', previous_data.length, 'items to socket', socket.id);
+        io.sockets.connected[socket.id].emit('alerts', previous_data);
 
         socket.on('disconnect', function(){
             console.log('user disconnected. num_connections', --num_connections);
