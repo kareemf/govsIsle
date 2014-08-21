@@ -19,7 +19,7 @@ body{
   height: 100%; width: 100%;
   background-color: #E7E7E7;
   color: black;
-  min-width: 250px;
+  min-width: 300px;
   font-family: Arial, verdana, helvetica;
   font-size: 16px;
 }
@@ -202,9 +202,11 @@ a, a:link, a:hover, a:visited, a:active{
     padding: 0px 0px 0px 0px;
   }
 }
-@media screen and (max-width: 253px){
+@media (max-width: 308px){
   /*stop header breakage*/
-  #custom-nav{height: 55px;}
+  .nav-gov-brand{
+    font-size: 30px;
+  }
 }
 @media (max-width: 320px){
   /*iphone optimization */
