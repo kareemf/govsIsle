@@ -4,16 +4,17 @@ html{
   min-height: 100%;
 }
 @font-face {
-    font-family: 'govsle';
-    src: url('../fonts/DINEngschriftStd.otf');
-}
-@font-face {
     font-family: guppy;
-    src: url('../fonts/guppySans.otf');
+    src: url(../fonts/guppySans.otf);
 }
 @font-face {
-    font-family: 'avenyt';
-    src: url('../fonts/avenyt.otf');
+    font-family: govsle;
+    src: url(../fonts/DINEngschriftStd.otf);
+}
+
+@font-face {
+    font-family: avenyt;
+    src: url(../fonts/avenyt.otf);
 }
 body{
   height: 100%; width: 100%;
@@ -39,7 +40,7 @@ footer, header, hgroup, menu, nav, section {
 .lead{padding-right: 25px; padding-left: 25px;}
 /*SPECIAL CASES*/
 .navSpacingFix{margin-top: 85px;}
-.gov-size{font-size: 26px;font-family: 'govsle';}
+.gov-size{font-size: 26px;font-family: govsle;}
 #headerspacing{margin-top: 60px;}
 
 /*SITE COLORS*/
@@ -262,7 +263,7 @@ a, a:link, a:hover, a:visited, a:active{
   position: absolute;
   left: 15px;top: 10px;
   width: 75%;height: 50px;
-  font-family: 'govsle';
+  font-family: govsle;
   font-size: 20px;
   text-align: left;
   padding: 0px 0px 0px 0px;
@@ -277,7 +278,7 @@ a, a:link, a:hover, a:visited, a:active{
   text-align: center;
   right: 0; bottom: 10px;
   width: 100px;height: 25px;
-  font-family: 'govsle';
+  font-family: govsle;
   font-size: 20px;
   background-color: white;
   color: black;
@@ -371,7 +372,7 @@ a, a:link, a:hover, a:visited, a:active{
   position: absolute;
   left: 0;bottom: 10px;
   width: 100px;height: 25px;
-  font-family: 'govsle';
+  font-family: govsle;
   font-size: 20px;
   background-color: #FFF;
   color: black;
@@ -400,7 +401,7 @@ a, a:link, a:hover, a:visited, a:active{
   padding: 0px 0px 0px 10px;
   margin: 0px 0px 0px 0px;
   color: white;
-  font-family: 'govsle';
+  font-family: govsle;
   font-size: 20px;
   filter:alpha(opacity=80);opacity: .8;
   background-color: #000;
