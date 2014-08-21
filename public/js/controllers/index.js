@@ -23,6 +23,11 @@ controllers.controller('AppController', ['$rootScope', '$http', 'Shared',functio
     var socket = io.connect('http://localhost:3000');
     Shared.alerts = [];
 
+    socket.on('alerts', function(alerts){
+        console.log('alerts recieved', alerts);
+        Shared.alerts = Shared.alerts.concat(alerts);
+    });
+
     socket.on('alert', function(alert){
         console.log('alert recieved', alert);
         Shared.alerts.push(alert);
