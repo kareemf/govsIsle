@@ -233,7 +233,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         var marker = new google.maps.Marker(markerOptions);
         marker.entity = entity;
 
-        console.log('existing entity', entity, 'marker', marker);
+        //console.log('existing entity', entity, 'marker', marker);
         return marker;
     };
 	
@@ -265,7 +265,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 		//console.log(tourpoint.description);
 		marker.entity = tourpoint; 
 
-        console.log('existing entity', tourpoint, 'marker', marker);
+        //console.log('existing entity', tourpoint, 'marker', marker);
         return marker;
     };
 	
@@ -292,7 +292,6 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         console.log('getContentByFilters', filters);
         clearMarkers($scope.existingEventMarkers);
         clearMarkers($scope.existingAmenityMarkers);
-        clearMarkers($scope.existingAlertMarkers);
         clearMarkers($scope.tourMarkers);
 
         //TODO: events become activitites
@@ -322,7 +321,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 			   for(var i in data['tour_points']) {
 				    //console.log(data['tour_points'] [i]);
 			       	//_tourpoints.push(data['tour_points'] [i]);
-					console.log(data['tour_points'] [i]);
+					//console.log(data['tour_points'] [i]);
 	                var marker = createTourMarker(data['tour_points'] [i], $scope.myMap);
 
 	                $scope.oms.addMarker(marker);
@@ -345,27 +344,52 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                 });
             });
 
-            if(filters.indexOf('alert') >= 0){
-                Alerts.query({}, function(alerts){
-                    console.log('alerts', alerts);
-                    alerts.forEach(function(alert){
-                        var marker = createMarker(alert, $scope.myMap);
+            //if(filters.indexOf('alert') >= 0){
+                //Alerts.query({}, function(alerts){
+                    //console.log('alerts', alerts);
+                    //alerts.forEach(function(alert){
+                    //    var marker = createMarker(alert, $scope.myMap);
 
-                        $scope.oms.addMarker(marker);
-                        $scope.existingAlertMarkers.push(marker);
-                        $scope.alerts.push(alert);
-                    });
-                });
-            }
+                    //    $scope.oms.addMarker(marker);
+                    //    $scope.existingAlertMarkers.push(marker);
+                    //    $scope.alerts.push(alert);
+                    //});
+                //});
+            //}
         }
     };
 
     $scope.$watch(function(){return Shared.filters}, function(newVal, oldVal){
         //console.log('FILTERS_CHANGED', newVal, oldVal);
+        if(newVal && !oldVal){
+            //special case - ignores
+            return;
+        }
         if(!newVal){
-            return getContentByFilters(Shared.allFilters);
+            Shared.filters = Shared.allFilters;
+            return getContentByFilters(Shared.filters);
         }
         getContentByFilters(newVal);
+    }, true);
+
+    $scope.$watch(function(){return Shared.alerts || Shared.filters}, function(){
+        var alerts = Shared.alerts;
+        var filters = Shared.filters;
+
+        console.log('NEW ALERTS', alerts, 'NEW FILTERS', filters);
+
+        if(!alerts || !filters || filters.indexOf('alert') < 0){
+            return;
+        }
+
+        clearMarkers($scope.existingAlertMarkers);
+        alerts.forEach(function(alert){
+            var marker = createMarker(alert, $scope.myMap);
+
+            $scope.oms.addMarker(marker);
+            $scope.existingAlertMarkers.push(marker);
+            $scope.alerts.push(alert);
+        });
     }, true);
 
     $scope.$on('MARKER_UPDATED_EVENT', function(event, args){

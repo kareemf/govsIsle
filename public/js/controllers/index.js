@@ -2,7 +2,7 @@
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('AppController', ['$rootScope', '$http', function($rootScope, $http){
+controllers.controller('AppController', ['$rootScope', '$http', 'Shared',function($rootScope, $http, Shared){
     var checkLoggedIn = function(){
         $http.get('/loggedin')
             .success(function(response) {
@@ -21,8 +21,10 @@ controllers.controller('AppController', ['$rootScope', '$http', function($rootSc
     checkLoggedIn();
 
     var socket = io.connect('http://localhost:3000');
+    Shared.alerts = [];
 
     socket.on('alert', function(alert){
         console.log('alert recieved', alert);
+        Shared.alerts.push(alert);
     });
 }]);
