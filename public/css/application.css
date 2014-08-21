@@ -778,7 +778,13 @@ ul.lead{list-style-type: none;}
 	position:relative;
 	top:-70px;
 	left:75px;
-	width: 80px;
+	width: 96px;
+}
+
+#myInfoWindow span {
+	
+	font-size:10px;
+	
 }
 
 #myInfoWindow img {
