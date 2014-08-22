@@ -11,9 +11,25 @@ module.exports = function(server){
     var previous_data = []; //TODO: cache via redis
     var socketId_user_map = {};
 
-    //TODO: only published (unless admin),
+    var ascertainPermissions = function(socket, doc){
+        var permissions = permissionsManager.ascertainBasicPermissions(doc);
+        var user = socketId_user_map[socket.id];
+
+        if(user){
+            permissions = permissionsManager.ascertainPermissions(user, doc);
+        }
+
+        return permissions;
+    };
+
+    var stripDoc = function(doc, permissions){
+        var _doc = doc.toObject();
+        //remove all field for which the user does not have read access
+        _doc = permissionsManager.removeNonPermitedFields(permissions, _doc);
+        return _doc;
+    }
+
     //TODO: enddate >= today
-    //TODO: published == true
     var stream = Alert.find().tailable().stream();
 
     stream.on('data', function (doc) {
@@ -22,27 +38,18 @@ module.exports = function(server){
         console.log('Alert stream doc', doc, 'num_connections emitting to:', num_connections);
 
         for(var socket in io.sockets.connected){
-            var permissions = permissionsManager.ascertainBasicPermissions(doc);
-            var user = socketId_user_map[socket.id];
-            
-            if(user){
-                permissions = permissionsManager.ascertainPermissions(user, doc);
-            }
+            var permissions = ascertainPermissions(socket, doc);
 
             //prevent user from viewing unpublished content unless they have permission to do so
             //see baseController.get for more details
-            if(!_.contains(permissions, Alert.readUnpublishedPermission())){
+            if(!doc.published && !_.contains(permissions, Alert.readUnpublishedPermission())){
                 console.log('user cant view unpublished Alert', doc);
                 continue;
             }
 
-            //remove all field for which the user does not have read access
-            _doc = permissionsManager.removeNonPermitedFields(permissions, _doc);
-
-
+            var _doc = stripDoc(doc, permissions);            
             io.sockets.connected[socket.id].emit('alert', _doc);
         }
-
 
         previous_data.push(doc);
     });
@@ -59,8 +66,23 @@ module.exports = function(server){
         console.log('user connected to socket. num_connections', ++num_connections);
 
         //connecting user may have missed out on all previous transmissions, get them up to speed
-        console.log('sending', previous_data.length, 'items to socket', socket.id);
-        io.sockets.connected[socket.id].emit('alerts', previous_data);
+        console.log('previous_data count:', previous_data.length);
+       
+        var docs = [];
+        previous_data.forEach(function(doc){
+            var permissions = ascertainPermissions(socket, doc);
+
+            if(!doc.published && !_.contains(permissions, Alert.readUnpublishedPermission())){
+                console.log('user cant view unpublished Alert', doc);
+                return;
+            }
+
+            var _doc = stripDoc(doc, permissions);  
+            docs.push(_doc);          
+        });
+
+        console.log('sending', docs.length, 'items to socket', socket.id);
+        io.sockets.connected[socket.id].emit('alerts', docs);
 
         socket.on('authenicated_connection', function(user){
             console.log('user', user.id, 'connected to socket', socket.id);

@@ -2,7 +2,8 @@
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('AppController', ['$rootScope', '$http', 'Shared',function($rootScope, $http, Shared){
+controllers.controller('AppController', ['$scope', '$rootScope', '$http', 'Shared',
+function($scope, $rootScope, $http, Shared){
     var checkLoggedIn = function(){
         $http.get('/loggedin')
             .success(function(response) {
@@ -25,9 +26,16 @@ controllers.controller('AppController', ['$rootScope', '$http', 'Shared',functio
 
     socket.on('connect', function () {
         console.log('connected to web socket');
-        if($rootScope.user){
-            socket.emit('authenicated_connection', $rootScope.user);
-        }
+        // if($rootScope.user){
+            // socket.emit('authenicated_connection', $rootScope.user);
+        // }
+        $scope.$watch(function(){return $rootScope.user && $rootScope.user.id}, function(){
+            var user = $rootScope.user;
+            if(user){
+                console.log('emitting authenicated_connection to websocket');
+                socket.emit('authenicated_connection', $rootScope.user);
+            }
+        })
     });
 
     socket.on('alerts', function(alerts){
