@@ -237,7 +237,6 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         return marker;
     };
 	
-	
     var createTourMarker = function(tourpoint, map){
 		
 		tourpoint.name = tourpoint.postName;
@@ -269,8 +268,6 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         return marker;
     };
 	
-	
-
     var clearMarkers = function(markers){
         markers.forEach(function(marker){
             marker.setMap(null);
@@ -283,7 +280,8 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             if(markers[i] == marker){
                 var icon = determineMarkerIcon(entity);
                 marker.setIcon(icon);
-    }
+                break;
+            }
         }
     };
 
@@ -399,7 +397,6 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         else if(args.amenity){
             updateMarkerIcon(args.amenity, args.marker, $scope.existingAmenityMarkers);
         }
-
     });
 }]);
 
@@ -430,7 +427,6 @@ controllers.controller('NewMarkerListController', ['$scope', '$controller', func
         }
         return null;
     };
-
 }]);
 
 controllers.controller('GeoLocationController', ['$scope', 'Events', function ($scope, Events) {

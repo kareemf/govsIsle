@@ -20,8 +20,15 @@ controllers.controller('AppController', ['$rootScope', '$http', 'Shared',functio
 
     checkLoggedIn();
 
-    var socket = io.connect('http://localhost:3000');
+    var socket = io.connect(window.location.origin);
     Shared.alerts = [];
+
+    socket.on('connect', function () {
+        console.log('connected to web socket');
+        if($rootScope.user){
+            socket.emit('authenicated_connection', $rootScope.user);
+        }
+    });
 
     socket.on('alerts', function(alerts){
         console.log('alerts recieved', alerts);
