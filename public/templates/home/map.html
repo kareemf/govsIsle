@@ -102,7 +102,9 @@
 		  <div ng-show="currentEvent.type == 'tour'">
 			  <a class="black" ui-sref="tourpoint({ id: currentEvent.id })">
 			  <img ng-show="currentEvent.type == 'tour'" ng-src="http://www.entangledspace.com/data/postImages/{{currentEvent.imageLoc}}" width="70" height="70">
-			  <h3>{{currentEvent.name}}</h3>
+			  <h3>{{currentEvent.name}} <span>from &quot;{{currentEvent.tourName}}&quot;
+				  <br>by {{currentEvent.userName}}</span></h3>
+			 
 			</a>
 		  </div>
     </div>

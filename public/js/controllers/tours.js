@@ -50,10 +50,11 @@ controllers.controller('TourpointDetailController', ['$scope', '$stateParams', '
    });
 
    var id = $stateParams.id;
+   $scope.tID = 9;
    if(id){
 
 	    
-	    $http.get('http://entangledspace.com/api/v1/getPost.php?token=a02e0202572aa6bf75423b9e355bb239ecc5ff849ffd000933b97ef292c09cc8&username=cultureisland&postID='+id).
+	    $http.get('http://entangledspace.com/api/v1/getPost.php?token=a02e0202572aa6bf75423b9e355bb239ecc5ff849ffd000933b97ef292c09cc8&username=cultureisland&postID='+id+'&tourID='+9+'').
 	           success(function(data) {
 	               $scope.tourpoint = data['post'];
 		   		   $scope.audio.src = $scope.getAudioSrc($scope.tourpoint.clipLoc);

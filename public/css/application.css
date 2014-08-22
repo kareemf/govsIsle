@@ -731,6 +731,7 @@ ul.lead{list-style-type: none;}
 
 	padding-bottom: 10px;
 	border-bottom: solid 2px gray;
+	
 
 }
 
@@ -761,7 +762,16 @@ ul.lead{list-style-type: none;}
 
 }
 
+#mainTourImg{
 
+	height: 200px;
+	overflow:hidden;
+
+}
+
+#mainTourImg .carousel{
+	padding:10px;
+}
 
 #tourpoints {
 
@@ -795,7 +805,15 @@ ul.lead{list-style-type: none;}
 	position:relative;
 	top:-70px;
 	left:75px;
-	width: 80px;
+	width: 96px;
+	
+	color:black;
+}
+
+#myInfoWindow span {
+	
+	font-size:10px;
+	
 }
 
 #myInfoWindow img {
