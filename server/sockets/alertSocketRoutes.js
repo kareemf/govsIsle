@@ -27,7 +27,23 @@ module.exports = function(server){
         //remove all field for which the user does not have read access
         _doc = permissionsManager.removeNonPermitedFields(permissions, _doc);
         return _doc;
-    }
+    };
+
+    var filterDocs = function(socket, docs){
+        var _docs = [];
+        docs.forEach(function(doc){
+            var permissions = ascertainPermissions(socket, doc);
+
+            if(!doc.published && !_.contains(permissions, Alert.readUnpublishedPermission())){
+                console.log('user cant view unpublished Alert', doc);
+                return;
+            }
+
+            var _doc = stripDoc(doc, permissions);  
+            _docs.push(_doc);          
+        });
+        return _docs;
+    };
 
     //TODO: enddate >= today
     var stream = Alert.find().tailable().stream();
@@ -63,30 +79,28 @@ module.exports = function(server){
     });
 
     io.sockets.on('connection', function(socket) {
-        console.log('user connected to socket. num_connections', ++num_connections);
+        console.log('user connected to socket. num_connections:', ++num_connections);
 
         //connecting user may have missed out on all previous transmissions, get them up to speed
         console.log('previous_data count:', previous_data.length);
        
-        var docs = [];
-        previous_data.forEach(function(doc){
-            var permissions = ascertainPermissions(socket, doc);
+        socket.on('authenicated_connection', function(user){
+            console.log('user', user._id, 'connected to socket', socket.id);
+            socketId_user_map[socket.id] = user;
 
-            if(!doc.published && !_.contains(permissions, Alert.readUnpublishedPermission())){
-                console.log('user cant view unpublished Alert', doc);
-                return;
-            }
+            var _docs = filterDocs(socket, previous_data);            
 
-            var _doc = stripDoc(doc, permissions);  
-            docs.push(_doc);          
+            console.log('sending', _docs.length, 'out of', previous_data.length,' items to socket', socket.id);
+            io.sockets.connected[socket.id].emit('alerts', _docs);
         });
 
-        console.log('sending', docs.length, 'items to socket', socket.id);
-        io.sockets.connected[socket.id].emit('alerts', docs);
+        socket.on('anonymous_connection', function(){
+            console.log('anonymous connection to socket', socket.id);
 
-        socket.on('authenicated_connection', function(user){
-            console.log('user', user.id, 'connected to socket', socket.id);
-            socketId_user_map[socket.id] = user;
+            var _docs = filterDocs(socket, previous_data);            
+
+            console.log('sending', _docs.length, 'out of', previous_data.length,' items to socket', socket.id);
+            io.sockets.connected[socket.id].emit('alerts', _docs);
         });
 
         socket.on('disconnect', function(){
