@@ -3,7 +3,16 @@
 var paths = {
     js: ['*.js', 'server/**/*.js', 'public/**/*.js', 'test/**/*.js', '!test/coverage/**', '!public/system/lib/**', 'packages/**/*.js', '!packages/**/node_modules/**'],
     html: ['public/**/views/**', 'server/views/**', 'packages/**/public/**/views/**', 'packages/**/server/views/**'],
-    css: ['!public/system/lib/**', 'packages/**/public/**/css/*.css']
+    css: ['public/css/*.css', 'public/bower_components/bootstrap/dist/css/bootstrap.css'],
+    productionJsBower: ['public/bower_components/jquery/dist/jquery.min.js',"public/bower_components/angular/angular.min.js",
+    "public/bower_components/bootstrap/dist/js/bootstrap.min.js","public/bower_components/lodash/dist/lodash.min.js",
+        "public/bower_components/ng-file-upload/angular-file-upload-shim.min.js", "public/bower_components/ng-file-upload/angular-file-upload.min.js",
+        "public/bower_components/angular-resource/angular-resource.min.js","public/bower_components/angular-ui-router/release/angular-ui-router.min.js",
+        "public/bower_components/angular-bootstrap/ui-bootstrap.min.js","public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
+        "public/bower_components/angular-ui-utils/ui-utils.min.js","public/bower_components/angular-ui-map/ui-map.min.js", 
+        "public/bower_components/jquery-touchswipe/jquery.touchSwipe.min.js"],
+    productionJsF:['public/js/app.js','public/js/services/*.js','public/js/filter/sharedFilter.js','public/js/controllers/*.js'],
+    productionJsLibs:['public/libs/*.js']
 };
 
 module.exports = function(grunt) {

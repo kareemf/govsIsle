@@ -29,7 +29,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
-
 /*GENERAL STYLING AREA*/
 .clear{clear: both;}
 .header-shadow{
@@ -457,22 +456,10 @@ height: 100px; width: 100px;
 
 
 /*----------===MAPS===---------------*/
-.angular-google-map-container { height: 400px; }
-.map-container{
-  position: relative;
-  width: 100%;height: 100%;
-}
-/* i dont know what .gm does*/
-/*.gm-style-iw {top: 0 !important;}*/
-.map-canvas { height: 400px; }
-#map{
-    height: 100%;
-    width: 100%;
-}
 #eventmap{
-    height:500px;
-    width: 100%;
-    min-height: 100%;
+  position: absolute; 
+  height: 90%; width: 100%; 
+  background-color: #2F516B;
 }
 .map-form{
     background: white;
@@ -839,7 +826,6 @@ ul.lead{list-style-type: none;}
 }
 
 /*-----------END OF TOUR--------------*/
-
 .activebtn{background-color: #5FA77A; color: #FFF;}
 .textLeft{text-align: left;padding-left: 20px;}
 .textCenter{text-align: center;}

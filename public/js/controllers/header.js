@@ -131,7 +131,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
 controllers.controller('AlertsController', ['$scope', function($scope){
     console.log('In AlertsController');
     $scope.isAlert = function(){
-        return true;
+        return false;
     }
 }]);
 

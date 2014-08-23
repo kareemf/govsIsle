@@ -1,0 +1,12 @@
+{
+  "name": "maptilerv054 v5",
+  "version": "1.0.0",
+  "description": "",
+  "type": "overlay",
+  "format": "png",
+  "minzoom": "14",
+  "maxzoom": "19",
+  "bounds": "-74.02779616,40.68214604,-74.00997836,40.69563960",
+  "scale": "1",
+  "profile": "mercator"
+}

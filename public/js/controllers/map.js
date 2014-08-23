@@ -133,8 +133,37 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         }
 
     };
+    var mapMinZoom = 14;
+    var mapMaxZoom = 19;
+    var mapBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(40.682146, -74.027796),
+      new google.maps.LatLng(40.695640, -74.009978));
 
-  }]);
+    var mapGetTile = function(x,y,z) {
+        return "templates/maps/"+z + "/" + x + "/" + y + ".png";
+    }
+
+    var element=document.getElementById('eventmap');
+    
+    $scope.mapInit = function() {
+      var opts = {
+        streetViewControl: false,
+        center: new google.maps.LatLng(0,0),
+        panControl: true,
+        zoom: 14,
+        zoomControlOptions:{ 
+            position: google.maps.ControlPosition.TOP_LEFT,
+            style: google.maps.ZoomControlStyle.small
+        }
+
+      };
+      $scope.myMap = new google.maps.Map(document.getElementById('eventmap'), opts);
+      $scope.myMap.setMapTypeId(google.maps.MapTypeId.HYBRID);
+      $scope.myMap.fitBounds(mapBounds);
+      var maptiler = new klokantech.MapTilerMapType($scope.myMap , mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
+      var opacitycontrol = new klokantech.OpacityControl($scope.myMap , maptiler);
+    };
+}]);
 
 controllers.controller('MarkerListController', ['$scope', '$state','$stateParams','Events', 'Amenities', 'Alerts',
     'Tours', 'Shared', function($scope, $state, $stateParams, Events, Amenities, Alerts, Tours, Shared){

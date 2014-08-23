@@ -1,59 +1,58 @@
-<section class="event-map" ng-controller="MapController" >
+<section class="event-map" ng-controller="MapController" ng-init="mapInit()">
     <!-- render map. ui-map will be the name of scope property -->
-    <div class="map-container">
-    	<div id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents" class="eventmap"></div>
-        <div ng-controller="MarkerListController">
-            <!-- populate map with event markers -->
-            <div ng-repeat="marker in existingEventMarkers">
-                <span
-                    ng-init="entity = events[$index]"
-                    ui-map-marker="marker"
-                    ui-event="markerEvents"></span>
+	<!--<div id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents"></div>-->
+    <div id="eventmap"></div>
+    <div ng-controller="MarkerListController">
+        <!-- populate map with event markers -->
+        <div ng-repeat="marker in existingEventMarkers">
+            <span
+                ng-init="entity = events[$index]"
+                ui-map-marker="marker"
+                ui-event="markerEvents"></span>
 
-                <!-- create a hidden edit form for each event -->
-                <!--markers handle is there so current marker can be cleanly removed if need be-->
-                <div ng-init="event = entity" ng-controller="ExistingEventMarkerController">
-                    <div ng-show="isEditMode && showForm" ng-init="markers = existingEventMarkers"
-                         ng-include="'/templates/events/eventForm.html'" scope="" onload="">
-                    </div>
-                </div>
-            </div>
-            <div ng-repeat="marker in existingAmenityMarkers">
-                <span
-                        ng-init="entity = amenities[$index]"
-                        ui-map-marker="marker"
-                        ui-event="markerEvents"></span>
-
-                <div ng-init="amenity = entity" ng-controller="ExistingAmenityMarkerController">
-                    <div ng-show="isEditMode && showForm" ng-init="markers = existingAmenityMarkers"
-                         ng-include="'/templates/amenities/amenityForm.html'" scope="" onload="">
-                    </div>
-                </div>
-            </div>
-            <div ng-repeat="marker in existingAlertMarkers">
-                <span
-                    ng-init="entity = alerts[$index]"
-                    ui-map-marker="marker"
-                    ui-event="markerEvents"></span>
-
-                <div ng-init="alert = entity" ng-controller="ExistingAlertMarkerController">
-                    <div ng-show="isEditMode && showForm" ng-init="markers = existingAlertMarkers"
-                         ng-include="'/templates/alerts/alertForm.html'" scope="" onload="">
-                    </div>
-                </div>
-            </div>
-			<!-- write the tour marker -->
-            <div ng-repeat="marker in tourMarkers">
-                <span
-                        ng-init="entity = tourPoints[$index]"
-                        ui-map-marker="marker"
-                        ui-event="markerEvents"></span>
-                <div ng-controller="TourMarkerController">
+            <!-- create a hidden edit form for each event -->
+            <!--markers handle is there so current marker can be cleanly removed if need be-->
+            <div ng-init="event = entity" ng-controller="ExistingEventMarkerController">
+                <div ng-show="isEditMode && showForm" ng-init="markers = existingEventMarkers"
+                     ng-include="'/templates/events/eventForm.html'" scope="" onload="">
                 </div>
             </div>
         </div>
+        <div ng-repeat="marker in existingAmenityMarkers">
+            <span
+                    ng-init="entity = amenities[$index]"
+                    ui-map-marker="marker"
+                    ui-event="markerEvents"></span>
 
+            <div ng-init="amenity = entity" ng-controller="ExistingAmenityMarkerController">
+                <div ng-show="isEditMode && showForm" ng-init="markers = existingAmenityMarkers"
+                     ng-include="'/templates/amenities/amenityForm.html'" scope="" onload="">
+                </div>
+            </div>
+        </div>
+        <div ng-repeat="marker in existingAlertMarkers">
+            <span
+                ng-init="entity = alerts[$index]"
+                ui-map-marker="marker"
+                ui-event="markerEvents"></span>
+
+            <div ng-init="alert = entity" ng-controller="ExistingAlertMarkerController">
+                <div ng-show="isEditMode && showForm" ng-init="markers = existingAlertMarkers"
+                     ng-include="'/templates/alerts/alertForm.html'" scope="" onload="">
+                </div>
+            </div>
+        </div>
+		<!-- write the tour marker -->
+        <div ng-repeat="marker in tourMarkers">
+            <span
+                    ng-init="entity = tourPoints[$index]"
+                    ui-map-marker="marker"
+                    ui-event="markerEvents"></span>
+            <div ng-controller="TourMarkerController">
+            </div>
+        </div>
     </div>
+
 
     <!-- populate map with new markers/events -->
     <div ng-controller="NewMarkerListController">
@@ -104,7 +103,6 @@
 			  <img ng-show="currentEvent.type == 'tour'" ng-src="http://www.entangledspace.com/data/postImages/{{currentEvent.imageLoc}}" width="70" height="70">
 			  <h3>{{currentEvent.name}} <span>from &quot;{{currentEvent.tourName}}&quot;
 				  <br>by {{currentEvent.userName}}</span></h3>
-			 
 			</a>
 		  </div>
     </div>
