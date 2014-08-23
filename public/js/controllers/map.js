@@ -133,7 +133,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         }
 
     };
-       var map;
     var mapMinZoom = 14;
     var mapMaxZoom = 19;
     var mapBounds = new google.maps.LatLngBounds(
@@ -150,7 +149,13 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
       var opts = {
         streetViewControl: false,
         center: new google.maps.LatLng(0,0),
-        zoom: 14
+        panControl: true,
+        zoom: 14,
+        zoomControlOptions:{ 
+            position: google.maps.ControlPosition.TOP_LEFT,
+            style: google.maps.ZoomControlStyle.small
+        }
+
       };
       $scope.myMap = new google.maps.Map(document.getElementById('eventmap'), opts);
       $scope.myMap.setMapTypeId(google.maps.MapTypeId.HYBRID);

@@ -14,7 +14,7 @@
         <div class="main-header"><!--MAIN-HEADER-->
            <div ng-include="'templates/header.html'" data-role="navigation"></div>
         </div>
-        <div ng-show="isAlert()"ng-controller="AlertsController">
+        <div ng-hide="true"ng-controller="AlertsController">
             <div class="global-alerts"> 
                 <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
                     <div class="alert alert-danger" data-dismiss="alert" role="alert">
@@ -111,7 +111,7 @@
                });
             })
         </script>
-        <!--DEVELOPMENT HOME--><script src="http://192.168.1.5:35729/livereload.js?snipver=1"></script>
+        <!--DEVELOPMENT HOME<script src="http://192.168.1.5:35729/livereload.js?snipver=1"></script>-->
         <!--DEVELOPMENT WORK<script src="http://10.255.16.107:35729/livereload.js?snipver=1"></script>-->
     </body>
 </html>

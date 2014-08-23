@@ -1,6 +1,5 @@
 <section class="event-map" ng-controller="MapController" ng-init="mapInit()">
     <!-- render map. ui-map will be the name of scope property -->
-
 	<!--<div id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents"></div>-->
     <div id="eventmap"></div>
     <div ng-controller="MarkerListController">
@@ -104,7 +103,6 @@
 			  <img ng-show="currentEvent.type == 'tour'" ng-src="http://www.entangledspace.com/data/postImages/{{currentEvent.imageLoc}}" width="70" height="70">
 			  <h3>{{currentEvent.name}} <span>from &quot;{{currentEvent.tourName}}&quot;
 				  <br>by {{currentEvent.userName}}</span></h3>
-			 
 			</a>
 		  </div>
     </div>
