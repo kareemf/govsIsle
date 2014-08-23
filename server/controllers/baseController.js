@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash'),
+    redis = require('redis'),
     Lazy = require('lazy.js');
 
 var PaginationResponse = function(items, total, limit, offset){
@@ -20,6 +21,8 @@ module.exports = function(Model){
             _id: id
         }).populate('media', 'slug id').exec(callback);
     };
+
+    var redisClient = redis.createClient();
 
     return {
         /**
@@ -119,6 +122,9 @@ module.exports = function(Model){
                 } else {
                     permissionsManager.grantCreatorPermissions(req.user, doc);
                     doc.permissions = permissions;
+
+                    console.log(modelName + '.created', doc);
+                    redisClient.publish(modelName + '.created', JSON.stringify(doc));
                     res.jsonp(doc);
                 }
             });
