@@ -116,7 +116,7 @@ module.exports = function(server){
     stream.on('data', function (doc) {
         //note: there may be as few a 0 users connected at this point, meaning that noone may see this initial data
         //hence, it is stored in redis, so that it will be accessible to all who join later
-        console.log('Alert stream doc', doc, 'num_connections emitting to:', num_connections);
+        console.log('Alert stream doc', doc._id, 'num_connections emitting to:', num_connections);
 
         for(var socket in io.sockets.connected){
             var permissions = ascertainPermissions(socket, doc);
@@ -124,7 +124,7 @@ module.exports = function(server){
             //prevent user from viewing unpublished content unless they have permission to do so
             //see baseController.get for more details
             if(!doc.published && !_.contains(permissions, Alert.readUnpublishedPermission())){
-                console.log('user cant view unpublished Alert', doc);
+                console.log('user cant view unpublished Alert', doc._id);
                 continue;
             }
 

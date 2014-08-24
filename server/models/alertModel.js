@@ -19,7 +19,7 @@ var properties = _.extend(base.properties, {
 
 var AlertSchema = new Schema(properties, {
     toObject: { virtuals: true },
-    toJSON: { virtuals: true },
+    toJSON: { virtuals: true }
 });
 
 AlertSchema.virtual('permissions')
@@ -61,7 +61,7 @@ AlertSchema.statics.permissionsGrantedToAnon = function(){
         fieldPermissions['endDateTime'][readPermission],
         fieldPermissions['isReccuring'][readPermission],
         fieldPermissions['location'][readPermission],
-        fieldPermissions['geoLocation'][readPermission],
+        fieldPermissions['geoLocation'][readPermission]
     ];
 };
 

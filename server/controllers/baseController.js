@@ -24,6 +24,12 @@ module.exports = function(Model){
 
     var redisClient = redis.createClient();
 
+    var redisPublishOperation = function(doc, operation){
+        var redisEntityKey = modelName + '.' + operation;
+        console.log(redisEntityKey, doc);
+        return redisClient.publish(redisEntityKey, JSON.stringify(doc));
+    };
+
     return {
         /**
          * Find doc by id
@@ -123,8 +129,7 @@ module.exports = function(Model){
                     permissionsManager.grantCreatorPermissions(req.user, doc);
                     doc.permissions = permissions;
 
-                    console.log(modelName + '.created', doc);
-                    redisClient.publish(modelName + '.created', JSON.stringify(doc));
+                    redisPublishOperation(doc, 'created');
                     res.jsonp(doc);
                 }
             });
@@ -174,14 +179,14 @@ module.exports = function(Model){
 
                         var mediaController = require('./mediaController');
                         mediaController.create(req, res, function (mediaResponseJson) {
+                            redisPublishOperation(doc, 'updated');
                             res.jsonp(doc);
                         });
-
                     }
                     else{
+                        redisPublishOperation(doc, 'updated');
                         res.jsonp(doc);
                     }
-
                 }
             });
         },
@@ -203,6 +208,7 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to destroy doc. Error: ' + err);
                 } else {
+                    redisPublishOperation(doc, 'deleted');
                     res.jsonp(doc);
                 }
             });
@@ -334,6 +340,7 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
+                    redisPublishOperation(doc, 'updated');
                     res.jsonp(doc);
                 }
             });
