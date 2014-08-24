@@ -87,6 +87,27 @@ module.exports = function(server){
         });
     };
 
+    var emitToAllSockets = function(doc, channel) {
+
+        if (!channel) {
+            channel = 'alert';
+        }
+        for (var socket in io.sockets.connected) {
+            var permissions = ascertainPermissions(socket, doc);
+
+            //prevent user from viewing unpublished content unless they have permission to do so
+            //see baseController.get for more details
+            if (!doc.published && !_.contains(permissions, Alert.readUnpublishedPermission())) {
+                console.log('user cant view unpublished Alert', doc._id);
+                continue;
+            }
+
+            var _doc = stripDoc(doc, permissions);
+            console.log('emitting doc', doc._id, 'to socket', socket.id, 'on channel', channel);
+            io.sockets.connected[socket.id].emit(channel, _doc);
+        }
+    };
+
     io.sockets.on('connection', function(socket) {
         console.log('connection to socket', socket.id, '. num_connections:', ++num_connections);
 
@@ -118,19 +139,7 @@ module.exports = function(server){
         //hence, it is stored in redis, so that it will be accessible to all who join later
         console.log('Alert stream doc', doc._id, 'num_connections emitting to:', num_connections);
 
-        for(var socket in io.sockets.connected){
-            var permissions = ascertainPermissions(socket, doc);
-
-            //prevent user from viewing unpublished content unless they have permission to do so
-            //see baseController.get for more details
-            if(!doc.published && !_.contains(permissions, Alert.readUnpublishedPermission())){
-                console.log('user cant view unpublished Alert', doc._id);
-                continue;
-            }
-
-            var _doc = stripDoc(doc, permissions);
-            io.sockets.connected[socket.id].emit('alert', _doc);
-        }
+        emitToAllSockets(doc);
 
         redisKeyStoreClient.rpush('alerts', JSON.stringify(doc));
     });
@@ -143,13 +152,19 @@ module.exports = function(server){
         console.log('Alert stream closed');
     });
 
-    redisPubSubClient.on('pmessage', function(pattern, message){
-        console.log('redis - pattern', pattern, 'recieved message', message);
-        //ex[expecting message to be the result of JSON.stringify(doc)
-        //expecting alerts.created, alerts.updated, etc
-        var type = pattern.split('.')[0];
+    redisPubSubClient.on('pmessage', function(pattern, channel, message){
+        //ex[expecting message to be the result of JSON.stringify(doc), doc being a mongoose model
+        //expecting channel to be of the formar 'alerts.created', 'alerts.updated', etc
+        console.log('redis - pattern', pattern, 'recieved message', message, 'on channel', channel);
+
+        var type = channel.split('.')[1];
+        var _doc = JSON.parse(message);
+
+        emitToAllSockets(_doc, channel);
 
         if(type == 'created'){
+            console.log('created redis alert', _doc._id);
+
             redisKeyStoreClient.rpush('alerts', message);
         }
         else if(type == 'updated'){
@@ -157,8 +172,6 @@ module.exports = function(server){
                 if(err){
                     return err;
                 }
-                var _doc = jQuery.parseJSON(message);
-
                 items.forEach(function(item){
                     if( _doc._id != item._id){
                         return;
@@ -166,8 +179,8 @@ module.exports = function(server){
                     item = _doc;
                 });
 
+                console.log('updated redis alert', _doc._id);
                 redisKeyStoreClient.set('alerts', items);
-                io.sockets.connected[socket.id].emit('alerts', JSON.stringify(items));
             });
         }
         else if(type == 'deleted'){
@@ -175,13 +188,11 @@ module.exports = function(server){
                 if(err){
                    return err;
                 }
-                var _doc = JSON.parse(message);
                 var _docs = items.filter(function(item){
                     return _doc._id != item._id;
                 });
 
                 redisKeyStoreClient.set('alerts', _docs);
-                io.sockets.connected[socket.id].emit('alerts', JSON.stringify(_docs));
             });
         }
     });
