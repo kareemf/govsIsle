@@ -14,25 +14,26 @@
         <div class="main-header"><!--MAIN-HEADER-->
            <div ng-include="'templates/header.html'" data-role="navigation"></div>
         </div>
-        <div ng-hide="true"ng-controller="AlertsController">
+        <div ng-show="alerts && alerts.length" ng-controller="AlertsController">
             <div class="global-alerts"> 
                 <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
                     <div class="alert alert-danger" data-dismiss="alert" role="alert">
-                        <strong>3 pedding notifications!</strong> ...
+                        <strong>{{alerts.length}} pending alerts!</strong> ...
                     </div>
                 </a>
                 <div id="light" class="white-content">
                     <ul class="nav-inlineblock alertbox-header">
                         <li class="pull-left alertbtn"><span class="alertopen"></span></li>
-                        <li class="alert-title">SPECIAL ALERT</li> <!--We may want to change the title depending on the alert-->
+                        <li class="alert-title">{{alerts[0].type || uppercase}} ALERT</li> <!--We may want to change the title depending on the alert-->
                         <li class="pull-right alertclosingbtn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="alertclose"></span></a></li>
                     </ul> 
 
                     <ul class="list-notification">                  <!--TODO: type of alert and short message-->
-                        <li class="notif-dropdown">Weather: raining... </li>
-                        <div class="dropdownwrap"><p>Please find shelter. heavy rain fall in 1 hour</p></div>
-                        <li class="notif-dropdown">Park: park closing in 5 minutes...</li>
-                        <div class="dropdownwrap"><p>Please head to Manttan ferry, closing is in 10 minutes. there is no food on the island.</p></div>
+                        <li class="notif-dropdown">{{alerts[0].name}} </li>
+                        <div class="dropdownwrap"><p>{{alerts[0].description}}</p></div>
+                        <div class="notif-dropdown" ng-if="alerts[0].location"><p>Location: {{alerts[0].location}}</p></div>
+                        <li class="notif-dropdown">From: {{alerts[0].startDateTime | date:'dd/mm/yyyy hh:mm:ss a'}}</li>
+                        <li class="notif-dropdown">Until: {{alerts[0].startDateTime | date:'dd/mm/yyyy hh:mm:ss a'}}</li>
                     </ul>
                 </div>
                 <div id="fade" class="white-overlay"></div>
