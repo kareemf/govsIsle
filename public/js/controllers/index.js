@@ -4,6 +4,7 @@ var controllers = angular.module('app.controllers');
 
 controllers.controller('AppController', ['$scope', '$rootScope', '$http', 'Shared',
 function($scope, $rootScope, $http, Shared){
+
     var checkLoggedIn = function(callback){
         $http.get('/loggedin')
             .success(function(response) {
@@ -45,11 +46,13 @@ function($scope, $rootScope, $http, Shared){
         socket.on('alerts', function(alerts){
             console.log('alerts received', alerts);
             Shared.alerts = Shared.alerts.concat(alerts);
+            $scope.$apply();
         });
 
         socket.on('alert.created', function(alert){
             console.log('alert.created received', alert);
             Shared.alerts.push(alert);
+            $scope.$apply();
         });
 
         socket.on('alert.updated', function(alert){
@@ -60,6 +63,7 @@ function($scope, $rootScope, $http, Shared){
                 Shared.alerts[i] = alert;
                 break;
             }
+            $scope.$apply();
         });
 
         socket.on('alert.deleted', function(alert){
@@ -67,8 +71,13 @@ function($scope, $rootScope, $http, Shared){
             Shared.alerts = Shared.alerts.filter(function(_alert){
                return  alert._id != _alert._id;
             });
+            $scope.$apply();
         });
     };
 
     checkLoggedIn(connectToSocket);
+
+    $scope.$watch(function(){return Shared.alerts},function(){
+        $scope.alerts = Shared.alerts;
+    });
 }]);
