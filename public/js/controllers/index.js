@@ -43,13 +43,31 @@ function($scope, $rootScope, $http, Shared){
         });
 
         socket.on('alerts', function(alerts){
-            console.log('alerts recieved', alerts);
+            console.log('alerts received', alerts);
             Shared.alerts = Shared.alerts.concat(alerts);
         });
 
-        socket.on('alert', function(alert){
-            console.log('alert recieved', alert);
+        socket.on('alert.created', function(alert){
+            console.log('alert.created received', alert);
             Shared.alerts.push(alert);
+        });
+
+        socket.on('alert.updated', function(alert){
+            console.log('alert.updated received', alert);
+            Shared.alerts.push(alert);
+            for(var i = Shared.alerts.length - 1; i >= 0; i--){
+                var _alert = Shared.alerts[i];
+                if(alert._id !=_alert._id){ continue; }
+                _alert = alert;
+                break;
+            }
+        });
+
+        socket.on('alert.deleted', function(alert){
+            console.log('alert.deleted received', alert);
+            Shared.alerts = Shared.alerts.filter(function(_alert){
+               return  alert._id != _alert._id;
+            });
         });
     };
 
