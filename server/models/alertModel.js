@@ -55,6 +55,7 @@ AlertSchema.statics.permissionsGrantedToAnon = function(){
     return [
         readPermission,
         readListPermission,
+        fieldPermissions['name'][readPermission],
         fieldPermissions['type'][readPermission],
         fieldPermissions['description'][readPermission],
         fieldPermissions['startDateTime'][readPermission],
