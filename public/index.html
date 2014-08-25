@@ -7,14 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/application.css">
-        <link rel="stylesheet" type="text/css" href="css/addthisevent.css">
+        <!--<link rel="stylesheet" type="text/css" href="css/addthisevent.css">-->
         <title>Culture Island</title>
     </head>
     <body ng-controller="AppController">
         <div class="main-header"><!--MAIN-HEADER-->
            <div ng-include="'templates/header.html'" data-role="navigation"></div>
         </div>
-        <div ng-hide="true"ng-controller="AlertsController">
+        <div ng-controller="AlertsController" ng-hide="isAlert()">
             <div class="global-alerts"> 
                 <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
                     <div class="alert alert-danger" data-dismiss="alert" role="alert">
@@ -87,7 +87,8 @@
 		<audio id="audioPlayer"></audio>
         <!-- 3rd party Libraries-->
         <script type="text/javascript" src="libs/oms.min.js"></script>
-        <script src="https://maptilercdn.s3.amazonaws.com/klokantech.js"></script>
+        <script type="text/javascript"></script>
+        <!--<script src="https://maptilercdn.s3.amazonaws.com/klokantech.js"></script>-->
         <!--<script type="text/javascript" src="libs/maptiler.js"></script>-->
         <!--AddThisEvent-->
         <script type="text/javascript" src="https://addthisevent.com/libs/1.5.8/ate.min.js"></script>
