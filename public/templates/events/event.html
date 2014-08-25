@@ -7,8 +7,8 @@
     <a ng-href="events/{{event.slug}}" title="Add to Calendar" class="addthisevent">
         Add to Calendar
         <span class="arrow">&nbsp;</span>
-        <span class="_start">{{event.startDateTime | date:'dd/mm/yyyy hh:mm:ss tt'}}</span>
-        <span class="_end">{{event.startDateTime | date:'dd/mm/yyyy hh:mm:ss tt'}}</span>
+        <span class="_start">{{event.startDateTime | date:'dd/mm/yyyy hh:mm:ss a'}}</span>
+        <span class="_end">{{event.startDateTime | date:'dd/mm/yyyy hh:mm:ss a'}}</span>
         <span class="_zonecode">40</span>
         <span class="_summary">{{event.name}}</span>
         <span class="_description">{{event.description}}</span>
