@@ -228,6 +228,10 @@ a, a:link, a:hover, a:visited, a:active{
     font: 8px Verdana;
 }
 
+.notification-link{
+  background-color: pink !important;
+}
+
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
   .col-xs-12{width: 100%;

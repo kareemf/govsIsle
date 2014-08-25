@@ -2,9 +2,9 @@
     <div class="nav-ui">
     	<div class="container">
 	        <ul class="nav-inlineblock">
-	        	<li ng-hide="isActive(0)"class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activehome:isActive(0)}" class="glyphicon glyphicon-home"></span></a></li>
+	        	<li ng-hide="isActive(0)" class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activehome:isActive(0)}" class="glyphicon glyphicon-home"></span></a></li>
 	        	<!--<li ng-hide="!isActive(0)" class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{weather:isActive(0)}" class="resizeweather"></span></a></li>-->
-	        	<li ng-hide="!isActive(0)" class="pull-left navleft-btn"><i class="glyphicon glyphicon-globe"></i><span class="notification-counter">25</span></li>
+	        	<li ng-hide="!isActive(0)" class="pull-left navleft-btn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><i class="glyphicon glyphicon-globe"></i><span class="notification-counter">25</span>    </a></li>
 	            <li class="nav-gov-brand"><a ui-sref="/">GOVERNORS ISLAND</a></li>
 	            <li ng-hide="buttonswap()" class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicon glyphicon-info-sign"></span></a></li>
 	            <li ng-show="isActive(3)" class="pull-right navright-btn">
@@ -28,3 +28,20 @@
     </div>
 </nav>
 <div id="headerspacing"></div>
+<div class="global-alerts"> 
+    <div id="light" class="white-content">
+        <ul class="nav-inlineblock alertbox-header">
+            <li class="pull-left alertbtn"><span class="alertopen"></span></li>
+            <li class="alert-title">SPECIAL ALERT</li> <!--We may want to change the title depending on the alert-->
+            <li class="pull-right alertclosingbtn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="alertclose"></span></a></li>
+        </ul> 
+
+        <ul class="list-notification">                  <!--TODO: type of alert and short message-->
+            <li class="notif-dropdown">Weather: raining... </li>
+            <div class="dropdownwrap"><p>Please find shelter. heavy rain fall in 1 hour</p></div>
+            <li class="notif-dropdown">Park: park closing in 5 minutes...</li>
+            <div class="dropdownwrap"><p>Please head to Manttan ferry, closing is in 10 minutes. there is no food on the island.</p></div>
+        </ul>
+    </div>
+    <div id="fade" class="white-overlay"></div>
+</div>
