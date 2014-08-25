@@ -57,7 +57,7 @@ function($scope, $rootScope, $http, Shared){
             for(var i = Shared.alerts.length - 1; i >= 0; i--){
                 var _alert = Shared.alerts[i];
                 if(alert._id !=_alert._id){ continue; }
-                _alert = alert;
+                Shared.alerts[i] = alert;
                 break;
             }
         });
