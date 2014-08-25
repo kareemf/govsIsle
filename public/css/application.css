@@ -191,6 +191,43 @@ a, a:link, a:hover, a:visited, a:active{
 .alertclosingbtn{padding-top: 5px;padding-right: 5%;}
 .alert-title{font-family: 'guppy'; font-size: 24px; padding-top: 2px;}
 .fixme{background-color: green;}
+#weather-panel{
+  color:  #129068;
+  margin-top: 0px;
+  text-align: center;
+ /*background-color: red;*/
+  margin: 0;
+}
+.leftside{
+  float: left;
+  font-size: 50px;
+  padding-left: 10%;
+  background-color: inherit;
+  margin: inherit;
+}
+.rightside{
+  float: right;
+  padding: 18px 10% 18px 0;
+  font-size: 16px;
+  background-color: inherit;
+  margin: inherit;
+}
+.rightside p{
+  font-family: 'guppy';
+  font-size: 21px;
+  padding: 3px;
+  margin: 0;
+}
+.notification-counter {   
+    position: absolute;
+    top: 10px;left: 30px;
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 3px;
+    font: 8px Verdana;
+}
+
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
 @media screen and (max-width: 991px){
   .col-xs-12{width: 100%;
@@ -233,12 +270,17 @@ a, a:link, a:hover, a:visited, a:active{
 
 
 /*---==LANDING-CAROUSEL PAGE==---*/
-#mainCaro, #secCaro{
+#mainCaro{
   max-width: 700px;
   margin: 15px auto 0px auto;
  /* background-color: pink;*/
 }
-#secCaro{}
+#secCaro,#weather-panel, #eventCaro {
+    max-width: 700px;
+ margin: 0px auto 0px auto;
+  /*background-color: blue;*/
+
+}
 #mainCaro .carousel-indicators{
   position: absolute;
   top: 10px;left: 110%;
@@ -352,11 +394,11 @@ a, a:link, a:hover, a:visited, a:active{
 }
 /*LANING PAGE*/
 #landing .eventlist{
-  height: 220px;
+  height: 185px;
   overflow-x: auto;
   overflow-y: hidden;
   white-space:nowrap;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 #landing .eventlist li{
   max-width:230px;

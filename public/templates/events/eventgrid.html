@@ -26,7 +26,7 @@
 	</div>
 	<div class="clear"></div>
 	<section>
-		<h3 class="info-banner-left">SPECIAL EVENTS <span class="glyphicon glyphicon-boat"></span></h3>
+		<h3 class="info-banner-left">SPECIAL EVENTS</h3>
 		<ul class="eventlist">
 			<li ng-repeat="event in specialEvent">
 				<a ui-sref="events.detail({slug: event.slug})">
@@ -79,32 +79,4 @@
 		</ul>
 	</section>
 </div><br/>
-<script type="text/javascript">
-$(function() {
-  //Enable swiping...
-  $("#eventCaro .swapePanel").swipe({
-    //Generic swipe handler for all directions
-    swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-      //$(this).text("You swiped " + direction );
-      if(direction==="left"){
-        //$(this).text("You swiped " + direction );
-        $("#eventCaro").carousel('next');
-      }
-      if(direction==="right"){
-        //$(this).text("You swiped " + direction );
-         $("#eventCaro").carousel('prev');
-      }
-      if(direction===null){
-        //$(this).text("tap not working");
-      }
-    },
-    excludedElements:".testtest a",
 
-    //Default is 75px, set to 0 for demo so any distance triggers swipe
-    threshold:0,
-    allowPageScroll: "vertical",
-    triggerOnTouchEnd : true
-
-  });
-});
-</script>
