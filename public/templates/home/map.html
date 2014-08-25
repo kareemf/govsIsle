@@ -1,4 +1,4 @@
-<section class="event-map" ng-controller="MapController" ng-init="mapInit()">
+<section class="event-map" ng-controller="MapController"  ng-init="mapInit()">
     <!-- render map. ui-map will be the name of scope property -->
 	<!--<div id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents"></div>-->
     <div id="eventmap"></div>
@@ -53,9 +53,8 @@
         </div>
     </div>
 
-
     <!-- populate map with new markers/events -->
-    <div ng-controller="NewMarkerListController">
+    <div ng-controller="NewMarkerListController" class="newMarkerPanel">
         <div ng-repeat="marker in newMarkers"
             ui-map-marker="marker"
             ui-event="newMarkerEvents">
@@ -86,12 +85,10 @@
     </div>
 
     <!-- only one infoWindow, gets moved and populated dynamically -->
-	
 	<!-- put in ng-if and make second second section for handling tourpoint marker -->
     <div ui-map-info-window="myInfoWindow" id="myInfoWindow">
-		
 		   <div ng-show="currentEvent.type != 'tour'">
-			   <a class="black" ui-sref="events.detail({ slug: currentEvent.slug })">
+			  <a class="black" ui-sref="events.detail({ slug: currentEvent.slug })">
 			  <p>{{currentEvent.name}}</p>
 	 	      <p ng-show="currentEvent.type != 'tour'">{{currentEvent.description}}</p>
 	 	      <p ng-show="currentEvent.type != 'tour'">{{currentEvent.location}}</p>
@@ -107,9 +104,10 @@
 		  </div>
     </div>
 	
-
-	
-    <div ng-show="isAdmin">
+    <div ng-show="isAdmin" class="adminPanel">
+        <div class="info-banner"><!--both-->
+            <h3>Admin Panel</h3>
+        </div>
         Edit mode: <input type="checkbox" ng-model="isEditMode" ng-change="toggleEditMode(isEditMode)">
     </div>
 </section>

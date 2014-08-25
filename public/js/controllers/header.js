@@ -65,7 +65,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
     });
 
     //For the landing page area
-//    $scope.featured=$filter('SelecteByFeatured')('main');
+    //$scope.featured=$filter('SelecteByFeatured')('main');
     //TODO: only query fo featured Events
     Events.query(function(events){
         $scope.featured = events.filter(function(event){

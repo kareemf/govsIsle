@@ -181,7 +181,15 @@ a, a:link, a:hover, a:visited, a:active{
   background-color: #FB5751;
   text-align: center;
 }
-.list-notification li{padding: 5px; margin: 0;}
+.alert-indicator{
+  border-radius: 50%;
+  width: 15px;height: 15px; 
+  color: red;
+  background-color: red;
+  float: right;
+  padding-right: 0;
+}
+.list-notification li{padding: 5px; margin: 0; border-bottom: 1px solid #FFF;}
 .dropdownwrap{
     display:none;
     height:auto;
@@ -190,8 +198,8 @@ a, a:link, a:hover, a:visited, a:active{
     background-color:#434343;
     padding:10px;
 }
-.alertbtn{padding-top: 10px;padding-left: 8%;}
-.alertclosingbtn{padding-top: 5px;padding-right: 5%;}
+.alertbtn{padding-top: 10px;padding-left: 5%;}
+.alertclosingbtn{padding-top: 5px;padding-right: 4%;}
 .alert-title{font-family: 'guppy'; font-size: 24px; padding-top: 2px;}
 .fixme{background-color: green;}
 #weather-panel{
@@ -223,16 +231,12 @@ a, a:link, a:hover, a:visited, a:active{
 }
 .notification-counter {   
     position: absolute;
-    top: 10px;left: 30px;
+    top: -4px;left: 21px;
     background-color: rgba(212, 19, 13, 1);
     color: #fff;
     border-radius: 3px;
     padding: 1px 3px;
     font: 8px Verdana;
-}
-
-.notification-link{
-  background-color: pink !important;
 }
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
@@ -284,7 +288,7 @@ a, a:link, a:hover, a:visited, a:active{
 }
 #secCaro,#weather-panel, #eventCaro {
     max-width: 700px;
- margin: 0px auto 0px auto;
+    margin: 0px auto 0px auto;
   /*background-color: blue;*/
 
 }
@@ -581,6 +585,22 @@ ul.lead{list-style-type: none;}
 }
 /* -------====FERRY SCHEDULE END==--------- */
 
+.adminPanel{
+  position: relative;
+  bottom: -500px;left: 0px;
+  width: 200px;
+  color: #000;
+z-index: 10000;
+}
+
+.newMarkerPanel{
+  position: relative;
+  bottom: -500px;right: -325px;
+  color: #000;
+  background-color: black;
+
+ 
+}
 
 /*----------=ALL TOURS VIEW=-------------*/
 #allTours {
