@@ -16,7 +16,6 @@ var properties = _.extend(base.properties, {
     geoLocation: {type: [Number], index: '2d'},
     tourpointId: String //Entangled
 });
-var AlertSchema = new Schema(properties);
 
 var AlertSchema = new Schema(properties, {
     toObject: { virtuals: true },
@@ -56,13 +55,14 @@ AlertSchema.statics.permissionsGrantedToAnon = function(){
     return [
         readPermission,
         readListPermission,
+        fieldPermissions['name'][readPermission],
         fieldPermissions['type'][readPermission],
         fieldPermissions['description'][readPermission],
         fieldPermissions['startDateTime'][readPermission],
         fieldPermissions['endDateTime'][readPermission],
         fieldPermissions['isReccuring'][readPermission],
         fieldPermissions['location'][readPermission],
-        fieldPermissions['geoLocation'][readPermission],
+        fieldPermissions['geoLocation'][readPermission]
     ];
 };
 
