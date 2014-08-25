@@ -13,9 +13,9 @@ module.exports = function(server){
     var num_connections = 0;
     var socketId_user_map = {};
 
-    var ascertainPermissions = function(socket, doc){
+    var ascertainPermissions = function(socketId, doc){
         var permissions = permissionsManager.ascertainBasicPermissions(doc);
-        var user = socketId_user_map[socket.id];
+        var user = socketId_user_map[socketId];
 
         if(user){
             permissions = permissionsManager.ascertainPermissions(user, doc);
@@ -39,15 +39,15 @@ module.exports = function(server){
         return _doc;
     };
 
-    var filterDocs = function(socket, docs){
+    var filterDocs = function(socketId, docs){
         //remove the docs that user does not have permission to view
         //for remaining docs, remove fields that user does not have permission to view
         var _docs = [];
         docs.forEach(function(doc){
-            var permissions = ascertainPermissions(socket, doc);
+            var permissions = ascertainPermissions(socketId, doc);
 
             if(!doc.published && !_.contains(permissions, Alert.readUnpublishedPermission())){
-                console.log('user cant view unpublished Alert', doc);
+                console.log('socket', socketId, 'user cant view unpublished Alert', doc._id);
                 return;
             }
 
@@ -79,7 +79,7 @@ module.exports = function(server){
         //retrieve all previously emitted messages from redis and send to user
         getRedisItems('alerts',function(err, items){
             if(!err){
-                var _docs = filterDocs(socket, items);
+                var _docs = filterDocs(socket.id, items);
 
                 console.log('sending', _docs.length, 'out of', items.length,' items to socket', socket.id);
                 io.sockets.connected[socket.id].emit('alerts', _docs);
@@ -88,23 +88,22 @@ module.exports = function(server){
     };
 
     var emitToAllSockets = function(doc, channel) {
-
         if (!channel) {
             channel = 'alert';
         }
-        for (var socket in io.sockets.connected) {
-            var permissions = ascertainPermissions(socket, doc);
+        for (var socketId in io.sockets.connected) {
+            var permissions = ascertainPermissions(socketId, doc);
 
             //prevent user from viewing unpublished content unless they have permission to do so
             //see baseController.get for more details
             if (!doc.published && !_.contains(permissions, Alert.readUnpublishedPermission())) {
-                console.log('user cant view unpublished Alert', doc._id);
+                console.log('socket', socketId, 'user cant view unpublished Alert', doc._id);
                 continue;
             }
 
             var _doc = stripDoc(doc, permissions);
-            console.log('emitting doc', doc._id, 'to socket', socket.id, 'on channel', channel);
-            io.sockets.connected[socket.id].emit(channel, _doc);
+            console.log('emitting doc', doc._id, 'to socket', socketId, 'on channel', channel);
+            io.sockets.connected[socketId].emit(channel, _doc);
         }
     };
 

@@ -26,7 +26,7 @@ module.exports = function(Model){
 
     var redisPublishOperation = function(doc, operation){
         var redisEntityKey = modelName + '.' + operation;
-        console.log(redisEntityKey, doc);
+        console.log(redisEntityKey, doc._id);
         return redisClient.publish(redisEntityKey, JSON.stringify(doc));
     };
 
