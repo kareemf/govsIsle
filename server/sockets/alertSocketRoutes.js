@@ -79,7 +79,14 @@ module.exports = function(server){
         //retrieve all previously emitted messages from redis and send to user
         getRedisItems('alerts',function(err, items){
             if(!err){
-                var _docs = filterDocs(socket.id, items);
+                var _docs = [];
+
+                items.forEach(function(item){
+                   var _doc = JSON.parse(item);
+                    _docs.push(_doc);
+                });
+
+                _docs = filterDocs(socket.id, _docs);
 
                 console.log('sending', _docs.length, 'out of', items.length,' items to socket', socket.id);
                 io.sockets.connected[socket.id].emit('alerts', _docs);
@@ -139,8 +146,6 @@ module.exports = function(server){
         console.log('Alert stream doc', doc._id, 'num_connections emitting to:', num_connections);
 
         emitToAllSockets(doc);
-        emitToAllSockets(doc);
-
         redisKeyStoreClient.rpush('alerts', JSON.stringify(doc));
     });
 
