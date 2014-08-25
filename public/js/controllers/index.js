@@ -54,7 +54,6 @@ function($scope, $rootScope, $http, Shared){
 
         socket.on('alert.updated', function(alert){
             console.log('alert.updated received', alert);
-            Shared.alerts.push(alert);
             for(var i = Shared.alerts.length - 1; i >= 0; i--){
                 var _alert = Shared.alerts[i];
                 if(alert._id !=_alert._id){ continue; }
