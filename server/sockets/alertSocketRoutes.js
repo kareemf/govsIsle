@@ -139,6 +139,7 @@ module.exports = function(server){
         console.log('Alert stream doc', doc._id, 'num_connections emitting to:', num_connections);
 
         emitToAllSockets(doc);
+        emitToAllSockets(doc);
 
         redisKeyStoreClient.rpush('alerts', JSON.stringify(doc));
     });
@@ -171,15 +172,16 @@ module.exports = function(server){
                 if(err){
                     return err;
                 }
-                items.forEach(function(item){
-                    if( _doc._id != item._id){
-                        return;
-                    }
-                    item = _doc;
-                });
-
                 console.log('updated redis alert', _doc._id);
-                redisKeyStoreClient.set('alerts', items);
+
+                redisKeyStoreClient.del('alerts');
+                items.forEach(function(item){
+                    var __doc = JSON.parse(item);
+                    if( _doc._id == __doc._id){
+                        item = _doc;
+                    }
+                    redisKeyStoreClient.rpush('alerts', item);
+                });
             });
         }
         else if(type == 'deleted'){
