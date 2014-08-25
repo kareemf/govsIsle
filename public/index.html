@@ -15,6 +15,7 @@
         <div class="main-header"><!--MAIN-HEADER-->
            <div ng-include="'templates/header.html'" data-role="navigation"></div>
         </div>
+
         <div ng-controller="AlertsController">
             <div ng-hide="isAlert()" ng-include=" 'templates/alerts/alerts.html' " data-role="alerts"></div>
         </div>
@@ -42,6 +43,7 @@
         <script type="text/javascript" src="bower_components/angular-ui-utils/ui-utils.min.js"></script>
         <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.min.js"></script>
         <script type="text/javascript" src="bower_components/jquery-touchswipe/jquery.touchSwipe.min.js"></script>
+        <script type="text/javascript" src="bower_components/socket.io-client/socket.io.js"></script>
         <!--Front-end Controllers-->
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/services/shared.js"></script>
@@ -63,7 +65,7 @@
         <script type="text/javascript" src="js/controllers/amenities.js"></script>
         <script type="text/javascript" src="js/controllers/alerts.js"></script>
         <script type="text/javascript" src="js/controllers/header.js"></script>
-		<script type="text/javascript" src="js/controllers/tours.js"></script>
+        <script type="text/javascript" src="js/controllers/tours.js"></script>
 		<audio id="audioPlayer"></audio>
         <!-- our party libraries-->
         <!--<script type="text/javascript" src="js/carousel.js"></script>-->

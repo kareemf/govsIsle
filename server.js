@@ -5,7 +5,8 @@
  */
 var mongoose = require('mongoose'),
     passport = require('passport'),
-    logger = require('mean-logger');
+    logger = require('mean-logger'),
+    appPath = process.cwd();
 
 /**
  * Main application entry file.
@@ -22,8 +23,17 @@ var db = mongoose.connect(config.db);
 var app = require('./server/config/system/bootstrap')(passport, db);
 
 // Start the app by listening on <port>, optional hostname
-app.listen(config.port, config.hostname);
+var server = app.listen(config.port, config.hostname);
 console.log('Mean app started on port ' + config.port + ' (' + process.env.NODE_ENV + ')');
+
+function bootstrapSocketRoutes() {
+    require('./server/config/util').walk(appPath + '/server/sockets', null, function(path) {
+        console.log('require socket router', path);
+        require(path)(server);
+    });
+}
+
+bootstrapSocketRoutes();
 
 // Initializing logger
 logger.init(app, passport, mongoose);

@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash'),
+    redis = require('redis'),
     Lazy = require('lazy.js');
 
 var PaginationResponse = function(items, total, limit, offset){
@@ -19,6 +20,14 @@ module.exports = function(Model){
         Model.findOne({
             _id: id
         }).populate('media', 'slug id').exec(callback);
+    };
+
+    var redisClient = redis.createClient();
+
+    var redisPublishOperation = function(doc, operation){
+        var redisEntityKey = modelName + '.' + operation;
+        console.log(redisEntityKey, doc._id);
+        return redisClient.publish(redisEntityKey, JSON.stringify(doc));
     };
 
     return {
@@ -119,6 +128,8 @@ module.exports = function(Model){
                 } else {
                     permissionsManager.grantCreatorPermissions(req.user, doc);
                     doc.permissions = permissions;
+
+                    redisPublishOperation(doc, 'created');
                     res.jsonp(doc);
                 }
             });
@@ -159,7 +170,8 @@ module.exports = function(Model){
                 if (err) {
                     var data = {errors: err.errors};
                     data[modelName] = doc;
-                    return new Error('Failed to update doc. Error: ' + err);
+                    console.error('Failed to update', modelName, 'doc', doc.id, '. Error: ' + err);
+                    return res.send(500);
                 } else {
                     //if a cover photo, etc, was uploaded, create the Media instance.
                     if(files && Object.keys(files).length) {
@@ -168,14 +180,14 @@ module.exports = function(Model){
 
                         var mediaController = require('./mediaController');
                         mediaController.create(req, res, function (mediaResponseJson) {
+                            redisPublishOperation(doc, 'updated');
                             res.jsonp(doc);
                         });
-
                     }
                     else{
+                        redisPublishOperation(doc, 'updated');
                         res.jsonp(doc);
                     }
-
                 }
             });
         },
@@ -197,6 +209,7 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to destroy doc. Error: ' + err);
                 } else {
+                    redisPublishOperation(doc, 'deleted');
                     res.jsonp(doc);
                 }
             });
@@ -328,6 +341,7 @@ module.exports = function(Model){
                     data[modelName] = doc;
                     return new Error('Failed to update doc. Error: ' + err);
                 } else {
+                    redisPublishOperation(doc, 'updated');
                     res.jsonp(doc);
                 }
             });
