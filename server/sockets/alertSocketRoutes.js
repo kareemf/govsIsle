@@ -164,7 +164,6 @@ module.exports = function(server){
 
         if(type == 'created'){
             console.log('created redis alert', _doc._id);
-
             redisKeyStoreClient.rpush('alerts', message);
         }
         else if(type == 'updated'){
@@ -178,7 +177,7 @@ module.exports = function(server){
                 items.forEach(function(item){
                     var __doc = JSON.parse(item);
                     if( _doc._id == __doc._id){
-                        item = _doc;
+                        item = JSON.stringify(_doc);
                     }
                     redisKeyStoreClient.rpush('alerts', item);
                 });
@@ -189,11 +188,16 @@ module.exports = function(server){
                 if(err){
                    return err;
                 }
-                var _docs = items.filter(function(item){
-                    return _doc._id != item._id;
-                });
+                console.log('deleted redis alert', _doc._id);
 
-                redisKeyStoreClient.set('alerts', _docs);
+                redisKeyStoreClient.del('alerts');
+                items.forEach(function(item){
+                    var __doc = JSON.parse(item);
+                    if( _doc._id == __doc._id){
+                        return;
+                    }
+                    redisKeyStoreClient.rpush('alerts', item);
+                });
             });
         }
     });
