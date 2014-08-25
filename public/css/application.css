@@ -64,6 +64,9 @@ a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
   color: #FFF;
 }
+
+.black, .black a{color: #000000 !important;}
+
 #curatedlist a ,#artistlist a , #tourPoints a, .eventlist a, #light a,#fade a{
   color: #000;
 }
