@@ -1,5 +1,5 @@
 var _ = require('lodash'),
-    redis = require('redis'),
+    redis = require('../config/redis'),
     socketIo = require('socket.io'),
     mongoose = require('mongoose'),
     Alert = mongoose.model('Alert'),
