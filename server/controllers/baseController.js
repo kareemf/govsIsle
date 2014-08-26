@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash'),
-    redis = require('redis'),
+    redis = require('../config/redis'),
     Lazy = require('lazy.js');
 
 var PaginationResponse = function(items, total, limit, offset){
