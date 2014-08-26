@@ -46,7 +46,7 @@
 	</ul>
 	<h3 id="artistLabel">ARTIST CONTRIBUTORS</h3>
 	<ul id="artistlist" class="tourlist"> 
-		<li data-ng-repeat="tour in allTours">
+		<li data-ng-repeat="tour in contributedTours">
 			<a ui-sref="tourlist({ id: tour.id })">
 				<img ng-src="{{getImageSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
 				<div class="caption">

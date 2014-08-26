@@ -45,8 +45,8 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
 controllers.controller('NavController', ['$scope','$location', '$filter','NavService', 'Shared', 'Events', function($scope, $location, $filter, NavService, Shared, Events){
     console.log('In NavController');
     var path = $location.path();
-
-    var paths=["/","/about","/events/grid","/events/map","/tours","/ferry", "/events/list"];
+    //0 1 2 3...
+    var paths=["/","/about","/events/grid","/events/map","/tours","/ferry", "/events/list", '/weather'];
 
     $scope.currentLink=paths.indexOf(path);
     console.log($scope.currentLink+"link");
@@ -65,7 +65,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
     });
 
     //For the landing page area
-//    $scope.featured=$filter('SelecteByFeatured')('main');
+    //$scope.featured=$filter('SelecteByFeatured')('main');
     //TODO: only query fo featured Events
     Events.query(function(events){
         $scope.featured = events.filter(function(event){
@@ -80,7 +80,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
         return (tmp===0);
     };
     */
-    var allFilters = Shared.allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event'];
+    var allFilters = Shared.allFilters = ['info', 'food', 'drink', 'activity', 'venue', 'facility', 'tour', 'event', 'alert'];
     $scope.filters = allFilters;
 
     $scope.toggleFilters = function(oneOrMoreFilters){
@@ -120,7 +120,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
 
     $scope.isFilterActive = function(filter){
         var filters = $scope.filters;
-        for(var i = filters.length - 1; i > 0; i--){
+        for(var i = filters.length - 1; i >= 0; i--){
             if(filters[i] === filter){
                 return true;
             }
@@ -128,3 +128,10 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
         return false;
     }
 }]);
+controllers.controller('AlertsController', ['$scope', function($scope){
+    console.log('In AlertsController');
+    $scope.isAlert = function(){
+        return true;
+    }
+}]);
+

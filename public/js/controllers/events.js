@@ -8,7 +8,7 @@ controllers.controller('BaseEventMarkerController', ['$scope', '$controller', 'E
     $scope.Resource = Events;
     $scope.baseUrl = 'api/v1/events/';
 
-    var marker = $scope.marker
+    var marker = $scope.marker;
 
     $scope.saveSuccessCallback = function(event, headers){
         //save successful, close the form
@@ -181,15 +181,6 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
 
 controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','$filter', function($scope, $state, $stateParams, Events, $filter){
     console.log('In EventListController');
-
-    // $scope.featured=$filter('SelecteByFeatured')('event');
-
-    // $scope.specialEvent=$filter('SelecteByType')('event');
-    // $scope.parkServices=$filter('SelecteByType')('tour');
-    // $scope.venues=$filter('SelecteByType')('venue');
-    // $scope.activities=$filter('SelecteByType')('activity');
-    // $scope.eventList=$filter('allData');
-
     Events.query(function(events){
         $scope.eventList = events;
         $scope.activities = events.filter(function(event){
@@ -207,39 +198,37 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
         $scope.featured = events.filter(function(event){
             return event.isFeatured && event.isFeatured.indexOf('event') >=0;
         });
+
+
     });
+    console.log("event array "+$scope.specialEvent);
 }]);
 
-controllers.controller('EventMapController', ['$scope', '$state','$stateParams','Events', function($scope, $state, $stateParams, Events){
+controllers.controller('EventMapController', ['$scope','Events', function($scope,Events){
     console.log('In EventListController');
-    //var view = $stateParams.view;
-    //view = view ? view : 'map';
     var map;
-    var mapMinZoom = 15;
-    var mapMaxZoom = 17;
+    var mapMinZoom = 14;
+    var mapMaxZoom = 19;
     var mapBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(40.682183, -74.027019),
-        new google.maps.LatLng(40.695688, -74.008764));
+      new google.maps.LatLng(40.682146, -74.027796),
+      new google.maps.LatLng(40.695640, -74.009978));
+
     var mapGetTile = function(x,y,z) {
-        return "templates/map/"+z + "/" + x + "/" + y + ".png";
+        return "templates/maps/"+z + "/" + x + "/" + y + ".png";
     }
 
-    var mapOptions = {
-        center: new google.maps.LatLng(40.682183, -74.027019),
-        streetViewControl: false,
-        panControl: true,
-        zoom: 15,
-        maxZoom: mapMaxZoom,
-        minZoom: mapMinZoom,
-        mapTypeId: google.maps.MapTypeId.HYBRID
-    };
 
     $scope.init = function() {
-
-        map = new google.maps.Map(document.getElementById('eventmap'), mapOptions);
-        map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-        map.fitBounds(mapBounds);
-        var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
-        var opacitycontrol = new klokantech.OpacityControl(map, maptiler);
+      var opts = {
+        streetViewControl: false,
+        center: new google.maps.LatLng(0,0),
+        zoom: 14
+      };
+      map = new google.maps.Map(document.getElementById('eventmap'), opts);
+      map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+      map.fitBounds(mapBounds);
+      var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
+      var opacitycontrol = new klokantech.OpacityControl(map, maptiler);
     };
+
 }]);

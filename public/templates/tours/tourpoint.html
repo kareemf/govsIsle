@@ -1,12 +1,21 @@
 <div id="point" ng-controller="TourpointDetailController">
 	
-	<div id="pointImg">
-		<img src="{{getImageSrc(tourpoint.imageLoc)}}">
+	<div id="mainTourImg" class="carousel slide" data-ride="carousel">
+		<a ui-sref="tourpoint({ id: tourpoint.prevPoint })" class="left carousel-control" role="button" data-slide="prev" ng-show="tourpoint.prevPoint !== null">
+		 	   <span class="glyphicon glyphicon-chevron-left"></span>
+		</a>
+		<a ui-sref="tourpoint({ id: tourpoint.nextPoint })" class="right carousel-control" role="button" data-slide="next" ng-show="tourpoint.nextPoint !== null">
+		 	   <span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+		<div id="pointImg">
+			<img src="{{getImageSrc(tourpoint.imageLoc)}}">
+		</div>
+		<div class="audioPlayer">
+			<button ng-click="play()" class="button" ng-show="!playing"><img src="../images/detail_play.png"></button>
+			<button ng-click="stop()" class="button" ng-show="playing"><img src="../images/detail_pause.png"></button>
+		</div>
 	</div>
-	<div class="audioPlayer">
-		<button ng-click="play()" class="button" ng-show="!playing"><img src="../images/detail_play.png"></button>
-		<button ng-click="stop()" class="button" ng-show="playing"><img src="../images/detail_pause.png"></button>
-	</div>
+	
 	<div id="pointInfo">
 		<h3>{{tourpoint.postName}}</h3>
 		<p id="info">

@@ -33,7 +33,8 @@ module.exports = function(Model){
 
             var documentId = permission.documentId;
             if(documentId){
-                if(!doc || !documentId.equals(doc.id)) {
+                //if(!doc || !documentId.equals(doc.id)) {
+                if(!doc || !documentId === doc.id) {
                     //this permission is meant to be applied to a specific doc
                     //either no doc was specified or doc does not match permission
 
@@ -133,7 +134,7 @@ module.exports = function(Model){
                     console.log('DIRTY FIELD', field);
 
                     if(!modelFieldPermissions[field]){
-                        //attempting to update a field that is not a part of the model
+                        console.log('attempting to update field "', field, '" that is not part of the model', Model.modelName);
                         delete body[field];
                         continue;
                     }

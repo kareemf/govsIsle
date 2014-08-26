@@ -3,20 +3,20 @@
     * Type:
     <select
             ng-model="event.type"
-            ng-options="type for type in ['event', 'info', 'food', 'drink', 'tour', 'activity', 'facility']">
+            ng-options="type for type in ['event', 'info', 'food', 'drink', 'tour', 'venue','activity', 'facility']">
         <option value="">-- choose type of amenity --</option>
     </select>
     <br>
-    Featured: <select multiple
+    Featured:
+    <select multiple
             ng-model="event.isFeatured"
-            ng-options="carousel for carousel in ['main', 'event', 'tour']">
-        <option value="">-- choose type of amenity --</option>
+            ng-options="carousel for carousel in ['main', 'event', 'tour', null]">
     </select>
     <br>
     Desc: <textarea ng-model="event.description"></textarea><br />
-    <!--Type: <input type="text" ng-model="event.type" /><br />-->
     <!--Vis: <input type="text" ng-model="event.visibility" /><br />-->
     <!--Recurring: <input type="checkbox" ng-model="event.isReccuring" /><br />-->
+    All Day Event: <input type="checkbox" ng-model="event.isAllDayEvent" /><br />
     Setup: <input  type="text" ng-model="event.setupDateTime" /><br />
     Start: <input type="text" ng-model="event.startDateTime" /><br />
     End: <input type="text" ng-model="event.endDateTime" /><br />
@@ -24,8 +24,17 @@
     Anticipated Attendance: <input type="number" ng-model="event.anticipatedAttendance" /><br />
     Location: <input type="text" ng-model="event.location" /><!--<button ng-click="lookupGeo(event, marker)">Lookup Coords</button--><br />
     Coords: <input type="text" ng-model="event.geoLocation" /><br/><!--<button ng-click="lookupLocation(event, marker)">Lookup Location</button><br />-->
+    Tourpoint ID: <input type="text" ng-model="event.tourpointId" /><br/>
+
+    Organizer: <input type="text" ng-model="event.organizer.name" /><br/>
+    Email: <input type="text" ng-model="event.organizer.email" /><br/>
+    Phone: <input type="text" ng-model="event.organizer.phone" /><br/>
+
+
     Published: <input type="checkbox" ng-model="isPublished" ng-change="togglePublished(event)"/>
-    <br><br>You will be able to upload an image after the initial save<br>
+    <br><br>
+    <span ng-show="!event.id">You will be able to upload an image after the initial save</span>
+    <br>
     <span class="error" ng-show="error">Error: {{error}}</span><br>
     <button ng-show="event.id" ng-click="update(event, marker)">Edit</button>
     <button ng-show="!event.id" ng-click="save(event, marker)">Save</button>

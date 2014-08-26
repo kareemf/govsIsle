@@ -4,28 +4,24 @@ html{
   min-height: 100%;
 }
 @font-face {
-  font-family: myFirstFont;
-	src: url(../font/dinregularwebfont.ttf);
+    font-family: 'guppy';
+    src: url('../fonts/GuppySans.otf');
 }
 @font-face {
-    font-family: govsle;
-    src: url(../font/DINEngschriftStd.otf);
+    font-family: 'govsle';
+    src: url('../fonts/DINEngschriftStd.otf');
 }
+
 @font-face {
-    font-family: guppy;
-    src: url(../font/GuppySans.otf);
-}
-@font-face {
-    font-family: avenyt;
-    src: url(../font/AvenyT.otf);
+    font-family: 'avenyt';
+    src: url('../fonts/AvenyT.otf');
 }
 body{
-  height: 100%; width: 100%; 
+  height: 100%; width: 100%;
   background-color: #E7E7E7;
-  /*background-color: #FFF;*/
   color: black;
-  min-width: 250px;
-  font-family: Arial;
+  min-width: 300px;
+  font-family: Arial, verdana, helvetica;
   font-size: 16px;
 }
 /* HTML5 display-role reset for older browsers */
@@ -33,7 +29,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
-
 /*GENERAL STYLING AREA*/
 .clear{clear: both;}
 .header-shadow{
@@ -44,7 +39,8 @@ footer, header, hgroup, menu, nav, section {
 .lead{padding-right: 25px; padding-left: 25px;}
 /*SPECIAL CASES*/
 .navSpacingFix{margin-top: 85px;}
-.gov-size{font-size: 26px;font-family: govsle;}
+.gov-size{font-size: 26px;font-family: 'govsle';}
+#headerspacing{margin-top: 60px;}
 
 /*SITE COLORS*/
 .information{background-color: #ff9900;}
@@ -58,19 +54,23 @@ footer, header, hgroup, menu, nav, section {
 .hrstyle{
     border: 0;
     height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
 /* ALL LINKS*/
 a, a:link, a:hover, a:visited, a:active{
   text-decoration: none;
   color: #FFF;
 }
-#curatedlist a ,#artistlist a , #tourPoints a, .eventlist a{
+
+.black, .black a{color: #000000 !important;}
+
+#curatedlist a ,#artistlist a , #tourPoints a, .eventlist a, #light a,#fade a{
   color: #000;
 }
+
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
   height: 60px;
@@ -79,7 +79,6 @@ a, a:link, a:hover, a:visited, a:active{
   z-index: 9999;
   min-width: 300px;
   /*border-bottom: 1px solid #E7E7E7;*/
-  background: #129068;
   background: -moz-linear-gradient(top,  #129068 0%, #3b9d71 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#129068), color-stop(100%,#3b9d71));
   background: -webkit-linear-gradient(top,  #129068 0%,#3b9d71 100%);
@@ -99,10 +98,9 @@ a, a:link, a:hover, a:visited, a:active{
 }
 .nav-gov-brand{
   color: white;
-  font-size: 36px;
+  font-size: 34px;
   text-align: left;
-  font-family: guppy;
-  text-align: left;
+  font-family: 'guppy';
 }
 .nav-inlineblock li{
   display: inline-block;
@@ -112,13 +110,8 @@ a, a:link, a:hover, a:visited, a:active{
   display: inline-block;
   list-style-type: none;
 }
-.navright-btn{padding-right: 10px;}  
+.navright-btn{padding-right: 10px;}
 .navleft-btn{padding-left: 10px;}
-.center-brand{
-  text-align: center;
-  vertical-align: top;
-  display: inline-block;
-}
 /*MAIN-FOOTER NAVIGATION*/
 .map-ui{
   height: 70px; width: 100%;
@@ -126,7 +119,6 @@ a, a:link, a:hover, a:visited, a:active{
   padding-top: 10px;
   background-color: #4F535E;
   color: white;
-
   font-size:45px;
   text-align: center;
 }
@@ -160,8 +152,91 @@ a, a:link, a:hover, a:visited, a:active{
 .nav-map{ padding-left: 6%; padding-right: 5%;}
 .nav-end{padding-left: 6%;}
 
-.black{
-    color: #000000 !important;
+.alert{margin-bottom: 0px;}
+.global-alerts{margin:0px;}
+.white-overlay{
+  display: none;
+  position: fixed;
+  top: 0;left: 0;
+  width: 100%;height: 100%;
+  background-color: #FFF;
+  z-index:1001;
+  -moz-opacity: 0.8;
+  opacity:.80;
+  filter: alpha(opacity=80);
+}
+.white-content{
+  display: none;
+  position: fixed;
+  top: 15%;left: 10%;
+  width: 80%;height: 60%;
+  background-color: black;
+  z-index:1002;
+  color: #FFF;
+  overflow: auto;
+}
+.alertbox-header{
+  width: 100%; height: 50px;
+  line-height: 50px;
+  background-color: #FB5751;
+  text-align: center;
+}
+.alert-indicator{
+  border-radius: 50%;
+  width: 15px;height: 15px; 
+  color: red;
+  background-color: red;
+  float: right;
+  padding-right: 0;
+}
+.list-notification li{padding: 5px; margin: 0; border-bottom: 1px solid #FFF;}
+.dropdownwrap{
+    display:none;
+    height:auto;
+    float:center;
+    margin:0px 0px 0px 0px;
+    background-color:#434343;
+    padding:10px;
+}
+.alertbtn{padding-top: 10px;padding-left: 5%;}
+.alertclosingbtn{padding-top: 5px;padding-right: 4%;}
+.alert-title{font-family: 'guppy'; font-size: 24px; padding-top: 2px;}
+.fixme{background-color: green;}
+#weather-panel{
+  color:  #129068;
+  margin-top: 0px;
+  text-align: center;
+ /*background-color: red;*/
+  margin: 0;
+}
+.leftside{
+  float: left;
+  font-size: 50px;
+  padding-left: 10%;
+  background-color: inherit;
+  margin: inherit;
+}
+.rightside{
+  float: right;
+  padding: 18px 10% 18px 0;
+  font-size: 16px;
+  background-color: inherit;
+  margin: inherit;
+}
+.rightside p{
+  font-family: 'guppy';
+  font-size: 21px;
+  padding: 3px;
+  margin: 0;
+}
+.notification-counter {   
+    position: absolute;
+    top: -4px;left: 21px;
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 3px;
+    font: 8px Verdana;
 }
 
 /*RESPONSIVE NAVIGATION WITH MEDIA QUERIES*/
@@ -175,10 +250,15 @@ a, a:link, a:hover, a:visited, a:active{
     padding: 0px 0px 0px 0px;
   }
 }
-@media screen and (max-width: 253px){
-  #custom-nav{height: 55px;}
+@media (max-width: 308px){
+  /*stop header breakage*/
+  .nav-gov-brand{
+    font-size: 30px;
+  }
 }
-
+@media (max-width: 320px){
+  /*iphone optimization */
+}
 /*the max page size should remain 1004px*/
 @media (min-width: 992px) {
   .container {
@@ -193,47 +273,54 @@ a, a:link, a:hover, a:visited, a:active{
 
 
 /*THE MAIN CONTENT AKA THE MIDDLE SECTION*/
-.main-content{margin-top: 60px;}
+.main-content{margin: 0px;}
 /*THE MAIN FOOTER AKA THE FOOTER*/
 .main-footer{
   margin-bottom: 30px; /*lower navigation bar*/
 }
 
 
-/*---==CAROUSEL-LANDING PAGE==---*/
+/*---==LANDING-CAROUSEL PAGE==---*/
 #mainCaro{
-  margin-top: 15px;
+  max-width: 700px;
+  margin: 15px auto 0px auto;
+ /* background-color: pink;*/
+}
+#secCaro,#weather-panel, #eventCaro {
+    max-width: 700px;
+    margin: 0px auto 0px auto;
+  /*background-color: blue;*/
+
 }
 #mainCaro .carousel-indicators{
   position: absolute;
-  top: 10px;
-  left: 110%;
+  top: 10px;left: 110%;
   z-index: 200;
-  height: 25px;
-  width: 50px;
+  height: 25px;width: 50px;
   /*background-color: blue;*/
+} 
+#mainCaro .carousel-inner,#mainCaro .item{
+ max-height: 300px;
+
 }
+
 #mainCaro .swapePanel, #allEvents .swapePanel{
   position: absolute;
   z-index: 0;
-  top: 0;
-  bottom: 0;
+  top: 0;bottom: 0;
   width: 100%;
-  color: white;
   /*background-color: black;*/
 }
 #mainCaro .carousel-caption{
   position: absolute;
-  top: 0px;
-  left:-5px;
-  height: 50px;
-  width: 75%;
-  padding: 5px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
+  left: 15px;top: 10px;
+  width: 75%;height: 50px;
+  font-family: 'govsle';
+  font-size: 20px;
+  text-align: left;
+  padding: 0px 0px 0px 0px;
   z-index: 200px;
   color: white;
-  font-family: govsle;
-  font-size: 20px;
   /*background-color: red;*/
   /*opacity: 0.5;*/
 }
@@ -243,56 +330,37 @@ a, a:link, a:hover, a:visited, a:active{
   text-align: center;
   right: 0; bottom: 10px;
   width: 100px;height: 25px;
-  font-family: govsle;
+  font-family: 'govsle';
   font-size: 20px;
   background-color: white;
   color: black;
   opacity: 0.7;
 }
-.img-container{
-  background-color: #FFF;
-  height: 100%;width:100%;
-}
-.img-custom{
-    display: block;
-    margin: 0 auto;
-    width: 90%;
-}
-.img-custom-lg{
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    z-index: 300;
+#mainCaro .img-responsive{
+   margin: 0 auto;
+   width: 100%;
     /*padding-top: 20px;
     padding-bottom: 20px;*/
 }
+
 /*DETAIL VIEW*/
-.img-detail{
-  width: 100%;
-}
-.carousel-control{
-  height: inherit;
-}
+.img-detail{ width: 100%;}
+.carousel-control{ height: inherit;}
 .carousel-control.left, .carousel-control.right{
     /*background-image: none;*/
     font-size: 2em;
     padding: 0;
     margin: 0;
 }
-.btn-custom{
-  background-color: #5FA77A;
-}
+.btn-custom{ background-color: #5FA77A; }
 /*----------====SECOND CAROUSEL====-------*/
-#myCarousel{
-  margin-top: 15px;
-}
-
+#myCarousel{margin-top: 15px;}
 #myCarousel .carousel-inner .active.left { left: 0px;}
 #myCarousel .carousel-inner .next        { left: 0px;}
 #myCarousel .carousel-inner .prev        { left: 0px;}
 
-#myCarousel .item{  
-  white-space: nowrap; 
+#myCarousel .item{
+  white-space: nowrap;
   overflow: hidden;
 }
 #myCarousel .carousel-control{
@@ -333,18 +401,17 @@ a, a:link, a:hover, a:visited, a:active{
   font-size: 36px;
   vertical-align: middle;
   text-align: center;
-  font-family: myFirstFont;
   padding-top: 25px;
 }
 /*LANING PAGE*/
 #landing .eventlist{
-  height: 220px;
+  height: 185px;
   overflow-x: auto;
   overflow-y: hidden;
   white-space:nowrap;
-  margin-top: 10px;
+  margin-top: 0px;
 }
-#landing .eventlist li{ 
+#landing .eventlist li{
   max-width:230px;
   padding: 10px;
   display:inline-block;
@@ -353,19 +420,16 @@ a, a:link, a:hover, a:visited, a:active{
   vertical-align:top;
   /*box-shadow: 1px 1px 10px #999;*/
 }
-
 .card{
   position: absolute;
   left: 0;bottom: 10px;
   width: 100px;height: 25px;
-  font-family: govsle;
+  font-family: 'govsle';
   font-size: 20px;
   background-color: #FFF;
   color: black;
   opacity: 0.7;
   text-align: center;
-  transition:all 0.6s ease;
-  transform-style: preserve-3d;
 }
 /*---------=EVENTGRID View=--------------*/
 #allEvents{background-color: #FFF;}
@@ -389,7 +453,7 @@ a, a:link, a:hover, a:visited, a:active{
   padding: 0px 0px 0px 10px;
   margin: 0px 0px 0px 0px;
   color: white;
-  font-family: govsle;
+  font-family: 'govsle';
   font-size: 20px;
   filter:alpha(opacity=80);opacity: .8;
   background-color: #000;
@@ -401,7 +465,7 @@ a, a:link, a:hover, a:visited, a:active{
   white-space:nowrap;
   border-bottom: solid 2px gray;
 }
-#allEvents .eventlist li{ 
+#allEvents .eventlist li{
   max-width:230px;
   padding: 10px;
   display:inline-block;
@@ -410,7 +474,7 @@ a, a:link, a:hover, a:visited, a:active{
   vertical-align:top;
   /*box-shadow: 1px 1px 10px #999;*/
 }
-#allEvents .eventlist .caption { 
+#allEvents .eventlist .caption {
   max-width: 230px;
   height: 50px;
   white-space:normal;
@@ -445,25 +509,11 @@ height: 100px; width: 100px;
 
 
 /*----------===MAPS===---------------*/
-.angular-google-map-container { height: 400px; }
-.map-container{
-  position: relative;
-  width: 100%;height: 100%;
-}
-/* i dont know what .gm does*/
-/*.gm-style-iw {top: 0 !important;}*/
-.map-canvas { height: 400px; }
-#map{
-    height: 100%;
-    width: 100%;
-}
 #eventmap{
-    height:500px;
-    width: 100%;
-    min-height: 100%;
+  position: absolute; 
+  height: 90%; width: 100%; 
+  background-color: #2F516B;
 }
-
-
 .map-form{
     background: white;
     border: 1px solid;
@@ -482,10 +532,10 @@ height: 100px; width: 100px;
   width: 100%;
   background-color: #FFF;
   text-align: center;
-  font-style: bold;
-  font-family: avenyt;
+  font-family: ''avenyt'';
 }
 .info-banner h3, .info-banner h4{
+  padding: inherit;margin: inherit;
   line-height: inherit;
 }
 
@@ -535,6 +585,22 @@ ul.lead{list-style-type: none;}
 }
 /* -------====FERRY SCHEDULE END==--------- */
 
+.adminPanel{
+  position: relative;
+  bottom: -500px;left: 0px;
+  width: 200px;
+  color: #000;
+z-index: 10000;
+}
+
+.newMarkerPanel{
+  position: relative;
+  bottom: -500px;right: -325px;
+  color: #000;
+  background-color: black;
+
+ 
+}
 
 /*----------=ALL TOURS VIEW=-------------*/
 #allTours {
@@ -542,17 +608,17 @@ ul.lead{list-style-type: none;}
 }
 
 #allTours #featuredLabel, #curatedLabel, #artistLabel{
-	
+
 	padding: 10px;
 	margin:0px;
 	padding-bottom: 0px;
 }
 
 #allTours #main-carousel{
-	
+
 	height: 250px;
 	overflow:hidden;
-	
+
 }
 
 #allTours #main-carousel .carousel-wrapper {
@@ -564,13 +630,13 @@ ul.lead{list-style-type: none;}
 }
 
 #allTours #main-carousel .carousel-inner, #allTours .item, .carousel-wrapper, #caroContainer{
-	
+
 	height: 250px;
-	
+
 }
 
 #allTours #main-carousel .carousel-indicators {
-	
+
 	float:right;
 	width:37px;
 	right:10px;
@@ -579,7 +645,7 @@ ul.lead{list-style-type: none;}
 }
 
 #allTours #main-carousel .carousel-caption {
-	
+
 	text-align:left;
 	float:left;
 	padding-left:15px;
@@ -589,43 +655,43 @@ ul.lead{list-style-type: none;}
 	left:0;right:0;
 	width:290px;
 	height:50px;
-	
+
 }
 
 #allTours #main-carousel .carousel-caption h3 {
-	
+
 	font-size:21px !important;
-	
+
 }
 
 #allTours #bottomBar {
-	
+
 	padding: 10px;
 	background-color:black; filter:alpha(opacity=80); opacity:.8;
 	height: 50px;
 	position:relative;
 	top:-50px;
-	
+
 }
 
 
 .tourlist {
-	
+
 	height: 220px;
 	overflow-x: auto;
 	overflow-y: hidden;
 	white-space:nowrap;
 	border-bottom: solid 2px gray;
-	
+
 }
 
 .tourlist li{
-	
+
 	max-width:180px;
 	box-shadow: 1px 1px 10px #999;
 	background: #ffffff;
 	padding: 10px;
-	
+
 	display:inline-block;
 	*display:inline;/* For IE7*/
 	*zoom:1;/* For IE7*/
@@ -633,14 +699,14 @@ ul.lead{list-style-type: none;}
 }
 
 .tourlist .caption {
-	
+
 	width: 150px;
 	height: 60px;
 	white-space:normal;
 }
 
 .tourlist .caption h5 {
-	
+
 	font-size:18px;
 	padding-top:0px;
 	margin-top:10px;
@@ -648,62 +714,62 @@ ul.lead{list-style-type: none;}
 }
 
 #tourImage {
-	
+
 	width:100%;
 	height:50%;
-	
+
 }
 
 /*----------=SINGLE TOUR VIEW=-------------*/
 
 #tourPoints #tourInfo h3 {
-	
+
 	padding-left:10px;
 	margin-top:10px;
 	font-size:24px;
-	
+
 }
 
 #tourPoints #tourInfo p {
-	
+
 	padding-left:10px;
 	margin-top:10px;
 	font-size:18px;
-	
+
 }
 
 #tourPoints #pointlist {
-	
+
 	height: 100%;
 
 }
 
 #tourPoints #pointlist li{
-	
+
 	padding: 5px;
 	padding-left: 15px;
 	border-top:solid 2px gray;
 	height: 50px;
   line-height: 50px;
-	
+
 }
 
 #tourPoints #pointlist .caption{
-	
+
 	position:relative;
 	top:-5px;
-	
+
 }
 
 #tourPoints #pointlist li h5{
-	
+
 	font-size: 20px;
 	display:inline;
 	width:100%;
 }
 
 #tourPoints #pointlist img {
-	
+
 	float:right;
 	display:inline;
 	position:relative;
@@ -711,86 +777,129 @@ ul.lead{list-style-type: none;}
 }
 
 #point {
-	
+
 	text-align:center;
 	width: 100%;
 	height: 100px;
 	margin-top:25px;
-	
+
 }
 
 #point #pointInfo {
-	
+
 	text-align:left;
 	padding-left: 25px;
 	padding-right: 25px;
 	overflow-y:auto;
 	height:80vh;
 	line-height:130%
-	
+
 }
 
 #point #pointInfo h3{
-	
+
 	padding-bottom: 10px;
 	border-bottom: solid 2px gray;
 	
+
 }
 
 #point #pointImg {
-	
+
 	height: 200px;
 	overflow:hidden;
 	margin:0;
 }
 
 #point #pointImg img{
-	
+
 	width:100%;
 }
 
 #point .audioPlayer button{
-	
+
 	background: transparent;
 	border: none;
 	position:relative;
 	top:-170px
-	
+
 }
 
 #point .audioPlayer {
-	
+
 	height:0;
-	
+
 }
 
-  
+#mainTourImg{
+
+	height: 200px;
+	overflow:hidden;
+
+}
+
+#mainTourImg .carousel{
+	padding:10px;
+}
 
 #tourpoints {
-	
-	
+
+
 }
 
 #tourImage {
-	
+
 	height: 225px;
 	overflow:hidden;
-	
+
 }
 
 #tourImage img{
-	
+
 	width: 100%;
+
+}
+
+#myInfoWindow {
+	
+	height:75px;
+	width:150px;
+	color:black;
 	
 }
-/*-----------END OF TOUR--------------*/
 
+#myInfoWindow h3 {
+	
+	font-size:12px;
+	z-index:2;
+	position:relative;
+	top:-70px;
+	left:75px;
+	width: 96px;
+	
+	color:black;
+}
+
+#myInfoWindow span {
+	
+	font-size:10px;
+	
+}
+
+#myInfoWindow img {
+	
+	position:relative;
+	z-index:0;
+	clear:all;
+	top:0;
+}
+
+/*-----------END OF TOUR--------------*/
 .activebtn{background-color: #5FA77A; color: #FFF;}
 .textLeft{text-align: left;padding-left: 20px;}
-
+.textCenter{text-align: center;}
 /*.dangere{background-color: #FF0101;}
-.coole{background-color: #4099FF;}
-*/
+.coole{background-color: #4099FF;}*/
 .activeinfo{color:  #104432;}
 .activehome{ visibility: hidden;}
 
@@ -800,10 +909,10 @@ li.wordpress, li.twiiter, li.instagram{
 li.wordpress{
   margin-right: 15px;
 }
-/*SPRITES*/ 
-.ferry0, .ferry1, .headphones0, .headphones1, .calendar0, 
-.calendar1, .activities, .facilities, .food, .history, 
-.info, .venues, .facebook, .instagram, .twitter, 
+/*SPRITES*/
+.resizeweather, .ferry0, .ferry1, .headphones0, .headphones1, .calendar0,
+.calendar1, .activities, .facilities, .food, .history,
+.info, .venues, .facebook, .instagram, .twitter,.alertclose, .alertopen,
 .wordpress, .mappin0, .mappin1
 { display: inline-block; background: url('../images/siteicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
 .ferry0 { background-position: -3px -0px; width: 65px; height: 45px; }
@@ -818,10 +927,13 @@ li.wordpress{
 .history { background-position: -3px -432px; width: 45px; height: 45px; }
 .info { background-position: -3px -480px; width: 45px; height: 45px; }
 .venues { background-position: -3px -528px; width: 45px; height: 45px; }
-.facebook { background-position: -3px -576px; width: 32px; height: 32px; }
-.instagram { background-position: -3px -611px; width: 32px; height: 32px; }
-.twitter { background-position: -3px -646px; width: 32px; height: 32px; }
-.wordpress { background-position: -3px -681px; width: 32px; height: 32px; }
-.mappin0 { background-position: -3px -716px; width: 28px; height: 45px; }
-.mappin1 { background-position: -34px -716px; width: 28px; height: 45px; }
+.weather { background-position: -3px -576px; width: 41px; height: 30px; }
+.facebook { background-position: -3px -609px; width: 32px; height: 32px; }
+.instagram { background-position: -3px -644px; width: 32px; height: 32px; }
+.twitter { background-position: -3px -679px; width: 32px; height: 32px; }
+.wordpress { background-position: -3px -714px; width: 32px; height: 32px; }
+.alertclose { background-position: -3px -749px; width: 30px; height: 30px; }
+.alertopen { background-position: -3px -782px; width: 30px; height: 30px; }
+.mappin0 { background-position: -36px -749px; width: 28px; height: 45px; }
+.mappin1 { background-position: -36px -797px; width: 28px; height: 45px; }
 

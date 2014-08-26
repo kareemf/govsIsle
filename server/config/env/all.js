@@ -7,7 +7,8 @@ module.exports = {
 	root: rootPath,
 	port: process.env.PORT || 3000,
 	hostname: process.env.HOST || process.env.HOSTNAME,
-	db: process.env.MONGOHQ_URL,
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI,
+    redis: process.env.REDISCLOUD_URL || "redis://127.0.0.1:6379/0",
 	templateEngine: 'swig',
 
     // The secret should be set to a non-guessable string that

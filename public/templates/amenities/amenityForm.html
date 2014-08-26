@@ -14,7 +14,10 @@
     Location: <input type="text" ng-model="amenity.location" /><!--<button ng-click="lookupGeo(amenity, marker)">Lookup Coords</button--><br />
     Coords: <input type="text" ng-model="amenity.geoLocation" /><!--<button ng-click="lookupLocation(amenity, marker)">Lookup Location</button><br />-->
     Published: <input type="checkbox" ng-model="isPublished" ng-change="togglePublished(amenity)"/>
-    <br><br>You will be able to upload an image after the initial save<br>
+    Tourpoint ID: <input type="text" ng-model="amenity.tourpointId" /><br/>
+    <br><br>
+    <span ng-show="!amenity.id">You will be able to upload an image after the initial save</span>
+    <br>
     <span class="error" ng-show="error">Error: {{error}}</span><br>
     <button ng-show="amenity.id" ng-click="update(amenity, marker)">Edit</button>
     <button ng-show="!amenity.id" ng-click="save(amenity, marker)">Save</button>
