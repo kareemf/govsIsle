@@ -133,8 +133,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         }
 
     };
-    var mapMinZoom = 14;
-    var mapMaxZoom = 19;
+    var zoom=16, mapMinZoom = 14, mapMaxZoom = 19;
     var mapBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(40.682146, -74.027796),
       new google.maps.LatLng(40.695640, -74.009978));
@@ -148,19 +147,20 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
     $scope.mapInit = function() {
       var opts = {
         streetViewControl: false,
+        panControl: false,
         center: new google.maps.LatLng(0,0),
-        panControl: true,
-        zoom: 14,
+        zoom: 16,
+        maxZoom: 20,
+        minZoom: 14,
         zoomControlOptions:{ 
-            position: google.maps.ControlPosition.TOP_LEFT,
+            position: google.maps.ControlPosition.LEFT_TOP,
             style: google.maps.ZoomControlStyle.small
         }
-
       };
       $scope.myMap = new google.maps.Map(document.getElementById('eventmap'), opts);
       $scope.myMap.setMapTypeId(google.maps.MapTypeId.HYBRID);
       $scope.myMap.fitBounds(mapBounds);
-      var maptiler = new klokantech.MapTilerMapType($scope.myMap , mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
+      var maptiler = new klokantech.MapTilerMapType($scope.myMap , mapGetTile, mapBounds,mapMinZoom, mapMaxZoom);
       var opacitycontrol = new klokantech.OpacityControl($scope.myMap , maptiler);
     };
 }]);
