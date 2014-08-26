@@ -90,7 +90,7 @@
 		   <div ng-show="currentEvent.type != 'tour'">
 			  <a class="black" ui-sref="events.detail({ slug: currentEvent.slug })">
 			  <p>{{currentEvent.name}}</p>
-	 	      <p ng-show="currentEvent.type != 'tour'">{{currentEvent.description}}</p>
+                  <p ng-show="currentEvent.type != 'tour'">{{currentEvent.description| truncate:true:55:' ...'}}</p>
 	 	      <p ng-show="currentEvent.type != 'tour'">{{currentEvent.location}}</p>
 		  	  </a> 
 		  </div>	   
