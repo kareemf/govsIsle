@@ -10,6 +10,16 @@ var controllers = angular.module('app.controllers');
 controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', function ($scope, $rootScope, Shared) {
     console.log('Google maps controller.');
 
+    var zoom=16, mapMinZoom = 14, mapMaxZoom = 19;
+    var mapBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(40.682146, -74.027796),
+      new google.maps.LatLng(40.695640, -74.009978));
+
+    var mapGetTile = function(x,y,z) {
+        return "templates/maps/"+z + "/" + x + "/" + y + ".png";
+    }
+
+    var element=document.getElementById('eventmap');
     /* $scope.myMap auto-populated with google map object */
     $scope.isEditMode = true;
     $scope.isAdmin = false;
@@ -133,16 +143,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         }
 
     };
-    var zoom=16, mapMinZoom = 14, mapMaxZoom = 19;
-    var mapBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(40.682146, -74.027796),
-      new google.maps.LatLng(40.695640, -74.009978));
-
-    var mapGetTile = function(x,y,z) {
-        return "templates/maps/"+z + "/" + x + "/" + y + ".png";
-    }
-
-    var element=document.getElementById('eventmap');
     
     $scope.mapInit = function() {
       var opts = {
