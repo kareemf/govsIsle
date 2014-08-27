@@ -11,7 +11,7 @@ var paths = {
         "public/bower_components/angular-bootstrap/ui-bootstrap.min.js","public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
         "public/bower_components/angular-ui-utils/ui-utils.min.js","public/bower_components/angular-ui-map/ui-map.min.js", 
         "public/bower_components/jquery-touchswipe/jquery.touchSwipe.min.js"],
-    productionJsF:['public/js/app.js','public/js/services/*.js','public/js/filter/sharedFilter.js','public/js/controllers/*.js'],
+    productionJsF:['public/js/app.js','public/js/services/*.js','public/js/filters/*.js','public/js/controllers/*.js'],
     productionJsLibs:['public/libs/*.js']
 };
 
