@@ -31,6 +31,9 @@ module.exports = function(app) {
     app.route(baseUrl + '/slug/:eventSlug')
         .get(events.show);
 
+    app.route(baseUrl + '/search/:search')
+        .get(events.search);
+
     app.param('eventId', events.get);
     app.param('eventSlug', events.getBySlug);
 
