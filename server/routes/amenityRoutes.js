@@ -21,6 +21,9 @@ module.exports = function(app) {
     app.route(baseUrl + '/slug/:amenitySlug')
         .get(amenities.show);
 
+    app.route(baseUrl + '/search/:search')
+        .get(amenities.search);
+
     app.param('amenityId', amenities.get);
     app.param('amenitySlug', amenities.getBySlug);
 

@@ -51,4 +51,8 @@ exports.all = function(req, res) {
 
 exports.publish = function(req, res){
     base.publish(req, res);
-}
+};
+
+exports.search = function(req, res){
+    base.search(req, res);
+};
