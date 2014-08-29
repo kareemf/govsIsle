@@ -512,7 +512,7 @@ height: 100px; width: 100px;
 #eventmap{
   position: absolute; 
   height: 90%; width: 100%; 
-  background-color: #2F516B;
+  /*background-color: #2F516B;*/
 }
 .map-form{
     background: white;
