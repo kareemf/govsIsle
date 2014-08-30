@@ -4,14 +4,6 @@ angular.module('app.controllers').controller('HeaderController', ['$scope', '$ro
     function($scope, $rootScope, Global, Menus, NavService) {
         $scope.global = Global;
         $scope.menus = {};
-        //service now in control of updating foo
-        /*
-        $scope.$watch(
-            function(){return NavService.navHeader}, function(newVal, oldVal){
-            console.log('NavService.navHeader', newVal, oldVal);
-            $scope.headerview = NavService.navHeader;
-        });
-        */
 
         // Default hard coded menu items for main menu
         var defaultMainMenu = [];
@@ -46,7 +38,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
     console.log('In NavController');
     var path = $location.path();
     //0 1 2 3...
-    var paths=["/","/about","/events/grid","/events/map","/tours","/ferry", "/events/list", '/weather'];
+    var paths=["/","/about","/events/grid","/home","/tours","/ferry", "/events/list", '/weather'];
 
     $scope.currentLink=paths.indexOf(path);
     console.log($scope.currentLink+"link");
@@ -134,4 +126,3 @@ controllers.controller('AlertsController', ['$scope', function($scope){
         return true;
     }
 }]);
-

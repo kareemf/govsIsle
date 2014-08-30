@@ -467,7 +467,8 @@ controllers.controller('GeoLocationController', ['$scope', 'Events', function ($
                 accu= position.coords.accuracy; //return the accuracy in meters
             //alert(accu);
             var coords = lat+ ', '+ lon;
-            document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
+            //document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
+            return [lat, lon];
 
         };
 
@@ -480,7 +481,7 @@ controllers.controller('GeoLocationController', ['$scope', 'Events', function ($
             //enableHighAccuracy: true -> increase by 10 meters
             navigator.geolocation.getCurrentPosition(coordinates, err,
                 {enableHighAccuracy: true,
-                    maximumAge: 30000, //in millisecond to refresh the cach
+                    maximumAge: 30000,      //in millisecond to refresh the cache
                     //timeout: 300         //time in seconds for the browser to get the location
                 });
             return false;
