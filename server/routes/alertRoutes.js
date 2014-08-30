@@ -18,6 +18,9 @@ module.exports = function(app) {
     app.route(baseUrl + '/:alertId/publish')
         .post(alerts.publish);
 
+    app.route(baseUrl + '/search/:search')
+        .get(alerts.search);
+
     app.param('alertId', alerts.get);
 
 };

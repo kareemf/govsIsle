@@ -117,4 +117,14 @@ EventSchema.statics.load = function(id, callback){
     .exec(callback);
 };
 
-mongoose.model('Event', EventSchema);
+var Model = mongoose.model('Event', EventSchema);
+
+Model.collection.ensureIndex({
+    description : 'text',
+    name : 'text'
+}, function(error, res) {
+    if(error){
+        console.error(Model.modelName, 'failed ensureIndex');
+    }
+    console.log(Model.modelName, 'ensureIndex succeeded with response', res);
+});
