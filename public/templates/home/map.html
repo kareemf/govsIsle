@@ -65,10 +65,13 @@
             ui-map-marker="marker"
             ui-event="newMarkerEvents">
 
-            <select ng-model="newEntityContentType"
-                    ng-options="contentType for contentType in contentTypes">
-                <option value="">-- choose content type --</option>
-            </select>
+            <div ng-show="marker.map">
+                <select ng-model="newEntityContentType"
+                        ng-options="contentType for contentType in contentTypes">
+                    <option value="">-- choose content type --</option>
+                </select>
+                <button ng-click="cancelMarker(marker, newMarkers)">Cancel</button>
+             </div>
 
             <!-- create a hidden edit form for each new event/marker -->
             <div ng-show="isEditMode" ng-init="markers = newMarkers">

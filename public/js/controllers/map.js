@@ -134,6 +134,13 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         });
     };
 
+    $scope.cancelMarker = function(marker, markers){
+        markers = markers.filter(function(_marker){
+            return marker !== _marker
+        });
+        marker.setMap(null);
+    };
+
     $scope.updateGeolocationAfterDrag = function(marker, entity){
         console.log('updating entity position. entity', entity, 'marker', marker);
 
