@@ -74,17 +74,20 @@
             <div ng-show="isEditMode" ng-init="markers = newMarkers">
                 <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventMarkerController"
                      ng-include="'/templates/events/eventForm.html'" scope="" onload=""
-                     ng-show="showForm">
+                     ng-show="showForm"
+                     jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
 
                 <div ng-if="newEntityContentType == 'amenity'" ng-controller="NewAmenityMarkerController"
                      ng-include="'/templates/amenities/amenityForm.html'" scope="" onload=""
-                     ng-show="showForm">
+                     ng-show="showForm"
+                     jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
 
                 <div ng-if="newEntityContentType == 'alert'" ng-controller="NewAlertMarkerController"
                      ng-include="'/templates/alerts/alertForm.html'" scope="" onload=""
-                     ng-show="showForm">
+                     ng-show="showForm"
+                     jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
             </div>
         </div>
