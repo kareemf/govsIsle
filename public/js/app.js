@@ -9,6 +9,7 @@ var app = angular.module('app', [
     'app.services',
     'app.filter',
     'ngResource',
+    'ngDragDrop',
     'angularFileUpload',
     'ui.router',
     'ui.map']);
@@ -71,7 +72,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
         .state('ferry', {
             url: '/ferry',
             templateUrl: 'templates/info/ferry.html'
-        })
+        });
 
     // Event routes
     $stateProvider
@@ -105,7 +106,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
     $stateProvider
         .state('amenityDetail',{
             url: '/amenities/{slug}',
-            templateUrl: 'templates/amenities/amenity.html',
+            templateUrl: 'templates/amenities/amenity.html'
         });
 		
 	$stateProvider
@@ -133,4 +134,4 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
 				   'self',
 				   'http://www.entangledspace.com/**']);
 
-}])
+}]);
