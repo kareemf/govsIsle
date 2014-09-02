@@ -1,13 +1,7 @@
-<section class="event-map" ng-controller="MapController"  ng-init="mapInit()">
+<section class="event-map" ng-controller="MapController">
     <!-- render map. ui-map will be the name of scope property -->
-    <div ng-if="!isAdmin">
-        <div id="eventmap"></div>
-    </div>
-    <div ng-if="isAdmin">
-        <div id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents"></div>
-    </div>
+    <div  id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents"></div>
 
-    <div ng-show="!isAdmin" id="eventmap"></div>
     <div ng-controller="MarkerListController">
         <!-- populate map with event markers -->
         <div ng-repeat="marker in existingEventMarkers">
