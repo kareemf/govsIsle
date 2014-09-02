@@ -599,9 +599,7 @@ z-index: 10000;
   position: relative;
   bottom: -500px;right: -325px;
   color: #000;
-  background-color: black;
-
- 
+  /*background-color: black;*/
 }
 
 /*----------=ALL TOURS VIEW=-------------*/

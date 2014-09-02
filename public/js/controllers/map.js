@@ -17,7 +17,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     var mapGetTile = function(x,y,z) {
         return "templates/maps/"+z + "/" + x + "/" + y + ".png";
-    }
+    };
 
     var element=document.getElementById('eventmap');
     /* $scope.myMap auto-populated with google map object */
@@ -48,6 +48,9 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
     );
 
     $scope.$watch('myMap', function(map){
+        if(!map){return;}
+
+        $scope.mapInit();
         var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
 
         oms.addListener('click', function(marker) {
@@ -134,6 +137,13 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         });
     };
 
+    $scope.cancelMarker = function(marker, markers){
+        markers = markers.filter(function(_marker){
+            return marker !== _marker
+        });
+        marker.setMap(null);
+    };
+
     $scope.updateGeolocationAfterDrag = function(marker, entity){
         console.log('updating entity position. entity', entity, 'marker', marker);
 
@@ -157,7 +167,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             style: google.maps.ZoomControlStyle.small
         }
       };
-      $scope.myMap = new google.maps.Map(document.getElementById('eventmap'), opts);
+      //$scope.myMap = new google.maps.Map(document.getElementById('eventmap'), opts);
       $scope.myMap.setMapTypeId(google.maps.MapTypeId.HYBRID);
       $scope.myMap.fitBounds(mapBounds);
       var maptiler = new klokantech.MapTilerMapType($scope.myMap , mapGetTile, mapBounds,mapMinZoom, mapMaxZoom);
