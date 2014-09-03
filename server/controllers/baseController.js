@@ -346,5 +346,28 @@ module.exports = function(Model){
                 }
             });
         },
+
+        search: function(req, res){
+           var search = req.params.search;
+           var query = Model.find(
+                { $text : { $search : search } },
+                { score : { $meta: "textScore" } }
+            )
+           .sort({ score: { $meta : "textScore" } });
+            
+            var limit = req.query.limit || 10;
+            query.limit(limit);
+            
+            var offset = req.query.offset || 0;
+            query.skip(offset);
+
+            query.exec(function(error, results) {
+                if (error) {
+                    res.json(500, { error : error });
+                } else {
+                    res.json(results);
+                }
+            });
+        }
     };
 };

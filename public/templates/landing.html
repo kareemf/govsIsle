@@ -42,10 +42,10 @@
 			</div><!--ENDING OF CAROUSEL-INNER-->
 		</div>
 	</div>
-	<div id="weather-panel">
-		<div class="leftside"><i class="wi wi-cloudy"></i></div>
+	<div id="weather-panel" ng-controller="WeatherUpdateController">
+		<div class="leftside"><i class="{{crossApi[yahooWeather.code]}}"></i></div>
 		<div class="rightside">
-			<p>66&#176; F Monstly Cloudy</p>
+			<p>{{yahooWeather.temp}}&#176; F {{yahooWeather.text}}</p>
 		</div>
 	</div>
 	<div class="clear"></div>
@@ -59,4 +59,29 @@
 		</ul>
 	</section>
 </div><br/>
-<script type="text/javascript" src="js/carousel.js"></script>
+<script type="text/javascript">
+jQuery( document ).ready(function( $ ) {
+      var elem= $(".swapePanel");
+      elem.swipe({
+          swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+          //$(this).text("You swiped " + direction );
+          if(direction==="left"){
+            //$(this).text("You swiped " + direction );
+            $("#mainCaro").carousel('next');  
+          }
+          if(direction==="right"){
+            //$(this).text("You swiped " + direction );
+             $("#mainCaro").carousel('prev');  
+          }
+          if(direction===null){
+            //$(this).text("tap not working");
+          }
+        },
+        excludedElements:".testtest a",
+        //Default is 75px, set to 0 for demo so any distance triggers swipe
+        threshold:0,
+        allowPageScroll: "vertical",
+        triggerOnTouchEnd : true
+      });
+});
+</script>

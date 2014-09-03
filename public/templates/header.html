@@ -25,56 +25,55 @@
                 <!--<li ng-show="isActive(2)" class="pull-right navright-btn"><a ui-sref="events.list" ng-click="activelink(6)"><span class="glyphicon glyphicon-th-list"></span></a></li>-->
 	        </ul>
         </div>
-        <div >
-            <div class="global-alerts"> 
-                <div id="light" class="white-content">
-                    <ul class="nav-inlineblock alertbox-header">
-                        <li class="pull-left alertbtn"><span class="alertopen"></span></li>
-                        <!--<li class="alert-title">{{alerts[0].type || uppercase}} ALERT</li> We may want to change the title depending on the alert-->
-                        <li class="alert-title">NOTIFICATION CENTER</li> 
-                        <li class="pull-right alertclosingbtn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="alertclose"></span></a></li>
-                    </ul> 
-                    <ul class="list-notification">
-                        <section>
-                            <li class="notif-dropdown">{{alerts[0].type}}: {{alerts[0].name}} <span class="alert-indicator"></span></li>
-                            <div class="dropdownwrap">
-                                <p>{{alerts[0].description}}</p>
-                                <p ng-if="alerts[0].location">Location: {{alerts[0].location}}</p>
-                                <p ng-if="alerts[0].startDateTime">From: {{alerts[0].startDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                                <p ng-if="alerts[0].endDateTime">Until: {{alerts[0].endDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                            </div>
-                        </section>
-                        <section>
-                            <li class="notif-dropdown">{{alerts[1].type}}: {{alerts[1].name}} <span class="alert-indicator"></span></li>
-                            <div class="dropdownwrap">
-                                <p>{{alerts[1].description}}</p>
-                                <p ng-if="alerts[0].location">Location: {{alerts[1].location}}</p>
-                                <p ng-if="alerts[0].startDateTime">From: {{alerts[1].startDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                                <p ng-if="alerts[0].endDateTime">Until: {{alerts[1].endDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                            </div>
-                        </section>
-                        <section>
-                            <li class="notif-dropdown">{{alerts[2].type}}: {{alerts[2].name}} <span class="alert-indicator"></span></li>
-                            <div class="dropdownwrap">
-                                <p>{{alerts[2].description}}</p>
-                                <p ng-if="alerts[0].location">Location: {{alerts[2].location}}</p>
-                                <p ng-if="alerts[0].startDateTime">From: {{alerts[2].startDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                                <p ng-if="alerts[0].endDateTime">Until: {{alerts[2].endDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                            </div>
-                        </section>
-                  
-                    </ul>
-                </div>
-                <div id="fade" class="white-overlay"></div>
+
+        <div class="global-alerts"> 
+            <div id="light" class="white-content">
+                <ul class="nav-inlineblock alertbox-header">
+                    <li class="pull-left alertbtn"><span class="alertopen"></span></li>
+                    <!--<li class="alert-title">{{alerts[0].type || uppercase}} ALERT</li> We may want to change the title depending on the alert-->
+                    <li class="alert-title">NOTIFICATION CENTER</li> 
+                    <li class="pull-right alertclosingbtn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="alertclose"></span></a></li>
+                </ul> 
+                <ul class="list-notification">
+                    <section>
+                        <li class="notif-dropdown">{{alerts[0].type}}: {{alerts[0].name}} <span class="alert-indicator"></span></li>
+                        <div class="dropdownwrap">
+                            <p>{{alerts[0].description}}</p>
+                            <p ng-if="alerts[0].location">Location: {{alerts[0].location}}</p>
+                            <p ng-if="alerts[0].startDateTime">From: {{alerts[0].startDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
+                            <p ng-if="alerts[0].endDateTime">Until: {{alerts[0].endDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
+                        </div>
+                    </section>
+                    <section>
+                        <li class="notif-dropdown">{{alerts[1].type}}: {{alerts[1].name}} <span class="alert-indicator"></span></li>
+                        <div class="dropdownwrap">
+                            <p>{{alerts[1].description}}</p>
+                            <p ng-if="alerts[0].location">Location: {{alerts[1].location}}</p>
+                            <p ng-if="alerts[0].startDateTime">From: {{alerts[1].startDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
+                            <p ng-if="alerts[0].endDateTime">Until: {{alerts[1].endDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
+                        </div>
+                    </section>
+                    <section>
+                        <li class="notif-dropdown">{{alerts[2].type}}: {{alerts[2].name}} <span class="alert-indicator"></span></li>
+                        <div class="dropdownwrap">
+                            <p>{{alerts[2].description}}</p>
+                            <p ng-if="alerts[0].location">Location: {{alerts[2].location}}</p>
+                            <p ng-if="alerts[0].startDateTime">From: {{alerts[2].startDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
+                            <p ng-if="alerts[0].endDateTime">Until: {{alerts[2].endDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
+                        </div>
+                    </section>
+              
+                </ul>
             </div>
+            <div id="fade" class="white-overlay"></div>
         </div>
     </div>
 </nav>
 <div id="headerspacing"></div>
-        <script>
-            $(document).ready(function(e){
-               $('.notif-dropdown').on('click',function(){
-                    $(this).next('.dropdownwrap').slideToggle();
-               });
-            })
-        </script>
+<script>
+    jQuery( document ).ready(function( $ ) {
+       $('.notif-dropdown').on('click',function(){
+            $(this).next('.dropdownwrap').slideToggle();
+       });
+    })
+</script>

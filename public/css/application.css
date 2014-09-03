@@ -301,9 +301,7 @@ a, a:link, a:hover, a:visited, a:active{
 } 
 #mainCaro .carousel-inner,#mainCaro .item{
  max-height: 300px;
-
 }
-
 #mainCaro .swapePanel, #allEvents .swapePanel{
   position: absolute;
   z-index: 0;
@@ -458,6 +456,10 @@ a, a:link, a:hover, a:visited, a:active{
   filter:alpha(opacity=80);opacity: .8;
   background-color: #000;
 }
+.eventlist{
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
+}
 #allEvents .eventlist{
   height: 240px;
   overflow-x: auto;
@@ -512,7 +514,7 @@ height: 100px; width: 100px;
 #eventmap{
   position: absolute; 
   height: 90%; width: 100%; 
-  background-color: #2F516B;
+  /*background-color: #2F516B;*/
 }
 .map-form{
     background: white;
@@ -522,6 +524,10 @@ height: 100px; width: 100px;
     z-index: 100;
     opacity: 0.90;
     top:62px;
+}
+
+.map-form a, .map-form a:link, .map-form a:hover, .map-form a:visited,.map-form a:active{
+    color: #000;
 }
 /* -------====FERRY SCHEDULE==--------- */
 .info-banner{
@@ -597,9 +603,7 @@ z-index: 10000;
   position: relative;
   bottom: -500px;right: -325px;
   color: #000;
-  background-color: black;
-
- 
+  /*background-color: black;*/
 }
 
 /*----------=ALL TOURS VIEW=-------------*/

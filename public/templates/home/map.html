@@ -1,7 +1,7 @@
-<section class="event-map" ng-controller="MapController"  ng-init="mapInit()">
+<section class="event-map" ng-controller="MapController">
     <!-- render map. ui-map will be the name of scope property -->
-	<!--<div id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents"></div>-->
-    <div id="eventmap"></div>
+    <div  id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents"></div>
+
     <div ng-controller="MarkerListController">
         <!-- populate map with event markers -->
         <div ng-repeat="marker in existingEventMarkers">
@@ -14,7 +14,8 @@
             <!--markers handle is there so current marker can be cleanly removed if need be-->
             <div ng-init="event = entity" ng-controller="ExistingEventMarkerController">
                 <div ng-show="isEditMode && showForm" ng-init="markers = existingEventMarkers"
-                     ng-include="'/templates/events/eventForm.html'" scope="" onload="">
+                     ng-include="'/templates/events/eventForm.html'" scope="" onload=""
+                     jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
             </div>
         </div>
@@ -26,7 +27,8 @@
 
             <div ng-init="amenity = entity" ng-controller="ExistingAmenityMarkerController">
                 <div ng-show="isEditMode && showForm" ng-init="markers = existingAmenityMarkers"
-                     ng-include="'/templates/amenities/amenityForm.html'" scope="" onload="">
+                     ng-include="'/templates/amenities/amenityForm.html'" scope="" onload=""
+                     jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
             </div>
         </div>
@@ -38,7 +40,8 @@
 
             <div ng-init="alert = entity" ng-controller="ExistingAlertMarkerController">
                 <div ng-show="isEditMode && showForm" ng-init="markers = existingAlertMarkers"
-                     ng-include="'/templates/alerts/alertForm.html'" scope="" onload="">
+                     ng-include="'/templates/alerts/alertForm.html'" scope="" onload=""
+                     jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
             </div>
         </div>
@@ -59,26 +62,32 @@
             ui-map-marker="marker"
             ui-event="newMarkerEvents">
 
-            <select ng-model="newEntityContentType"
-                    ng-options="contentType for contentType in contentTypes">
-                <option value="">-- choose content type --</option>
-            </select>
+            <div ng-show="marker.map">
+                <select ng-model="newEntityContentType"
+                        ng-options="contentType for contentType in contentTypes">
+                    <option value="">-- choose content type --</option>
+                </select>
+                <button ng-click="cancelMarker(marker, newMarkers)">Cancel</button>
+             </div>
 
             <!-- create a hidden edit form for each new event/marker -->
             <div ng-show="isEditMode" ng-init="markers = newMarkers">
                 <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventMarkerController"
                      ng-include="'/templates/events/eventForm.html'" scope="" onload=""
-                     ng-show="showForm">
+                     ng-show="showForm"
+                     jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
 
                 <div ng-if="newEntityContentType == 'amenity'" ng-controller="NewAmenityMarkerController"
                      ng-include="'/templates/amenities/amenityForm.html'" scope="" onload=""
-                     ng-show="showForm">
+                     ng-show="showForm"
+                     jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
 
                 <div ng-if="newEntityContentType == 'alert'" ng-controller="NewAlertMarkerController"
                      ng-include="'/templates/alerts/alertForm.html'" scope="" onload=""
-                     ng-show="showForm">
+                     ng-show="showForm"
+                     jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
             </div>
         </div>
@@ -90,7 +99,7 @@
 		   <div ng-show="currentEvent.type != 'tour'">
 			  <a class="black" ui-sref="events.detail({ slug: currentEvent.slug })">
 			  <p>{{currentEvent.name}}</p>
-	 	      <p ng-show="currentEvent.type != 'tour'">{{currentEvent.description}}</p>
+                  <p ng-show="currentEvent.type != 'tour'">{{currentEvent.description| truncate:true:55:' ...'}}</p>
 	 	      <p ng-show="currentEvent.type != 'tour'">{{currentEvent.location}}</p>
 		  	  </a> 
 		  </div>	   

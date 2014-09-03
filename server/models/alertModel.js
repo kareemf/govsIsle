@@ -66,4 +66,14 @@ AlertSchema.statics.permissionsGrantedToAnon = function(){
     ];
 };
 
-mongoose.model('Alert', AlertSchema);
+var Model = mongoose.model('Alert', AlertSchema);
+
+Model.collection.ensureIndex({
+    description : 'text',
+    name : 'text'
+}, function(error, res) {
+    if(error){
+        console.error(Model.modelName, 'failed ensureIndex with error', error);
+    }
+    console.log(Model.modelName, 'ensureIndex succeeded with response', res);
+});

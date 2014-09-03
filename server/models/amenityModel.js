@@ -83,4 +83,14 @@ AmenitySchema.statics.load = function(id, callback){
         .exec(callback);
 };
 
-mongoose.model('Amenity', AmenitySchema);
+var Model = mongoose.model('Amenity', AmenitySchema);
+
+Model.collection.ensureIndex({
+    description : 'text',
+    name : 'text'
+}, function(error, res) {
+    if(error){
+        console.error(Model.modelName, 'failed ensureIndex');
+    }
+    console.log(Model.modelName, 'ensureIndex succeeded with response', res);
+});

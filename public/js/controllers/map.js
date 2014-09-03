@@ -10,6 +10,16 @@ var controllers = angular.module('app.controllers');
 controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', function ($scope, $rootScope, Shared) {
     console.log('Google maps controller.');
 
+    var zoom=16, mapMinZoom = 14, mapMaxZoom = 19;
+    var mapBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(40.682146, -74.027796),
+      new google.maps.LatLng(40.695640, -74.009978));
+
+    var mapGetTile = function(x,y,z) {
+        return "templates/maps/"+z + "/" + x + "/" + y + ".png";
+    };
+
+    var element=document.getElementById('eventmap');
     /* $scope.myMap auto-populated with google map object */
     $scope.isEditMode = true;
     $scope.isAdmin = false;
@@ -38,6 +48,9 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
     );
 
     $scope.$watch('myMap', function(map){
+        if(!map){return;}
+
+        $scope.mapInit();
         var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
 
         oms.addListener('click', function(marker) {
@@ -124,6 +137,13 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         });
     };
 
+    $scope.cancelMarker = function(marker, markers){
+        markers = markers.filter(function(_marker){
+            return marker !== _marker
+        });
+        marker.setMap(null);
+    };
+
     $scope.updateGeolocationAfterDrag = function(marker, entity){
         console.log('updating entity position. entity', entity, 'marker', marker);
 
@@ -133,34 +153,24 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         }
 
     };
-    var mapMinZoom = 14;
-    var mapMaxZoom = 19;
-    var mapBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(40.682146, -74.027796),
-      new google.maps.LatLng(40.695640, -74.009978));
-
-    var mapGetTile = function(x,y,z) {
-        return "templates/maps/"+z + "/" + x + "/" + y + ".png";
-    }
-
-    var element=document.getElementById('eventmap');
     
     $scope.mapInit = function() {
       var opts = {
         streetViewControl: false,
+        panControl: false,
         center: new google.maps.LatLng(0,0),
-        panControl: true,
-        zoom: 14,
+        zoom: 16,
+        maxZoom: 20,
+        minZoom: 14,
         zoomControlOptions:{ 
-            position: google.maps.ControlPosition.TOP_LEFT,
+            position: google.maps.ControlPosition.LEFT_TOP,
             style: google.maps.ZoomControlStyle.small
         }
-
       };
-      $scope.myMap = new google.maps.Map(document.getElementById('eventmap'), opts);
+      //$scope.myMap = new google.maps.Map(document.getElementById('eventmap'), opts);
       $scope.myMap.setMapTypeId(google.maps.MapTypeId.HYBRID);
       $scope.myMap.fitBounds(mapBounds);
-      var maptiler = new klokantech.MapTilerMapType($scope.myMap , mapGetTile, mapBounds, mapMinZoom, mapMaxZoom);
+      var maptiler = new klokantech.MapTilerMapType($scope.myMap , mapGetTile, mapBounds,mapMinZoom, mapMaxZoom);
       var opacitycontrol = new klokantech.OpacityControl($scope.myMap , maptiler);
     };
 }]);
@@ -467,7 +477,8 @@ controllers.controller('GeoLocationController', ['$scope', 'Events', function ($
                 accu= position.coords.accuracy; //return the accuracy in meters
             //alert(accu);
             var coords = lat+ ', '+ lon;
-            document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
+            //document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
+            return [lat, lon];
 
         };
 
@@ -480,7 +491,7 @@ controllers.controller('GeoLocationController', ['$scope', 'Events', function ($
             //enableHighAccuracy: true -> increase by 10 meters
             navigator.geolocation.getCurrentPosition(coordinates, err,
                 {enableHighAccuracy: true,
-                    maximumAge: 30000, //in millisecond to refresh the cach
+                    maximumAge: 30000,      //in millisecond to refresh the cache
                     //timeout: 300         //time in seconds for the browser to get the location
                 });
             return false;

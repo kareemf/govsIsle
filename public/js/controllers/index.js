@@ -81,3 +81,63 @@ function($scope, $rootScope, $http, Shared){
         $scope.alerts = Shared.alerts;
     });
 }]);
+
+controllers.controller('WeatherUpdateController', ['$scope', 'Weather', function($scope,Weather){
+    console.log('In WeatherAlertsController');
+
+    $scope.yahooWeather=Weather.get();
+    $scope.crossApi={   //cross reference 2 api. yahoo weather with weather icons ;-(
+        "0": "wi-tornado",
+        "1": "wi-day-storm-showers",
+        "2": "wi-hurricane",
+        "3": "wi-lightning",
+        "4": "wi-lightning",
+        "5": "wi-rain-mix",
+        "6": "wi-rain-mix",
+        "7": "wi-showers",
+        "8": "wi-sprinkle",
+        "9": "wi-sprinkle",
+        "10": "wi-rain",
+        "11": "wi-showers",
+        "12": "wi-showers",
+        "13": "wi-snow",
+        "14": "wi-showers",
+        "15": "wi-snow-wind",
+        "16": "wi-snow",
+        "18": "wi-hail",
+        "19": "wi-rain-mix",
+        "20": "wi-fog",
+        "21": "wi-dust",
+        "22": "wi-smoke",
+        "23": "wi-cloudy-gusts",
+        "24": "wi-cloudy-windy",
+        "25": "wi-snowflake-cold",
+        "26": "wi-cloudy",
+        "27": "wi-night-cloudy",
+        "28": "wi-day-cloudy",
+        "29": "wi-night-cloudy",
+        "30": "wi-day-cloudy",
+        "31": "wi-night-clear",
+        "32": "wi-day-sunny",
+        "33": 'wi-night-cloudy',
+        "34": 'wi-day-cloudy',
+        "35": "wi-rain-mix",
+        "36": "wi-hot",
+        "37": "wi-thunderstorm",
+        "38": "wi-night-thunderstorm",
+        "39": "wi-day-thunderstorm",
+        "40": "wi-showers",
+        "41": "wi-snow-wind",
+        "42": "wi-rain-mix",
+        "43": "wi-day-snow",
+        "44": "wi-cloudy",
+        "45": "wi-storm-showers",
+        "46": "wi-showers",
+        "47": "wi-storm-showers",
+        "3200": "wi-cloud-down"
+    };
+
+    $scope.mytest="night-partly-cloudy";
+
+}]);
+
