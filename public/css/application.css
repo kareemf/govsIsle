@@ -525,6 +525,10 @@ height: 100px; width: 100px;
     opacity: 0.90;
     top:62px;
 }
+
+.map-form a, .map-form a:link, .map-form a:hover, .map-form a:visited,.map-form a:active{
+    color: #000;
+}
 /* -------====FERRY SCHEDULE==--------- */
 .info-banner{
   padding: 0px 0px 0px 0px;
