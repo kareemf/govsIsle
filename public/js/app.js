@@ -10,6 +10,7 @@ var app = angular.module('app', [
     'app.filter',
     'ngResource',
     'ngDragDrop',
+    'ngQuickDate',
     'angularFileUpload',
     'ui.router',
     'ui.map']);
