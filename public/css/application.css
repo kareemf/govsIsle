@@ -493,26 +493,26 @@ a, a:link, a:hover, a:visited, a:active{
   font-weight: normal;
 }
 /*----------=END EventLIST VIEW=-------------*/
+.listCol{
+  margin-top: 2px;
+  border-bottom: 1px solid #999999;
+  padding-top: 10px;
+}
 .leftpanel{
   float: left;
 }
 .rightpanel{
   float: right;
-  width: 150px;height: 150px;
+  width: 50%;height: 150px;
   overflow: hidden;
 }
+.rightpanel h5, .rightpanel p{
+  font-size: 12px;
+
+}
 #listEvents .img-detail{
-height: 150px; width: 150px;
-
+  height: 150px; width: 150px;
 }
-#listEvents .listCol{
-
-}
-.listCol{
-  display: flex;
-   flex:1;
-}
-#listEvents
 /*----------=END EVENTLIST VIEW=-------------*/
 
 
