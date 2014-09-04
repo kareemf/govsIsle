@@ -16,7 +16,6 @@
         <div class="main-header"><!--MAIN-HEADER-->
            <div ng-include="'templates/header.html'" data-role="navigation"></div>
         </div>
-
         <div ng-controller="AlertsController">
             <div ng-hide="isAlert()" ng-include=" 'templates/alerts/alerts.html' " data-role="alerts"></div>
         </div>
@@ -47,8 +46,9 @@
         <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.min.js"></script>
         <script type="text/javascript" src="bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
         <script type="text/javascript" src="bower_components/ngQuickDate/dist/ng-quick-date.min.js"></script>
-        <!--Front-end Controllers-->
+        <!--Routes-->
         <script type="text/javascript" src="js/app.js"></script>
+        <!--Front-End services-->
         <script type="text/javascript" src="js/services/shared.js"></script>
         <script type="text/javascript" src="js/services/events.js"></script>
         <script type="text/javascript" src="js/services/amenities.js"></script>
@@ -60,7 +60,7 @@
         <!--Filter controllers-->
         <script type="text/javascript" src="js/filters/sharedFilter.js"></script>
         <script type="text/javascript" src="js/filters/truncate.js"></script>
-        <!--back-End Controllers-->
+        <!--Front-End Controllers-->
         <script type="text/javascript" src="js/controllers/index.js"></script>
         <script type="text/javascript" src="js/controllers/auth.js"></script>
         <script type="text/javascript" src="js/controllers/home.js"></script>
@@ -72,14 +72,11 @@
         <script type="text/javascript" src="js/controllers/header.js"></script>
         <script type="text/javascript" src="js/controllers/tours.js"></script>
 		<audio id="audioPlayer"></audio>
-        <!-- our party libraries-->
-        <!--<script type="text/javascript" src="js/carousel.js"></script>-->
         <!-- 3rd party Libraries-->
         <script type="text/javascript" src="libs/maptiler.js"></script>
         <script type="text/javascript" src="libs/oms.min.js"></script>
         <!--AddThisEvent-->
         <script type="text/javascript" src="https://addthisevent.com/libs/1.5.8/ate.min.js"></script>
-       
         <!-- AddThisEvent Settings -->
         <script type="text/javascript">
             addthisevent.settings({
@@ -94,7 +91,7 @@
             });
         </script>
         <!--DEVELOPMENT HOME-->
-        <!--<script src="http://192.168.1.5:35729/livereload.js?snipver=1"></script>-->
+        <!----><script src="http://192.168.1.5:35729/livereload.js?snipver=1"></script>
         <!--DEVELOPMENT WORK<script src="http://10.255.16.107:35729/livereload.js?snipver=1"></script>-->
     </body>
 </html>
