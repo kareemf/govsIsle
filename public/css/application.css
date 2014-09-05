@@ -500,10 +500,11 @@ a, a:link, a:hover, a:visited, a:active{
 }
 .leftpanel{
   float: left;
+  margin-left: 10px;
 }
 .rightpanel{
   float: right;
-  width: 50%;height: 150px;
+  width: 48%;height: 150px;
   overflow: hidden;
 }
 .rightpanel h5, .rightpanel p{
