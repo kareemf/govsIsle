@@ -12,8 +12,7 @@
 						<li ng-click="toggleFilters('info')">
                             <a ng-class="{selected: isFilterActive('info')}">
                                 <i class="info"></i><span class="map-ui-btn">INFORMATION</span>
-                                <input type="checkbox" class="flat" id="cb-info"/>
-                                <label for="cb-info" class="fr"><span></span></label>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('info')}"></span>
                             </a>
                         </li>
 					    <li ng-click="toggleFilters('activity')"><a ng-class="{selected: isFilterActive('activity')}")><i class="activities"></i><span class="map-ui-btn">ACTIVITIES</span></a></li>

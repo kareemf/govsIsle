@@ -33,6 +33,7 @@ footer, header, hgroup, menu, nav, section {
 input[type="checkbox"].flat {
     display:none;
 }
+.checkbox-fake,
 input[type="checkbox"].flat + label span {
     display:inline-block;
     width:19px;
@@ -42,6 +43,7 @@ input[type="checkbox"].flat + label span {
     background:url('../images/check_radio_sheet.png') left top no-repeat;
     cursor:pointer;
 }
+.checkbox-fake.checked,
 input[type="checkbox"].flat:checked + label span {
     background:url('../images/check_radio_sheet.png') -19px top no-repeat;
 }
