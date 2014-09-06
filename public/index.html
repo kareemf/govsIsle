@@ -6,6 +6,7 @@
         <meta name="govsIsland" content="travel trip fun">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> INVESTIGATE the reason why notification are effect by this-->
         <link rel="stylesheet" type="text/css" href="css/application.css">
         <link rel="stylesheet" type="text/css" href="bower_components/weather-icons/css/weather-icons.min.css">
         <link rel="stylesheet" type="text/css" href="bower_components/ngQuickDate/dist/ng-quick-date-plus-default-theme.css">
@@ -31,7 +32,8 @@
         <!-- Bower installs-->
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!--<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+        <script type="text/javascript" src="libs/bootstrap.min.js"></script><!-- local copy of bootstrap-->
         <script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>
         <script type="text/javascript" src="bower_components/ng-file-upload/angular-file-upload-shim.min.js"></script>
         <script type="text/javascript" src="bower_components/ng-file-upload/angular-file-upload.min.js"></script>
@@ -76,7 +78,7 @@
         <script type="text/javascript" src="libs/maptiler.js"></script>
         <script type="text/javascript" src="libs/oms.min.js"></script>
         <!--AddThisEvent-->
-        <script type="text/javascript" src="https://addthisevent.com/libs/1.5.8/ate.min.js"></script>
+        <script type="text/javascript" src="libs/ate.min.js"></script>
         <!-- AddThisEvent Settings -->
         <script type="text/javascript">
             addthisevent.settings({
@@ -90,8 +92,7 @@
                 facebook	: {show:true, text:"Facebook Calendar"}
             });
         </script>
-        <!--DEVELOPMENT HOME-->
-        <!----><script src="http://192.168.1.5:35729/livereload.js?snipver=1"></script>
-        <!--DEVELOPMENT WORK<script src="http://10.255.16.107:35729/livereload.js?snipver=1"></script>-->
+        <!--Niquepg DEVELOPMENT script-->
+        <!--<script src="http://192.168.1.5:35729/livereload.js?snipver=1"></script>-->
     </body>
 </html>

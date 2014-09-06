@@ -10,8 +10,6 @@ var controllers = angular.module('app.controllers');
 controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', function ($scope, $rootScope, Shared) {
     console.log('Google maps controller.');
 
-    var zoom=16, mapMinZoom = 14, mapMaxZoom = 20;
-
     var mapBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(40.682146, -74.027796),
       new google.maps.LatLng(40.695640, -74.009978)
@@ -21,12 +19,12 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
      new google.maps.LatLng(28.70, -127.50), 
      new google.maps.LatLng(48.85, -55.90)
     );
-
+     /* We wont need this anymore too
     var mapGetTile = function(x,y,z) {
         return "templates/maps/"+z + "/" + x + "/" + y + ".png";
     };
-
-    var element=document.getElementById('eventmap');
+    */
+    var eventmap=document.getElementById('eventmap');
     /* $scope.myMap auto-populated with google map object */
     $scope.isEditMode = true;
     $scope.isAdmin = false;
@@ -57,7 +55,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
     $scope.$watch('myMap', function(map){
         if(!map){return;}
 
-        $scope.mapInit();
+        //$scope.mapInit();
         var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
 
         oms.addListener('click', function(marker) {
@@ -82,20 +80,67 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         center: new google.maps.LatLng(40.6880492, -74.0188415),
         streetViewControl: false,
         panControl: false,
-        mapTypeControl: true,
-        zoom: 16,
-        maxZoom: 20,
+        mapTypeControl: false,
+        zoomControl: true,
+        disableDefaultUI: true,
+        zoom: 17,
+        maxZoom: 18,
         minZoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
         zoomControlOptions:{ 
             position: google.maps.ControlPosition.RIGHT_TOP,
             style: google.maps.ZoomControlStyle.small
-        },
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
     };
    
-
     $scope.mapEvents = {
         'map-rightclick': 'addNewMarker($event, $params)'
+    };
+    /*if we can get google overlay working we can delete the maptiler js file; i had got it working but
+    not with the map markers */
+    var googleMapsOverlay = new google.maps.ImageMapType({
+        getTileUrl: function(coord, zoom) { 
+            var proj = map.getProjection();
+            var z2 = Math.pow(2, zoom);
+            var tileXSize = 256 / z2;
+            var tileYSize = 256 / z2;
+            var tileBounds = new google.maps.LatLngBounds(
+                proj.fromPointToLatLng(new google.maps.Point(coord.x * tileXSize, (coord.y + 1) * tileYSize)),
+                proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * tileXSize, coord.y * tileYSize))
+            );
+            var y = coord.y;
+            if (mapBounds.intersects(tileBounds) && ($scope.mapOptions.minZoom <= zoom) && (zoom <= $scope.mapOptions.maxZoom)){
+                return "templates/maps/"+zoom + "/" + coord.x + "/" + y + ".png";
+            }
+            else{
+                return "templates/maps/blink.png";
+            }
+        },
+        tileSize: new google.maps.Size(256, 256),
+        isPng: true,
+        opacity: 1.0,
+        name: "Govsle"
+    });
+
+    /* 
+    $scope.mapInit = function() {
+        var options = $scope.mapOptions;
+        var map = $scope.myMap;
+        var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, options.minZoom, options.maxZoom);
+        map.fitBounds(mapBounds);
+        map.setTilt(0); //disable 45 degree view
+        if(user){
+            var opacitycontrol = new klokantech.OpacityControl(map , maptiler);
+        }
+    };
+    */
+    var map;
+    $scope.googleMapOverlayInit = function() {
+
+        map = new google.maps.Map(eventmap, $scope.mapOptions);
+        map.fitBounds(mapBounds);
+        map.setTilt(0); //disable 45 degree view
+        map.overlayMapTypes.insertAt(0, googleMapsOverlay);
     };
 
     //TODO: use permissions to determine what content user can create if any
@@ -166,40 +211,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         }
 
     };
-    /*if we can get google overlay working we can delete the maptiler js file; i had got it working but
-        not with the map markers */
-    var googleOverlay = new google.maps.ImageMapType({
-        getTileUrl: function(coord, zoom) { 
-            var proj = map.getProjection();
-            var z2 = Math.pow(2, zoom);
-            var tileXSize = 256 / z2;
-            var tileYSize = 256 / z2;
-            var tileBounds = new google.maps.LatLngBounds(
-                proj.fromPointToLatLng(new google.maps.Point(coord.x * tileXSize, (coord.y + 1) * tileYSize)),
-                proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * tileXSize, coord.y * tileYSize))
-            );
-            var y = coord.y;
-            if (mapBounds.intersects(tileBounds) && (mapMinZoom <= zoom) && (zoom <= mapMaxZoom)){
-                return "templates/maps/"+zoom + "/" + coord.x + "/" + y + ".png";
-            }
-            else{
-                return "templates/maps/blink.png";
-            }
-        },
-        tileSize: new google.maps.Size(256, 256),
-        isPng: true,
-        opacity: 1.0,
-        name: "Govsle"
-    });
-    $scope.mapInit = function() {
-        $scope.myMap.fitBounds(mapBounds);
-       /*map = new google.maps.Map(document.getElementById('eventmap'), opts);
-         map.fitBounds(mapBounds);
-         map.overlayMapTypes.insertAt(0, maptiler);*/
-        var maptiler = new klokantech.MapTilerMapType($scope.myMap , mapGetTile, mapBounds,mapMinZoom, mapMaxZoom);
-        //var opacitycontrol = new klokantech.OpacityControl(map, maptiler);
-    };
-
 }]);
 
 controllers.controller('MarkerListController', ['$scope', '$state','$stateParams','Events', 'Amenities', 'Alerts',

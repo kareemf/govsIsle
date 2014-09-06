@@ -118,7 +118,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
             }
         }
         return false;
-    }
+    };
 }]);
 controllers.controller('AlertsController', ['$scope', function($scope){
     console.log('In AlertsController');
