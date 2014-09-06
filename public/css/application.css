@@ -30,6 +30,29 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 /*GENERAL STYLING AREA*/
+input[type="checkbox"].flat {
+    display:none;
+}
+.checkbox-fake,
+input[type="checkbox"].flat + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url('../images/check_radio_sheet.png') left top no-repeat;
+    cursor:pointer;
+}
+.checkbox-fake.checked,
+input[type="checkbox"].flat:checked + label span {
+    background:url('../images/check_radio_sheet.png') -19px top no-repeat;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
 .clear{clear: both;}
 .header-shadow{
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
@@ -130,22 +153,37 @@ a, a:link, a:hover, a:visited, a:active{
   padding: 0;
 }
 .map-ui-filter{
-  background-color: #454953;
+  background-color: #4F535E;
   text-align: left;
   width: 75%;
 }
 .map-ui-filter li{
   display: block;
 }
-.dropdown-menu.map-ui-filter a.active{
-    background-color: #F5F5BD;
+
+.dropdown-menu.map-ui-filter a:hover,
+.dropdown-menu.map-ui-filter a:focus{
+    background-color: #008B8B !important;
 }
+.dropdown-menu.map-ui-filter a.selected{
+    background-color: #454953;
+}
+
 .map-ui-btn{
   position: relative;
   font-size: 18px;
   color: #FFF;
   bottom:17px;
   right:-10px;
+}
+
+.map-ui-btn-glyp{
+    right: -25px;
+}
+
+.map-ui-btn-all{
+    color: #fff;
+    font-size: 45px;
 }
 .nav-map{ padding-left: 6%; padding-right: 5%;}
 .nav-end{padding-left: 6%;}
