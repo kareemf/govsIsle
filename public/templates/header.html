@@ -72,7 +72,7 @@
                 </ul> 
                 <ul class="list-notification">
                     <section ng-repeat="alert in alerts">
-                        <li class="notif-dropdown">{{alert.name}} <span class="alert-indicator"></span></li>
+                        <li class="notif-dropdown" ng-click="setAlertViewed(alert)">{{alert.name}} <span class="alert-indicator" ng-class="{gray: isAlertViewed(alert)}"></span></li>
                         <div class="dropdownwrap">
                             <p>{{alert.description}}</p>
                             <p ng-if="alert.location">Location: {{alert.location}}</p>

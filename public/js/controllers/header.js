@@ -120,9 +120,30 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
         return false;
     };
 }]);
-controllers.controller('AlertsController', ['$scope', function($scope){
+
+controllers.controller('AlertsController', ['$scope', '$cookies', function($scope, $cookies){
     console.log('In AlertsController');
     $scope.isAlert = function(){
         return true;
-    }
+    };
+
+     $scope.isAlertViewed = function(alert){
+        var viewedAlerts = $cookies.alerts;
+        return viewedAlerts && viewedAlerts.indexOf(alert.id) >= 0;
+    };
+
+    $scope.setAlertViewed = function(alert){
+        if($scope.isAlertViewed(alert)){
+            return;
+        }
+
+        var viewedAlerts = $cookies.alerts;
+        if(!viewedAlerts){
+            viewedAlerts = alert.id;
+        }
+        else{
+            viewedAlerts = viewedAlerts.concat(',' + alert.id);
+        }
+        $cookies.alerts = viewedAlerts;
+    };
 }]);

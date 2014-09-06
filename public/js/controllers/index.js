@@ -83,7 +83,7 @@ function($scope, $rootScope, $http, Shared){
 }]);
 
 controllers.controller('WeatherUpdateController', ['$scope', 'Weather', function($scope,Weather){
-    console.log('In WeatherAlertsController');
+    console.log('In WeatherUpdateController');
 
     $scope.yahooWeather=Weather.get();
     $scope.crossApi={   //cross reference 2 api. yahoo weather with weather icons ;-(
@@ -138,6 +138,5 @@ controllers.controller('WeatherUpdateController', ['$scope', 'Weather', function
     };
 
     $scope.mytest="night-partly-cloudy";
-
 }]);
 
