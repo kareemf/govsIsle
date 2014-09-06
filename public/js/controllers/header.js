@@ -121,11 +121,29 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
     };
 }]);
 
-controllers.controller('AlertsController', ['$scope', '$cookies', function($scope, $cookies){
+controllers.controller('AlertsController', ['$scope', '$cookies', 'Shared', function($scope, $cookies, Shared){
     console.log('In AlertsController');
     $scope.isAlert = function(){
         return true;
     };
+
+    $scope.unreadAlertsCount = 0;
+
+    $scope.$watch(function(){return Shared.alerts}, function(alerts, oldVal){
+        if(!alerts){ return;}
+
+        var unreadAlertsCount = 0;
+
+        for (var i = alerts.length - 1; i >= 0; i--) {
+            var alert = alerts[i]
+            if($scope.isAlertViewed(alert)){
+                continue;
+            }
+            unreadAlertsCount++;
+
+        };
+        $scope.unreadAlertsCount = unreadAlertsCount;
+    }, true);
 
      $scope.isAlertViewed = function(alert){
         var viewedAlerts = $cookies.alerts;
