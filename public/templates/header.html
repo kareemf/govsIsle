@@ -17,6 +17,7 @@
                         <li ng-click="toggleFilters('event')"><a ng-class="{selected: isFilterActive('event')}"><i class="venues"></i><span class="map-ui-btn">EVENTS</span></a></li>
                         <li ng-click="toggleFilters('facility')"><a ng-class="{selected: isFilterActive('facility')}"><i class="facilities"></i><span class="map-ui-btn">FACILITIES</span></a></li>
                         <li ng-click="toggleFilters('alert')"><a ng-class="{selected: isFilterActive('alert')}"><i class="facilities"></i><span class="map-ui-btn">ALERTS</span></a></li>
+                        <li ng-click="toggleFilters('all')"><a><span class="glyphicon glyphicon-th  map-ui-btn-all"></span> <span class="map-ui-btn map-ui-btn-glyp">ALL</span></a></li>
 					</ul>
 				</li>
 				<li ng-show="isActive(6)" class="pull-right navright-btn"><a ui-sref="events.grid" ng-click="activelink(2)"><span class="glyphicon glyphicon-th-large"></span></a></li>

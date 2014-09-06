@@ -153,6 +153,15 @@ a, a:link, a:hover, a:visited, a:active{
   bottom:17px;
   right:-10px;
 }
+
+.map-ui-btn-glyp{
+    right: -25px;
+}
+
+.map-ui-btn-all{
+    color: #fff;
+    font-size: 45px;
+}
 .nav-map{ padding-left: 6%; padding-right: 5%;}
 .nav-end{padding-left: 6%;}
 
