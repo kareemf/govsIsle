@@ -15,14 +15,47 @@
                                 <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('info')}"></span>
                             </a>
                         </li>
-					    <li ng-click="toggleFilters('activity')"><a ng-class="{selected: isFilterActive('activity')}")><i class="activities"></i><span class="map-ui-btn">ACTIVITIES</span></a></li>
-					    <li ng-click="toggleFilters('food, drink')"><a ng-class="{selected: isFilterActive('food') || isFilterActive('drink')}"><i class="food"></i><span class="map-ui-btn">FOOD &amp; DRINK</span></a></li>
-					    <li ng-click="toggleFilters('tour')"><a ng-class="{selected: isFilterActive('tour')}"><i class="history"></i><span class="map-ui-btn">HISTORY</span></a></li>
+					    <li ng-click="toggleFilters('activity')">
+                            <a ng-class="{selected: isFilterActive('activity')}")>
+                                <i class="activities"></i><span class="map-ui-btn">ACTIVITIES</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('activity')}"></span>
+                            </a>
+                        </li>
+					    <li ng-click="toggleFilters('food, drink')">
+                            <a ng-class="{selected: isFilterActive('food') || isFilterActive('drink')}">
+                                <i class="food"></i><span class="map-ui-btn">FOOD &amp; DRINK</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('food') || isFilterActive('drink')}"></span>
+                            </a>
+                        </li>
+					    <li ng-click="toggleFilters('tour')">
+                            <a ng-class="{selected: isFilterActive('tour')}">
+                                <i class="history"></i><span class="map-ui-btn">HISTORY</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('tour')}"></span>
+                            </a>
+                        </li>
                         <!--<li ng-click="toggleFilters('venue')"><a ng-class="{selected: isFilterActive('venue')}" ><i class="venues"></i><span class="map-ui-btn">VENUES</span></a></li>-->
-                        <li ng-click="toggleFilters('event')"><a ng-class="{selected: isFilterActive('event')}"><i class="venues"></i><span class="map-ui-btn">EVENTS</span></a></li>
-                        <li ng-click="toggleFilters('facility')"><a ng-class="{selected: isFilterActive('facility')}"><i class="facilities"></i><span class="map-ui-btn">FACILITIES</span></a></li>
-                        <li ng-click="toggleFilters('alert')"><a ng-class="{selected: isFilterActive('alert')}"><i class="facilities"></i><span class="map-ui-btn">ALERTS</span></a></li>
-                        <li ng-click="toggleFilters('all')"><a><span class="glyphicon glyphicon-th  map-ui-btn-all"></span> <span class="map-ui-btn map-ui-btn-glyp">ALL</span></a></li>
+                        <li ng-click="toggleFilters('event')">
+                            <a ng-class="{selected: isFilterActive('event')}">
+                                <i class="venues"></i><span class="map-ui-btn">EVENTS</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('event')}"></span>
+                            </a>
+                        </li>
+                        <li ng-click="toggleFilters('facility')">
+                            <a ng-class="{selected: isFilterActive('facility')}">
+                                <i class="facilities"></i><span class="map-ui-btn">FACILITIES</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('facility')}"></span>
+                            </a>
+                        </li>
+                        <li ng-click="toggleFilters('alert')">
+                            <a ng-class="{selected: isFilterActive('alert')}">
+                                <i class="facilities"></i><span class="map-ui-btn">ALERTS</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('alert')}"></span>
+                            </a>
+                        </li>
+                        <li ng-click="toggleFilters('all')">
+                            <a><span class="glyphicon glyphicon-th  map-ui-btn-all"></span> <span class="map-ui-btn map-ui-btn-glyp">ALL</span>
+                            </a>
+                        </li>
 					</ul>
 				</li>
 				<li ng-show="isActive(6)" class="pull-right navright-btn"><a ui-sref="events.grid" ng-click="activelink(2)"><span class="glyphicon glyphicon-th-large"></span></a></li>
