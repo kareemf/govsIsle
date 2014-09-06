@@ -9,50 +9,50 @@
 	            <li ng-show="isActive(3)" class="pull-right navright-btn">
 					<a type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span></a>
 					<ul class="dropdown-menu map-ui-filter" role="menu">
-						<li ng-click="toggleFilters('info')">
+						<li ng-click="toggleFilters('info'); $event.stopPropagation()">
                             <a ng-class="{selected: isFilterActive('info')}">
                                 <i class="info"></i><span class="map-ui-btn">INFORMATION</span>
                                 <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('info')}"></span>
                             </a>
                         </li>
-					    <li ng-click="toggleFilters('activity')">
+					    <li ng-click="toggleFilters('activity'); $event.stopPropagation()">
                             <a ng-class="{selected: isFilterActive('activity')}")>
                                 <i class="activities"></i><span class="map-ui-btn">ACTIVITIES</span>
                                 <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('activity')}"></span>
                             </a>
                         </li>
-					    <li ng-click="toggleFilters('food, drink')">
+					    <li ng-click="toggleFilters('food, drink'); $event.stopPropagation()">
                             <a ng-class="{selected: isFilterActive('food') || isFilterActive('drink')}">
                                 <i class="food"></i><span class="map-ui-btn">FOOD &amp; DRINK</span>
                                 <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('food') || isFilterActive('drink')}"></span>
                             </a>
                         </li>
-					    <li ng-click="toggleFilters('tour')">
+					    <li ng-click="toggleFilters('tour'); $event.stopPropagation()">
                             <a ng-class="{selected: isFilterActive('tour')}">
                                 <i class="history"></i><span class="map-ui-btn">HISTORY</span>
                                 <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('tour')}"></span>
                             </a>
                         </li>
                         <!--<li ng-click="toggleFilters('venue')"><a ng-class="{selected: isFilterActive('venue')}" ><i class="venues"></i><span class="map-ui-btn">VENUES</span></a></li>-->
-                        <li ng-click="toggleFilters('event')">
+                        <li ng-click="toggleFilters('event'); $event.stopPropagation()">
                             <a ng-class="{selected: isFilterActive('event')}">
                                 <i class="venues"></i><span class="map-ui-btn">EVENTS</span>
                                 <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('event')}"></span>
                             </a>
                         </li>
-                        <li ng-click="toggleFilters('facility')">
+                        <li ng-click="toggleFilters('facility'); $event.stopPropagation()">
                             <a ng-class="{selected: isFilterActive('facility')}">
                                 <i class="facilities"></i><span class="map-ui-btn">FACILITIES</span>
                                 <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('facility')}"></span>
                             </a>
                         </li>
-                        <li ng-click="toggleFilters('alert')">
+                        <li ng-click="toggleFilters('alert'); $event.stopPropagation()">
                             <a ng-class="{selected: isFilterActive('alert')}">
                                 <i class="facilities"></i><span class="map-ui-btn">ALERTS</span>
                                 <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('alert')}"></span>
                             </a>
                         </li>
-                        <li ng-click="toggleFilters('all')">
+                        <li ng-click="toggleFilters('all'); $event.stopPropagation()">
                             <a><span class="glyphicon glyphicon-th  map-ui-btn-all"></span> <span class="map-ui-btn map-ui-btn-glyp">ALL</span>
                             </a>
                         </li>
