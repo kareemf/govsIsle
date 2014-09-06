@@ -211,6 +211,47 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         }
 
     };
+
+    $scope.userLocation=function(){
+        var coordinates= function(position){
+            var lat= position.coords.latitude,
+                lon= position.coords.longitude,
+                accu= position.coords.accuracy; //return the accuracy in meters
+            //alert(accu);
+            var coords = lat+ ', '+ lon;
+            //document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
+                 
+            var newmarker = new google.maps.Marker({
+                map: map,
+                position: {lat:40.689462, lng:-74.016792},
+                draggable: false,
+                icon:'http://res.cloudinary.com/hqsaer6gs/image/upload/c_scale,h_51/v1410040466/locationMarker_lfmaem.png'
+            });
+            $scope.oms.addMarker(newmarker);
+            $scope.newMarkers.push(newmarker);
+            return [lat, lon];
+
+        };
+
+        var  err = function(error){
+            //1 no premission, 2 no internet conncetion, 3 timeout
+            if(error.code===1){
+                console.log('please allow us to access your location');
+            }
+            if(error.code===3){
+                console.log('The browser timeout');
+            }
+        };
+
+        document.getElementById('geolocation').onclick=function(){
+            navigator.geolocation.getCurrentPosition(coordinates, err,
+                {enableHighAccuracy: true,   //enableHighAccuracy: true -> increase by 10 meters
+                    maximumAge: 30000,      //in millisecond to refresh the cache
+                    //timeout: 300         //time in seconds for the browser to get the location
+                });
+            return false;
+        }
+    };
 }]);
 
 controllers.controller('MarkerListController', ['$scope', '$state','$stateParams','Events', 'Amenities', 'Alerts',
@@ -504,35 +545,4 @@ controllers.controller('NewMarkerListController', ['$scope', '$controller', func
         }
         return null;
     };
-}]);
-
-controllers.controller('GeoLocationController', ['$scope', 'Events', function ($scope, Events) {
-
-    $scope.geo=function(){
-        var coordinates= function(position){
-            var lat= position.coords.latitude,
-                lon= position.coords.longitude,
-                accu= position.coords.accuracy; //return the accuracy in meters
-            //alert(accu);
-            var coords = lat+ ', '+ lon;
-            //document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
-            return [lat, lon];
-
-        };
-
-        var  err = function(error){
-            //1 no premission, 2 no internet conncetion, 3 timeout
-            if(error.code===1){alert('please allow us to access your location');}
-            if(error.code===3){alert('The browser timeout')}
-        };
-        document.getElementById('get_location').onclick=function(){
-            //enableHighAccuracy: true -> increase by 10 meters
-            navigator.geolocation.getCurrentPosition(coordinates, err,
-                {enableHighAccuracy: true,
-                    maximumAge: 30000,      //in millisecond to refresh the cache
-                    //timeout: 300         //time in seconds for the browser to get the location
-                });
-            return false;
-        }
-    }();
 }]);

@@ -2,6 +2,9 @@
     <!-- render map. ui-map will be the name of scope property -->
     <!--<div  id="eventmap" ui-map="myMap" ui-options="mapOptions" ui-event="mapEvents"></div>-->
     <div id="eventmap" ui-options="mapOptions"></div>
+    <div id="eventmap-ui" data-ng-init="userLocation()">
+        <a id="geolocation"><span class="glyphicons direction" ></span></a>
+    </div>
     <div ng-controller="MarkerListController">
         <!-- populate map with event markers -->
         <div ng-repeat="marker in existingEventMarkers">
