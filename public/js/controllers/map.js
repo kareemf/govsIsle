@@ -73,16 +73,29 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
-        streetViewControl: true,
-        panControl: true,
-        zoom: 16,
+        streetViewControl: false,
+        panControl: false,
+        disableDefaultUI: true,
+        zoom: 20,
         maxZoom: 20,
         minZoom: 14,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        // mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.SATELLITE 
+
     };
 
     $scope.mapEvents = {
         'map-rightclick': 'addNewMarker($event, $params)'
+    };
+
+    $scope.mapInit = function() {
+        var options = $scope.mapOptions;
+        if(options.mapTypeId){
+            $scope.myMap.setMapTypeId(options.mapTypeId);
+        }        
+        $scope.myMap.fitBounds(mapBounds);
+        var maptiler = new klokantech.MapTilerMapType($scope.myMap, mapGetTile, mapBounds, options.minZoom, options.maxZoom);
+        // var opacitycontrol = new klokantech.OpacityControl($scope.myMap , maptiler);
     };
 
     //TODO: use permissions to determine what content user can create if any
@@ -152,26 +165,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             entity.geoLocation = geoLocation;
         }
 
-    };
-    
-    $scope.mapInit = function() {
-      var opts = {
-        streetViewControl: false,
-        panControl: false,
-        center: new google.maps.LatLng(0,0),
-        zoom: 16,
-        maxZoom: 20,
-        minZoom: 14,
-        zoomControlOptions:{ 
-            position: google.maps.ControlPosition.LEFT_TOP,
-            style: google.maps.ZoomControlStyle.small
-        }
-      };
-      //$scope.myMap = new google.maps.Map(document.getElementById('eventmap'), opts);
-      $scope.myMap.setMapTypeId(google.maps.MapTypeId.HYBRID);
-      $scope.myMap.fitBounds(mapBounds);
-      var maptiler = new klokantech.MapTilerMapType($scope.myMap , mapGetTile, mapBounds,mapMinZoom, mapMaxZoom);
-      var opacitycontrol = new klokantech.OpacityControl($scope.myMap , maptiler);
     };
 }]);
 
