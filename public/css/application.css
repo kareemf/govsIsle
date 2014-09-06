@@ -72,11 +72,7 @@ a, a:link, a:hover, a:visited, a:active{
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
   height: 60px;
-  /*background-color: #129068;*/
-  border-collapse: separate;
-  z-index: 9999;
   min-width: 300px;
-  /*border-bottom: 1px solid #E7E7E7;*/
   background: -moz-linear-gradient(top,  #129068 0%, #3b9d71 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#129068), color-stop(100%,#3b9d71));
   background: -webkit-linear-gradient(top,  #129068 0%,#3b9d71 100%);
@@ -88,7 +84,6 @@ a, a:link, a:hover, a:visited, a:active{
 .nav-ui{
   width: 100%;height: 100%;
   line-height: 60px;
-  padding-top: 4px;
   color: white;
   z-index: 900;
   font-size: 30px;
