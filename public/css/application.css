@@ -130,16 +130,22 @@ a, a:link, a:hover, a:visited, a:active{
   padding: 0;
 }
 .map-ui-filter{
-  background-color: #454953;
+  background-color: #4F535E;
   text-align: left;
   width: 75%;
 }
 .map-ui-filter li{
   display: block;
 }
-.dropdown-menu.map-ui-filter a.active{
-    background-color: #F5F5BD;
+
+.dropdown-menu.map-ui-filter a:hover,
+.dropdown-menu.map-ui-filter a:focus{
+    background-color: #008B8B !important;
 }
+.dropdown-menu.map-ui-filter a.selected{
+    background-color: #454953;
+}
+
 .map-ui-btn{
   position: relative;
   font-size: 18px;

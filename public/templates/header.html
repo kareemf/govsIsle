@@ -9,14 +9,14 @@
 	            <li ng-show="isActive(3)" class="pull-right navright-btn">
 					<a type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span></a>
 					<ul class="dropdown-menu map-ui-filter" role="menu">
-						<li ng-click="toggleFilters('info')"><a ng-class="{active: isFilterActive('info')}"><i class="info"></i><span class="map-ui-btn">INFORMATION</span></a></li>
-					    <li ng-click="toggleFilters('activity')"><a ng-class="{active: isFilterActive('activity')}")><i class="activities"></i><span class="map-ui-btn">ACTIVITIES</span></a></li>
-					    <li ng-click="toggleFilters('food, drink')"><a ng-class="{active: isFilterActive('food') || isFilterActive('drink')}"><i class="food"></i><span class="map-ui-btn">FOOD &amp; DRINK</span></a></li>
-					    <li ng-click="toggleFilters('tour')"><a ng-class="{active: isFilterActive('tour')}"><i class="history"></i><span class="map-ui-btn">HISTORY</span></a></li>
-                        <!--<li ng-click="toggleFilters('venue')"><a ng-class="{active: isFilterActive('venue')}" ><i class="venues"></i><span class="map-ui-btn">VENUES</span></a></li>-->
-                        <li ng-click="toggleFilters('event')"><a ng-class="{active: isFilterActive('event')}"><i class="venues"></i><span class="map-ui-btn">EVENTS</span></a></li>
-                        <li ng-click="toggleFilters('facility')"><a ng-class="{active: isFilterActive('facility')}"><i class="facilities"></i><span class="map-ui-btn">FACILITIES</span></a></li>
-                        <li ng-click="toggleFilters('alert')"><a ng-class="{active: isFilterActive('alert')}"><i class="facilities"></i><span class="map-ui-btn">ALERTS</span></a></li>
+						<li ng-click="toggleFilters('info')"><a ng-class="{selected: isFilterActive('info')}"><i class="info"></i><span class="map-ui-btn">INFORMATION</span></a></li>
+					    <li ng-click="toggleFilters('activity')"><a ng-class="{selected: isFilterActive('activity')}")><i class="activities"></i><span class="map-ui-btn">ACTIVITIES</span></a></li>
+					    <li ng-click="toggleFilters('food, drink')"><a ng-class="{selected: isFilterActive('food') || isFilterActive('drink')}"><i class="food"></i><span class="map-ui-btn">FOOD &amp; DRINK</span></a></li>
+					    <li ng-click="toggleFilters('tour')"><a ng-class="{selected: isFilterActive('tour')}"><i class="history"></i><span class="map-ui-btn">HISTORY</span></a></li>
+                        <!--<li ng-click="toggleFilters('venue')"><a ng-class="{selected: isFilterActive('venue')}" ><i class="venues"></i><span class="map-ui-btn">VENUES</span></a></li>-->
+                        <li ng-click="toggleFilters('event')"><a ng-class="{selected: isFilterActive('event')}"><i class="venues"></i><span class="map-ui-btn">EVENTS</span></a></li>
+                        <li ng-click="toggleFilters('facility')"><a ng-class="{selected: isFilterActive('facility')}"><i class="facilities"></i><span class="map-ui-btn">FACILITIES</span></a></li>
+                        <li ng-click="toggleFilters('alert')"><a ng-class="{selected: isFilterActive('alert')}"><i class="facilities"></i><span class="map-ui-btn">ALERTS</span></a></li>
 					</ul>
 				</li>
 				<li ng-show="isActive(6)" class="pull-right navright-btn"><a ui-sref="events.grid" ng-click="activelink(2)"><span class="glyphicon glyphicon-th-large"></span></a></li>
