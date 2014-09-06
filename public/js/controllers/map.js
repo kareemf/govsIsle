@@ -76,8 +76,8 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         streetViewControl: false,
         panControl: false,
         disableDefaultUI: true,
-        zoom: 20,
-        maxZoom: 20,
+        zoom: 17,
+        maxZoom: 18,
         minZoom: 14,
         // mapTypeId: google.maps.MapTypeId.ROADMAP
         mapTypeId: google.maps.MapTypeId.SATELLITE 
@@ -90,11 +90,15 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     $scope.mapInit = function() {
         var options = $scope.mapOptions;
+        var map = $scope.myMap;
+        var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, options.minZoom, options.maxZoom);
+
         if(options.mapTypeId){
             $scope.myMap.setMapTypeId(options.mapTypeId);
         }        
-        $scope.myMap.fitBounds(mapBounds);
-        var maptiler = new klokantech.MapTilerMapType($scope.myMap, mapGetTile, mapBounds, options.minZoom, options.maxZoom);
+        map.fitBounds(mapBounds);
+        map.setTilt(0); //disable 45 degree view
+
         // var opacitycontrol = new klokantech.OpacityControl($scope.myMap , maptiler);
     };
 
