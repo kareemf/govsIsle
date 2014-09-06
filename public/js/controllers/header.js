@@ -163,5 +163,10 @@ controllers.controller('AlertsController', ['$scope', '$cookies', 'Shared', func
             viewedAlerts = viewedAlerts.concat(',' + alert.id);
         }
         $cookies.alerts = viewedAlerts;
+
+        var unreadAlertsCount = $scope.unreadAlertsCount; 
+        if(unreadAlertsCount){
+            $scope.unreadAlertsCount = unreadAlertsCount - 1;
+        }
     };
 }]);
