@@ -65,7 +65,7 @@
             ui-map-marker="marker"
             ui-event="newMarkerEvents">
 
-            <div ng-show="marker.map">
+            <div ng-show="marker.map && !marker.isPersisted">
                 <select ng-model="newEntityContentType"
                         ng-options="contentType for contentType in contentTypes">
                     <option value="">-- choose content type --</option>

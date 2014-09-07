@@ -554,6 +554,16 @@ controllers.controller('NewMarkerListController', ['$scope', '$controller', func
         $scope.newEntities.push(args.entity);
     });
 
+    $scope.$on('ENTITY_PERSISTED_EVENT', function(event, args){
+        args.marker.isPersisted = true;
+        if(args.event){
+            updateMarkerIcon(args.event, args.marker, $scope.existingEventMarkers);
+        }
+        else if(args.amenity){
+            updateMarkerIcon(args.amenity, args.marker, $scope.existingAmenityMarkers);
+        }
+    });
+
     $scope.findRelatedEntity = function(marker){
         var markers = $scope.newMarkers;
         var entities = $scope.newEntities;
