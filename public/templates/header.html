@@ -4,14 +4,14 @@
 	        <ul class="nav-inlineblock">
 	        	<li class="pull-left navleft-btn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><i class="glyphicons globe"> <span class="notification-counter" ng-show="unreadAlertsCount">{{unreadAlertsCount}}</span></i></a></li>
                <li class="nav-gov-brand"><a ui-sref="/">GOVERNORS ISLAND</a></li>
-	            <li ng-hide="buttonswap()" class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicons circle_info"></span></a></li>
+	           <li ng-hide="buttonswap()" class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicons circle_info"></span></a></li>
                 <!--filter area-->
                 <li ng-show="isActive(3)" class="pull-right navright-btn">
 					<a type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicons show_thumbnails"></span></a>
 					<ul class="dropdown-menu map-ui-filter" role="menu">
                         <li ng-click="toggleFilters('info'); $event.stopPropagation()">
                             <a ng-class="{selected: isFilterActive('info')}">
-                                <i class=" glyphicons circle_info map-ui-btn-glyph"></i><span class="map-ui-btn map-ui-btn-label">INFORMATION</span>
+                                <i class="glyphicons circle_info map-ui-btn-glyph"></i><span class="map-ui-btn map-ui-btn-label">INFORMATION</span>
                                 <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('info')}"></span>
                             </a>
                         </li>

@@ -1,10 +1,10 @@
 <div id="listEvents">
 	<div class="info-banner textLeft">
-		<h3>UPCOMING EVENTS</h3>
+		<h3><b>Upcoming Events</b><span class="glyphicons search fr"></span></h3>
 	</div>
 	<section class="listCol" ng-repeat="event in eventList">
 		<div class="leftpanel img-detail">
-			<img alt="{{event.name}}" ng-src="{{event.coverPhoto.url}}" class="img-responsive">
+			<a ui-sref="events.detail({slug: event.slug})"><img alt="{{event.name}}" ng-src="{{event.coverPhoto.url}}" class="img-responsive"></a>
 		</div>
 		<div class="rightpanel">
 			<h5><b>{{event.name}}</b></h5>
