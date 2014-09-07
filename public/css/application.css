@@ -68,11 +68,7 @@ input[type="checkbox"].flat:checked + label span {
     float: right;
 }
 .clear{clear: both;}
-.header-shadow{
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-}
+
 .lead{padding-right: 25px; padding-left: 25px;}
 /*SPECIAL CASES*/
 .navSpacingFix{margin-top: 85px;}
@@ -80,12 +76,7 @@ input[type="checkbox"].flat:checked + label span {
 #headerspacing{margin-top: 60px;}
 
 /*SITE COLORS*/
-.information{background-color: #ff9900;}
-.food-drink{background-color: #ff66cc;}
-.activitie{background-color: #33cc66;}
-.venue{background-color: #000066}
-.facilitie{background-color: #0099ff;}
-.hist{background-color: #ccff33;}
+
 .title{font-size: bold;}
 .softtop-padding{padding-top: 20px;}
 .hrstyle{
@@ -155,7 +146,7 @@ a, a:link, a:hover, a:visited, a:active{
 .map-ui-filter{
   background-color: #4F535E;
   text-align: left;
-  width: 75%;
+  width: 90%;
 }
 .map-ui-filter li{
   display: block;
@@ -553,11 +544,32 @@ a, a:link, a:hover, a:visited, a:active{
 /*----------=END EVENTLIST VIEW=-------------*/
 
 
-/*----------===MAPS===---------------*/
+/*----------===EVENT MAPS===---------------*/
 #eventmap{
   position: absolute; 
   height: 90%; width: 100%; 
   /*background-color: #2F516B;*/
+}
+
+#eventmap-ui{
+  position: absolute;
+  width: 30px;height: 30px;
+  top: 150px;right: 15px;
+  background-color: #FFF;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  -webkit-border-radius: 5px; 
+  -moz-border-radius: 5px; 
+  border-radius: 5px; 
+  margin: 0;padding-bottom: 0;
+  padding-top: 2px;
+}
+#eventmap-ui a{
+  color: #000080;
+}
+#eventmap-ui a:visited , #eventmap-ui a:active{
+  background-color: blue;
 }
 .map-form{
     background: white;
@@ -568,17 +580,8 @@ a, a:link, a:hover, a:visited, a:active{
     opacity: 0.90;
     top:62px;
 }
-
-.map-form a, .map-form a:link, .map-form a:hover, .map-form a:visited,.map-form a:active,#eventmap-ui a{
+.map-form a, .map-form a:link, .map-form a:hover, .map-form a:visited,.map-form a:active{
     color: #000;
-}
-#eventmap-ui{
-  position: absolute;
-  width: 30px;height: 30px;
-  top: 150px;right: 15px;
-  background-color: #FFF;
-  font-size: 24px;
-  text-align: center;
 }
 
 /* -------====FERRY SCHEDULE==--------- */
