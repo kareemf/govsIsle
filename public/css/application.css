@@ -129,23 +129,40 @@ a, a:link, a:hover, a:visited, a:active{
   display: inline-block;
   list-style-type: none;
 }
-.nav-login li{
-  display: inline-block;
-  list-style-type: none;
-}
-.navright-btn{padding-right: 10px;}
-.navleft-btn{padding-left: 10px;}
+.navright-btn{padding-right: 4%;}
+.navleft-btn{padding-left: 4%;}
 
 
 /*MAIN-FOOTER NAVIGATION*/
 .map-ui{
   height: 70px; width: 100%;
-  line-height: 70px;
-  padding-top: 10px;
+  padding-top: 8px;
   background-color: #4F535E;
   color: white;
-  font-size:45px;
-  text-align: center;
+  font-size:32px;
+  text-align: justify;
+  min-width: 300px;
+}
+.map-ui .nav-inlineblock:after{
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+.map-ui .nav-home li{
+  display: inline-block;
+}
+.nav-inlineblock #nav-home{
+  padding-left: 2%;
+}
+.nav-inlineblock #nav-ferry{
+  padding-right: 2%;
+}
+.activeTab{
+  color: #129068;
+}
+.tab_title{
+  font-size: 10px;
+  display: block;
 }
 .map-ui-filter{
   background-color: #4F535E;
@@ -178,8 +195,6 @@ a, a:link, a:hover, a:visited, a:active{
     color: #fff;
     font-size: 45px;
 }
-.nav-map{ padding-left: 6%; padding-right: 5%;}
-.nav-end{padding-left: 6%;}
 
 .alert{margin-bottom: 0px;}
 .global-alerts{margin:0px;}
@@ -316,7 +331,7 @@ a, a:link, a:hover, a:visited, a:active{
 /*---==LANDING-CAROUSEL PAGE==---*/
 #mainCaro{
   max-width: 700px;
-  margin: 15px auto 0px auto;
+  margin: 01px auto 0px auto;
  /* background-color: pink;*/
 }
 #secCaro,#weather-panel, #eventCaro {

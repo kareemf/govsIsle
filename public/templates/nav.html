@@ -1,11 +1,26 @@
 <div class="navbar-fixed-bottom" ng-controller="NavController" ng-init="activelink(currentLink)">
     <div class="map-ui">
         <ul class="nav-inlineblock">
-        	<li class="nav-home"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activehome:isActive(0)}" class="glyphicons home">home</span></a></li>
-            <li class="nav-event"><a ng-click="activelink(2)" ui-sref="events.grid"><span ng-class="{calendar1: isActive(2) || isActive(6)}" class="glyphicons home"></span></a></li>
-            <li class="nav-map"><a ng-click="activelink(3);buttonswap()" ui-sref="home"><span ng-class="{mappin1:isActive(3)}" class="glyphicons home"></span></a></li>
-            <li class="nav-headphone"><a ng-click="activelink(4)" ui-sref="tours"><span ng-class="{headphones1:isActive(4)}" class="glyphicons home"></span></a></li>
-            <li class="nav-ferry"><a ng-click="activelink(5)" ui-sref="ferry"><span ng-class="{ferry1:isActive(5)}" class="glyphicons home"></span></a></li>
+        	<li id="nav-home">
+        		<a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activeTab:isActive(0)}" class="glyphicons home"></span></a>
+        		<a class="tab_title" ui-sref="/" ng-click="activelink(0)"> &nbsp;Home</a>
+        	</li>
+            <li id="nav-event">
+            	<a ng-click="activelink(2)" ui-sref="events.grid"><span ng-class="{activeTab: isActive(2) || isActive(6)}" class="glyphicons calendar"></span></a>
+            	<a class="tab_title" ui-sref="/" ng-click="activelink(0)"> Events</a>
+            </li>
+            <li id="nav-map">
+            	<a ng-click="activelink(3);buttonswap()" ui-sref="home"><span ng-class="{activeTab:isActive(3)}" class="glyphicons google_maps"></span></a>
+            	<a class="tab_title" ui-sref="/" ng-click="activelink(0)">&nbsp;&nbsp; Map</a>
+            </li>
+            <li id="nav-tour">
+            	<a ng-click="activelink(4)" ui-sref="tours"><span ng-class="{activeTab:isActive(4)}" class="glyphicons headphones"></span></a>
+            	<a class="tab_title" ui-sref="/" ng-click="activelink(0)"> &nbsp;&nbsp;Tours</a>
+            </li>
+            <li id="nav-ferry">
+            	<a ng-click="activelink(5)" ui-sref="ferry"><span ng-class="{activeTab:isActive(5)}" class="glyphicons boat"></span></a>
+            	<a class="tab_title" ui-sref="/" ng-click="activelink(0)">Visit Us</a>
+            </li>
         </ul>
     </div>
 </div>

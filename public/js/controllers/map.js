@@ -166,16 +166,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         map.fitBounds(mapBounds);
         map.setTilt(0); //disable 45 degree view
         map.overlayMapTypes.insertAt(0, googleMapsOverlay);
-
-        if(user){
-            //only authenicated users can toggle map overlay opacity
-            // var opacitycontrol = new klokantech.OpacityControl(map , maptiler);
-        }
     };
-    
-    $scope.googleMapOverlayInit = function() {
-    };
-
     $scope.openMarkerInfo = function (marker, entity) {
         console.log('openMarkerInfo marker', marker, 'entity', entity );
 
