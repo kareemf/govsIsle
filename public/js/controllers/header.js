@@ -157,8 +157,12 @@ controllers.controller('AlertsController', ['$scope', '$cookies', 'Shared', func
         }
     };
 
+    $scope.isActiveAlert = function(alert){
+        return $scope.activeAlert == alert;
+    };
+
     $scope.toggleActiveAlert = function(alert){
-        if($scope.activeAlert == alert){
+        if($scope.isActiveAlert(alert)){
             return $scope.activeAlert = null;
         }
         $scope.activeAlert = alert;
