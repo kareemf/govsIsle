@@ -184,13 +184,28 @@ a, a:link, a:hover, a:visited, a:active{
   right:-10px;
 }
 
-.map-ui-btn-glyp{
+.map-ui-btn-label{
     right: -25px;
 }
 
-.map-ui-btn-all{
+.map-ui-btn-glyph{
     color: #fff;
     font-size: 45px;
+}
+
+.map-ui-btn-glyph.circle_info{
+  color: #74FF9F;
+}
+.map-ui-btn-glyph.bicycle{
+  color: #FFCC03;
+}.map-ui-btn-glyph.cutlery{
+  color: #FF64A6;
+}.map-ui-btn-glyph.calendar{
+  color: #FFA05F;
+}.map-ui-btn-glyph.underwear{
+  color: #89FFF8;
+}.map-ui-btn-glyph.warning_sign{
+  color: #FF3752;
 }
 
 .alert{margin-bottom: 0px;}
@@ -1003,7 +1018,7 @@ li.wordpress{
 .activities { background-position: -3px -288px; width: 45px; height: 45px; }
 .facilities { background-position: -3px -336px; width: 45px; height: 45px; }
 .food { background-position: -3px -384px; width: 45px; height: 45px; }
-.history { background-position: -3px -432px; width: 45px; height: 45px; }
+/*.history { background-position: -3px -432px; width: 45px; height: 45px; }*/
 .info { background-position: -3px -480px; width: 45px; height: 45px; }
 .venues { background-position: -3px -528px; width: 45px; height: 45px; }
 .weather { background-position: -3px -576px; width: 41px; height: 30px; }
