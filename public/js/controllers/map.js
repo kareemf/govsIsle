@@ -10,11 +10,6 @@ var controllers = angular.module('app.controllers');
 controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', function ($scope, $rootScope, Shared) {
     console.log('Google maps controller.');
 
-    var mapBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(40.682146, -74.027796),
-      new google.maps.LatLng(40.695640, -74.009978)
-    );
-
     var strictBounds = new google.maps.LatLngBounds(
      new google.maps.LatLng(28.70, -127.50), 
      new google.maps.LatLng(48.85, -55.90)
@@ -50,7 +45,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         stylers: [
         {color:'#2F516A'}
         ]     
-
     },{
         featureType: 'road',
         elementType: 'geometry',
@@ -58,62 +52,24 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         {color:'#2F516A'}
         ]     
     }];
-     /* We wont need this anymore too
-    var mapGetTile = function(x,y,z) {
-        return "templates/maps/"+z + "/" + x + "/" + y + ".png";
-    };
-    */
-    var eventmap=document.getElementById('eventmap');
-    /* $scope.myMap auto-populated with google map object */
-    $scope.isEditMode = true;
-    $scope.isAdmin = false;
-
-    console.log('$rootScope.user', $rootScope.user);
-    var user = $rootScope.user;
-    if(user){
-        //TODO: use actual permissions
-        if(user.roles){
-            user.roles.forEach(function(role){
-                if(role.name === 'admin'){
-                    $scope.isAdmin = true;
-                }
-            });
-        }
-    }
-
-    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
 
     var gm = google.maps;
-    var shadow = new gm.MarkerImage(
+    var markerShadow = new gm.MarkerImage(
         'https://www.google.com/intl/en_ALL/mapfiles/shadow50.png',
         new gm.Size(37, 34),  // size   - for sprite clipping
         new gm.Point(0, 0),   // origin - ditto
         new gm.Point(10, 34)  // anchor - where to meet map location
     );
 
-    $scope.$watch('myMap', function(map){
-        if(!map){return;}
+    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
 
-        //$scope.mapInit();
-        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
+    /* $scope.myMap auto-populated with google map object */
+    $scope.isEditMode = true;
+    $scope.isAdmin = false
 
-        oms.addListener('click', function(marker) {
-            $scope.openMarkerInfo(marker, marker.entity);
-        });
-
-        oms.addListener('spiderfy', function(markers) {
-            for(var i = 0; i < markers.length; i ++) {
-                markers[i].setShadow(null);
-            }
-            $scope.myInfoWindow.close();
-        });
-
-        oms.addListener('unspiderfy', function(markers) {
-            for(var i = 0; i < markers.length; i ++) {
-                markers[i].setShadow(shadow);
-            }
-        });
-    });
+    //TODO: use permissions to determine what content user can create if any
+    $scope.contentTypes = ['event', 'amenity', 'alert'];
+    $scope.newMarkers = [];
 
     $scope.mapOptions = {
         center: new google.maps.LatLng(40.6880492, -74.0188415),
@@ -130,60 +86,95 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             position: google.maps.ControlPosition.RIGHT_TOP,
             style: google.maps.ZoomControlStyle.small
         },
-        styles:mapStyles//Awesome. so i now i can style the map under the overlay to make look better
+        styles:mapStyles
     };
    
     $scope.mapEvents = {
         'map-rightclick': 'addNewMarker($event, $params)'
     };
-    /*if we can get google overlay working we can delete the maptiler js file; i had got it working but
-    not with the map markers */
-    var googleMapsOverlay = new google.maps.ImageMapType({
-        getTileUrl: function(coord, zoom) { 
-            var proj = map.getProjection();
-            var z2 = Math.pow(2, zoom);
-            var tileXSize = 256 / z2;
-            var tileYSize = 256 / z2;
-            var tileBounds = new google.maps.LatLngBounds(
-                proj.fromPointToLatLng(new google.maps.Point(coord.x * tileXSize, (coord.y + 1) * tileYSize)),
-                proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * tileXSize, coord.y * tileYSize))
-            );
-            var y = coord.y;
-            if (mapBounds.intersects(tileBounds) && ($scope.mapOptions.minZoom <= zoom) && (zoom <= $scope.mapOptions.maxZoom)){
-                return "templates/maps/"+zoom + "/" + coord.x + "/" + y + ".png";
-            }
-            else{
-                return "templates/maps/blink.png";
-            }
-        },
-        tileSize: new google.maps.Size(256, 256),
-        isPng: true,
-        opacity: 1.0,
-        name: "Govsle"
-    });
 
-    /* 
+    console.log('$rootScope.user', $rootScope.user);
+    var user = $rootScope.user;
+    if(user){
+        //TODO: use actual permissions
+        if(user.roles){
+            user.roles.forEach(function(role){
+                if(role.name === 'admin'){
+                    $scope.isAdmin = true;
+                }
+            });
+        }
+    }
+
+    $scope.$watch('myMap', function(map){
+        if(!map){return;}
+        $scope.mapInit();
+
+        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
+
+        oms.addListener('click', function(marker) {
+            $scope.openMarkerInfo(marker, marker.entity);
+        });
+
+        oms.addListener('spiderfy', function(markers) {
+            for(var i = 0; i < markers.length; i ++) {
+                markers[i].setShadow(null);
+            }
+            $scope.myInfoWindow.close();
+        });
+
+        oms.addListener('unspiderfy', function(markers) {
+            for(var i = 0; i < markers.length; i ++) {
+                markers[i].setShadow(markerShadow);
+            }
+        });
+    });
+     
     $scope.mapInit = function() {
         var options = $scope.mapOptions;
         var map = $scope.myMap;
-        var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, options.minZoom, options.maxZoom);
-        map.fitBounds(mapBounds);
-        map.setTilt(0); //disable 45 degree view
-        if(user){
-            var opacitycontrol = new klokantech.OpacityControl(map , maptiler);
-        }
-    };
-    */
-    var map;
-    $scope.googleMapOverlayInit = function() {
-        map = new google.maps.Map(eventmap, $scope.mapOptions);
+        var mapBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(40.682146, -74.027796),
+          new google.maps.LatLng(40.695640, -74.009978)
+        );
+
+        // var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, options.minZoom, options.maxZoom);
+        var googleMapsOverlay = new google.maps.ImageMapType({
+            getTileUrl: function(coord, zoom) { 
+                var proj = map.getProjection();
+                var z2 = Math.pow(2, zoom);
+                var tileXSize = 256 / z2;
+                var tileYSize = 256 / z2;
+                var tileBounds = new google.maps.LatLngBounds(
+                    proj.fromPointToLatLng(new google.maps.Point(coord.x * tileXSize, (coord.y + 1) * tileYSize)),
+                    proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * tileXSize, coord.y * tileYSize))
+                );
+                var y = coord.y;
+                if (mapBounds.intersects(tileBounds) && (options.minZoom <= zoom) && (zoom <= options.maxZoom)){
+                    return "templates/maps/"+zoom + "/" + coord.x + "/" + y + ".png";
+                }
+                else{
+                    return "templates/maps/blink.png";
+                }
+            },
+            tileSize: new google.maps.Size(256, 256),
+            isPng: true,
+            opacity: 1.0,
+            name: "GovsIsle"
+        });
+
         map.fitBounds(mapBounds);
         map.setTilt(0); //disable 45 degree view
         map.overlayMapTypes.insertAt(0, googleMapsOverlay);
-    };
 
-    //TODO: use permissions to determine what content user can create if any
-    $scope.contentTypes = ['event', 'amenity', 'alert'];
+        if(user){
+            //only authenicated users can toggle map overlay opacity
+            // var opacitycontrol = new klokantech.OpacityControl(map , maptiler);
+        }
+    };
+    
+    $scope.googleMapOverlayInit = function() {
+    };
 
     $scope.openMarkerInfo = function (marker, entity) {
         console.log('openMarkerInfo marker', marker, 'entity', entity );
@@ -194,8 +185,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         $scope.currentEvent = entity;
         $scope.myInfoWindow.open($scope.myMap, marker);
     };
-
-    $scope.newMarkers = [];
 
     $scope.addNewMarker = function ($event, $params) {
         console.log('rightclick', $event, $params);
@@ -251,11 +240,13 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     };
 
-    $scope.userLocation=function(){
-        var coordinates= function(position){
-            var lat= position.coords.latitude,
-                lon= position.coords.longitude,
-                accu= position.coords.accuracy; //return the accuracy in meters
+    $scope.userLocation = function(){
+        var map = $scope.myMap;
+
+        var coordinates = function(position){
+            var lat = position.coords.latitude,
+                lon = position.coords.longitude,
+                accu = position.coords.accuracy; //return the accuracy in meters
             //alert(accu);
             var coords = lat+ ', '+ lon;
             //document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
@@ -272,7 +263,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
         };
 
-        var  err = function(error){
+        var err = function(error){
             //1 no premission, 2 no internet conncetion, 3 timeout
             if(error.code===1){
                 console.log('please allow us to access your location');
@@ -573,7 +564,7 @@ controllers.controller('NewMarkerListController', ['$scope', '$controller', func
         $scope.newEntities.push(args.entity);
     });
 
-     $scope.findRelatedEntity = function(marker){
+    $scope.findRelatedEntity = function(marker){
         var markers = $scope.newMarkers;
         var entities = $scope.newEntities;
 
