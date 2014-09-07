@@ -9,6 +9,7 @@ var app = angular.module('app', [
     'app.services',
     'app.filter',
     'ngResource',
+    'ngCookies',
     'ngDragDrop',
     'ngQuickDate',
     'angularFileUpload',
