@@ -38,7 +38,8 @@
             <span
                 ng-init="entity = alerts[$index]"
                 ui-map-marker="marker"
-                ui-event="markerEvents"></span>
+                ui-event="markerEvents"
+                class="info"></span>
 
             <div ng-init="alert = entity" ng-controller="ExistingAlertMarkerController">
                 <div ng-show="isEditMode && showForm" ng-init="markers = existingAlertMarkers"
