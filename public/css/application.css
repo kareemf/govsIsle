@@ -67,6 +67,9 @@ input[type="checkbox"].flat:checked + label span {
 .fr{
     float: right;
 }
+.black{
+  color:#000 !important; 
+}
 .clear{clear: both;}
 
 .lead{padding-right: 25px; padding-left: 25px;}
