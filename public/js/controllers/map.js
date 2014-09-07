@@ -15,10 +15,49 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
       new google.maps.LatLng(40.695640, -74.009978)
     );
 
-     var strictBounds = new google.maps.LatLngBounds(
+    var strictBounds = new google.maps.LatLngBounds(
      new google.maps.LatLng(28.70, -127.50), 
      new google.maps.LatLng(48.85, -55.90)
     );
+    
+    var mapStyles=[{
+        featureType: 'all',
+        elementType: 'labels',
+        stylers:[
+            {visibility: 'off'}
+        ]
+    },{
+        featureType: 'water',
+        elementType:'geometry',
+        stylers:[
+            {color: '#2F516A'}
+        ]
+    },{
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [
+        {color:'#4B5557'}
+        ]
+    },{
+        featureType: 'poi',
+        elementType: 'geometry',
+        stylers: [
+        {color:'#4B5557'}
+        ]
+    },{
+        featureType: 'transit',
+        elementType: 'geometry',
+        stylers: [
+        {color:'#2F516A'}
+        ]     
+
+    },{
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [
+        {color:'#2F516A'}
+        ]     
+    }];
      /* We wont need this anymore too
     var mapGetTile = function(x,y,z) {
         return "templates/maps/"+z + "/" + x + "/" + y + ".png";
@@ -90,7 +129,8 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         zoomControlOptions:{ 
             position: google.maps.ControlPosition.RIGHT_TOP,
             style: google.maps.ZoomControlStyle.small
-        }
+        },
+        styles:mapStyles//Awesome. so i now i can style the map under the overlay to make look better
     };
    
     $scope.mapEvents = {
@@ -136,7 +176,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
     */
     var map;
     $scope.googleMapOverlayInit = function() {
-
         map = new google.maps.Map(eventmap, $scope.mapOptions);
         map.fitBounds(mapBounds);
         map.setTilt(0); //disable 45 degree view
