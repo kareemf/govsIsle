@@ -15,7 +15,7 @@
             <!-- create a hidden edit form for each event -->
             <!--markers handle is there so current marker can be cleanly removed if need be-->
             <div ng-init="event = entity" ng-controller="ExistingEventMarkerController">
-                <div ng-show="isEditMode && showForm" ng-init="markers = existingEventMarkers"
+                <div ng-if="isEditMode && showForm" ng-init="markers = existingEventMarkers"
                      ng-include="'/templates/events/eventForm.html'" scope="" onload=""
                      jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
@@ -28,7 +28,7 @@
                     ui-event="markerEvents"></span>
 
             <div ng-init="amenity = entity" ng-controller="ExistingAmenityMarkerController">
-                <div ng-show="isEditMode && showForm" ng-init="markers = existingAmenityMarkers"
+                <div ng-if="isEditMode && showForm" ng-init="markers = existingAmenityMarkers"
                      ng-include="'/templates/amenities/amenityForm.html'" scope="" onload=""
                      jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
@@ -42,7 +42,7 @@
                 class="info"></span>
 
             <div ng-init="alert = entity" ng-controller="ExistingAlertMarkerController">
-                <div ng-show="isEditMode && showForm" ng-init="markers = existingAlertMarkers"
+                <div ng-if="isEditMode && showForm" ng-init="markers = existingAlertMarkers"
                      ng-include="'/templates/alerts/alertForm.html'" scope="" onload=""
                      jqyoui-draggable="{animate:true}" data-drag="true">
                 </div>
@@ -74,7 +74,7 @@
              </div>
 
             <!-- create a hidden edit form for each new event/marker -->
-            <div ng-show="isEditMode" ng-init="markers = newMarkers">
+            <div ng-if="isEditMode" ng-init="markers = newMarkers">
                 <div ng-if="newEntityContentType == 'event'" ng-controller="NewEventMarkerController"
                      ng-include="'/templates/events/eventForm.html'" scope="" onload=""
                      ng-show="showForm"
