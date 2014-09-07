@@ -479,19 +479,6 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                     $scope.amenities.push(amenity);
                 });
             });
-
-            //if(filters.indexOf('alert') >= 0){
-                //Alerts.query({}, function(alerts){
-                    //console.log('alerts', alerts);
-                    //alerts.forEach(function(alert){
-                    //    var marker = createMarker(alert, $scope.myMap);
-
-                    //    $scope.oms.addMarker(marker);
-                    //    $scope.existingAlertMarkers.push(marker);
-                    //    $scope.alerts.push(alert);
-                    //});
-                //});
-            //}
         }
     };
 
@@ -536,9 +523,29 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             updateMarkerIcon(args.amenity, args.marker, $scope.existingAmenityMarkers);
         }
     });
+
+    $scope.$watch(function(){return Shared.newEntityTurnedExisting}, function(args){
+        if(!args){return}      
+            
+        var marker = args.marker;
+        $scope.oms.addMarker(marker);
+
+        if(args.event){
+            $scope.existingEventMarkers.push(marker);
+            $scope.events.push(args.event);
+
+            updateMarkerIcon(args.event, args.marker, $scope.existingEventMarkers);
+        }
+        else if(args.amenity){
+            $scope.existingAmenityMarkers.push(marker);
+            $scope.amenities.push(args.amenity);
+
+            updateMarkerIcon(args.amenity, args.marker, $scope.existingAmenityMarkers);
+        }
+    });
 }]);
 
-controllers.controller('NewMarkerListController', ['$scope', '$controller', function($scope, $controller){
+controllers.controller('NewMarkerListController', ['$scope', '$controller', 'Shared', function($scope, $controller, Shared){
     console.log('in NewMarkerListController');
 
     $scope.newMarkerEvents = {
@@ -555,13 +562,20 @@ controllers.controller('NewMarkerListController', ['$scope', '$controller', func
     });
 
     $scope.$on('ENTITY_PERSISTED_EVENT', function(event, args){
-        args.marker.isPersisted = true;
+        var marker = args.marker;
+        marker.isPersisted = true;
+
+        var params = {
+            marker: marker,
+        }
+
         if(args.event){
-            updateMarkerIcon(args.event, args.marker, $scope.existingEventMarkers);
+            params.event = args.event;
         }
         else if(args.amenity){
-            updateMarkerIcon(args.amenity, args.marker, $scope.existingAmenityMarkers);
-        }
+            params.amenity = args.amenity;
+        }  
+        Shared.newEntityTurnedExisting = params;
     });
 
     $scope.findRelatedEntity = function(marker){
