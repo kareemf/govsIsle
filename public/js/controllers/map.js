@@ -526,10 +526,11 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
     $scope.$watch(function(){return Shared.newEntityTurnedExisting}, function(args){
         if(!args){return}      
-            
-        var marker = args.marker;
-        $scope.oms.addMarker(marker);
 
+        var marker = args.marker;
+        var entity = args.event || args.amenity;
+
+        $scope.oms.addMarker(marker);
         if(args.event){
             $scope.existingEventMarkers.push(marker);
             $scope.events.push(args.event);
@@ -542,6 +543,9 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
             updateMarkerIcon(args.amenity, args.marker, $scope.existingAmenityMarkers);
         }
+
+        marker.entity = entity;
+
     });
 }]);
 
