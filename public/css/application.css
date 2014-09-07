@@ -71,15 +71,11 @@ input[type="checkbox"].flat:checked + label span {
   color:#000 !important; 
 }
 .clear{clear: both;}
-
 .lead{padding-right: 25px; padding-left: 25px;}
 /*SPECIAL CASES*/
 .navSpacingFix{margin-top: 85px;}
 .gov-size{font-size: 26px;font-family: 'govsle';}
 #headerspacing{margin-top: 60px;}
-
-/*SITE COLORS*/
-
 .title{font-size: bold;}
 .softtop-padding{padding-top: 20px;}
 .hrstyle{
@@ -122,15 +118,16 @@ a, a:link, a:hover, a:visited, a:active{
 .nav-gov-brand{
   color: white;
   font-size: 34px;
-  text-align: left;
+  text-align: center;
   font-family: 'guppy';
+  padding-top: 2px;
 }
 .nav-inlineblock li{
   display: inline-block;
   list-style-type: none;
 }
-.navright-btn{padding-right: 4%;}
-.navleft-btn{padding-left: 4%;}
+.navright-btn{padding-right: 2%;}
+.navleft-btn{padding-left: 2%;}
 
 
 /*MAIN-FOOTER NAVIGATION*/
@@ -991,7 +988,7 @@ li.wordpress, li.twiiter, li.instagram{
 li.wordpress{
   margin-right: 15px;
 }
-/*SPRITES*/
+/*SPRITES
 .resizeweather, .ferry0, .ferry1, .headphones0, .headphones1, .calendar0,
 .calendar1, .activities, .facilities, .food, .history,
 .info, .venues, .facebook, .instagram, .twitter,.alertclose, .alertopen,
@@ -1018,4 +1015,4 @@ li.wordpress{
 .alertopen { background-position: -3px -782px; width: 30px; height: 30px; }
 .mappin0 { background-position: -36px -749px; width: 28px; height: 45px; }
 .mappin1 { background-position: -36px -797px; width: 28px; height: 45px; }
-
+*/
