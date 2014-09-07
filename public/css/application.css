@@ -227,6 +227,9 @@ a, a:link, a:hover, a:visited, a:active{
 .gray{
   background-color: #808080;
 }
+.list-notification {
+  padding: 0 5px 0 5px;
+}
 .list-notification li{padding: 5px; margin: 0; border-bottom: 1px solid #FFF;}
 .dropdownwrap{
     height:auto;
