@@ -63,8 +63,14 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
 
+    var omsOptions = {
+        keepSpiderfied: true,
+        markersWontMove: true,
+        markersWontHide: true
+    };
+
     /* $scope.myMap auto-populated with google map object */
-    $scope.isEditMode = true;
+    $scope.isEditMode = false;
     $scope.isAdmin = false
 
     //TODO: use permissions to determine what content user can create if any
@@ -101,6 +107,9 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             user.roles.forEach(function(role){
                 if(role.name === 'admin'){
                     $scope.isAdmin = true;
+                    $scope.isEditMode = true;
+                    omsOptions.markersWontMove = false;
+                    omsOptions.markersWontHide  = false;
                 }
             });
         }
@@ -110,7 +119,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         if(!map){return;}
         $scope.mapInit();
 
-        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
+        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map, omsOptions);
 
         oms.addListener('click', function(marker) {
             $scope.openMarkerInfo(marker, marker.entity);
