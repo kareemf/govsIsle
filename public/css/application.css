@@ -96,7 +96,7 @@ a, a:link, a:hover, a:visited, a:active{
   color: #000;
 }
 
-/*------============HEADER-STYLING AREA=========---------*/
+/*------HEADER-STYLING AREA---------*/
 #nav-beta{
   height: 60px;min-width: 300px;
   background: -moz-linear-gradient(top,  #129068 0%, #3b9d71 100%);
@@ -129,8 +129,7 @@ a, a:link, a:hover, a:visited, a:active{
 .navright-btn{padding-right: 2%;}
 .navleft-btn{padding-left: 2%;}
 
-
-/*MAIN-FOOTER NAVIGATION*/
+/*-------MAIN-FOOTER NAVIGATION-------*/
 .map-ui{
   height: 70px; width: 100%;
   padding-top: 8px;
@@ -183,16 +182,13 @@ a, a:link, a:hover, a:visited, a:active{
   bottom:17px;
   right:-10px;
 }
-
 .map-ui-btn-label{
     right: -25px;
 }
-
 .map-ui-btn-glyph{
     color: #fff;
     font-size: 32px;
 }
-
 .map-ui-btn-glyph.circle_info{
   color: #74FF9F;
 }
@@ -210,8 +206,9 @@ a, a:link, a:hover, a:visited, a:active{
 .map-ui-btn-glyph.history{
   color: #3E72FF;
 }
+/*-----------ALERT AREA------------*/
 .alert{margin-bottom: 0px;}
-.global-alerts{margin:0px;}
+#global-alerts{margin:0px;}
 .white-overlay{
   display: none;
   position: fixed;
@@ -260,8 +257,18 @@ a, a:link, a:hover, a:visited, a:active{
     background-color:#434343;
     padding:10px;
 }
-.alertbtn{padding-top: 10px;padding-left: 5%;}
-.alertclosingbtn{padding-top: 5px;padding-right: 4%;}
+.alertbtn{
+  padding-top: 4px;
+  padding-left: 5%;
+  font-size: 30px;
+  color: #000;
+}
+.alertclosingbtn{
+  line-height: 1px;
+  padding-top: 5px;
+  padding-right: 4%;
+  font-size: 22px;
+}
 .alert-title{font-family: 'guppy'; font-size: 24px; padding-top: 2px;}
 .fixme{background-color: green;}
 #weather-panel{
@@ -998,7 +1005,6 @@ z-index: 10000;
 .coole{background-color: #4099FF;}*/
 .activeinfo{color:  #104432;}
 .activehome{ visibility: hidden;}
-
 li.wordpress, li.twiiter, li.instagram{
  margin-left: 15px;
 }

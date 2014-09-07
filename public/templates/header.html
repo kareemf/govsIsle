@@ -65,12 +65,12 @@
 	        </ul>
         </div>
 
-        <div class="global-alerts"> 
+        <div id="global-alerts"> 
             <div id="light" class="white-content">
                 <ul class="nav-inlineblock alertbox-header">
-                    <li class="pull-left alertbtn"><span class="alertopen"></span></li>
+                    <li class="pull-left alertbtn"><span class="glyphicons circle_exclamation_mark"></span></li>
                     <li class="alert-title">NOTIFICATION CENTER</li> 
-                    <li class="pull-right alertclosingbtn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="alertclose"></span></a></li>
+                    <li class="pull-right alertclosingbtn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="glyphicons remove"></span></a></li>
                 </ul> 
                 <ul class="list-notification">
                     <section ng-repeat="alert in alerts">
