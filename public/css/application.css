@@ -218,14 +218,18 @@ a, a:link, a:hover, a:visited, a:active{
 .alert-indicator{
   border-radius: 50%;
   width: 15px;height: 15px; 
-  color: red;
   background-color: red;
   float: right;
   padding-right: 0;
 }
+.gray{
+  background-color: #808080;
+}
+.list-notification {
+  padding: 0 5px 0 5px;
+}
 .list-notification li{padding: 5px; margin: 0; border-bottom: 1px solid #FFF;}
 .dropdownwrap{
-    display:none;
     height:auto;
     float:center;
     margin:0px 0px 0px 0px;
