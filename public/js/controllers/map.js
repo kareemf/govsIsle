@@ -493,7 +493,8 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         }
     };
 
-    $scope.$watch(function(){return Shared.filters}, function(newVal, oldVal){
+    $scope.Shared = Shared;
+    $scope.$watch('Shared.filters', function(newVal, oldVal){
         //console.log('FILTERS_CHANGED', newVal, oldVal);
         if(newVal && !oldVal){
             //special case - ignores
@@ -506,17 +507,21 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         getContentByFilters(newVal);
     }, true);
 
-    $scope.$watch(function(){return Shared.alerts || Shared.filters}, function(){
+    $scope.$watch('Shared.alerts + Shared.filters', function(){
         var alerts = Shared.alerts;
         var filters = Shared.filters;
 
         console.log('NEW ALERTS', alerts, 'NEW FILTERS', filters);
 
-        if(!alerts || !filters || filters.indexOf('alert') < 0){
+        if(!alerts || !filters){
             return;
         }
 
         clearMarkers($scope.existingAlertMarkers);
+        if(filters.indexOf('alert') < 0){
+            return;
+        }
+
         alerts.forEach(function(alert){
             var marker = createMarker(alert, $scope.myMap);
 
