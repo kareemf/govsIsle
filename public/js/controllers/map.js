@@ -258,7 +258,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
                 icon:'http://res.cloudinary.com/hqsaer6gs/image/upload/c_scale,h_51/v1410040466/locationMarker_lfmaem.png'
             });
             $scope.oms.addMarker(newmarker);
-            $scope.newMarkers.push(newmarker);
             return [lat, lon];
 
         };
