@@ -190,7 +190,7 @@ a, a:link, a:hover, a:visited, a:active{
 
 .map-ui-btn-glyph{
     color: #fff;
-    font-size: 45px;
+    font-size: 32px;
 }
 
 .map-ui-btn-glyph.circle_info{
@@ -207,7 +207,9 @@ a, a:link, a:hover, a:visited, a:active{
 }.map-ui-btn-glyph.warning_sign{
   color: #FF3752;
 }
-
+.map-ui-btn-glyph.history{
+  color: #3E72FF;
+}
 .alert{margin-bottom: 0px;}
 .global-alerts{margin:0px;}
 .white-overlay{
