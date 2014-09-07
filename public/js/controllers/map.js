@@ -219,6 +219,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             return marker !== _marker
         });
         marker.setMap(null);
+        $scope.oms.removeMarker(marker);
     };
 
     $scope.updateGeolocationAfterDrag = function(marker, entity){
@@ -410,7 +411,8 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         markers.forEach(function(marker){
             marker.setMap(null);
         });
-        markers = [];
+        markers = [];;
+        $scope.oms.clearMarkers()
     };
 
     var updateMarkerIcon = function(entity, marker, markers){
