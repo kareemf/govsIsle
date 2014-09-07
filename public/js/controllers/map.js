@@ -49,7 +49,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         featureType: 'road',
         elementType: 'geometry',
         stylers: [
-        {color:'#2F516A'}
+        {color:'#53554A'}
         ]     
     }];
 
