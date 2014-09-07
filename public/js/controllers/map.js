@@ -507,7 +507,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         getContentByFilters(newVal);
     }, true);
 
-    $scope.$watch('Shared.alerts + Shared.filters', function(){
+    $scope.$watch('Shared.alerts + Shared.filters', function handleAlertMarkers(){
         var alerts = Shared.alerts;
         var filters = Shared.filters;
 
@@ -584,6 +584,14 @@ controllers.controller('NewMarkerListController', ['$scope', '$controller', 'Sha
     $scope.$on('ENTITY_PERSISTED_EVENT', function(event, args){
         var marker = args.marker;
         marker.isPersisted = true;
+
+        if(args.alert){
+            // handleAlertMarkers in MarkerListController takes care of alerts marker logic
+            //instead of updating this marker, a new one will be created
+            marker.setMap(null);
+            $scope.oms.removeMarker(marker);
+            return;
+        }
 
         var params = {
             marker: marker,
