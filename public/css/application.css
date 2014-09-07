@@ -71,11 +71,7 @@ input[type="checkbox"].flat:checked + label span {
   color:#000 !important; 
 }
 .clear{clear: both;}
-.header-shadow{
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-}
+
 .lead{padding-right: 25px; padding-left: 25px;}
 /*SPECIAL CASES*/
 .navSpacingFix{margin-top: 85px;}
@@ -83,12 +79,7 @@ input[type="checkbox"].flat:checked + label span {
 #headerspacing{margin-top: 60px;}
 
 /*SITE COLORS*/
-.information{background-color: #ff9900;}
-.food-drink{background-color: #ff66cc;}
-.activitie{background-color: #33cc66;}
-.venue{background-color: #000066}
-.facilitie{background-color: #0099ff;}
-.hist{background-color: #ccff33;}
+
 .title{font-size: bold;}
 .softtop-padding{padding-top: 20px;}
 .hrstyle{
@@ -111,8 +102,7 @@ a, a:link, a:hover, a:visited, a:active{
 
 /*------============HEADER-STYLING AREA=========---------*/
 #nav-beta{
-  height: 60px;
-  min-width: 300px;
+  height: 60px;min-width: 300px;
   background: -moz-linear-gradient(top,  #129068 0%, #3b9d71 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#129068), color-stop(100%,#3b9d71));
   background: -webkit-linear-gradient(top,  #129068 0%,#3b9d71 100%);
@@ -139,26 +129,45 @@ a, a:link, a:hover, a:visited, a:active{
   display: inline-block;
   list-style-type: none;
 }
-.nav-login li{
-  display: inline-block;
-  list-style-type: none;
-}
-.navright-btn{padding-right: 10px;}
-.navleft-btn{padding-left: 10px;}
+.navright-btn{padding-right: 4%;}
+.navleft-btn{padding-left: 4%;}
+
+
 /*MAIN-FOOTER NAVIGATION*/
 .map-ui{
   height: 70px; width: 100%;
-  line-height: 70px;
-  padding-top: 10px;
+  padding-top: 8px;
   background-color: #4F535E;
   color: white;
-  font-size:45px;
-  text-align: center;
+  font-size:32px;
+  text-align: justify;
+  min-width: 300px;
+}
+.map-ui .nav-inlineblock:after{
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+.map-ui .nav-home li{
+  display: inline-block;
+}
+.nav-inlineblock #nav-home{
+  padding-left: 2%;
+}
+.nav-inlineblock #nav-ferry{
+  padding-right: 2%;
+}
+.activeTab{
+  color: #129068;
+}
+.tab_title{
+  font-size: 10px;
+  display: block;
 }
 .map-ui-filter{
   background-color: #4F535E;
   text-align: left;
-  width: 75%;
+  width: 90%;
 }
 .map-ui-filter li{
   display: block;
@@ -186,8 +195,6 @@ a, a:link, a:hover, a:visited, a:active{
     color: #fff;
     font-size: 45px;
 }
-.nav-map{ padding-left: 6%; padding-right: 5%;}
-.nav-end{padding-left: 6%;}
 
 .alert{margin-bottom: 0px;}
 .global-alerts{margin:0px;}
@@ -324,7 +331,7 @@ a, a:link, a:hover, a:visited, a:active{
 /*---==LANDING-CAROUSEL PAGE==---*/
 #mainCaro{
   max-width: 700px;
-  margin: 15px auto 0px auto;
+  margin: 01px auto 0px auto;
  /* background-color: pink;*/
 }
 #secCaro,#weather-panel, #eventCaro {
@@ -560,11 +567,32 @@ a, a:link, a:hover, a:visited, a:active{
 /*----------=END EVENTLIST VIEW=-------------*/
 
 
-/*----------===MAPS===---------------*/
+/*----------===EVENT MAPS===---------------*/
 #eventmap{
   position: absolute; 
   height: 90%; width: 100%; 
   /*background-color: #2F516B;*/
+}
+
+#eventmap-ui{
+  position: absolute;
+  width: 30px;height: 30px;
+  top: 150px;right: 15px;
+  background-color: #FFF;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  -webkit-border-radius: 5px; 
+  -moz-border-radius: 5px; 
+  border-radius: 5px; 
+  margin: 0;padding-bottom: 0;
+  padding-top: 2px;
+}
+#eventmap-ui a{
+  color: #000080;
+}
+#eventmap-ui a:visited , #eventmap-ui a:active{
+  background-color: blue;
 }
 .map-form{
     background: white;
@@ -575,17 +603,8 @@ a, a:link, a:hover, a:visited, a:active{
     opacity: 0.90;
     top:62px;
 }
-
-.map-form a, .map-form a:link, .map-form a:hover, .map-form a:visited,.map-form a:active,#eventmap-ui a{
+.map-form a, .map-form a:link, .map-form a:hover, .map-form a:visited,.map-form a:active{
     color: #000;
-}
-#eventmap-ui{
-  position: absolute;
-  width: 30px;height: 30px;
-  top: 150px;right: 15px;
-  background-color: #FFF;
-  font-size: 24px;
-  text-align: center;
 }
 
 /* -------====FERRY SCHEDULE==--------- */
