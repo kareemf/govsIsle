@@ -49,7 +49,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         featureType: 'road',
         elementType: 'geometry',
         stylers: [
-        {color:'#2F516A'}
+        {color:'#53554A'}
         ]     
     }];
 
@@ -63,8 +63,14 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
     var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
 
+    var omsOptions = {
+        keepSpiderfied: true,
+        markersWontMove: true,
+        markersWontHide: true
+    };
+
     /* $scope.myMap auto-populated with google map object */
-    $scope.isEditMode = true;
+    $scope.isEditMode = false;
     $scope.isAdmin = false
 
     //TODO: use permissions to determine what content user can create if any
@@ -101,6 +107,9 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             user.roles.forEach(function(role){
                 if(role.name === 'admin'){
                     $scope.isAdmin = true;
+                    $scope.isEditMode = true;
+                    omsOptions.markersWontMove = false;
+                    omsOptions.markersWontHide  = false;
                 }
             });
         }
@@ -110,7 +119,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         if(!map){return;}
         $scope.mapInit();
 
-        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
+        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map, omsOptions);
 
         oms.addListener('click', function(marker) {
             $scope.openMarkerInfo(marker, marker.entity);
@@ -219,6 +228,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             return marker !== _marker
         });
         marker.setMap(null);
+        $scope.oms.removeMarker(marker);
     };
 
     $scope.updateGeolocationAfterDrag = function(marker, entity){
@@ -410,7 +420,8 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         markers.forEach(function(marker){
             marker.setMap(null);
         });
-        markers = [];
+        markers = [];;
+        $scope.oms.clearMarkers()
     };
 
     var updateMarkerIcon = function(entity, marker, markers){
@@ -482,7 +493,8 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         }
     };
 
-    $scope.$watch(function(){return Shared.filters}, function(newVal, oldVal){
+    $scope.Shared = Shared;
+    $scope.$watch('Shared.filters', function(newVal, oldVal){
         //console.log('FILTERS_CHANGED', newVal, oldVal);
         if(newVal && !oldVal){
             //special case - ignores
@@ -495,17 +507,21 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         getContentByFilters(newVal);
     }, true);
 
-    $scope.$watch(function(){return Shared.alerts || Shared.filters}, function(){
+    $scope.$watch('Shared.alerts + Shared.filters', function handleAlertMarkers(){
         var alerts = Shared.alerts;
         var filters = Shared.filters;
 
         console.log('NEW ALERTS', alerts, 'NEW FILTERS', filters);
 
-        if(!alerts || !filters || filters.indexOf('alert') < 0){
+        if(!alerts || !filters){
             return;
         }
 
         clearMarkers($scope.existingAlertMarkers);
+        if(filters.indexOf('alert') < 0){
+            return;
+        }
+
         alerts.forEach(function(alert){
             var marker = createMarker(alert, $scope.myMap);
 
@@ -568,6 +584,14 @@ controllers.controller('NewMarkerListController', ['$scope', '$controller', 'Sha
     $scope.$on('ENTITY_PERSISTED_EVENT', function(event, args){
         var marker = args.marker;
         marker.isPersisted = true;
+
+        if(args.alert){
+            // handleAlertMarkers in MarkerListController takes care of alerts marker logic
+            //instead of updating this marker, a new one will be created
+            marker.setMap(null);
+            $scope.oms.removeMarker(marker);
+            return;
+        }
 
         var params = {
             marker: marker,
