@@ -196,6 +196,21 @@ a, a:link, a:hover, a:visited, a:active{
     font-size: 45px;
 }
 
+.map-ui-btn-glyph.circle_info{
+  color: #74FF9F;
+}
+.map-ui-btn-glyph.bicycle{
+  color: #FFCC03;
+}.map-ui-btn-glyph.cutlery{
+  color: #FF64A6;
+}.map-ui-btn-glyph.calendar{
+  color: #FFA05F;
+}.map-ui-btn-glyph.underwear{
+  color: #89FFF8;
+}.map-ui-btn-glyph.warning_sign{
+  color: #FF3752;
+}
+
 .alert{margin-bottom: 0px;}
 .global-alerts{margin:0px;}
 .white-overlay{
