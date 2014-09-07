@@ -229,7 +229,6 @@ a, a:link, a:hover, a:visited, a:active{
 }
 .list-notification li{padding: 5px; margin: 0; border-bottom: 1px solid #FFF;}
 .dropdownwrap{
-    display:none;
     height:auto;
     float:center;
     margin:0px 0px 0px 0px;
