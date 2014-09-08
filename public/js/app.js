@@ -3,11 +3,14 @@
 var controllers = angular.module('app.controllers', []);
 var services = angular.module('app.services', []);
 var filter = angular.module('app.filter', []);
+var directives = angular.module('app.directives', []);
+
 
 var app = angular.module('app', [
     'app.controllers',
     'app.services',
     'app.filter',
+    'app.directives.addToCalendar',
     'ngResource',
     'ngCookies',
     'ngDragDrop',

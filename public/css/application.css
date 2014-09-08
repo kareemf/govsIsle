@@ -318,7 +318,7 @@ a, a:link, a:hover, a:visited, a:active{
   color:  #129068;
   margin-top: 0px;
   text-align: center;
- /*background-color: red;*/
+/*& background-color: red;*/
   margin: 0;
 }
 .leftside{
@@ -327,10 +327,11 @@ a, a:link, a:hover, a:visited, a:active{
   padding-left: 10%;
   background-color: inherit;
   margin: inherit;
+  padding-top: 25px;
 }
 .rightside{
   float: right;
-  padding: 18px 10% 18px 0;
+  padding: 42px 10% 18px 0;
   font-size: 16px;
   background-color: inherit;
   margin: inherit;
@@ -400,7 +401,7 @@ a, a:link, a:hover, a:visited, a:active{
 .main-content{margin: 0px;}
 /*THE MAIN FOOTER AKA THE FOOTER*/
 .main-footer{
-  margin-bottom: 30px; /*lower navigation bar*/
+  margin-bottom: 34px; /*lower navigation bar*/
 }
 
 
