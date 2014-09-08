@@ -72,8 +72,8 @@
                 <ul class="list-notification">
                     <section ng-repeat="alert in alerts">
                         <li class="notif-dropdown" ng-click="setAlertViewed(alert); toggleActiveAlert(alert);">
-                            <span class="glyphicon glyphicon-chevron-down" ng-if="!isActiveAlert(alert)"></span>
-                            <span class="glyphicon glyphicon-chevron-up" ng-if="isActiveAlert(alert)"></span>
+                            <span class="glyphicons chevron-right" ng-if="!isActiveAlert(alert)"></span>
+                            <span class="glyphicons chevron-left" ng-if="isActiveAlert(alert)"></span>
                             {{alert.name}} <span class="alert-indicator" ng-class="{gray: isAlertViewed(alert)}"></span>
                         </li>
                         <div class="dropdownwrap" ng-show="isActiveAlert(alert)">
