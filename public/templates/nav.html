@@ -14,8 +14,8 @@
             	<a class="tab_title" ng-class="{activeTab:isActive(3)}">&nbsp;&nbsp; Map</a>
             </li>
             <li id="nav-tour">
-            	<a ng-click="activelink(4)" ui-sref="tours"><span ng-class="{activeTab:isActive(4)}" class="glyphicons headphones"></span></a>
-            	<a class="tab_title" ng-class="{activeTab:isActive(4)}"> &nbsp;Tours</a>
+            	<a ng-click="activelink(4)" ui-sref="tours"><span ng-class="{activeTab:isActive(4)|| isActive(7)}" class="glyphicons headphones"></span></a>
+            	<a class="tab_title" ng-class="{activeTab:isActive(4)|| isActive(7)}"> &nbsp;Tours</a>
             </li>
             <li id="nav-ferry">
             	<a ng-click="activelink(5)" ui-sref="ferry"><span ng-class="{activeTab:isActive(5)}" class="glyphicons boat"></span></a>

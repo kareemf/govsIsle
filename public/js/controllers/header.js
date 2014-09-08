@@ -38,7 +38,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
     console.log('In NavController');
     var path = $location.path();
     //0 1 2 3...
-    var paths=["/","/about","/events/grid","/map","/tours","/ferry", "/events/list", '/weather'];
+    var paths=["/","/about","/events/grid","/map","/tours","/ferry", "/events/list",'/list'];
 
     $scope.currentLink=paths.indexOf(path);
     console.log($scope.currentLink+"link");

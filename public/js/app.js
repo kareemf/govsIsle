@@ -105,6 +105,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
 	            url: '/tours',
 	            templateUrl: 'templates/tours/tours.html'
 	        });
+    $stateProvider   
+            .state('tourlistview',{
+                url: '/list',
+                templateUrl: 'templates/tours/tourlist.html'
+            });
 	
 	$stateProvider
 			.state('tourlist',{

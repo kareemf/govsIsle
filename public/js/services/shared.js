@@ -91,7 +91,7 @@ services.factory('NavService',function($rootScope){
             return activelink;
         },
         getHiddenBtn : function(){
-            if(activelink===2 || activelink===3 || activelink===4 || activelink===6){
+            if(activelink===2 || activelink===3 || activelink===4 || activelink===6 ||activelink===7){
                 return true;
             }
             else{return false;}

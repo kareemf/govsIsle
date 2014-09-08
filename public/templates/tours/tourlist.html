@@ -1,0 +1,28 @@
+<div id="listEvents" ng-controller="ToursController">
+	<div class="info-banner textLeft">
+		<h3>Upcoming Tours<span class="glyphicons search fr" ng-if="false"></span></h3>
+	</div>
+	<section class="listCol" data-ng-repeat="tour in myTours">
+		<div class="leftpanel img-detail">
+			<a ui-sref="tourlist({ id: tour.id })"><img ng-src="{{getImageSrc(tour.imageLoc)}}" alt="" width="150px" height="150px" class="img-responsive"></a>
+		</div>
+		<div class="rightpanel">
+					<div class="caption">
+						<h5>{{tour.tourName}}</h5>
+					</div>
+		</div>
+		<div class="clear"></div>
+	</section>
+	<!--<h3 id="artistLabel">ARTIST CONTRIBUTORS</h3>-->
+	<section class="listCol" data-ng-repeat="tour in contributedTours">
+		<div class="leftpanel img-detail">
+			<a ui-sref="tourlist({ id: tour.id })"><img ng-src="{{getImageSrc(tour.imageLoc)}}" alt="" width="150px" height="150px" class="img-responsive"> </a>
+		</div>
+		<div class="rightpanel">
+					<div class="caption">
+						<h5>{{tour.tourName}}</h5>
+					</div>
+		</div>
+		<div class="clear"></div>
+	</section>
+</div><br/><br/>

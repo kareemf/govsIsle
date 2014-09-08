@@ -177,6 +177,9 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
         Events.getBySlug({slug: slug}, successCallback, failureCallback);
 
     }
+
+
+
 }]);
 
 controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','$filter', function($scope, $state, $stateParams, Events, $filter){

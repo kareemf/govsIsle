@@ -18,20 +18,21 @@
         <img alt="{{event.name}}" ng-src="{{event.coverPhoto.url}}" class="img-responsive"/>
     </div>
     <h4 class="lead"><b>{{event.name}}<b></h4>
-<!--
+    <div id="calendar">
         <a ng-href="events/{{event.slug}}" title="Add to Calendar" class="addthisevent">
-             Add To Calendar
-              <span class="arrow">&nbsp;</span>
+            Add To Calendar<span class="glyphicons chevron-right"></span>
             <span class="_start">{{event.startDateTime | date:'dd/mm/yyyy hh:mm:ss a'}}</span>
-            <span class="_end">{{event.startDateTime | date:'dd/mm/yyyy hh:mm:ss a'}}</span>
-            <span class="_zonecode">40</span>
-            <span class="_summary">Love money</span>
-            <span class="_description"><p ng-bind-html="event.description"></p></span>
+            <span class="_end">{{event.endDateTime | date:'dd/mm/yyyy hh:mm:ss a'}}</span>
+            <span class="_zonecode">15</span>
+            <span class="_summary"> {{"fud"+event.name}}</span> <!--gcal title-->
+            <span class="_description" ng-class="wait">{{event.description}}</span>
             <span class="_location">{{event.location}}</span>
+            <span class="_organizer">Culture Island</span>
             <span class="_all_day_event">{{event.isAllDayEvent? 'true' : 'false'}}</span>
             <span class="_date_format">DD/MM/YYYY</span>
         </a>
-        -->
+    </div>
+
     <p class="lead">{{event.startDateTime | date:'EEEE, MMM dd'}} - {{event.endDateTime| date:'EEEE, MMM dd'}}<br/>
     {{event.startDateTime | date:'h:mma'}} - {{event.endDateTime |date:'h:mma'}} | {{event.location}}</p>
     <hr class="hrstyle"/>

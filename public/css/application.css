@@ -405,12 +405,12 @@ a, a:link, a:hover, a:visited, a:active{
 
 
 /*---==LANDING-CAROUSEL PAGE==---*/
-#mainCaro{
+#mainCaro, #allTours{
   max-width: 700px;
-  margin: 01px auto 0px auto;
+  margin: 1px auto 0px auto;
  /* background-color: pink;*/
 }
-#secCaro,#weather-panel, #eventCaro {
+#secCaro,#weather-panel, #eventCaro , #caroContainer {
     max-width: 700px;
     margin: 0px auto 0px auto;
   /*background-color: blue;*/
@@ -426,7 +426,8 @@ a, a:link, a:hover, a:visited, a:active{
 #mainCaro .carousel-inner,#mainCaro .item{
  max-height: 300px;
 }
-#mainCaro .swapePanel, #allEvents .swapePanel{
+#mainCaro .swapePanel, #allEvents .swapePanel,
+#allTours .swapePanel{
   position: absolute;
   z-index: 0;
   top: 0;bottom: 0;
@@ -534,6 +535,7 @@ a, a:link, a:hover, a:visited, a:active{
   white-space:nowrap;
   margin-top: 0px;
 }
+
 #landing .eventlist li{
   max-width:230px;
   padding: 10px;
@@ -555,18 +557,18 @@ a, a:link, a:hover, a:visited, a:active{
   text-align: center;
 }
 /*---------=EVENTGRID View=--------------*/
-#allEvents{
+#allEvents ,#allTours{
   background-color: #FFF;
   max-width: 700px;
   margin: 0px auto 0px auto;
 }
-#allEvents #eventCaro{
+#allEvents #eventCaro, #allTours #main-carousel{
   overflow:hidden;
 }
-#eventCaro .item{/* good with all image the same size*/
+#eventCaro .item, #main-carousel .item{/* good with all image the same size*/
   max-height: 200px;
 }
-#eventCaro .carousel-indicators {
+#eventCaro .carousel-indicators, #main-carousel .carousel-indicators{
   position: absolute;
   bottom: 5px;
   left: 110%;
@@ -574,7 +576,7 @@ a, a:link, a:hover, a:visited, a:active{
   width: 50px;
   /*background-color: blue;*/
 }
-#eventCaro .carousel-caption {
+#eventCaro .carousel-caption,#main-carousel .carousel-caption{
   position: absolute;
   bottom: 0px;left:0px;
   height: 50px;width: 100%;
@@ -592,7 +594,7 @@ a, a:link, a:hover, a:visited, a:active{
   overflow-y: scroll; /* has to be scroll, not auto */
   -webkit-overflow-scrolling: touch;
 }
-#allEvents .eventlist{
+#allEvents .eventlist, #allTours .eventlist{
   height: 100%;
   overflow-x: auto;
   overflow-y: hidden;
@@ -600,7 +602,7 @@ a, a:link, a:hover, a:visited, a:active{
   border-bottom: solid 2px gray;
 
 }
-#allEvents .eventlist li{
+#allEvents .eventlist li, #allTours .eventlist li{
   max-width:230px;
   padding: 10px;
   display:inline-block;
@@ -609,21 +611,21 @@ a, a:link, a:hover, a:visited, a:active{
   vertical-align:top;
   /*box-shadow: 1px 1px 10px #999;*/
 }
-#allEvents .eventlist .caption {
+#allEvents .eventlist .caption,#allTours .eventlist .caption {
   max-width: 230px;
   height: 50px;
   white-space:normal;
 }
-#allEvents .eventlist .caption h5 {
+#allEvents .eventlist .caption h5,#allTours .eventlist .caption h5{
   font-size:16px;
   margin:10px 0px 0px 0px;
   font-weight: bold;
 }
-#allEvents .eventlist h5.sp1 {
+#allEvents .eventlist h5.sp1,#allTours .eventlist h5.sp1{
   margin-top: 5px;
   font-weight: normal;
 }
-#allEvents .fr,#listEvents .fr{
+#allEvents .fr,#listEvents .fr, #allTours .fr{
   padding-top: 4px;
   padding-right: 4%;
 }
@@ -649,9 +651,12 @@ a, a:link, a:hover, a:visited, a:active{
 #listEvents .img-detail{
   height: 100%; width: 150px;
 }
-
+#calendar{
+  text-align: center;
+  padding-bottom: 15px;
+}
 /* AddThisEvent */
-.addthisevent-drop            {width:170px;display:inline-block;position:relative;z-index:999998;background:#2878eb;font-family:"Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;color:#fff!important;text-decoration:none;font-size:15px;text-decoration:none;padding:12px 20px 12px 15px;}
+.addthisevent-drop            {width:170px;display:inline-block;position:relative;z-index:0;background:#2878eb;font-family:"Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;color:#fff!important;text-decoration:none;font-size:15px;text-decoration:none;padding:12px 20px 12px 15px;}
 .addthisevent-drop:hover        {color:#fff;font-size:15px;text-decoration:none;background-color:#2c84f4;}
 .addthisevent-drop:active         {top:1px;}
 .addthisevent-drop .arrow         {width:15px;height:10px;position:absolute;top:50%;right:15px;margin-top:-5px;background:url(/gfx/icon-arrow-t2.png) no-repeat;}
@@ -665,10 +670,7 @@ a, a:link, a:hover, a:visited, a:active{
 .addthisevent_dropdown .brx       {width:180px;height:1px;overflow:hidden;background:#e0e0e0;position:absolute;z-index:100;left:10px;top:9px;}
 .addthisevent_dropdown .frs       {position:absolute;top:3px;cursor:pointer;right:10px;padding-left:10px;font-style:normal;font-weight:normal;text-align:right;z-index:101;line-height:110%;background:#fff;text-decoration:none;font-size:10px;color:#cacaca;}
 .addthisevent_dropdown .frs:hover     {color:#6d84b4;}
-.addthisevent               {visibility:hidden;}
-
-
-
+.addthisevent{visibility:hidden;}
 
 
 /*----------===EVENT MAPS===---------------*/
@@ -803,6 +805,7 @@ z-index: 10000;
 }
 
 /*----------=ALL TOURS VIEW=-------------*/
+/*
 #allTours {
 	background: #ffffff;
 }
@@ -884,7 +887,8 @@ z-index: 10000;
 	border-bottom: solid 2px gray;
 
 }
-
+*/
+/*
 .tourlist li{
 
 	max-width:180px;
@@ -894,7 +898,7 @@ z-index: 10000;
 
 	display:inline-block;
 	*display:inline;/* For IE7*/
-	*zoom:1;/* For IE7*/
+	/*zoom:1;/* For IE7
 	vertical-align:top;
 }
 
@@ -919,7 +923,7 @@ z-index: 10000;
 	height:50%;
 
 }
-
+*/
 /*----------=SINGLE TOUR VIEW=-------------*/
 
 #tourPoints #tourInfo h3 {
