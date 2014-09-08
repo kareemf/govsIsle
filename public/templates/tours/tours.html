@@ -53,21 +53,11 @@
 </div><br/><br/>
 <script type="text/javascript">
 jQuery( document ).ready(function( $ ) {
-      var elem= $(".swapePanel");
-      elem.swipe({
-          swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-          //$(this).text("You swiped " + direction );
-          if(direction==="left"){
-          	$("#main-carousel").carousel('next');  
-          }
-          if(direction==="right"){
-             $("#main-carousel").carousel('prev');  
-          }
-        },
-        excludedElements:"testtest a",
-        threshold:0,
-        allowPageScroll: "vertical",
-        triggerOnTouchEnd : true
-      });
-});
-</script>
+	   $("#main-carousel").swiperight(function() {  
+	      $("#main-carousel").carousel('prev');  
+	    });  
+	   $("#main-carousel").swipeleft(function() {  
+	      $("#main-carousel").carousel('next');  
+	   });  
+});  
+</script>  
