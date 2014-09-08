@@ -1763,31 +1763,31 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         featureType: 'water',
         elementType:'geometry',
         stylers:[
-            {color: '#2F516A'}
+            {color: '#4E78A0'}
         ]
     },{
         featureType: 'landscape',
         elementType: 'geometry',
         stylers: [
-        {color:'#4B5557'}
+        {color:'#272D34'}
         ]
     },{
         featureType: 'poi',
         elementType: 'geometry',
         stylers: [
-        {color:'#4B5557'}
+        {color:'#272D34'}
         ]
     },{
         featureType: 'transit',
         elementType: 'geometry',
         stylers: [
-        {color:'#2F516A'}
+        {color:'#4E78A0'}
         ]     
     },{
         featureType: 'road',
         elementType: 'geometry',
         stylers: [
-        {color:'#53554A'}
+        {color:'#434C55'}
         ]     
     }];
 
@@ -2179,28 +2179,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         clearMarkers($scope.existingAmenityMarkers);
         clearMarkers($scope.tourMarkers);
 
-        //TODO: events become activitites
-        if(filters.indexOf('event') >= 0){
-            Events.query(function(events){
-                console.log('events', events);
-                events.forEach(function(event){
-                    var marker = createMarker(event, $scope.myMap);
-
-                    $scope.oms.addMarker(marker);
-                    $scope.existingEventMarkers.push(marker);
-                    $scope.events.push(event);
-                });
-            });
-
-            //remove 'event' filter from the set of filters to prevent including
-            //amenities query
-            filters = filters.filter(function(f){
-                return f != 'event'
-            });
-        }
-
-        if(filters.indexOf('tour') >= 0){
-            			
+        if(filters.indexOf('tour') >= 0){            			
             var _tourpoints = [];
 			Tours.getTourpoints(function(data){
 			   for(var i in data['tour_points']) {
@@ -2218,6 +2197,23 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         }
 		
         if(filters && filters.length){
+            Events.query({filter: filters}, function(events){
+                console.log('events', events);
+                events.forEach(function(event){
+                    var marker = createMarker(event, $scope.myMap);
+
+                    $scope.oms.addMarker(marker);
+                    $scope.existingEventMarkers.push(marker);
+                    $scope.events.push(event);
+                });
+            });
+
+            //remove 'event' filter from the set of filters to prevent including
+            //amenities query
+            filters = filters.filter(function(f){
+                return f != 'event'
+            });
+
             Amenities.query({filter: filters}, function(amenities){
                 console.log('amenities', amenities);
                 amenities.forEach(function(amenity){
