@@ -3,11 +3,14 @@
 var controllers = angular.module('app.controllers', []);
 var services = angular.module('app.services', []);
 var filter = angular.module('app.filter', []);
+var directives = angular.module('app.directives', []);
+
 
 var app = angular.module('app', [
     'app.controllers',
     'app.services',
     'app.filter',
+    'app.directives.addToCalendar',
     'ngResource',
     'ngCookies',
     'ngDragDrop',
@@ -24,18 +27,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
             templateUrl: 'templates/landing.html'
         });
 
-    //Home routes
+    //Map routes
     $stateProvider
-        .state('home', {
-            url: '/home?view',
-            templateUrl: 'templates/home/home.html'
+        .state('map', {
+            url: '/map?filters',
+            templateUrl: 'templates/map/map.html'
         })
-        .state('home.map', {
-            templateUrl: 'templates/home/map.html'
-        })
-        .state('home.list', {
-            templateUrl: 'templates/home/list.html'
-        });
 
     // Auth routes
     $stateProvider
@@ -74,18 +71,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
         .state('ferry', {
             url: '/ferry',
             templateUrl: 'templates/info/ferry.html'
-        });
+        }); 
 
     // Event routes
     $stateProvider
         .state('events', {
             url: '/events?view',
             templateUrl: 'templates/events/events.html'
-        })
-        .state('events.map',{
-            url: '/map',
-            //templateUrl: 'templates/map/maplist.html'
-            templateUrl: 'templates/events/eventmap.html'
         })
         .state('events.list',{
             url: '/list',
@@ -116,6 +108,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
 	            url: '/tours',
 	            templateUrl: 'templates/tours/tours.html'
 	        });
+    $stateProvider   
+            .state('tourlistview',{
+                url: '/list',
+                templateUrl: 'templates/tours/tourlist.html'
+            });
 	
 	$stateProvider
 			.state('tourlist',{
@@ -322,7 +319,8 @@ services.factory('SiteData', function($rootScope){
          'type': 'active',
          'visibility': 'public',
          'activeBtn': 3,
-         'link': 'home',
+         'link': 'map',
+         'params': {'filters': ['food', 'drink']},
          'media': "images/landing/Thumb_eat_320x250.jpg"
         },
         {'id':3,
@@ -330,7 +328,8 @@ services.factory('SiteData', function($rootScope){
          'type': 'active',
          'visibility': 'public',
          'activeBtn': 3,
-         'link': 'home',
+         'link': 'map',
+         'params': {'filters': ['event', 'activity']},
          'media': "images/landing/Thumb_enjoy_320x250.jpg"
         },
         {'id':4,
@@ -364,7 +363,7 @@ services.factory('NavService',function($rootScope){
             return activelink;
         },
         getHiddenBtn : function(){
-            if(activelink===2 || activelink===3 || activelink===4 || activelink===6){
+            if(activelink===2 || activelink===3 || activelink===4 || activelink===6 ||activelink===7){
                 return true;
             }
             else{return false;}
@@ -1340,6 +1339,9 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
         Events.getBySlug({slug: slug}, successCallback, failureCallback);
 
     }
+
+
+
 }]);
 
 controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','$filter', function($scope, $state, $stateParams, Events, $filter){
@@ -1436,7 +1438,7 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
     console.log('In NavController');
     var path = $location.path();
     //0 1 2 3...
-    var paths=["/","/about","/events/grid","/home","/tours","/ferry", "/events/list", '/weather'];
+    var paths=["/","/about","/events/grid","/map","/tours","/ferry", "/events/list",'/list'];
 
     $scope.currentLink=paths.indexOf(path);
     console.log($scope.currentLink+"link");
@@ -1517,6 +1519,16 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
         }
         return false;
     };
+
+    $scope.Shared = Shared;
+    $scope.$watch('Shared.filters', function(newVal, oldVal){
+        /*this function exists because even though 99% of the time NavController is the one updating the filters,
+        it still needs to honor changes to the filters made elsewhere in the app, ex map.js setupMap*/
+        if(!newVal){
+            return;
+        }
+        $scope.filters = Shared.filters;
+    }, true);
 }]);
 
 controllers.controller('AlertsController', ['$scope', '$cookies', 'Shared', function($scope, $cookies, Shared){
@@ -1581,17 +1593,6 @@ controllers.controller('AlertsController', ['$scope', '$cookies', 'Shared', func
         };
         $scope.unreadAlertsCount = unreadAlertsCount;
     }, true);
-}]);
-'use strict';
-
-var controllers = angular.module('app.controllers');
-
-controllers.controller('HomeController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams){
-    // console.log('In HomeController. $stateParams.view', $stateParams.view);
-    var view = $stateParams.view;
-    view = view ? view : 'map';
-    // console.log('changeing to home state:', view);
-    $state.go('home.' + view);
 }]);
 'use strict';
 
@@ -1745,7 +1746,7 @@ function initCall() {
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', function ($scope, $rootScope, Shared) {
+controllers.controller('MapController', ['$scope', '$rootScope', '$timeout', '$stateParams', 'Shared', function ($scope, $rootScope, $timeout, $stateParams, Shared) {
     console.log('Google maps controller.');
 
     var strictBounds = new google.maps.LatLngBounds(
@@ -1853,28 +1854,20 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         }
     }
 
-    $scope.$watch('myMap', function(map){
+    $scope.$watch('myMap', function setupMap(map){
         if(!map){return;}
         $scope.mapInit();
+        $scope.omsInit();    
 
-        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map, omsOptions);
+        var preSelectedFilters = $stateParams.filters;
+        if(preSelectedFilters){
+            preSelectedFilters = preSelectedFilters.split(',');
+            Shared.filters = preSelectedFilters;
 
-        oms.addListener('click', function(marker) {
-            $scope.openMarkerInfo(marker, marker.entity);
-        });
-
-        oms.addListener('spiderfy', function(markers) {
-            for(var i = 0; i < markers.length; i ++) {
-                markers[i].setShadow(null);
-            }
-            $scope.myInfoWindow.close();
-        });
-
-        oms.addListener('unspiderfy', function(markers) {
-            for(var i = 0; i < markers.length; i ++) {
-                markers[i].setShadow(markerShadow);
-            }
-        });
+            $timeout(function() {
+                angular.element('#filter-menu').trigger('click')
+            }, 150);
+        }   
     });
      
     $scope.mapInit = function() {
@@ -1914,6 +1907,29 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         map.setTilt(0); //disable 45 degree view
         map.overlayMapTypes.insertAt(0, googleMapsOverlay);
     };
+
+    $scope.omsInit = function(){
+        var map = $scope.myMap;
+        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map, omsOptions);
+
+        oms.addListener('click', function(marker) {
+            $scope.openMarkerInfo(marker, marker.entity);
+        });
+
+        oms.addListener('spiderfy', function(markers) {
+            for(var i = 0; i < markers.length; i ++) {
+                markers[i].setShadow(null);
+            }
+            $scope.myInfoWindow.close();
+        });
+
+        oms.addListener('unspiderfy', function(markers) {
+            for(var i = 0; i < markers.length; i ++) {
+                markers[i].setShadow(markerShadow);
+            }
+        });
+    };
+
     $scope.openMarkerInfo = function (marker, entity) {
         console.log('openMarkerInfo marker', marker, 'entity', entity );
 
