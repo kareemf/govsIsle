@@ -474,9 +474,9 @@ a, a:link, a:hover, a:visited, a:active{
     padding: 0;
     margin: 0;
 }
-.addthisevent{
-  color: black !important;
+.addCalendar{
   background-color: blue;
+
 }
 .btn-custom{ background-color: #5FA77A; }
 /*----------====SECOND CAROUSEL====-------*/
