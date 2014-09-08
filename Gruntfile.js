@@ -11,7 +11,7 @@ var paths = {
         "public/bower_components/angular-ui-router/release/angular-ui-router.min.js",
         "public/bower_components/angular-bootstrap/ui-bootstrap.min.js","public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
         "public/bower_components/angular-ui-utils/ui-utils.min.js","public/bower_components/angular-ui-map/ui-map.min.js", 
-        "public/bower_components/jquery-touchswipe/jquery.touchSwipe.min.js","public/bower_components/socket.io-client/socket.io.js",
+        "public/bower_components/socket.io-client/socket.io.js",
         "public/bower_components/jquery-ui/jquery-ui.min.js","public/bower_components/angular-dragdrop/src/angular-dragdrop.min.js"],
     productionJsP:['public/libs/*.js']
 };
