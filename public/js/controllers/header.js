@@ -119,6 +119,16 @@ controllers.controller('NavController', ['$scope','$location', '$filter','NavSer
         }
         return false;
     };
+
+    $scope.Shared = Shared;
+    $scope.$watch('Shared.filters', function(newVal, oldVal){
+        /*this function exists because even though 99% of the time NavController is the one updating the filters,
+        it still needs to honor changes to the filters made elsewhere in the app, ex map.js setupMap*/
+        if(!newVal){
+            return;
+        }
+        $scope.filters = Shared.filters;
+    }, true);
 }]);
 
 controllers.controller('AlertsController', ['$scope', '$cookies', 'Shared', function($scope, $cookies, Shared){

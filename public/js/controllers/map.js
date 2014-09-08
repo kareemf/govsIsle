@@ -115,7 +115,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', '$timeout', '$s
         }
     }
 
-    $scope.$watch('myMap', function(map){
+    $scope.$watch('myMap', function setupMap(map){
         if(!map){return;}
         $scope.mapInit();
         $scope.omsInit();    
@@ -126,8 +126,8 @@ controllers.controller('MapController', ['$scope', '$rootScope', '$timeout', '$s
             Shared.filters = preSelectedFilters;
 
             $timeout(function() {
-                angular.element('.dropdown-menu.map-ui-filter').triggerHandler('click');
-            }, 0);
+                angular.element('#filter-menu').trigger('click')
+            }, 150);
         }   
     });
      
