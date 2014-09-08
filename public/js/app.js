@@ -28,7 +28,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
     $stateProvider
         .state('map', {
             url: '/map?filters',
-            templateUrl: 'templates/home/map.html'
+            templateUrl: 'templates/map/map.html'
         })
 
     // Auth routes
