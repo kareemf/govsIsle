@@ -1,3 +1,28 @@
+<!-- Theme -->
+<style type="text/css">
+
+/* AddThisEvent (add to your existing CSS) */
+.addthisevent-drop                      {display:inline-block;position:relative;z-index:999998;font-family:'Roboto',sans-serif;color:#fff!important;text-decoration:none;font-size:15px;text-decoration:none;}
+.addthisevent-drop:hover                {color:#fff;font-size:15px;text-decoration:none;}
+.addthisevent_dropdown                  {position:relative;text-align:left;display:block!important;}
+.addthisevent_dropdown span             {display:inline-block;position:relative;line-height:110%;background:#ebebeb url(../gfx/button-bg.png) repeat-x;text-decoration:none;font-size:14px;font-weight:300;color:#333;cursor:pointer;padding:7px 14px 8px 12px;border:1px solid #e1e1e1;margin:0px 6px 0px 0px;-moz-border-radius:4px;-webkit-border-radius:4px;}
+.addthisevent_dropdown span:hover       {background:#f4f4f4;color:#000;text-decoration:none;font-size:14px;}
+.addthisevent_dropdown span:active      {top:1px;}
+.addthisevent_dropdown .ateoutlook      {border-top:3px solid #fa9d00;}
+.addthisevent_dropdown .ategoogle       {border-top:3px solid #d53900;}
+.addthisevent_dropdown .atehotmail      {border-top:3px solid #1473c5;}
+.addthisevent_dropdown .ateyahoo        {border-top:3px solid #65106e;}
+.addthisevent_dropdown .ateical         {border-top:3px solid #ab373a;}
+.addthisevent span                      {display:none!important;}
+.addthisevent-drop ._url,.addthisevent-drop ._start,.addthisevent-drop ._end,.addthisevent-drop ._summary,.addthisevent-drop ._description,.addthisevent-drop ._location,.addthisevent-drop ._organizer,.addthisevent-drop ._organizer_email,.addthisevent-drop ._facebook_event,.addthisevent-drop ._all_day_event {display:none!important;}
+.addthisevent_dropdown .copyx           {display:none;}
+.addthisevent_dropdown .brx             {display:none;}
+.addthisevent_dropdown .frs             {position:absolute;top:8px;cursor:pointer;right:13px;padding-left:10px;font-style:normal;font-weight:normal;text-align:right;z-index:101;line-height:110%;background:#fff;text-decoration:none;font-size:10px;color:#cacaca;}
+.addthisevent_dropdown .frs:hover       {color:#6d84b4;}
+.addthisevent                           {visibility:hidden;}
+
+</style>
+  
 <div ng-controller="EventDetailController">
     <div class="img-detail">
         <img alt="{{event.name}}" ng-src="{{event.coverPhoto.url}}" class="img-responsive"/>
@@ -38,29 +63,4 @@ addthisevent.settings({
     hotmail     : {show:true, text:"Hotmail"}
 });
 </script>
-  
-<!-- Theme -->
-<style type="text/css">
-
-/* AddThisEvent (add to your existing CSS) */
-.addthisevent-drop                      {display:inline-block;position:relative;z-index:999998;font-family:'Roboto',sans-serif;color:#fff!important;text-decoration:none;font-size:15px;text-decoration:none;}
-.addthisevent-drop:hover                {color:#fff;font-size:15px;text-decoration:none;}
-.addthisevent_dropdown                  {position:relative;text-align:left;display:block!important;}
-.addthisevent_dropdown span             {display:inline-block;position:relative;line-height:110%;background:#ebebeb url(../gfx/button-bg.png) repeat-x;text-decoration:none;font-size:14px;font-weight:300;color:#333;cursor:pointer;padding:7px 14px 8px 12px;border:1px solid #e1e1e1;margin:0px 6px 0px 0px;-moz-border-radius:4px;-webkit-border-radius:4px;}
-.addthisevent_dropdown span:hover       {background:#f4f4f4;color:#000;text-decoration:none;font-size:14px;}
-.addthisevent_dropdown span:active      {top:1px;}
-.addthisevent_dropdown .ateoutlook      {border-top:3px solid #fa9d00;}
-.addthisevent_dropdown .ategoogle       {border-top:3px solid #d53900;}
-.addthisevent_dropdown .atehotmail      {border-top:3px solid #1473c5;}
-.addthisevent_dropdown .ateyahoo        {border-top:3px solid #65106e;}
-.addthisevent_dropdown .ateical         {border-top:3px solid #ab373a;}
-.addthisevent span                      {display:none!important;}
-.addthisevent-drop ._url,.addthisevent-drop ._start,.addthisevent-drop ._end,.addthisevent-drop ._summary,.addthisevent-drop ._description,.addthisevent-drop ._location,.addthisevent-drop ._organizer,.addthisevent-drop ._organizer_email,.addthisevent-drop ._facebook_event,.addthisevent-drop ._all_day_event {display:none!important;}
-.addthisevent_dropdown .copyx           {display:none;}
-.addthisevent_dropdown .brx             {display:none;}
-.addthisevent_dropdown .frs             {position:absolute;top:8px;cursor:pointer;right:13px;padding-left:10px;font-style:normal;font-weight:normal;text-align:right;z-index:101;line-height:110%;background:#fff;text-decoration:none;font-size:10px;color:#cacaca;}
-.addthisevent_dropdown .frs:hover       {color:#6d84b4;}
-.addthisevent                           {visibility:hidden;}
-
-</style>
   
