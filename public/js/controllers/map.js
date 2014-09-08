@@ -25,31 +25,31 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         featureType: 'water',
         elementType:'geometry',
         stylers:[
-            {color: '#2F516A'}
+            {color: '#4E78A0'}
         ]
     },{
         featureType: 'landscape',
         elementType: 'geometry',
         stylers: [
-        {color:'#4B5557'}
+        {color:'#272D34'}
         ]
     },{
         featureType: 'poi',
         elementType: 'geometry',
         stylers: [
-        {color:'#4B5557'}
+        {color:'#272D34'}
         ]
     },{
         featureType: 'transit',
         elementType: 'geometry',
         stylers: [
-        {color:'#2F516A'}
+        {color:'#4E78A0'}
         ]     
     },{
         featureType: 'road',
         elementType: 'geometry',
         stylers: [
-        {color:'#53554A'}
+        {color:'#434C55'}
         ]     
     }];
 
