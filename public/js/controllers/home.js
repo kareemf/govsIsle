@@ -7,5 +7,8 @@ controllers.controller('HomeController', ['$scope', '$state', '$stateParams', fu
     var view = $stateParams.view;
     view = view ? view : 'map';
     // console.log('changeing to home state:', view);
+    if(view === 'map'){
+    	return $state.go(view);
+    }
     $state.go('home.' + view);
 }]);

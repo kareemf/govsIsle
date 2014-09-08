@@ -7,7 +7,7 @@ function initCall() {
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', function ($scope, $rootScope, Shared) {
+controllers.controller('MapController', ['$scope', '$rootScope', '$timeout', '$stateParams', 'Shared', function ($scope, $rootScope, $timeout, $stateParams, Shared) {
     console.log('Google maps controller.');
 
     var strictBounds = new google.maps.LatLngBounds(
@@ -118,25 +118,17 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
     $scope.$watch('myMap', function(map){
         if(!map){return;}
         $scope.mapInit();
+        $scope.omsInit();    
 
-        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map, omsOptions);
+        var preSelectedFilters = $stateParams.filters;
+        if(preSelectedFilters){
+            preSelectedFilters = preSelectedFilters.split(',');
+            Shared.filters = preSelectedFilters;
 
-        oms.addListener('click', function(marker) {
-            $scope.openMarkerInfo(marker, marker.entity);
-        });
-
-        oms.addListener('spiderfy', function(markers) {
-            for(var i = 0; i < markers.length; i ++) {
-                markers[i].setShadow(null);
-            }
-            $scope.myInfoWindow.close();
-        });
-
-        oms.addListener('unspiderfy', function(markers) {
-            for(var i = 0; i < markers.length; i ++) {
-                markers[i].setShadow(markerShadow);
-            }
-        });
+            $timeout(function() {
+                angular.element('.dropdown-menu.map-ui-filter').triggerHandler('click');
+            }, 0);
+        }   
     });
      
     $scope.mapInit = function() {
@@ -176,6 +168,29 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         map.setTilt(0); //disable 45 degree view
         map.overlayMapTypes.insertAt(0, googleMapsOverlay);
     };
+
+    $scope.omsInit = function(){
+        var map = $scope.myMap;
+        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map, omsOptions);
+
+        oms.addListener('click', function(marker) {
+            $scope.openMarkerInfo(marker, marker.entity);
+        });
+
+        oms.addListener('spiderfy', function(markers) {
+            for(var i = 0; i < markers.length; i ++) {
+                markers[i].setShadow(null);
+            }
+            $scope.myInfoWindow.close();
+        });
+
+        oms.addListener('unspiderfy', function(markers) {
+            for(var i = 0; i < markers.length; i ++) {
+                markers[i].setShadow(markerShadow);
+            }
+        });
+    };
+
     $scope.openMarkerInfo = function (marker, entity) {
         console.log('openMarkerInfo marker', marker, 'entity', entity );
 

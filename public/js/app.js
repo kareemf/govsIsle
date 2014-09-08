@@ -30,7 +30,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
             url: '/home?view',
             templateUrl: 'templates/home/home.html'
         })
-        .state('home.map', {
+        .state('map', {
+            url: '/map?filters',
             templateUrl: 'templates/home/map.html'
         })
         .state('home.list', {
@@ -82,11 +83,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
             url: '/events?view',
             templateUrl: 'templates/events/events.html'
         })
-        .state('events.map',{
-            url: '/map',
-            //templateUrl: 'templates/map/maplist.html'
-            templateUrl: 'templates/events/eventmap.html'
-        })
+        // .state('events.map',{
+        //     url: '/map',
+        //     //templateUrl: 'templates/map/maplist.html'
+        //     templateUrl: 'templates/events/eventmap.html'
+        // })
         .state('events.list',{
             url: '/list',
             templateUrl: 'templates/events/eventlist.html'
