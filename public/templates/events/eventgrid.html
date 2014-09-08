@@ -1,6 +1,6 @@
 <div id="allEvents">
 	<div class="info-banner textLeft">
-		<h3>UPCOMING EVENTS</h3>
+		<h3>Upcoming Events<span class="glyphicons search fr" ng-if="false"></span></h3>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div id="eventCaro" class="carousel slide" data-ride="carousel">
@@ -25,8 +25,8 @@
 		</div>
 	</div>
 	<div class="clear"></div>
-	<section>
-		<h3 class="info-banner-left">SPECIAL EVENTS</h3>
+	<section >
+		<h4 class="info-banner-left">Special Events</h4>
 		<ul class="eventlist">
 			<li ng-repeat="event in specialEvent">
 				<a ui-sref="events.detail({slug: event.slug})">
@@ -39,7 +39,7 @@
 		</ul>
 	</section>
 	<section>
-		<h3 class="info-banner-left">NATIONAL PARK SERVICE PROGRAMS</h3>
+		<h4 class="info-banner-left">National Park Service Programs</h4>
 		<ul class="eventlist">
 			<li data-ng-repeat="event in parkServices">
 				<a ui-sref="events.detail({ slug: event.slug })">
@@ -52,7 +52,7 @@
 		</ul>
 	</section>
 	<section>
-		<h3 class="info-banner-left">PROGRAMS</h3>
+		<h4 class="info-banner-left">Programs</h4>
 		<ul class="eventlist">
 			<li data-ng-repeat="event in venues">
 				<a ui-sref="events.detail({ slug: event.slug })">
@@ -66,7 +66,7 @@
 	<section>
 	</section>
 	<section>
-		<h3 class="info-banner-left">ACTIVITIES</h3>
+		<h4 class="info-banner-left">Activities</h4>
 		<ul class="eventlist">
 			<li data-ng-repeat="event in activities">
 				<a ui-sref="events.detail({ slug: event.slug })">
@@ -81,21 +81,11 @@
 </div><br/>
 <script type="text/javascript">
 jQuery( document ).ready(function( $ ) {
-      var elem= $(".swapePanel");
-      elem.swipe({
-          swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-          //$(this).text("You swiped " + direction );
-          if(direction==="left"){
-          	$("#eventCaro").carousel('next');  
-          }
-          if(direction==="right"){
-             $("#eventCaro").carousel('prev');  
-          }
-        },
-        excludedElements:"testtest a",
-        threshold:0,
-        allowPageScroll: "vertical",
-        triggerOnTouchEnd : true
-      });
-});
-</script>
+	   $("#eventCaro").swiperight(function() {  
+	      $("#eventCaro").carousel('prev');  
+	    });  
+	   $("#eventCaro").swipeleft(function() {  
+	      $("#eventCaro").carousel('next');  
+	   });  
+});  
+</script>  

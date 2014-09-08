@@ -7,22 +7,97 @@ function initCall() {
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', function ($scope, $rootScope, Shared) {
+controllers.controller('MapController', ['$scope', '$rootScope', '$timeout', '$stateParams', 'Shared', function ($scope, $rootScope, $timeout, $stateParams, Shared) {
     console.log('Google maps controller.');
 
-    var zoom=16, mapMinZoom = 14, mapMaxZoom = 19;
-    var mapBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(40.682146, -74.027796),
-      new google.maps.LatLng(40.695640, -74.009978));
+    var strictBounds = new google.maps.LatLngBounds(
+     new google.maps.LatLng(28.70, -127.50), 
+     new google.maps.LatLng(48.85, -55.90)
+    );
+    
+    var mapStyles=[{
+        featureType: 'all',
+        elementType: 'labels',
+        stylers:[
+            {visibility: 'off'}
+        ]
+    },{
+        featureType: 'water',
+        elementType:'geometry',
+        stylers:[
+            {color: '#4E78A0'}
+        ]
+    },{
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [
+        {color:'#272D34'}
+        ]
+    },{
+        featureType: 'poi',
+        elementType: 'geometry',
+        stylers: [
+        {color:'#272D34'}
+        ]
+    },{
+        featureType: 'transit',
+        elementType: 'geometry',
+        stylers: [
+        {color:'#4E78A0'}
+        ]     
+    },{
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [
+        {color:'#434C55'}
+        ]     
+    }];
 
-    var mapGetTile = function(x,y,z) {
-        return "templates/maps/"+z + "/" + x + "/" + y + ".png";
+    var gm = google.maps;
+    var markerShadow = new gm.MarkerImage(
+        'https://www.google.com/intl/en_ALL/mapfiles/shadow50.png',
+        new gm.Size(37, 34),  // size   - for sprite clipping
+        new gm.Point(0, 0),   // origin - ditto
+        new gm.Point(10, 34)  // anchor - where to meet map location
+    );
+
+    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
+
+    var omsOptions = {
+        keepSpiderfied: true,
+        markersWontMove: true,
+        markersWontHide: true
     };
 
-    var element=document.getElementById('eventmap');
     /* $scope.myMap auto-populated with google map object */
-    $scope.isEditMode = true;
-    $scope.isAdmin = false;
+    $scope.isEditMode = false;
+    $scope.isAdmin = false
+
+    //TODO: use permissions to determine what content user can create if any
+    $scope.contentTypes = ['event', 'amenity', 'alert'];
+    $scope.newMarkers = [];
+
+    $scope.mapOptions = {
+        center: new google.maps.LatLng(40.6880492, -74.0188415),
+        streetViewControl: false,
+        panControl: false,
+        mapTypeControl: false,
+        zoomControl: true,
+        disableDefaultUI: true,
+        zoom: 17,
+        maxZoom: 18,
+        minZoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        zoomControlOptions:{ 
+            position: google.maps.ControlPosition.RIGHT_TOP,
+            style: google.maps.ZoomControlStyle.small
+        },
+        styles:mapStyles
+    };
+   
+    $scope.mapEvents = {
+        'map-rightclick': 'addNewMarker($event, $params)'
+    };
 
     console.log('$rootScope.user', $rootScope.user);
     var user = $rootScope.user;
@@ -32,26 +107,71 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             user.roles.forEach(function(role){
                 if(role.name === 'admin'){
                     $scope.isAdmin = true;
+                    $scope.isEditMode = true;
+                    omsOptions.markersWontMove = false;
+                    omsOptions.markersWontHide  = false;
                 }
             });
         }
     }
 
-    var getMarkerGeoLocation = $scope.getMarkerGeoLocation = Shared.getMarkerGeoLocation;
-
-    var gm = google.maps;
-    var shadow = new gm.MarkerImage(
-        'https://www.google.com/intl/en_ALL/mapfiles/shadow50.png',
-        new gm.Size(37, 34),  // size   - for sprite clipping
-        new gm.Point(0, 0),   // origin - ditto
-        new gm.Point(10, 34)  // anchor - where to meet map location
-    );
-
-    $scope.$watch('myMap', function(map){
+    $scope.$watch('myMap', function setupMap(map){
         if(!map){return;}
-
         $scope.mapInit();
-        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map);
+        $scope.omsInit();    
+
+        var preSelectedFilters = $stateParams.filters;
+        if(preSelectedFilters){
+            preSelectedFilters = preSelectedFilters.split(',');
+            Shared.filters = preSelectedFilters;
+
+            $timeout(function() {
+                angular.element('#filter-menu').trigger('click')
+            }, 150);
+        }   
+    });
+     
+    $scope.mapInit = function() {
+        var options = $scope.mapOptions;
+        var map = $scope.myMap;
+        var mapBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(40.682146, -74.027796),
+          new google.maps.LatLng(40.695640, -74.009978)
+        );
+
+        // var maptiler = new klokantech.MapTilerMapType(map, mapGetTile, mapBounds, options.minZoom, options.maxZoom);
+        var googleMapsOverlay = new google.maps.ImageMapType({
+            getTileUrl: function(coord, zoom) { 
+                var proj = map.getProjection();
+                var z2 = Math.pow(2, zoom);
+                var tileXSize = 256 / z2;
+                var tileYSize = 256 / z2;
+                var tileBounds = new google.maps.LatLngBounds(
+                    proj.fromPointToLatLng(new google.maps.Point(coord.x * tileXSize, (coord.y + 1) * tileYSize)),
+                    proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * tileXSize, coord.y * tileYSize))
+                );
+                var y = coord.y;
+                if (mapBounds.intersects(tileBounds) && (options.minZoom <= zoom) && (zoom <= options.maxZoom)){
+                    return "templates/maps/"+zoom + "/" + coord.x + "/" + y + ".png";
+                }
+                else{
+                    return "templates/maps/blink.png";
+                }
+            },
+            tileSize: new google.maps.Size(256, 256),
+            isPng: true,
+            opacity: 1.0,
+            name: "GovsIsle"
+        });
+
+        map.fitBounds(mapBounds);
+        map.setTilt(0); //disable 45 degree view
+        map.overlayMapTypes.insertAt(0, googleMapsOverlay);
+    };
+
+    $scope.omsInit = function(){
+        var map = $scope.myMap;
+        var oms = $scope.oms = new OverlappingMarkerSpiderfier(map, omsOptions);
 
         oms.addListener('click', function(marker) {
             $scope.openMarkerInfo(marker, marker.entity);
@@ -66,27 +186,10 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
 
         oms.addListener('unspiderfy', function(markers) {
             for(var i = 0; i < markers.length; i ++) {
-                markers[i].setShadow(shadow);
+                markers[i].setShadow(markerShadow);
             }
         });
-    });
-
-    $scope.mapOptions = {
-        center: new google.maps.LatLng(40.6880492, -74.0188415),
-        streetViewControl: true,
-        panControl: true,
-        zoom: 16,
-        maxZoom: 20,
-        minZoom: 14,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-
-    $scope.mapEvents = {
-        'map-rightclick': 'addNewMarker($event, $params)'
-    };
-
-    //TODO: use permissions to determine what content user can create if any
-    $scope.contentTypes = ['event', 'amenity', 'alert'];
 
     $scope.openMarkerInfo = function (marker, entity) {
         console.log('openMarkerInfo marker', marker, 'entity', entity );
@@ -97,8 +200,6 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         $scope.currentEvent = entity;
         $scope.myInfoWindow.open($scope.myMap, marker);
     };
-
-    $scope.newMarkers = [];
 
     $scope.addNewMarker = function ($event, $params) {
         console.log('rightclick', $event, $params);
@@ -142,6 +243,7 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
             return marker !== _marker
         });
         marker.setMap(null);
+        $scope.oms.removeMarker(marker);
     };
 
     $scope.updateGeolocationAfterDrag = function(marker, entity){
@@ -153,25 +255,47 @@ controllers.controller('MapController', ['$scope', '$rootScope', 'Shared', funct
         }
 
     };
-    
-    $scope.mapInit = function() {
-      var opts = {
-        streetViewControl: false,
-        panControl: false,
-        center: new google.maps.LatLng(0,0),
-        zoom: 16,
-        maxZoom: 20,
-        minZoom: 14,
-        zoomControlOptions:{ 
-            position: google.maps.ControlPosition.LEFT_TOP,
-            style: google.maps.ZoomControlStyle.small
+
+    $scope.userLocation = function(){
+        var map = $scope.myMap;
+
+        var coordinates = function(position){
+            var lat = position.coords.latitude,
+                lon = position.coords.longitude,
+                accu = position.coords.accuracy; //return the accuracy in meters
+            //alert(accu);
+            var coords = lat+ ', '+ lon;
+            //document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
+                 
+            var newmarker = new google.maps.Marker({
+                map: map,
+                position: {lat:40.689462, lng:-74.016792},
+                draggable: false,
+                icon:'http://res.cloudinary.com/hqsaer6gs/image/upload/c_scale,h_51/v1410040466/locationMarker_lfmaem.png'
+            });
+            $scope.oms.addMarker(newmarker);
+            return [lat, lon];
+
+        };
+
+        var err = function(error){
+            //1 no premission, 2 no internet conncetion, 3 timeout
+            if(error.code===1){
+                console.log('please allow us to access your location');
+            }
+            if(error.code===3){
+                console.log('The browser timeout');
+            }
+        };
+
+        document.getElementById('geolocation').onclick=function(){
+            navigator.geolocation.getCurrentPosition(coordinates, err,
+                {enableHighAccuracy: true,   //enableHighAccuracy: true -> increase by 10 meters
+                    maximumAge: 30000,      //in millisecond to refresh the cache
+                    //timeout: 300         //time in seconds for the browser to get the location
+                });
+            return false;
         }
-      };
-      //$scope.myMap = new google.maps.Map(document.getElementById('eventmap'), opts);
-      $scope.myMap.setMapTypeId(google.maps.MapTypeId.HYBRID);
-      $scope.myMap.fitBounds(mapBounds);
-      var maptiler = new klokantech.MapTilerMapType($scope.myMap , mapGetTile, mapBounds,mapMinZoom, mapMaxZoom);
-      var opacitycontrol = new klokantech.OpacityControl($scope.myMap , maptiler);
     };
 }]);
 
@@ -311,7 +435,8 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         markers.forEach(function(marker){
             marker.setMap(null);
         });
-        markers = [];
+        markers = [];;
+        $scope.oms.clearMarkers()
     };
 
     var updateMarkerIcon = function(entity, marker, markers){
@@ -331,28 +456,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         clearMarkers($scope.existingAmenityMarkers);
         clearMarkers($scope.tourMarkers);
 
-        //TODO: events become activitites
-        if(filters.indexOf('event') >= 0){
-            Events.query(function(events){
-                console.log('events', events);
-                events.forEach(function(event){
-                    var marker = createMarker(event, $scope.myMap);
-
-                    $scope.oms.addMarker(marker);
-                    $scope.existingEventMarkers.push(marker);
-                    $scope.events.push(event);
-                });
-            });
-
-            //remove 'event' filter from the set of filters to prevent including
-            //amenities query
-            filters = filters.filter(function(f){
-                return f != 'event'
-            });
-        }
-
-        if(filters.indexOf('tour') >= 0){
-            			
+        if(filters.indexOf('tour') >= 0){            			
             var _tourpoints = [];
 			Tours.getTourpoints(function(data){
 			   for(var i in data['tour_points']) {
@@ -370,6 +474,23 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         }
 		
         if(filters && filters.length){
+            Events.query({filter: filters}, function(events){
+                console.log('events', events);
+                events.forEach(function(event){
+                    var marker = createMarker(event, $scope.myMap);
+
+                    $scope.oms.addMarker(marker);
+                    $scope.existingEventMarkers.push(marker);
+                    $scope.events.push(event);
+                });
+            });
+
+            //remove 'event' filter from the set of filters to prevent including
+            //amenities query
+            filters = filters.filter(function(f){
+                return f != 'event'
+            });
+
             Amenities.query({filter: filters}, function(amenities){
                 console.log('amenities', amenities);
                 amenities.forEach(function(amenity){
@@ -380,23 +501,11 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                     $scope.amenities.push(amenity);
                 });
             });
-
-            //if(filters.indexOf('alert') >= 0){
-                //Alerts.query({}, function(alerts){
-                    //console.log('alerts', alerts);
-                    //alerts.forEach(function(alert){
-                    //    var marker = createMarker(alert, $scope.myMap);
-
-                    //    $scope.oms.addMarker(marker);
-                    //    $scope.existingAlertMarkers.push(marker);
-                    //    $scope.alerts.push(alert);
-                    //});
-                //});
-            //}
         }
     };
 
-    $scope.$watch(function(){return Shared.filters}, function(newVal, oldVal){
+    $scope.Shared = Shared;
+    $scope.$watch('Shared.filters', function(newVal, oldVal){
         //console.log('FILTERS_CHANGED', newVal, oldVal);
         if(newVal && !oldVal){
             //special case - ignores
@@ -409,17 +518,21 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
         getContentByFilters(newVal);
     }, true);
 
-    $scope.$watch(function(){return Shared.alerts || Shared.filters}, function(){
+    $scope.$watch('Shared.alerts + Shared.filters', function handleAlertMarkers(){
         var alerts = Shared.alerts;
         var filters = Shared.filters;
 
         console.log('NEW ALERTS', alerts, 'NEW FILTERS', filters);
 
-        if(!alerts || !filters || filters.indexOf('alert') < 0){
+        if(!alerts || !filters){
             return;
         }
 
         clearMarkers($scope.existingAlertMarkers);
+        if(filters.indexOf('alert') < 0){
+            return;
+        }
+
         alerts.forEach(function(alert){
             var marker = createMarker(alert, $scope.myMap);
 
@@ -437,9 +550,33 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
             updateMarkerIcon(args.amenity, args.marker, $scope.existingAmenityMarkers);
         }
     });
+
+    $scope.$watch(function(){return Shared.newEntityTurnedExisting}, function(args){
+        if(!args){return}      
+
+        var marker = args.marker;
+        var entity = args.event || args.amenity;
+
+        $scope.oms.addMarker(marker);
+        if(args.event){
+            $scope.existingEventMarkers.push(marker);
+            $scope.events.push(args.event);
+
+            updateMarkerIcon(args.event, args.marker, $scope.existingEventMarkers);
+        }
+        else if(args.amenity){
+            $scope.existingAmenityMarkers.push(marker);
+            $scope.amenities.push(args.amenity);
+
+            updateMarkerIcon(args.amenity, args.marker, $scope.existingAmenityMarkers);
+        }
+
+        marker.entity = entity;
+
+    });
 }]);
 
-controllers.controller('NewMarkerListController', ['$scope', '$controller', function($scope, $controller){
+controllers.controller('NewMarkerListController', ['$scope', '$controller', 'Shared', function($scope, $controller, Shared){
     console.log('in NewMarkerListController');
 
     $scope.newMarkerEvents = {
@@ -455,7 +592,32 @@ controllers.controller('NewMarkerListController', ['$scope', '$controller', func
         $scope.newEntities.push(args.entity);
     });
 
-     $scope.findRelatedEntity = function(marker){
+    $scope.$on('ENTITY_PERSISTED_EVENT', function(event, args){
+        var marker = args.marker;
+        marker.isPersisted = true;
+
+        if(args.alert){
+            // handleAlertMarkers in MarkerListController takes care of alerts marker logic
+            //instead of updating this marker, a new one will be created
+            marker.setMap(null);
+            $scope.oms.removeMarker(marker);
+            return;
+        }
+
+        var params = {
+            marker: marker,
+        }
+
+        if(args.event){
+            params.event = args.event;
+        }
+        else if(args.amenity){
+            params.amenity = args.amenity;
+        }  
+        Shared.newEntityTurnedExisting = params;
+    });
+
+    $scope.findRelatedEntity = function(marker){
         var markers = $scope.newMarkers;
         var entities = $scope.newEntities;
 
@@ -466,35 +628,4 @@ controllers.controller('NewMarkerListController', ['$scope', '$controller', func
         }
         return null;
     };
-}]);
-
-controllers.controller('GeoLocationController', ['$scope', 'Events', function ($scope, Events) {
-
-    $scope.geo=function(){
-        var coordinates= function(position){
-            var lat= position.coords.latitude,
-                lon= position.coords.longitude,
-                accu= position.coords.accuracy; //return the accuracy in meters
-            //alert(accu);
-            var coords = lat+ ', '+ lon;
-            //document.getElementById('google_map').setAttribute('src',"https://maps.google.com?q="+coords+"&z=18&output=embed" )
-            return [lat, lon];
-
-        };
-
-        var  err = function(error){
-            //1 no premission, 2 no internet conncetion, 3 timeout
-            if(error.code===1){alert('please allow us to access your location');}
-            if(error.code===3){alert('The browser timeout')}
-        };
-        document.getElementById('get_location').onclick=function(){
-            //enableHighAccuracy: true -> increase by 10 meters
-            navigator.geolocation.getCurrentPosition(coordinates, err,
-                {enableHighAccuracy: true,
-                    maximumAge: 30000,      //in millisecond to refresh the cache
-                    //timeout: 300         //time in seconds for the browser to get the location
-                });
-            return false;
-        }
-    }();
 }]);

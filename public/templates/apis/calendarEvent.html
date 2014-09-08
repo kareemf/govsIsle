@@ -1,0 +1,14 @@
+<div id="calendar">
+    <a ng-href="events/{{event.slug}}" title="Add to Calendar" class="addthisevent">
+        Add To Calendar<span class="glyphicons chevron-right"></span>
+        <span class="_start">{{event.startDateTime | date:'dd/mm/yyyy hh:mm:ss a'}}</span>
+        <span class="_end">{{event.endDateTime | date:'dd/mm/yyyy hh:mm:ss a'}}</span>
+        <span class="_zonecode">15</span>
+        <span class="_summary"> {{"fud"+event.name}}</span> <!--gcal title-->
+        <span class="_description" ng-class="wait">{{event.description}}</span>
+        <span class="_location">{{event.location}}</span>
+        <span class="_organizer">Culture Island</span>
+        <span class="_all_day_event">{{event.isAllDayEvent? 'true' : 'false'}}</span>
+        <span class="_date_format">DD/MM/YYYY</span>
+    </a>
+</div>

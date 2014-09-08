@@ -1,16 +1,16 @@
 <div id="listEvents">
 	<div class="info-banner textLeft">
-		<h3>UPCOMING EVENTS</h3>
+		<h3>Upcoming Events<span class="glyphicons search fr" ng-if="false"></span></h3>
 	</div>
 	<section class="listCol" ng-repeat="event in eventList">
-		<div class="leftSide col-xs-6 col-sm-3 col-md-8 col-lg-8 img-detail">
-			<img alt="{{event.name}}" ng-src="{{event.media}}" class="img-responsive">
+		<div class="leftpanel img-detail">
+			<a ui-sref="events.detail({slug: event.slug})"><img alt="{{event.name}}" ng-src="{{event.coverPhoto.url}}" class="img-responsive"></a>
 		</div>
-		<div class="rightSide col-xs-6 col-sm-3 col-md-2 col-lg-8">
-			<h5><b>{{event.name}}<b></h5>
+		<div class="rightpanel">
+			<h5><b>{{event.name}}</b></h5>
 			<p>{{event.startDateTime | date:'EEE, MMM dd'}} - {{event.endDateTime| date:'EEE, MMM dd'}}<br/>
 			{{event.startDateTime | date:'h:mma'}} - {{event.endDateTime |date:'h:mma'}} | {{event.location}}</p>
 		</div>
-
-	</section><br/><br/>
+		<div class="clear"></div>
+	</section><br/>
 </div>

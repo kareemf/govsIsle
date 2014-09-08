@@ -14,7 +14,7 @@ controllers.controller('BaseAmenityMarkerController', ['$scope', '$controller', 
         //save successful, close the form
         $scope.showForm = false;
 
-        $scope.$emit('MARKER_UPDATED_EVENT', {
+        $scope.$emit('ENTITY_PERSISTED_EVENT', {
             marker: marker,
             amenity: amenity
         });

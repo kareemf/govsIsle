@@ -3,12 +3,16 @@
 var controllers = angular.module('app.controllers', []);
 var services = angular.module('app.services', []);
 var filter = angular.module('app.filter', []);
+var directives = angular.module('app.directives', []);
+
 
 var app = angular.module('app', [
     'app.controllers',
     'app.services',
     'app.filter',
+    'app.directives.addToCalendar',
     'ngResource',
+    'ngCookies',
     'ngDragDrop',
     'ngQuickDate',
     'angularFileUpload',
@@ -23,18 +27,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
             templateUrl: 'templates/landing.html'
         });
 
-    //Home routes
+    //Map routes
     $stateProvider
-        .state('home', {
-            url: '/home?view',
-            templateUrl: 'templates/home/home.html'
+        .state('map', {
+            url: '/map?filters',
+            templateUrl: 'templates/map/map.html'
         })
-        .state('home.map', {
-            templateUrl: 'templates/home/map.html'
-        })
-        .state('home.list', {
-            templateUrl: 'templates/home/list.html'
-        });
 
     // Auth routes
     $stateProvider
@@ -73,18 +71,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
         .state('ferry', {
             url: '/ferry',
             templateUrl: 'templates/info/ferry.html'
-        });
+        }); 
 
     // Event routes
     $stateProvider
         .state('events', {
             url: '/events?view',
             templateUrl: 'templates/events/events.html'
-        })
-        .state('events.map',{
-            url: '/map',
-            //templateUrl: 'templates/map/maplist.html'
-            templateUrl: 'templates/events/eventmap.html'
         })
         .state('events.list',{
             url: '/list',
@@ -115,6 +108,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
 	            url: '/tours',
 	            templateUrl: 'templates/tours/tours.html'
 	        });
+    $stateProvider   
+            .state('tourlistview',{
+                url: '/list',
+                templateUrl: 'templates/tours/tourlist.html'
+            });
 	
 	$stateProvider
 			.state('tourlist',{

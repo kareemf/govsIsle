@@ -1,68 +1,91 @@
 <nav class="navbar-fixed-top" id="nav-beta" data-ng-controller="NavController" ng-init="activelink(currentLink)">
     <div ng-controller="AlertsController">
     	<div class="nav-ui container">
-	        <ul class="nav-inlineblock" >
-	        	<li ng-hide="isActive(0)" class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{activehome:isActive(0)}" class="glyphicon glyphicon-home"></span></a></li>
-	        	<!--<li ng-hide="!isActive(0)" class="pull-left navleft-btn"><a ui-sref="/" ng-click="activelink(0)"><span ng-class="{weather:isActive(0)}" class="resizeweather"></span></a></li>-->
-	        	<li ng-hide="!isActive(0)" class="pull-left navleft-btn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><i class="glyphicon glyphicon-globe"> <span class="notification-counter" ng-show="alerts.length">{{alerts.length}}</span></i></a></li>
-	            <li class="nav-gov-brand"><a ui-sref="/">GOVERNORS ISLAND</a></li>
-	            <li ng-hide="buttonswap()" class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicon glyphicon-info-sign"></span></a></li>
-	            <li ng-show="isActive(3)" class="pull-right navright-btn">
-					<a type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th"></span></a>
+	        <ul class="nav-inlineblock">
+	        	<li class="pull-left navleft-btn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><i class="glyphicons globe"> <span class="notification-counter" ng-show="unreadAlertsCount">{{unreadAlertsCount}}</span></i></a></li>
+               <li class="nav-gov-brand"><a ui-sref="/">GOVERNORS ISLAND</a></li>
+	           <li ng-hide="buttonswap()" class="pull-right navright-btn"><a ui-sref="about" ng-click="activelink(1)"><span ng-class="{activeinfo:isActive(1)}" class="glyphicons circle_info"></span></a></li>
+                <!--filter area-->
+                <li ng-show="isActive(3)" class="pull-right navright-btn">
+					<a type="button" id="filter-menu" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicons show_thumbnails"></span></a>
 					<ul class="dropdown-menu map-ui-filter" role="menu">
-						<li ng-click="toggleFilters('info')"><a ng-class="{active: isFilterActive('info')}"><i class="info"></i><span class="map-ui-btn">INFORMATION</span></a></li>
-					    <li ng-click="toggleFilters('activity')"><a ng-class="{active: isFilterActive('activity')}")><i class="activities"></i><span class="map-ui-btn">ACTIVITIES</span></a></li>
-					    <li ng-click="toggleFilters('food, drink')"><a ng-class="{active: isFilterActive('food') || isFilterActive('drink')}"><i class="food"></i><span class="map-ui-btn">FOOD &amp; DRINK</span></a></li>
-					    <li ng-click="toggleFilters('tour')"><a ng-class="{active: isFilterActive('tour')}"><i class="history"></i><span class="map-ui-btn">HISTORY</span></a></li>
-                        <!--<li ng-click="toggleFilters('venue')"><a ng-class="{active: isFilterActive('venue')}" ><i class="venues"></i><span class="map-ui-btn">VENUES</span></a></li>-->
-                        <li ng-click="toggleFilters('event')"><a ng-class="{active: isFilterActive('event')}"><i class="venues"></i><span class="map-ui-btn">EVENTS</span></a></li>
-                        <li ng-click="toggleFilters('facility')"><a ng-class="{active: isFilterActive('facility')}"><i class="facilities"></i><span class="map-ui-btn">FACILITIES</span></a></li>
-                        <li ng-click="toggleFilters('alert')"><a ng-class="{active: isFilterActive('alert')}"><i class="facilities"></i><span class="map-ui-btn">ALERTS</span></a></li>
+                        <li ng-click="toggleFilters('info'); $event.stopPropagation()">
+                            <a ng-class="{selected: isFilterActive('info')}">
+                                <i class="glyphicons circle_info map-ui-btn-glyph"></i><span class="map-ui-btn map-ui-btn-label">INFORMATION</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('info')}"></span>
+                            </a>
+                        </li>
+                        <li ng-click="toggleFilters('activity'); $event.stopPropagation()">
+                            <a ng-class="{selected: isFilterActive('activity')}")>
+                                <i class="glyphicons map-ui-btn-glyph bicycle"></i><span class="map-ui-btn map-ui-btn-label">ACTIVITIES</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('activity')}"></span>
+                            </a>
+                        </li>
+                        <li ng-click="toggleFilters('food, drink'); $event.stopPropagation()">
+                            <a ng-class="{selected: isFilterActive('food') || isFilterActive('drink')}">
+                                <i class="glyphicons map-ui-btn-glyph cutlery"></i><span class="map-ui-btn map-ui-btn-label">FOOD &amp; DRINK</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('food') || isFilterActive('drink')}"></span>
+                            </a>
+                        </li>
+                        <li ng-click="toggleFilters('tour'); $event.stopPropagation()">
+                            <a ng-class="{selected: isFilterActive('tour')}">
+                                <i class="glyphicons map-ui-btn-glyph history"></i><span class="map-ui-btn map-ui-btn-label">HISTORY</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('tour')}"></span>
+                            </a>
+                        </li>
+                        <!--<li ng-click="toggleFilters('venue')"><a ng-class="{selected: isFilterActive('venue')}" ><i class="glyphicons map-ui-btn-glyph venues"></i><span class="map-ui-btn map-ui-btn-label">VENUES</span></a></li>-->
+                        <li ng-click="toggleFilters('event'); $event.stopPropagation()">
+                            <a ng-class="{selected: isFilterActive('event')}">
+                                <i class="glyphicons map-ui-btn-glyph calendar"></i><span class="map-ui-btn map-ui-btn-label">EVENTS</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('event')}"></span>
+                            </a>
+                        </li>
+                        <li ng-click="toggleFilters('facility'); $event.stopPropagation()">
+                            <a ng-class="{selected: isFilterActive('facility')}">
+                                <i class="glyphicons map-ui-btn-glyph underwear"></i><span class="map-ui-btn map-ui-btn-label">FACILITIES</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('facility')}"></span>
+                            </a>
+                        </li>
+                        <li ng-click="toggleFilters('alert'); $event.stopPropagation()">
+                            <a ng-class="{selected: isFilterActive('alert')}">
+                                <i class="glyphicons map-ui-btn-glyph warning_sign"></i><span class="map-ui-btn map-ui-btn-label">ALERTS</span>
+                                <span class="checkbox-fake fr" ng-class="{checked: isFilterActive('alert')}"></span>
+                            </a>
+                        </li>
+                        <li ng-click="toggleFilters('all'); $event.stopPropagation()">
+                            <a><span class="glyphicon glyphicon-th map-ui-btn-glyph"></span> <span class="map-ui-btn map-ui-btn-label">ALL</span>
+                            </a>
+                        </li>
 					</ul>
 				</li>
-				<li ng-show="isActive(6)" class="pull-right navright-btn"><a ui-sref="events.grid" ng-click="activelink(2)"><span class="glyphicon glyphicon-th-large"></span></a></li>
-				<!--TODO: disabled list view for now since it is currently not integrated with logic-->
-                <!--<li ng-show="isActive(2)" class="pull-right navright-btn"><a ui-sref="events.list" ng-click="activelink(6)"><span class="glyphicon glyphicon-th-list"></span></a></li>-->
+				<li ng-show="isActive(6)" class="pull-right navright-btn"><a ui-sref="events.grid" ng-click="activelink(2)"><span class="glyphicons show_big_thumbnails"></span></a></li>
+                <li ng-show="isActive(2)" class="pull-right navright-btn"><a ui-sref="events.list" ng-click="activelink(6)"><span class="glyphicons show_thumbnails_with_lines"></span></a></li>
+
+                <li ng-show="isActive(7)" class="pull-right navright-btn"><a ui-sref="tours" ng-click="activelink(4)"><span class="glyphicons show_big_thumbnails"></span></a></li>
+                <li ng-show="isActive(4)" class="pull-right navright-btn"><a ui-sref="tourlistview" ng-click="activelink(7)"><span class="glyphicons show_thumbnails_with_lines"></span></a></li>
 	        </ul>
         </div>
-
-        <div class="global-alerts"> 
+        <div id="global-alerts"> 
             <div id="light" class="white-content">
                 <ul class="nav-inlineblock alertbox-header">
-                    <li class="pull-left alertbtn"><span class="alertopen"></span></li>
-                    <!--<li class="alert-title">{{alerts[0].type || uppercase}} ALERT</li> We may want to change the title depending on the alert-->
+                    <li class="pull-left alertbtn"><span class="glyphicons circle_exclamation_mark"></span></li>
                     <li class="alert-title">NOTIFICATION CENTER</li> 
-                    <li class="pull-right alertclosingbtn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="alertclose"></span></a></li>
+                    <li class="pull-right alertclosingbtn"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><span class="glyphicons remove"></span></a></li>
                 </ul> 
                 <ul class="list-notification">
-                    <section>
-                        <li class="notif-dropdown">{{alerts[0].type}}: {{alerts[0].name}} <span class="alert-indicator"></span></li>
-                        <div class="dropdownwrap">
-                            <p>{{alerts[0].description}}</p>
-                            <p ng-if="alerts[0].location">Location: {{alerts[0].location}}</p>
-                            <p ng-if="alerts[0].startDateTime">From: {{alerts[0].startDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                            <p ng-if="alerts[0].endDateTime">Until: {{alerts[0].endDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
+                    <section ng-repeat="alert in alerts">
+                        <li class="notif-dropdown" ng-click="setAlertViewed(alert); toggleActiveAlert(alert);">
+                            <span class="glyphicons chevron-right" ng-if="!isActiveAlert(alert)"></span>
+                            <span class="glyphicons chevron-left" ng-if="isActiveAlert(alert)"></span>
+                            {{alert.name}} <span class="alert-indicator" ng-class="{gray: isAlertViewed(alert)}"></span>
+                        </li>
+                        <div class="dropdownwrap" ng-show="isActiveAlert(alert)">
+                            <p>{{alert.description}}</p>
+                            <p ng-if="alert.location">Location: {{alert.location}}</p>
+                            <p ng-if="alert.startDateTime">From: {{alert.startDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
+                            <p ng-if="alert.endDateTime">Until: {{alert.endDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
                         </div>
-                    </section>
-                    <section>
-                        <li class="notif-dropdown">{{alerts[1].type}}: {{alerts[1].name}} <span class="alert-indicator"></span></li>
-                        <div class="dropdownwrap">
-                            <p>{{alerts[1].description}}</p>
-                            <p ng-if="alerts[0].location">Location: {{alerts[1].location}}</p>
-                            <p ng-if="alerts[0].startDateTime">From: {{alerts[1].startDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                            <p ng-if="alerts[0].endDateTime">Until: {{alerts[1].endDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                        </div>
-                    </section>
-                    <section>
-                        <li class="notif-dropdown">{{alerts[2].type}}: {{alerts[2].name}} <span class="alert-indicator"></span></li>
-                        <div class="dropdownwrap">
-                            <p>{{alerts[2].description}}</p>
-                            <p ng-if="alerts[0].location">Location: {{alerts[2].location}}</p>
-                            <p ng-if="alerts[0].startDateTime">From: {{alerts[2].startDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                            <p ng-if="alerts[0].endDateTime">Until: {{alerts[2].endDateTime | date:'dd/mm/yyyy hh:mm a'}}</p>
-                        </div>
-                    </section>
-              
+                    </section>              
                 </ul>
             </div>
             <div id="fade" class="white-overlay"></div>
@@ -70,10 +93,3 @@
     </div>
 </nav>
 <div id="headerspacing"></div>
-<script>
-    jQuery( document ).ready(function( $ ) {
-       $('.notif-dropdown').on('click',function(){
-            $(this).next('.dropdownwrap').slideToggle();
-       });
-    })
-</script>

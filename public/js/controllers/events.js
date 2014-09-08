@@ -14,7 +14,7 @@ controllers.controller('BaseEventMarkerController', ['$scope', '$controller', 'E
         //save successful, close the form
         $scope.showForm = false;
 
-        $scope.$emit('MARKER_UPDATED_EVENT', {
+        $scope.$emit('ENTITY_PERSISTED_EVENT', {
             marker: marker,
             event: event
         });
@@ -177,6 +177,9 @@ controllers.controller('EventDetailController', ['$scope', '$stateParams', 'Even
         Events.getBySlug({slug: slug}, successCallback, failureCallback);
 
     }
+
+
+
 }]);
 
 controllers.controller('EventListController', ['$scope', '$state','$stateParams','Events','$filter', function($scope, $state, $stateParams, Events, $filter){

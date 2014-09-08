@@ -47,7 +47,8 @@ services.factory('SiteData', function($rootScope){
          'type': 'active',
          'visibility': 'public',
          'activeBtn': 3,
-         'link': 'home',
+         'link': 'map',
+         'params': {'filters': ['food', 'drink']},
          'media': "images/landing/Thumb_eat_320x250.jpg"
         },
         {'id':3,
@@ -55,7 +56,8 @@ services.factory('SiteData', function($rootScope){
          'type': 'active',
          'visibility': 'public',
          'activeBtn': 3,
-         'link': 'home',
+         'link': 'map',
+         'params': {'filters': ['event', 'activity']},
          'media': "images/landing/Thumb_enjoy_320x250.jpg"
         },
         {'id':4,
@@ -89,7 +91,7 @@ services.factory('NavService',function($rootScope){
             return activelink;
         },
         getHiddenBtn : function(){
-            if(activelink===2 || activelink===3 || activelink===4 || activelink===6){
+            if(activelink===2 || activelink===3 || activelink===4 || activelink===6 ||activelink===7){
                 return true;
             }
             else{return false;}
