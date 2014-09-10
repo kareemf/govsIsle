@@ -35,6 +35,11 @@ function bootstrapSocketRoutes() {
 
 bootstrapSocketRoutes();
 
+app.route('/')
+    .get(function(req, res){
+        res.sendFile(__dirname + '/public/index.html');
+    });
+
 // Initializing logger
 logger.init(app, passport, mongoose);
 
