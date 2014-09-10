@@ -90,7 +90,8 @@ module.exports = function(grunt) {
         watch: {
             js: {
                 files: paths.js,
-                tasks: ['concat', 'uglify','jshint'],
+                // tasks: ['concat', 'uglify','jshint'],
+                tasks: ['jshint'],
                 options: {
                     livereload: true
                 }
@@ -103,7 +104,8 @@ module.exports = function(grunt) {
             },
             css: {
                 files: paths.css,
-                tasks: ['concat', 'cssmin','csslint'],
+                // tasks: ['concat', 'cssmin','csslint'],
+                tasks: ['csslint'],
                 options: {
                     livereload: true
                 }
