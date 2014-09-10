@@ -189,8 +189,8 @@ module.exports = function(app, passport, db) {
             console.error(err.stack);
 
             // Error page
-            res.status(500).render('500', {
-                error: err.stack
+            res.status(500).jsonp({
+                error: process.env.NODE_ENV === 'development'? err.stack : 'server error'
             });
         });
 
