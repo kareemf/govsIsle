@@ -3,6 +3,7 @@
 var MONGOLAB_URI = process.env.MONGOLAB_URI;
 module.exports = {
     db: MONGOLAB_URI? MONGOLAB_URI : 'mongodb://localhost/gov-prod',
+	useConcatendatedFiles: true,
     app: {
         name: 'Governor\'s Island'
     },
