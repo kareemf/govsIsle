@@ -12,8 +12,6 @@ module.exports = function(app) {
                 return res.render('index-dist');
             }
             res.render('index');
-
-
         });
 
 };
