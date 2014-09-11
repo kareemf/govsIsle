@@ -58,8 +58,8 @@ module.exports = function(app, passport, db) {
     app.set('view engine', 'html');
 
     // Set views path, template engine and default layout
-    // app.set('views', config.root + '/server/views');
-    //app.set('views', config.root + '/public/templates');
+    app.set('views', config.root + '/server/views');
+//    app.set('views', config.root + '/public/templates');
 
     // Enable jsonp
     app.enable('jsonp callback');
@@ -69,7 +69,7 @@ module.exports = function(app, passport, db) {
 
     // Request body parsing middleware should be above methodOverride
     app.use(expressValidator());
-    app.use(multer({ dest: './uploads/'}))
+    app.use(multer({ dest: './uploads/'}));
     app.use(bodyParser());
     app.use(methodOverride());
 
@@ -196,10 +196,7 @@ module.exports = function(app, passport, db) {
 
         // Assume 404 since no middleware responded
         app.use(function(req, res) {
-            res.status(404).render('404', {
-                url: req.originalUrl,
-                error: 'Not found'
-            });
+            res.status(404).send('Sorry cant find that!');
         });
 
         // Error handler - has to be last
