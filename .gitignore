@@ -4,4 +4,6 @@ public/bower_components
 .idea
 .DS_STORE
 uploads/
+public/dist/
 dump.rdb
+
