@@ -26,6 +26,7 @@ var express = require('express'),
     Grid = require('gridfs-stream');
     var multer = require('multer');
 
+
 module.exports = function(app, passport, db) {
 
     var gfs = new Grid(db.connection.db, db.mongo);
@@ -46,10 +47,17 @@ module.exports = function(app, passport, db) {
         level: 9
     }));
 
-    // Only use logger for development environment
-    if (process.env.NODE_ENV === 'development') {
-        app.use(morgan('dev'));
-    }
+    console.log('config.accessLogLevel', config.accessLogLevel);
+    console.log('config.accessLogPath', config.accessLogPath);
+    console.log('config.writeAccessLog', config.writeAccessLog);
+    if(config.writeAccessLog){
+		// create a write stream (in append mode)
+		var accessLogStream = fs.createWriteStream(config.accessLogPath, {flags: 'a'});
+	    app.use(morgan(config.accessLogLevel, {stream: accessLogStream}));
+	}
+	else{
+		app.use(morgan(config.accessLogLevel));
+	}
 
     // assign the template engine to .html files
     app.engine('html', consolidate[config.templateEngine]);
@@ -59,6 +67,12 @@ module.exports = function(app, passport, db) {
 
     // Set views path, template engine and default layout
     app.set('views', config.root + '/server/views');
+
+
+    if (process.env.NODE_ENV === 'development') {
+        //dsiablee view caching for development
+        app.set('view cache', false);
+    }
 
     // Enable jsonp
     app.enable('jsonp callback');
