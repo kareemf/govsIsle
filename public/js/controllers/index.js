@@ -32,14 +32,25 @@ function($scope, $rootScope, $http, Shared){
 
         socket.on('connect', function(){
             console.log('connected to web socket');
+            
+            var params = {};
 
+            if(Shared.alerts){
+            	//If the server shuts down while this socket is still connected,
+            	//When reconnecting to the server, include ids of previously 
+            	//recieved data, so as to not recieve duplicates
+            	params.alreadyRecievedIds = Shared.alerts.map(function(alert){return alert.id});
+            }
+            
             if(user){
+            	params.user = user;
+
                 console.log('emitting authenicated_connection to websocket');
-                socket.emit('authenicated_connection', user);
+                socket.emit('authenicated_connection', params);
             }
             else{
                 console.log('emitting anonymous_connection to websocket');
-                socket.emit('anonymous_connection');
+                socket.emit('anonymous_connection', params);
             }
         });
 
