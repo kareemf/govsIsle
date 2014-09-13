@@ -10,7 +10,7 @@ var app = angular.module('app', [
     'app.controllers',
     'app.services',
     'app.filter',
-    'app.directives.addToCalendar',
+    'app.directives',
     'ngResource',
     'ngCookies',
     'ngDragDrop',

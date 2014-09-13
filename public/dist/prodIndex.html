@@ -5,9 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="govsIsland" content="travel trip fun">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <!--<link rel="stylesheet" type="text/css" href="css/bootstrap_custom.css">-->
-        <link rel="stylesheet" type="text/css" href="css/application.css">
+        <link rel="stylesheet" type="text/css" href="dist/css/application.min.css">
         <link rel="stylesheet" type="text/css" href="bower_components/weather-icons/css/weather-icons.min.css">
         <link rel="stylesheet" type="text/css" href="bower_components/ngQuickDate/dist/ng-quick-date-plus-default-theme.css">
         <title>The Trust for Governors Island</title>
@@ -22,64 +20,18 @@
         <div class="main-content"><!--MAIN-CONTENT-->
             <ui-view autoscroll='false'/>
         </div>
-
         <div class="main-footer"><!-- MAIN-FOOTER-->
             <div ng-include=" 'templates/nav.html' "></div>
         </div>
-        <!--Google maps-->
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-        <!-- Bower installs-->
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- <script type="text/javascript" src="libs/bootstrap.min.js"></script>local copy of bootstrap-->
-        <script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>
-        <script type="text/javascript" src="bower_components/ng-file-upload/angular-file-upload-shim.min.js"></script>
-        <script type="text/javascript" src="bower_components/ng-file-upload/angular-file-upload.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-ui-utils/ui-utils.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-ui-map/ui-map.min.js"></script>
-        <script type="text/javascript" src="bower_components/socket.io-client/socket.io.js"></script>
-        <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
-        <script type="text/javascript" src="bower_components/ngQuickDate/dist/ng-quick-date.min.js"></script>
-        <!--Routes-->
-        <script type="text/javascript" src="js/app.js"></script>
-        <!--Front-End services-->
-        <script type="text/javascript" src="js/services/shared.js"></script>
-        <script type="text/javascript" src="js/services/events.js"></script>
-        <script type="text/javascript" src="js/services/amenities.js"></script>
-        <script type="text/javascript" src="js/services/alerts.js"></script>
-        <script type="text/javascript" src="js/services/geocoder.js"></script>
-        <script type="text/javascript" src="js/services/meanio.js"></script>
-        <script type="text/javascript" src="js/services/tours.js"></script>
-        <script type="text/javascript" src="js/services/weather.js"></script>
-        <!--Filter controllers-->
-        <script type="text/javascript" src="js/filters/sharedFilter.js"></script>
-        <script type="text/javascript" src="js/filters/truncate.js"></script>
-        <!--Front-End Controllers-->
-        <script type="text/javascript" src="js/controllers/index.js"></script>
-        <script type="text/javascript" src="js/controllers/auth.js"></script>
-        <script type="text/javascript" src="js/controllers/map.js"></script>
-        <script type="text/javascript" src="js/controllers/entities.js"></script>
-        <script type="text/javascript" src="js/controllers/events.js"></script>
-        <script type="text/javascript" src="js/controllers/amenities.js"></script>
-        <script type="text/javascript" src="js/controllers/alerts.js"></script>
-        <script type="text/javascript" src="js/controllers/header.js"></script>
-        <script type="text/javascript" src="js/controllers/tours.js"></script>
-        <!--Directive-->
+        <script type="text/javascript" src="dist/js/jsbower.min.js"></script>
+        <!--it wont let me remove this guy hmm....--><script type="text/javascript" src="bower_components/ngQuickDate/dist/ng-quick-date.min.js"></script>
+        <script type="text/javascript" src="dist/js/application.js"></script>
+        <script type="text/javascript" src="dist/js/thirdparty.js"></script><!-- local copy of bootstrap-->
+                <!--Directive-->
         <script type="text/javascript" src="js/directive/addToCalendar.js"></script>
-        <script type="text/javascript" src="libs/jquery.mobile.custom.min.js"></script> <!--only swipe-->
-
         <audio id="audioPlayer"></audio>
-        <!-- 3rd party Libraries-->
-        <script type="text/javascript" src="libs/oms.min.js"></script>
-        <!--Niquepg DEVELOPMENT script-->
-        <!--<script src="http://192.168.1.5:35729/livereload.js?snipver=1"></script>-->
     </body>
 </html>
-
