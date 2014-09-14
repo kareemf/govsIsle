@@ -20,6 +20,9 @@ module.exports = function(app) {
         .get(events.all)
         .post(authorization.requiresLogin, events.create);
 
+    app.route(baseUrl + '/search')
+        .get(events.search);
+
     app.route(baseUrl + '/:eventId')
         .get(events.show)
         .put(authorization.requiresLogin, events.update)
@@ -30,9 +33,6 @@ module.exports = function(app) {
 
     app.route(baseUrl + '/slug/:eventSlug')
         .get(events.show);
-
-    app.route(baseUrl + '/search/:search')
-        .get(events.search);
 
     app.param('eventId', events.get);
     app.param('eventSlug', events.getBySlug);

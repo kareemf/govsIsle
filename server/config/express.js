@@ -70,7 +70,7 @@ module.exports = function(app, passport, db) {
 
 
     if (process.env.NODE_ENV === 'development') {
-        //dsiablee view caching for development
+        //disable view caching for development
         app.set('view cache', false);
     }
 
