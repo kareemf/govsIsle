@@ -3,13 +3,24 @@
 var controllers = angular.module('app.controllers');
 
 controllers.controller('SearchController', ['$scope', '$stateParams', 'Events', function($scope, $stateParams, Events){
-	var query = $scope.query = $stateParams.q;
+	$scope.searchTerm = $stateParams.q;
+	$scope.types = $stateParams.types;
 	$scope.eventResults = [];
 
-	Events.search({q: query}, function(results){
-		console.log('search results', results);
-		$scope.eventResults = results;
-	});
+	var query = $scope.query = function(searchTerm, types){
+		if(!angular.isArray(types)){
+			types = types.split(',');
+		}
+
+		if(types.indexOf('events') >= 0){
+			Events.search({q: searchTerm}, function(results){
+				console.log('search results', results);
+				$scope.eventResults = results;
+			});
+		}
+	};
+
+	$scope.query($scope.searchTerm, $scope.types);
 
 	// TODO: query audio tours
 	// TODO: query alerts

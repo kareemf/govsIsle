@@ -5,7 +5,18 @@
 <div ng-controller="SearchController">
 	<div id="listEvents">
 		<div class="info-banner textLeft">
-			<h3>Put search bar with results here: {{query}}<span class="glyphicons search fr" ng-if="false"></span></h3>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pull-right">
+		        <form class="navbar-form" role="search">
+			        <div class="input-group">
+			            <input type="text" class="form-control" placeholder="Search" ng-model="searchTerm">
+			            <div class="input-group-btn">
+			                <button class="btn btn-default" type="submit" ng-click="query(searchTerm, types)">
+			                	<i class="glyphicon glyphicon-search"></i>
+		                	</button>
+			            </div>
+			        </div>
+		        </form>
+	        </div>
 		</div>
 		<section class="listCol" ng-repeat="event in eventResults">
 			<div class="leftpanel img-detail">
