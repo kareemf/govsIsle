@@ -1,0 +1,22 @@
+<!-- TODO: add search bar with current query pre-populated -->
+<!-- TODO: add type select toggle -->
+<!-- add sort by score or by date -->
+<!-- pagination -->
+<div ng-controller="SearchController">
+	<div id="listEvents">
+		<div class="info-banner textLeft">
+			<h3>Put search bar with results here: {{query}}<span class="glyphicons search fr" ng-if="false"></span></h3>
+		</div>
+		<section class="listCol" ng-repeat="event in eventResults">
+			<div class="leftpanel img-detail">
+				<a ui-sref="events.detail({slug: event.slug})"><img alt="{{event.name}}" ng-src="{{event.coverPhoto.url}}" class="img-responsive"></a>
+			</div>
+			<div class="rightpanel">
+				<h5><b>{{event.name}}</b></h5>
+				<p>{{event.startDateTime | date:'EEE, MMM dd'}} - {{event.endDateTime| date:'EEE, MMM dd'}}<br/>
+				{{event.startDateTime | date:'h:mma'}} - {{event.endDateTime |date:'h:mma'}} | {{event.location}}</p>
+			</div>
+			<div class="clear"></div>
+		</section><br/>
+	</div>
+</div>
