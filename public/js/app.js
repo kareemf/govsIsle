@@ -10,6 +10,7 @@ var app = angular.module('app', [
     'app.controllers',
     'app.services',
     'app.filter',
+    'app.directives',
     'ngResource',
     'ngCookies',
     'ngDragDrop',
