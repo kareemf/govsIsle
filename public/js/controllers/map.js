@@ -7,7 +7,8 @@ function initCall() {
 
 var controllers = angular.module('app.controllers');
 
-controllers.controller('MapController', ['$scope', '$rootScope', '$timeout', '$stateParams', 'Shared', function ($scope, $rootScope, $timeout, $stateParams, Shared) {
+controllers.controller('MapController', ['$scope', '$rootScope', '$timeout', '$stateParams', 'Shared', 'NavService',
+function ($scope, $rootScope, $timeout, $stateParams, Shared, NavService) {
     console.log('Google maps controller.');
 
     var strictBounds = new google.maps.LatLngBounds(
@@ -286,6 +287,10 @@ controllers.controller('MapController', ['$scope', '$rootScope', '$timeout', '$s
             if(error.code===3){
                 console.log('The browser timeout');
             }
+        };
+
+        $scope.activateLink = function(numbtn) {
+            NavService.updateBtn(numbtn);
         };
 
         document.getElementById('geolocation').onclick=function(){

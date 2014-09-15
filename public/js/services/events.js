@@ -10,9 +10,13 @@ services.factory('Events', ['$resource', function($resource){
         update: {
             method: 'PUT'
         },
-        getBySlug:{
+        getBySlug: {
             url: eventUrl + '/slug/:slug',
             method: 'GET'
+        },
+        search: {
+            url: eventUrl + '/search',
+            isArray: true
         }
     });
 }]);

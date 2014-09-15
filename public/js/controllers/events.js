@@ -202,6 +202,15 @@ controllers.controller('EventListController', ['$scope', '$state','$stateParams'
             return event.isFeatured && event.isFeatured.indexOf('event') >=0;
         });
 
+        $scope.isSearchVisible = false; 
+        $scope.searchTerm = '';
+        $scope.toggleOrQuery = function(isSearchVisible, searchTerm){
+            if(!searchTerm){
+                return $scope.isSearchVisible = !isSearchVisible;
+            }
+            $state.go('search', {q: searchTerm, types: 'events'});
+        };
+
 
     });
     console.log("event array "+$scope.specialEvent);

@@ -74,7 +74,7 @@ module.exports = function(server){
         });
     };
 
-    var handleSocketConnection = function(socket){
+    var handleSocketConnection = function(socket, params){
         //connecting user may have missed out on all previous transmissions, get them up to speed -
         //retrieve all previously emitted messages from redis and send to user
         getRedisItems('alerts',function(err, items){
@@ -87,6 +87,14 @@ module.exports = function(server){
                 });
 
                 _docs = filterDocs(socket.id, _docs);
+
+                if(params.alreadyRecievedIds){
+                    //if a socket that was open during server shutdown is reconnecting,
+                    //do not resend items that were previously emitted
+                    _docs = _docs.filter(function(_doc){
+                        return !_.contains(params.alreadyRecievedIds, _doc._id);
+                    });
+                }
 
                 console.log('sending', _docs.length, 'out of', items.length,' items to socket', socket.id);
                 io.sockets.connected[socket.id].emit('alerts', _docs);
@@ -117,15 +125,15 @@ module.exports = function(server){
     io.sockets.on('connection', function(socket) {
         console.log('connection to socket', socket.id, '. num_connections:', ++num_connections);
 
-        socket.on('authenicated_connection', function(user){
-            console.log('user', user._id, 'connected to socket', socket.id);
-            socketId_user_map[socket.id] = user;
-            handleSocketConnection(socket);
+        socket.on('authenicated_connection', function(params){
+            console.log('user', params.user._id, 'connected to socket', socket.id);
+            socketId_user_map[socket.id] = params.user;
+            handleSocketConnection(socket, params);
         });
 
-        socket.on('anonymous_connection', function(){
+        socket.on('anonymous_connection', function(params){
             console.log('anonymous connection to socket', socket.id);
-            handleSocketConnection(socket);
+            handleSocketConnection(socket, params);
         });
 
         socket.on('disconnect', function(){

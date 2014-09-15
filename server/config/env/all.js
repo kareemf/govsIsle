@@ -10,6 +10,10 @@ module.exports = {
 	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI,
     redis: process.env.REDISCLOUD_URL || "redis://127.0.0.1:6379/0",
 	templateEngine: 'swig',
+	useConcatendatedFiles:  process.env.USE_CONCATENDATED || false,
+	writeAccessLog:  process.env.WRITE_LOG || false,
+	accessLogLevel: process.env.LOG_LEVEL || 'combined', //dev, combined, common, short, or tiny
+	accessLogPath: process.env.LOG_PATH || rootPath + '/access.log',
 
     // The secret should be set to a non-guessable string that
     // is used to compute a session hash
