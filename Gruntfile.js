@@ -1,6 +1,7 @@
 'use strict';
 var paths = {
     js:   ['server/js/**/*.js', 'public/**/*.js', 'public/libs/*.js','test/**/*.js'],
+    jsIgnore: ['node_modules/**/*.js','public/libs/**/*.js', 'public/bower_components/**/*.js', 'public/dist/**/*.js'],
     html: ['public/index.html', 'public/templates/**/*.html'],
     css:  ['public/css/*.css', 'packages/**/public/**/css/*.css'],
     productionCss:['public/css/bootstrap_custom.css', 'public/css/application.css'],
@@ -90,7 +91,8 @@ module.exports = function(grunt) {
         watch: {
             js: {
                 files: paths.js,
-                tasks: ['concat', 'uglify','jshint'],
+                // tasks: ['concat', 'uglify','jshint'],
+                tasks: ['jshint'],
                 options: {
                     livereload: true
                 }
@@ -103,7 +105,8 @@ module.exports = function(grunt) {
             },
             css: {
                 files: paths.css,
-                tasks: ['concat', 'cssmin','csslint'],
+                // tasks: ['concat', 'cssmin','csslint'],
+                tasks: ['csslint'],
                 options: {
                     livereload: true
                 }
@@ -113,7 +116,8 @@ module.exports = function(grunt) {
             all: {
                 src: paths.js,
                 options: {
-                    jshintrc: true
+                    jshintrc: true,
+                    ignores: paths.jsIgnore
                 }
             }
         },

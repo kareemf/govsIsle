@@ -2,7 +2,7 @@
 
 var MONGOLAB_URI = process.env.MONGOLAB_URI;
 module.exports = {
-    db: MONGOLAB_URI? MONGOLAB_URI : 'mongodb://localhost/gov-prod',
+    db: MONGOLAB_URI? MONGOLAB_URI : 'mongodb://localhost/govsle',
     app: {
         name: 'Governor\'s Island'
     },

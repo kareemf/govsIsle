@@ -104,12 +104,11 @@ module.exports = function(Model){
 
                 var requiredPermission = modelFieldPermissions[field][readPermission];
                 if(!_.contains(permissions, requiredPermission)){
-                    console.log('dont have', requiredPermission, 'for field', field);
+                    //console.log('dont have', requiredPermission, 'for field', field);
                     delete doc[field];
                     // doc[field] = null;
-
                 }
-            };
+            }
 
             return doc;
         },

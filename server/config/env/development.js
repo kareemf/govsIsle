@@ -4,6 +4,7 @@ var MONGOLAB_URI = process.env.MONGOLAB_URI;
 module.exports = {
     db: MONGOLAB_URI? MONGOLAB_URI : 'mongodb://localhost/govsle',
     redis: process.env.REDISCLOUD_URL || "redis://localhost:6379/0",
+    accessLogLevel: process.env.LOG_LEVEL || 'dev',
     app: {
         name: 'Governor\'s Island'
     },
