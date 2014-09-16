@@ -1,0 +1,29 @@
+<script type="text/javascript" src="libs/addevent.min.js"></script>
+<!-- AddThisEvent Settings -->
+<script type="text/javascript">
+    addthisevent.settings({
+        mouse       : false,
+        css         : false,
+        outlook     : {show:false, text:"Outlook Calendar"},
+        google      : {show:true, text:"Google Calendar"},
+        yahoo       : {show:true, text:"Yahoo Calendar"},
+        ical        : {show:true, text:"iCal Calendar"},
+        hotmail     : {show:true, text:"Hotmail Calendar"},
+        facebook    : {show:true, text:"Facebook Calendar"}
+    });
+</script>
+
+<div id="calendar">
+    <a ng-href="events/{{event.slug}}" title="Add to Calendar" class="addthisevent">
+        Add To Calendar<span class="glyphicons chevron-right"></span>
+        <span class="_start">{{cal.startDateTime.toDateString()}}</span>
+        <span class="_end">{{cal.endDateTime.toDateString()}}</span>
+        <span class="_zonecode">15</span>
+        <span class="_summary"> {{cal.name}}</span>
+        <span class="_description">{{cal.description}}</span>
+        <span class="_location">{{cal.location}}</span>
+        <span class="_organizer">Culture Island</span>
+        <span class="_all_day_event">{{cal.isAllDayEvent? 'true' : 'false'}}</span>
+        <span class="_date_format">DD/MM/YYYY</span>
+    </a>
+</div>

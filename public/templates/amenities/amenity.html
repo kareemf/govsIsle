@@ -1,9 +1,9 @@
-<div ng-controller="AmenityDetailController">!!!!
+<div ng-controller="AmenityDetailController">
     <div class="img-detail">
-        <img alt="{{amenity.name}}" ng-src="{{amenity.coverPhoto.url}}" class="img-responsive"/>
+        <img ng-if="amenity.coverPhoto" alt="{{amenity.name}}" ng-src="{{amenity.coverPhoto.url}}" class="img-responsive"/>
+        <img ng-if="!amenity.coverPhoto" alt="{{amenity.name}}" src="/images/about_govisland_640x310.jpg" class="img-responsive"/>
     </div>
     <h4 class="lead"><b>{{amenity.name}}<b></h4>
-    <p class="lead">{{amenity.startDateTime + " - " + amenity.endDateTime}}<br/>
-        {{amenity.startDateTime + " - " + amenity.endDateTime + " | " + amenity.location}}</p>
+    <hr class="hrstyle"/>
     <p class="lead text-indent" ng-bind-html="amenity.description | trustedHtml"></p>
 </div><br/>

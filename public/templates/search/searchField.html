@@ -1,0 +1,25 @@
+<div class="info-banner textLeft special-search">
+    <h3 class= "pull-left" ng-class="{hidden:isSearchVisible}">Upcoming Events</h3>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pull-right">
+        <form class="navbar-form" role="search">
+            <div class="input-group">
+                <input type="text" class="form-control fl" placeholder="Search" ng-model="searchTerm" ng-class="{hidden:!isSearchVisible}">
+                <div class="input-group-btn">
+                    <button class="btn btn-default fr" type="submit" ng-click="toggleOrQuery(isSearchVisible, searchTerm)">
+                        <i class="glyphicons search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+            $(document).on('click', '.special-search form[role="search"]:not(.active) button[type="submit"]', function(event) {
+            event.preventDefault();
+            var $form = $(this).closest('form'),
+                $input = $form.find('input');
+            //$form.addClass('active');
+            $input.focus();
+
+        });
+</script>

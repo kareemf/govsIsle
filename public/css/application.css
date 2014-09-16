@@ -103,6 +103,9 @@ input[type="checkbox"].flat:checked + label span {
 .black{
   color:#000 !important; 
 }
+.hidden{
+  visibility: hidden;
+}
 .clear{clear: both;}
 .lead{padding-right: 25px; padding-left: 25px;}
 /*SPECIAL CASES*/
@@ -558,7 +561,7 @@ a, a:link, a:hover, a:visited, a:active{
   text-align: center;
 }
 /*---------=EVENTGRID View=--------------*/
-#allEvents ,#allTours{
+#allEvents ,#allTours,#listEvents{
   background-color: #FFF;
   max-width: 700px;
   margin: 0px auto 0px auto;
@@ -781,13 +784,43 @@ ul.lead{list-style-type: none;}
 .textLeft{text-align: left;padding-left: 2%;}
 /* -------====FERRY SCHEDULE END==--------- */
 
+/*---- SEARCH-------*/
+.special-search{
+    position: relative;
+    max-height: 50px;
+    padding: 0px 0px 0px 2%;
+    background-color: #FFF;
+}
+.special-search form{
+    position: relative;
 
-
-
-
-
-
-
+    width: 100%;
+    padding: 0px;margin: 0px;
+    z-index: 0;
+}
+.special-search button, .special-search input{
+    border-radius: 0px;border-width: 0px;
+    border-color: #FFF;
+    box-shadow: none;outline: none;
+}
+.special-search button,.special-search button:active,
+  .special-search button:hover,.special-search button:visited{
+   background-color: #FFF;
+      box-shadow: none; outline: none;
+}
+.special-search button{
+  margin-top: 12px;
+  font-size: 16px;
+}
+.special-search input{
+    position: absolute;
+    padding: 0px 0px;
+    top: 0px; right: 130%;
+    font-size: 16pt;box-shadow: none;
+    width: 100% !important;height: 50px;
+    color: #000;
+    z-index: 1;
+}
 
 /*-----ADMIN STUFF-------------*/
 .adminPanel{
@@ -805,126 +838,6 @@ z-index: 10000;
   /*background-color: black;*/
 }
 
-/*----------=ALL TOURS VIEW=-------------*/
-/*
-#allTours {
-	background: #ffffff;
-}
-
-#allTours #featuredLabel, #curatedLabel, #artistLabel{
-
-	padding: 10px;
-	margin:0px;
-	padding-bottom: 0px;
-}
-
-#allTours #main-carousel{
-
-	height: 250px;
-	overflow:hidden;
-
-}
-
-#allTours #main-carousel .carousel-wrapper {
-
-}
-
-#allTours #main-carousel .carousel{
-	padding:10px;
-}
-
-#allTours #main-carousel .carousel-inner, #allTours .item, .carousel-wrapper, #caroContainer{
-
-	height: 250px;
-
-}
-
-#allTours #main-carousel .carousel-indicators {
-
-	float:right;
-	width:37px;
-	right:10px;
-	margin-left:auto;
-	bottom: 4px;
-}
-
-#allTours #main-carousel .carousel-caption {
-
-	text-align:left;
-	float:left;
-	padding-left:15px;
-	margin-bottom:5px;
-	margin-right:200;
-	display:inline;
-	left:0;right:0;
-	width:290px;
-	height:50px;
-
-}
-
-#allTours #main-carousel .carousel-caption h3 {
-
-	font-size:21px !important;
-
-}
-
-#allTours #bottomBar {
-
-	padding: 10px;
-	background-color:black; filter:alpha(opacity=80); opacity:.8;
-	height: 50px;
-	position:relative;
-	top:-50px;
-
-}
-
-
-.tourlist {
-
-	height: 220px;
-	overflow-x: auto;
-	overflow-y: hidden;
-	white-space:nowrap;
-	border-bottom: solid 2px gray;
-
-}
-*/
-/*
-.tourlist li{
-
-	max-width:180px;
-	box-shadow: 1px 1px 10px #999;
-	background: #ffffff;
-	padding: 10px;
-
-	display:inline-block;
-	*display:inline;/* For IE7*/
-	/*zoom:1;/* For IE7
-	vertical-align:top;
-}
-
-.tourlist .caption {
-
-	width: 150px;
-	height: 60px;
-	white-space:normal;
-}
-
-.tourlist .caption h5 {
-
-	font-size:18px;
-	padding-top:0px;
-	margin-top:10px;
-
-}
-
-#tourImage {
-
-	width:100%;
-	height:50%;
-
-}
-*/
 /*----------=SINGLE TOUR VIEW=-------------*/
 
 #tourPoints #tourInfo h3 {
@@ -1068,9 +981,11 @@ z-index: 10000;
 	
 }
 
-#myInfoWindow  a.content{
+#myInfoWindow  a.content,
+#myInfoWindow  span.content{
   font-size: 12px;
 }
+
 
 .bold{
   font-weight: bold;
@@ -1096,32 +1011,3 @@ z-index: 10000;
 	clear:all;
 	top:0;
 }
-/*-----------END OF TOUR--------------*/
-/*SPRITES
-.resizeweather, .ferry0, .ferry1, .headphones0, .headphones1, .calendar0,
-.calendar1, .activities, .facilities, .food, .history,
-.info, .venues, .facebook, .instagram, .twitter,.alertclose, .alertopen,
-.wordpress, .mappin0, .mappin1
-{ display: inline-block; background: url('../images/siteicons.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
-.ferry0 { background-position: -3px -0px; width: 65px; height: 45px; }
-.ferry1 { background-position: -3px -48px; width: 65px; height: 45px; }
-.headphones0 { background-position: -3px -96px; width: 54px; height: 45px; }
-.headphones1 { background-position: -3px -144px; width: 54px; height: 45px; }
-.calendar0 { background-position: -3px -192px; width: 49px; height: 45px; }
-.calendar1 { background-position: -3px -240px; width: 49px; height: 45px; }
-.activities { background-position: -3px -288px; width: 45px; height: 45px; }
-.facilities { background-position: -3px -336px; width: 45px; height: 45px; }
-.food { background-position: -3px -384px; width: 45px; height: 45px; }
-.history { background-position: -3px -432px; width: 45px; height: 45px; }
-.info { background-position: -3px -480px; width: 45px; height: 45px; }
-.venues { background-position: -3px -528px; width: 45px; height: 45px; }
-.weather { background-position: -3px -576px; width: 41px; height: 30px; }
-.facebook { background-position: -3px -609px; width: 32px; height: 32px; }
-.instagram { background-position: -3px -644px; width: 32px; height: 32px; }
-.twitter { background-position: -3px -679px; width: 32px; height: 32px; }
-.wordpress { background-position: -3px -714px; width: 32px; height: 32px; }
-.alertclose { background-position: -3px -749px; width: 30px; height: 30px; }
-.alertopen { background-position: -3px -782px; width: 30px; height: 30px; }
-.mappin0 { background-position: -36px -749px; width: 28px; height: 45px; }
-.mappin1 { background-position: -36px -797px; width: 28px; height: 45px; }
-*/

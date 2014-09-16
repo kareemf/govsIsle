@@ -16,9 +16,11 @@
         <div class="main-header"><!--MAIN-HEADER-->
            <div ng-include="'templates/header.html'" data-role="navigation"></div>
         </div>
+        <!--
         <div ng-controller="AlertsController">
             <div ng-hide="isAlert()" ng-include=" 'templates/alerts/alerts.html' " data-role="alerts"></div>
         </div>
+        -->
         <div class="main-content"><!--MAIN-CONTENT-->
             <ui-view autoscroll='false'/>
         </div>
@@ -26,6 +28,7 @@
         <div class="main-footer"><!-- MAIN-FOOTER-->
             <div ng-include=" 'templates/nav.html' "></div>
         </div>
+        <!-- DEV TEAM: HELP ME IDENTIFY JAVASCRIPT FILES THAT DOES NOT EFFECT THE DOM -->
         <!--Google maps-->
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <!-- Bower installs-->
@@ -71,15 +74,16 @@
         <script type="text/javascript" src="js/controllers/alerts.js"></script>
         <script type="text/javascript" src="js/controllers/header.js"></script>
         <script type="text/javascript" src="js/controllers/tours.js"></script>
+        <script type="text/javascript" src="js/controllers/search.js"></script>
         <!--Directive-->
-        <script type="text/javascript" src="js/directive/addToCalendar.js"></script>
-        <script type="text/javascript" src="libs/jquery.mobile.custom.min.js"></script> <!--only swipe-->
+        <script type="text/javascript" src="js/directives/addToCalendar.js"></script>
+        <!-- does not effect the dom so it can get async tag-->
+        <script type="text/javascript" src="libs/jquery.mobile.custom.min.js" async></script> <!--only swipe-->
 
         <audio id="audioPlayer"></audio>
         <!-- 3rd party Libraries-->
         <script type="text/javascript" src="libs/oms.min.js"></script>
         <!--Niquepg DEVELOPMENT script-->
-        <!--<script src="http://192.168.1.5:35729/livereload.js?snipver=1"></script>-->
+        <!--<script src="http://192.168.1.12:35729/livereload.js?snipver=1"></script>-->
     </body>
 </html>
-

@@ -80,6 +80,14 @@ services.factory('SiteData', function($rootScope){
    };
 })
 
+// 0 = landing
+// 1 = about
+// 2 = events  
+// 3 = map
+// 4 = tours
+// 5 = ferry
+
+//TODO: Lonique, this is being duplicated on line 16. Which one is correct?
 services.factory('NavService',function($rootScope){
     var activelink=null, hideInfo=null;
     return {

@@ -10,6 +10,9 @@ module.exports = function(app) {
         .get(alerts.all)
         .post(authorization.requiresLogin, alerts.create);
 
+    app.route(baseUrl + '/search')
+        .get(alerts.search);
+
     app.route(baseUrl + '/:alertId')
         .get(alerts.show)
         .put(authorization.requiresLogin, alerts.update)
@@ -17,9 +20,6 @@ module.exports = function(app) {
 
     app.route(baseUrl + '/:alertId/publish')
         .post(alerts.publish);
-
-    app.route(baseUrl + '/search/:search')
-        .get(alerts.search);
 
     app.param('alertId', alerts.get);
 

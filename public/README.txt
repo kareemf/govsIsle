@@ -1,0 +1,1 @@
+index.html and index-dist.hmtl are in server/views

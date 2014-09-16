@@ -99,16 +99,32 @@
     <!-- only one infoWindow, gets moved and populated dynamically -->
 	<!-- put in ng-if and make second second section for handling tourpoint marker -->
     <div ui-map-info-window="myInfoWindow" id="myInfoWindow">
-		   <div ng-show="currentEvent.type != 'tour'">
-			  <a class="black content" ui-sref="events.detail({ slug: currentEvent.slug })">
-			  <p class="bold">{{currentEvent.name| truncate:true:30:' ...'}}</p>
-                  <p ng-show="currentEvent.type != 'tour'">{{currentEvent.description| truncate:true:50:' ...'}}</p>
-	 	      <p ng-show="currentEvent.type != 'tour'">{{currentEvent.location}}</p>
+		   <div ng-show="currentMarker.source == 'events'">
+			  <a class="black content" ui-sref="events.detail({ slug: currentEvent.slug })" ng-click="activateLink(3)">
+    			  <p class="bold">{{currentEvent.name| truncate:true:30:' ...'}}</p>
+                      <p>{{currentEvent.description| truncate:true:50:' ...'}}</p>
+    	 	      <p>{{currentEvent.location}}</p>
 		  	  </a> 
-		   </div>	   
+		   </div>
+
+           <div ng-show="currentMarker.source == 'amenities'">
+              <a class="black content" ui-sref="amenityDetail({ slug: currentEvent.slug })" ng-click="activateLink(3)">
+                  <p class="bold">{{currentEvent.name| truncate:true:30:' ...'}}</p>
+                      <p>{{currentEvent.description| truncate:true:50:' ...'}}</p>
+                  <p>{{currentEvent.location}}</p>
+              </a> 
+           </div>
+
+           <div ng-show="currentMarker.source == 'alerts'">
+              <a class="black content" ng-click="openNotificationCenter(currentEvent)">
+                  <p class="bold">{{currentEvent.name| truncate:true:30:' ...'}}</p>
+                      <p>{{currentEvent.description| truncate:true:50:' ...'}}</p>
+                  <p>{{currentEvent.location}}</p>
+              </a> 
+           </div>
 		   
-		  <div ng-show="currentEvent.type == 'tour'" style="width:150px; height:75px;">
-			  <a class="black" ui-sref="tourpoint({ id: currentEvent.id })">
+		  <div ng-show="currentMarker.source == 'tours'" style="width:150px; height:75px;">
+			  <a class="black" ui-sref="tourpoint({ id: currentEvent.id })" ng-click="activateLink(4)">
 			  <img ng-show="currentEvent.type == 'tour'" ng-src="http://www.entangledspace.com/data/postImages/{{currentEvent.imageLoc}}" width="70" height="70">
 			  <h3>{{currentEvent.name}} <span>from &quot;{{currentEvent.tourName}}&quot;
 				  <br>by {{currentEvent.userName}}</span></h3>

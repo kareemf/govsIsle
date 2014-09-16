@@ -10,7 +10,7 @@ var app = angular.module('app', [
     'app.controllers',
     'app.services',
     'app.filter',
-    'app.directives.addToCalendar',
+    'app.directives',
     'ngResource',
     'ngCookies',
     'ngDragDrop',
@@ -25,6 +25,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
         .state('/', {
             url: '/',
             templateUrl: 'templates/landing.html'
+        });
+
+    //Search route
+    $stateProvider
+        .state('search', {
+            url: '/search?q&types',
+            templateUrl: 'templates/search/resultslist.html'
         });
 
     //Map routes
