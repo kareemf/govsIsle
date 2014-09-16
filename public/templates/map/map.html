@@ -116,11 +116,11 @@
            </div>
 
            <div ng-show="currentMarker.source == 'alerts'">
-              <span class="black content">
+              <a class="black content" ng-click="openNotificationCenter(currentEvent)">
                   <p class="bold">{{currentEvent.name| truncate:true:30:' ...'}}</p>
                       <p>{{currentEvent.description| truncate:true:50:' ...'}}</p>
                   <p>{{currentEvent.location}}</p>
-              </span> 
+              </a> 
            </div>
 		   
 		  <div ng-show="currentMarker.source == 'tours'" style="width:150px; height:75px;">

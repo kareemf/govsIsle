@@ -203,6 +203,13 @@ function ($scope, $rootScope, $timeout, $stateParams, Shared, NavService) {
         $scope.myInfoWindow.open($scope.myMap, marker);
     };
 
+    $scope.openNotificationCenter = function(alert){
+        $timeout(function() {
+            angular.element('#notification-center').trigger('click');
+            angular.element('.list-notification #'+ alert.id).trigger('click');
+        }, 1);
+    };
+
     $scope.addNewMarker = function ($event, $params) {
         console.log('rightclick', $event, $params);
 
