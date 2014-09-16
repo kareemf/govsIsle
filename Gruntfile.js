@@ -4,9 +4,10 @@ var paths = {
     jsIgnore: ['node_modules/**/*.js','public/libs/**/*.js', 'public/bower_components/**/*.js', 'public/dist/**/*.js'],
     html: ['public/index.html', 'public/templates/**/*.html'],
     css:  ['public/css/*.css', 'packages/**/public/**/css/*.css'],
-    productionCss:['public/css/bootstrap_custom.css', 'public/css/application.css'],
-    productionJsFrontEnd:['public/js/app.js','public/js/services/*.js', 'public/js/filters/*.js','public/js/controllers/*.js'],
-    productionJsBower: ["public/bower_components/lodash/dist/lodash.min.js",
+    productionCss:['public/bower_components/bootstrap/dist/css/bootstrap.css', 'public/css/application.css','public/bower_components/ngQuickDate/dist/ng-quick-date-plus-default-theme.css'],
+    prodJsFirst:['public/bower_components/angular/angular.min.js','public/bower_components/jquery/dist/jquery.min.js'],
+    productionJsFrontEnd:['public/js/app.js','public/js/services/*.js', 'public/js/filters/*.js','public/js/controllers/*.js', 'public/js/directives/*.js'],
+    productionJsBower: ["public/bower_components/bootstrap/dist/js/bootstrap.min.js","public/bower_components/lodash/dist/lodash.min.js",
         "public/bower_components/ng-file-upload/angular-file-upload-shim.min.js", "public/bower_components/ng-file-upload/angular-file-upload.min.js",
         "public/bower_components/angular-resource/angular-resource.min.js","public/bower_components/angular-cookies/angular-cookies.min.js",
         "public/bower_components/angular-ui-router/release/angular-ui-router.min.js",
@@ -31,6 +32,11 @@ module.exports = function(grunt) {
                 src: paths.productionCss,
                 dest: 'public/dist/css/application.css'
             },
+            prodJsFirst:{ 
+                src: paths.prodJsFirst,
+                dest: 'public/dist/js/angular_jquery.min.js'
+
+            },
             jsBower:{
                 src: paths.productionJsBower,
                 dest: 'public/dist/js/jsbower.min.js'
@@ -50,6 +56,12 @@ module.exports = function(grunt) {
                 src: ['public/dist/css/application.css'],
                 dest: 'public/dist/css/application.min.css',
                 ext: '.min.css'
+              },
+              minifyExtras:{
+                expand: false,
+                src: ['public/dist/css/thirdparty.css'],
+                dest: 'public/dist/css/thirdparty.min.css',
+                ext: '.min.css'           
               }
         },
         uglify: {
