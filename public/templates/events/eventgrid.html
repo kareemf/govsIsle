@@ -1,21 +1,5 @@
 <div id="allEvents">
-	<div class="info-banner textLeft">
-		<h3 class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-			Upcoming Events
-		</h3>
-		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pull-right">
-	        <form class="navbar-form" role="search">
-		        <div class="input-group">
-		            <input type="text" class="form-control" placeholder="Search" ng-model="searchTerm" ng-class="{hidden:!isSearchVisible}">
-		            <div class="input-group-btn">
-		                <button class="btn btn-default fr" type="submit" ng-click="toggleOrQuery(isSearchVisible, searchTerm)">
-		                	<i class="glyphicon glyphicon-search"></i>
-	                	</button>
-		            </div>
-		        </div>
-	        </form>
-        </div>
-	</div>
+	<div ng-include="'../templates/search/searchField.html'" data-role="search"></div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div id="eventCaro" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
@@ -102,4 +86,4 @@ jQuery( document ).ready(function( $ ) {
 	      $("#eventCaro").carousel('next');  
 	   });  
 });  
-</script>  
+</script>
