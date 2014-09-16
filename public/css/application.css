@@ -561,7 +561,7 @@ a, a:link, a:hover, a:visited, a:active{
   text-align: center;
 }
 /*---------=EVENTGRID View=--------------*/
-#allEvents ,#allTours{
+#allEvents ,#allTours,#listEvents{
   background-color: #FFF;
   max-width: 700px;
   margin: 0px auto 0px auto;
@@ -784,13 +784,43 @@ ul.lead{list-style-type: none;}
 .textLeft{text-align: left;padding-left: 2%;}
 /* -------====FERRY SCHEDULE END==--------- */
 
-
-
-
-
-
-
-
+/*---- SEARCH-------*/
+.special-search{
+    position: relative;
+    max-height: 50px;
+    padding: 0px 0px 0px 2%;
+    background-color: #FFF;
+}
+.special-search form{
+    position: relative;
+    top: 0px;right: 0px;
+    width: 100%;
+    padding: 0px;margin: 0px;
+    z-index: 0;
+}
+.special-search button, .special-search input{
+    border-radius: 0px;border-width: 0px;
+    border-color: #FFF;
+    box-shadow: none;outline: none;
+}
+.special-search button,.special-search button:active,
+  .special-search button:hover,.special-search button:visited{
+   background-color: #FFF;
+      box-shadow: none; outline: none;
+}
+.special-search button{
+  margin-top: 12px;
+  font-size: 16px;
+}
+.special-search input{
+    position: relative;
+    padding: 25px 18px;
+    top: 0px; left: -170px;
+    font-size: 16pt;box-shadow: none;
+    width: 250% !important;height: 35px;
+    color: #000;
+    z-index: 1;
+}
 
 /*-----ADMIN STUFF-------------*/
 .adminPanel{
