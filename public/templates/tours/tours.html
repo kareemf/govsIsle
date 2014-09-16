@@ -27,11 +27,48 @@
 	</div>
 	<div class="clear"></div>
 	<section>
-		<h3 id="artistLabel">History</h3>
+		<h3 class="info-banner-left">History</h3>
 		<ul class="eventlist"> 
+			<li>
+				<a ui-sref="tourlist({ id: 9 })">
+					<img ng-src="../images/govsle.jpg" alt="" width="200px" height="150px">
+					<div class="caption">
+						<h5>Governors Island through Time</h5>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a ui-sref="tourlist({ id: 9 })">
+					<img ng-src="../images/photo.jpg" alt="" width="200px" height="150px">
+					<div class="caption">
+						<h5>The Military &amp; Governors Island</h5>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a ui-sref="tourlist({ id: 9 })">
+					<img ng-src="../images/survey.jpg" alt="" width="200px" height="150px">
+					<div class="caption">
+						<h5>A Geological Survey</h5>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<section>
+	<h3 class="info-banner-left">Happening Now</h3>
+		<ul class="eventlist"> 
+			<li>
+				<a ui-sref="tourlist({ id: 9 })">
+					<img ng-src="../images/interview.jpg" alt="" width="200px" height="150px">
+					<div class="caption">
+						<h5>A Geological Survey</h5>
+					</div>
+				</a>
+			</li>
 			<li data-ng-repeat="tour in myTours">
 				<a ui-sref="tourlist({ id: tour.id })">
-					<img ng-src="{{getImageSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
+					<img ng-src="{{getImageSrc(tour.imageLoc)}}" alt="" width="200px" height="150px">
 					<div class="caption">
 						<h5>{{tour.tourName}}</h5>
 					</div>
@@ -39,17 +76,27 @@
 			</li>
 		</ul>
 	</section>
-	<h3 id="artistLabel">Artist Contributions</h3>
-	<ul class="eventlist"> 
+	<section>
+	<h3 class="info-banner-left">Stories &amp; Song</h3>
+	<ul class="eventlist">
+		<li>
+			<a ui-sref="tourlist({ id: 9 })">
+				<img ng-src="../images/govsmusic.jpg" alt="" width="200px" height="150px">
+				<div class="caption">
+					<h5>Rhythm &amp; Melody</h5>
+				</div>
+			</a>
+		</li>
 		<li data-ng-repeat="tour in contributedTours">
 			<a ui-sref="tourlist({ id: tour.id })">
-				<img ng-src="{{getImageSrc(tour.imageLoc)}}" alt="" width="150px" height="150px">
+				<img ng-src="{{getImageSrc(tour.imageLoc)}}" alt="" width="200px" height="150px">
 				<div class="caption">
 					<h5>{{tour.tourName}}</h5>
 				</div>
 			</a>
 		</li>
 	</ul>
+	</section>
 </div><br/><br/>
 <script type="text/javascript">
 jQuery( document ).ready(function( $ ) {
