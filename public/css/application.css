@@ -793,7 +793,7 @@ ul.lead{list-style-type: none;}
 }
 .special-search form{
     position: relative;
-    top: 0px;right: 0px;
+
     width: 100%;
     padding: 0px;margin: 0px;
     z-index: 0;
@@ -813,14 +813,16 @@ ul.lead{list-style-type: none;}
   font-size: 16px;
 }
 .special-search input{
-    position: relative;
-    padding: 25px 18px;
-    top: 0px; left: -170px;
+    position: absolute;
+    padding: 0px 0px;
+    top: 0px; right: 130%;
     font-size: 16pt;box-shadow: none;
-    width: 250% !important;height: 35px;
+    width: 100% !important;height: 50px;
     color: #000;
     z-index: 1;
 }
+
+
 
 /*-----ADMIN STUFF-------------*/
 .adminPanel{
