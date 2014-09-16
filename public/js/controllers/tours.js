@@ -13,8 +13,34 @@ controllers.controller('ToursController', ['$scope', '$stateParams', '$http', 'T
 		  return 'http://www.entangledspace.com/data/' + imageFile;
 		};
 		
+		$scope.getPostImageSrc = function (imageFile) {
+			//alert(imageFile);
+		  return 'http://www.entangledspace.com/data/postImages/' + imageFile;
+		};
+
 		$scope.myTours = Tours.getMyTours();
 		$scope.contributedTours = Tours.getContributedTours();
+
+
+		$http.get('http://entangledspace.com/api/v1/getTour.php?token=a02e0202572aa6bf75423b9e355bb239ecc5ff849ffd000933b97ef292c09cc8&username=cultureisland&tourID='+9).
+	           success(function(data) {
+	               $scope.history = data['tour_data'];
+	    });
+
+	    $http.get('http://entangledspace.com/api/v1/getTourpoints.php?token=a02e0202572aa6bf75423b9e355bb239ecc5ff849ffd000933b97ef292c09cc8&username=cultureisland&tourID='+9).
+	           success(function(data) {
+	               $scope.historyPoints = data['tour_points'].slice(0,4);
+	    });
+
+       $http.get('http://entangledspace.com/api/v1/getTour.php?token=a02e0202572aa6bf75423b9e355bb239ecc5ff849ffd000933b97ef292c09cc8&username=cultureisland&tourID='+8).
+	           success(function(data) {
+	               $scope.happeningNow = data['tour_data'];
+	    });
+
+	    $http.get('http://entangledspace.com/api/v1/getTourpoints.php?token=a02e0202572aa6bf75423b9e355bb239ecc5ff849ffd000933b97ef292c09cc8&username=cultureisland&tourID='+8).
+	           success(function(data) {
+	               $scope.happeningNowPoints = data['tour_points'].slice(0,4);
+	    });
 				
 }]);
 
