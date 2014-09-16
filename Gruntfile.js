@@ -56,12 +56,6 @@ module.exports = function(grunt) {
                 src: ['public/dist/css/application.css'],
                 dest: 'public/dist/css/application.min.css',
                 ext: '.min.css'
-              },
-              minifyExtras:{
-                expand: false,
-                src: ['public/dist/css/thirdparty.css'],
-                dest: 'public/dist/css/thirdparty.min.css',
-                ext: '.min.css'           
               }
         },
         uglify: {
