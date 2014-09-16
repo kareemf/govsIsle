@@ -88,7 +88,7 @@ module.exports = function(server){
 
                 _docs = filterDocs(socket.id, _docs);
 
-                if(params.alreadyRecievedIds){
+                if(params && params.alreadyRecievedIds){
                     //if a socket that was open during server shutdown is reconnecting,
                     //do not resend items that were previously emitted
                     _docs = _docs.filter(function(_doc){
