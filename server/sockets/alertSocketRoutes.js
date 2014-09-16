@@ -88,7 +88,7 @@ module.exports = function(server){
 
                 _docs = filterDocs(socket.id, _docs);
 
-                if(params.alreadyRecievedIds){
+                if(params && params.alreadyRecievedIds){
                     //if a socket that was open during server shutdown is reconnecting,
                     //do not resend items that were previously emitted
                     _docs = _docs.filter(function(_doc){
@@ -126,13 +126,13 @@ module.exports = function(server){
         console.log('connection to socket', socket.id, '. num_connections:', ++num_connections);
 
         socket.on('authenicated_connection', function(params){
-            console.log('user', params.user._id, 'connected to socket', socket.id);
+            console.log('user', params.user._id, 'connected to socket', socket.id, 'with params', params);
             socketId_user_map[socket.id] = params.user;
             handleSocketConnection(socket, params);
         });
 
         socket.on('anonymous_connection', function(params){
-            console.log('anonymous connection to socket', socket.id);
+            console.log('anonymous connection to socket', socket.id, 'with params', params);
             handleSocketConnection(socket, params);
         });
 
