@@ -58,19 +58,19 @@
 	<section>
 	<h3 class="info-banner-left">Happening Now</h3>
 		<ul class="eventlist"> 
-			<li>
-				<a ui-sref="tourlist({ id: 9 })">
-					<img ng-src="../images/interview.jpg" alt="" width="200px" height="150px">
-					<div class="caption">
-						<h5>A Geological Survey</h5>
-					</div>
-				</a>
-			</li>
 			<li data-ng-repeat="tour in myTours">
 				<a ui-sref="tourlist({ id: tour.id })">
 					<img ng-src="{{getImageSrc(tour.imageLoc)}}" alt="" width="200px" height="150px">
 					<div class="caption">
 						<h5>{{tour.tourName}}</h5>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a ui-sref="tourlist({ id: 9 })">
+					<img ng-src="../images/interview.jpg" alt="" width="200px" height="150px">
+					<div class="caption">
+						<h5>Artist Interviews</h5>
 					</div>
 				</a>
 			</li>
