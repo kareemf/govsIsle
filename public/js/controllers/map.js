@@ -199,6 +199,7 @@ function ($scope, $rootScope, $timeout, $stateParams, Shared, NavService) {
 
         //TODO: swtich on entyity.type or rename currentEvent
         $scope.currentEvent = entity;
+        $scope.currentMarker = marker;
         $scope.myInfoWindow.open($scope.myMap, marker);
     };
 
@@ -469,6 +470,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 			       	//_tourpoints.push(data['tour_points'] [i]);
 					//console.log(data['tour_points'] [i]);
 	                var marker = createTourMarker(data['tour_points'] [i], $scope.myMap);
+                    marker.source = 'tours';
 
 	                $scope.oms.addMarker(marker);
 					$scope.tourMarkers.push(marker);
@@ -483,6 +485,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                 console.log('events', events);
                 events.forEach(function(event){
                     var marker = createMarker(event, $scope.myMap);
+                    marker.source = 'events';
 
                     $scope.oms.addMarker(marker);
                     $scope.existingEventMarkers.push(marker);
@@ -500,6 +503,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
                 console.log('amenities', amenities);
                 amenities.forEach(function(amenity){
                     var marker = createMarker(amenity, $scope.myMap);
+                    marker.source = 'amenities';
 
                     $scope.oms.addMarker(marker);
                     $scope.existingAmenityMarkers.push(marker);
@@ -540,6 +544,7 @@ controllers.controller('MarkerListController', ['$scope', '$state','$stateParams
 
         alerts.forEach(function(alert){
             var marker = createMarker(alert, $scope.myMap);
+            marker.source = 'alerts';
 
             $scope.oms.addMarker(marker);
             $scope.existingAlertMarkers.push(marker);

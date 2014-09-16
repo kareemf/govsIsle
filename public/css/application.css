@@ -1103,9 +1103,11 @@ z-index: 10000;
 	
 }
 
-#myInfoWindow  a.content{
+#myInfoWindow  a.content,
+#myInfoWindow  span.content{
   font-size: 12px;
 }
+
 
 .bold{
   font-weight: bold;
