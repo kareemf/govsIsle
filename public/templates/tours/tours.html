@@ -13,12 +13,12 @@
 			<div class="carousel-inner">
 			    <div class="item active">
 		        	<img ng-src="{{getImageSrc(myTours[1].imageLoc)}}" alt="gov's island" class="img-responsive">
-		        	 <div class="carousel-caption"><p>EVENTS ON THE ISLAND</p></div>
+		        	 <div class="carousel-caption"><p>Listen To The Island</p></div>
 		        	 <a class="testtest" ui-sref="tourlist({ id: 8})"><div class="swapePanel"></div></a>
 			    </div>
 			    <div class="item">
 			      	<img ng-src="{{getImageSrc(myTours[0].imageLoc)}}" alt="gov's island" class="img-custom-lg img-responsive">
-			    	<div class="carousel-caption"><p>PAST, PRESENT, FUTURE</p></div>
+			    	<div class="carousel-caption"><p>Hear How It Began</p></div>
 			    	<a class="testtest" ui-sref="tourlist({ id: 9})"><div class="swapePanel"></div></a>
 			    </div>
 			</div><!--ENDING OF CAROUSEL-INNER nav-pills-->
@@ -27,7 +27,7 @@
 	</div>
 	<div class="clear"></div>
 	<section>
-		<h3 id="artistLabel">Curated Tours</h3>
+		<h3 id="artistLabel">History</h3>
 		<ul class="eventlist"> 
 			<li data-ng-repeat="tour in myTours">
 				<a ui-sref="tourlist({ id: tour.id })">
@@ -39,7 +39,7 @@
 			</li>
 		</ul>
 	</section>
-	<h3 id="artistLabel">ARTIST CONTRIBUTORS</h3>
+	<h3 id="artistLabel">Artist Contributions</h3>
 	<ul class="eventlist"> 
 		<li data-ng-repeat="tour in contributedTours">
 			<a ui-sref="tourlist({ id: tour.id })">
